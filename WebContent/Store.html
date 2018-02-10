@@ -17,12 +17,16 @@
 			<th>Name</th>
 			<th>Price</th>
 			<th>Description</th>
+			<th>Picture</th>
+			<th>Likes</th>
 			<th>Purchase</th>
 		</tr>
 		<tr ng-repeat="product in lib.products" ng-show="product.canRead">
 			<td>{{product.name}}</td>
-			<td>{{product.price}}</td>
+			<td>{{product.price | currency}}</td>
 			<td>{{product.description}}</td>
+			<td>Picture url here</td>
+			<td>Likes here</td>
 			<td><button class="btn btn-default" ng-show="product.canBuy">Add to Cart</button></td>
 		</tr>
 	</table>

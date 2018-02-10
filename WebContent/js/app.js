@@ -10,6 +10,20 @@
 
 	});
 
+	app.controller('LandingController', function() {
+		/* don't forget to change these two back */
+		this.userLogin = false;
+		this.userRegister = true;
+		this.toRegister = function() {
+			this.userLogin = false;
+			this.userRegister = true;
+		};
+		this.toLogin = function() {
+			this.userLogin = true;
+			this.userRegister = false;
+		};
+	});
+
 	var books = [
 
 	{
