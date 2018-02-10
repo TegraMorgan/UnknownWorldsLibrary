@@ -20,6 +20,7 @@
 			<th>Picture</th>
 			<th>Likes</th>
 			<th>Purchase</th>
+			<th>Review</th>
 		</tr>
 		<tr ng-repeat="product in lib.products" ng-show="product.canRead">
 			<td>{{product.name}}</td>
@@ -28,7 +29,16 @@
 			<td>Picture url here</td>
 			<td>Likes here</td>
 			<td><button class="btn btn-default" ng-show="product.canBuy">Add to Cart</button></td>
+			<td><button class="btn btn-default" on-click="lib.openreview(product.name)">Read reviews</button></td>
 		</tr>
 	</table>
+	
+	<script>
+		$(document).ready(function() {
+			$('[data-toggle="popover"]').popover();
+		});
+	</script>
+	<div style="width:100px" data-trigger="hover" data-toggle="popover" data-placement="bottom" title="Test popover" data-content="Some content">Popover</div>
+	
 </body>
 </html>

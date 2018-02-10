@@ -1,36 +1,38 @@
 @charset "UTF-8";
 
-html,
-body {
-  width: 100%;
-  height: 100%;
-  /*
+html, body {
+	width: 100%;
+	height: 100%;
+	/*
   * overflow: hidden
   */
-  padding: 0;
-  background-color: #001922;
+	padding: 0;
+	background-color: #001922;
 }
 
 .account-wall {
-  position: relative;
-  margin-top: 50px;
-  padding: 30px 15px 30px 15px;
-  background-color: #040507;
-  box-shadow: 10px 0px 15px rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-  color: #FFFFC0;
+	position: relative;
+	margin-top: 50px;
+	padding: 30px 15px 30px 15px;
+	background-color: #040507;
+	box-shadow: 10px 0px 15px rgba(0, 0, 0, 0.3);
+	border-radius: 10px;
+	color: #FFFFC0;
 }
 
-.auth-fail,
-.reg-fail {
-  position: absolute;
-  display: block;
-  max-width: 320px;
-  max-height: 320px;
-  min-width: 220px;
-  margin-top: 81%;
-  margin-left: 105%;
-  box-shadow: 10px 0px 15px rgba(0, 0, 0, 0.3);
-  border-radius: 12px;
-  font-size: 16px;
+.auth-fail, .reg-fail {
+	position: inherit;
+	display: block;
+	margin-top: 4px;
+	border-radius: 12px;
+	font-size: inherit;
+}
+
+.Title {
+	font-family: Georgia, serif;
+}
+
+.optional{
+	background-color: #d9edf7;
+	
 }
