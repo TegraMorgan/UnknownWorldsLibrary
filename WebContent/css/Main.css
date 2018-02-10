@@ -4,7 +4,9 @@ html,
 body {
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  /*
+  * overflow: hidden
+  */
   padding: 0;
   background-color: #001922;
 }
@@ -17,4 +19,18 @@ body {
   box-shadow: 10px 0px 15px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
   color: #FFFFC0;
+}
+
+.auth-fail,
+.reg-fail {
+  position: absolute;
+  display: block;
+  max-width: 320px;
+  max-height: 320px;
+  min-width: 220px;
+  margin-top: 81%;
+  margin-left: 105%;
+  box-shadow: 10px 0px 15px rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  font-size: 16px;
 }

@@ -70,14 +70,32 @@
 							<form>
 								<div class="form-group">
 									<div>
-										<label for="InputUsername1">Username</label> <input type="text" class="form-control" id="InputUsername1" placeholder="Enter Username" aria-describedby="info">
-										<p id="info">Test info</p>
-									</div>
-									<div>
-										<label for="InputEmail1">Email address</label> <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-									</div>
-									<div>
-										<label for="InputPassword1">Password</label> <input type="password" class="form-control" id="InputPassword1" placeholder="Password">
+										<div>
+											<label for="InputUsername1">Username</label> <input type="text" class="form-control" id="InputUsername1" placeholder="Username">
+										</div>
+										<div>
+											<label for="InputEmail1">Email address</label> <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="Em@il">
+										</div>
+										<div>
+											<label for="InputAdress1">Address</label> <input type="text" class="form-control" id="InputAdress1" placeholder="Street name">
+										</div>
+										<label for="InputNumber1">Block number</label> <input type="text" class="form-control" id="InputNumber1" placeholder="Block number"> <small>Positive integers only</small><br> <label
+											for="InputCity1"
+										>City name</label> <input type="text" class="form-control" id="InputCity1" placeholder="City name"> <small>English characters only, longer than 3 characters</small><br> <label
+											for="InputZIP1"
+										>ZIP code</label> <input type="text" class="form-control" id="InputZIP1" placeholder="ZIP code"> <small>Has to contain exactly 7 numbers</small><br> <label for="InputPhone1">Phone
+											number</label> <input type="text" class="form-control" id="InputPhone1" placeholder="Phone number"> <small>Valid number example 054-525-47-58 or 046-222-210</small><br> <label
+											for="InputPassword1"
+										>Password</label> <input type="password" class="form-control" id="InputPassword1" placeholder="Password"> <small>Password has to be up to 8 characters</small><br> <label
+											for="InputNickname1"
+										>Nickname</label> <input type="text" class="form-control" id="InputNickname1" placeholder="Nickname"> <small>Password has to be up to 8 characters</small><br> <label
+											for="InputDescription1"
+										>Short description</label> <input type="text" class="form-control" id="InputDescription1" placeholder="Short description"> <small>Password has to be up to 8 characters</small><br> <label
+											for="InputPhotoURL1"
+										>Photo URL</label> <input type="text" class="form-control" id="InputPhotoURL1" placeholder="Photo URL"> <small>Password has to be up to 8 characters</small><br>
+										<div class="auth-fail alert alert-warning" role="alert" ng-hide="lCtrl.authFailureWarningHidden">
+											{{lCtrl.error1}} <br />{{lCtrl.error2}}
+										</div>
 									</div>
 								</div>
 							</form>
@@ -85,7 +103,7 @@
 					</div>
 					<div class="row">
 						<div class="col-xs-4 col-xs-offset-2 text-center">
-							<button type="submit" class="btn btn-primary">Resister</button>
+							<button type="submit" class="btn btn-primary" ng-click="lCtrl.register()">Resister</button>
 						</div>
 						<div class="col-xs-4 text-center">
 							<button type="submit" class="btn btn-default" ng-click="lCtrl.toLogin()">Back to Sing-in</button>
