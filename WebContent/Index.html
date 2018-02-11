@@ -13,213 +13,224 @@
 <script type="text/javascript" src="js/popoverInit.js""></script>
 </head>
 <body data-ng-app="webapp">
-	<div class="container-fluid" ng-controller="LandingController as lCtrl">
+  <div class="container-fluid" ng-controller="LandingController as lCtrl">
 
-		<!-- login section, visible by default on opening the page -->
-		<form id="loginForm" name="loginForm" ng-submit="lCtrl.login()" novalidate>
-			<div class="row">
-				<div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3">
-					<div class="account-wall">
-						<div class="row">
-							<div class="col-xs-4">
-								<img class="img-rounded img-responsive" src="img/logo.png" alt="logo">
-							</div>
-							<div class="col-xs-8 text-center">
-								<h2 style="font-family: Georgia, serif;">Unknown Worlds Library</h2>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-8 col-xs-offset-2 text-center">
-								<h3>Please sign in or register to access the library</h3>
-							</div>
-							<div class="row">
-								<div class="col-xs-8 col-xs-offset-2">
-									<form>
-										<div class="form-group">
-											<label for="exampleInputEmail1">Email address</label> <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-											<div>
-												<label for="exampleInputPassword1">Password</label> <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-											</div>
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-4 col-xs-offset-2 text-center">
-								<button type="submit" class="btn btn-primary">Sing-in</button>
-							</div>
-							<div class="col-xs-4 text-center">
-								<button type="submit" class="btn btn-default" ng-click="lCtrl.toRegister()">Register</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</form>
+    <!-- login section, visible by default on opening the page -->
+    <form id="loginForm" name="loginForm" ng-submit="lCtrl.login()" novalidate>
+      <div class="row">
+        <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3">
+          <div class="account-wall">
+            <div class="row">
+              <div class="col-xs-4">
+                <img class="img-rounded img-responsive" src="img/logo.png" alt="logo">
+              </div>
+              <div class="col-xs-8 text-center">
+                <h2 style="font-family: Georgia, serif;">Unknown Worlds Library</h2>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-8 col-xs-offset-2 text-center">
+                <h3>Please sign in or register to access the library</h3>
+              </div>
+              <div class="row">
+                <div class="col-xs-8 col-xs-offset-2">
+                  <form>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Email address</label> <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                      <div>
+                        <label for="exampleInputPassword1">Password</label> <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-4 col-xs-offset-2 text-center">
+                <button type="submit" class="btn btn-primary">Sing-in</button>
+              </div>
+              <div class="col-xs-4 text-center">
+                <button type="submit" class="btn btn-default" ng-click="lCtrl.toRegister()">Register</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
 
 
 
-		<!-- Registration, not visible by default -->
+    <!-- Registration, not visible by default -->
 
-		<div class="row" id="registrationForm" style="display:none">
-			<div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3">
-				<div class="account-wall">
-					<div class="row">
-						<div class="col-xs-4">
-							<img class="img-rounded img-responsive" src="img/logo.png" alt="logo">
-						</div>
-						<div class="col-xs-8 text-center">
-							<h2 class="Title">Unknown Worlds Library</h2>
-						</div>
-					</div>
-					<!-- registerForm.$valid && -->
-					<form ng-submit="lCtrl.register()" name="registerForm" novalidate>
-						<div class="form-group">
-							<div class="row">
-								<div class="col-xs-8 col-xs-offset-2">
-									<div class="auth-fail alert alert-info" role="alert">Please note that cyan text fields are optional.</div>
-								</div>
+    <div class="row" id="registrationForm" style="display: none">
+      <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3">
+        <div class="account-wall">
+          <div class="row">
+            <div class="col-xs-4">
+              <img class="img-rounded img-responsive" src="img/logo.png" alt="logo">
+            </div>
+            <div class="col-xs-8 text-center">
+              <h2 class="Title">Unknown Worlds Library</h2>
+            </div>
+          </div>
+          <!-- registerForm.$valid && -->
+          <form ng-submit="lCtrl.register()" name="registerForm" novalidate>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-xs-8 col-xs-offset-2">
+                  <div class="auth-fail alert alert-info" role="alert">Please note that cyan text fields are optional.</div>
+                </div>
 
-								<div class="col-xs-8 col-xs-offset-2">
-									<div>
-										<label for="InputUsername1">Username</label> <input type="text" name="InputUsername1" class="form-control" id="InputUsername1" placeholder="Username" ng-model="lCtrl.newCustomer.username" data-trigger="hover"
-											data-toggle="popover" data-placement="bottom" data-content="{{lCtrl.usernameError}}" required
-										>
-									</div>
-									<div class="auth-fail alert alert-danger alert-dismissable fade in" role="alert" ng-hide="lCtrl.newUserNameOk">
-										<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> {{lCtrl.usernameError}}
-									</div>
-								</div>
-							</div>
+                <div class="col-xs-8 col-xs-offset-2">
+                  <div>
+                    <label for="InputUsername1">Username</label> <input type="text" name="InputUsername1" class="form-control" id="InputUsername1" placeholder="Username"
+                      ng-model="lCtrl.newCustomer.username" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="{{lCtrl.usernameError}}" required
+                    >
+                  </div>
+                  <div class="auth-fail alert alert-danger" role="alert" ng-hide="lCtrl.newUserNameOk">{{lCtrl.usernameError}}</div>
+                </div>
+              </div>
 
-							<div class="row">
-								<div class="col-xs-8 col-xs-offset-2">
-									<div>
-										<label for="InputEmail1">Email address</label> <input type="email" name="InputEmail1" class="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="Em@il" required
-											ng-model="lCtrl.newCustomer.email" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="{{lCtrl.emailerror}}"
-										>
-									</div>
-									<div class="auth-fail alert alert-danger alert-dismissable fade in" role="alert" ng-hide="lCtrl.newEmailOk">
-										<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> {{lCtrl.emailerror}}
-									</div>
-								</div>
-							</div>
+              <div class="row">
+                <div class="col-xs-8 col-xs-offset-2">
+                  <div>
+                    <label for="InputEmail1">Email address</label> <input type="email" name="InputEmail1" class="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="Em@il"
+                      required ng-model="lCtrl.newCustomer.email" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="{{lCtrl.emailerror}}"
+                    >
+                  </div>
+                  <div class="auth-fail alert alert-danger" role="alert" ng-hide="lCtrl.newEmailOk">{{lCtrl.emailerror}}</div>
+                </div>
+              </div>
 
-							<div class="row">
-								<div class="col-xs-8 col-xs-offset-2">
-									<div>
-										<label for="InputAdress1">Address</label> <input type="text" class="form-control" required ng-model="lCtrl.newCustomer.address" id="InputAdress1" placeholder="Street name" data-trigger="hover"data-toggle="popover" data-placement="bottom" data-content="{{lCtrl.adressError}}">
-									</div>
-									<div class="auth-fail alert alert-danger alert-dismissable fade in" role="alert" ng-hide="lCtrl.newAdressOk">
-										<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> {{lCtrl.adressError}}
-									</div>
-								</div>
-							</div>
+              <div class="row">
+                <div class="col-xs-8 col-xs-offset-2">
+                  <div>
+                    <label for="InputAdress1">Street name</label> <input type="text" class="form-control" required ng-model="lCtrl.newCustomer.address" id="InputAdress1" placeholder="Street name"
+                      data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="{{lCtrl.adressError}}"
+                    >
+                  </div>
+                  <div class="auth-fail alert alert-danger" role="alert" ng-hide="lCtrl.newAdressOk">{{lCtrl.adressError}}</div>
+                </div>
+              </div>
 
-							<div class="row">
-								<div class="col-xs-8 col-xs-offset-2">
-									<div>
-										<label for="InputNumber1">Block number</label> <input type="number" class="form-control" required ng-model="lCtrl.newCustomer.blockNum" id="InputNumber1" placeholder="Block number" data-trigger="hover"data-toggle="popover" data-placement="bottom" data-content="{{lCtrl.blockError}}">
-									</div>
-									<div class="auth-fail alert alert-danger alert-dismissable fade in" role="alert" ng-hide="lCtrl.newBlockNumberOk">
-										<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> {{lCtrl.blockError}}
-									</div>
-								</div>
-							</div>
+              <div class="row">
+                <div class="col-xs-8 col-xs-offset-2">
+                  <div>
+                    <label for="InputNumber1">Block number</label> <input type="number" class="form-control" required ng-model="lCtrl.newCustomer.blockNum" id="InputNumber1" placeholder="Block number"
+                      data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="{{lCtrl.blockError}}"
+                    >
+                  </div>
+                  <div class="auth-fail alert alert-danger" role="alert" ng-hide="lCtrl.newBlockNumberOk">{{lCtrl.blockError}}
+                  </div>
+                </div>
+              </div>
 
-							<div class="row">
-								<div class="col-xs-8 col-xs-offset-2">
-									<div>
-										<label for="InputCity1">City name</label> <input type="text" class="form-control" required ng-model="lCtrl.newCustomer.city" id="InputCity1" placeholder="City name" data-trigger="hover"data-toggle="popover" data-placement="bottom" data-content="{{lCtrl.cityError}}">
-									</div>
-									<div class="auth-fail alert alert-danger alert-dismissable fade in" role="alert" ng-hide="lCtrl.newCityOk">
-										<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> {{lCtrl.cityError}}
-									</div>
-								</div>
-							</div>
+              <div class="row">
+                <div class="col-xs-8 col-xs-offset-2">
+                  <div>
+                    <label for="InputCity1">City name</label> <input type="text" class="form-control" required ng-model="lCtrl.newCustomer.city" id="InputCity1" placeholder="City name"
+                      data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="{{lCtrl.cityError}}"
+                    >
+                  </div>
+                  <div class="auth-fail alert alert-danger alert-dismissable fade in" role="alert" ng-hide="lCtrl.newCityOk">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> {{lCtrl.cityError}}
+                  </div>
+                </div>
+              </div>
 
-							<div class="row">
-								<div class="col-xs-8 col-xs-offset-2">
-									<div>
-										<label for="InputZIP1">ZIP code</label> <input type="number" class="form-control" required ng-model="lCtrl.newCustomer.zip" id="InputZIP1" placeholder="ZIP code"  data-trigger="hover"data-toggle="popover" data-placement="bottom" data-content="{{lCtrl.zipError}}">
-									</div>
-									<div class="auth-fail alert alert-danger alert-dismissable fade in" role="alert" ng-hide="lCtrl.newZIPOk">
-										<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> {{lCtrl.zipError}}
-									</div>
-								</div>
-							</div>
+              <div class="row">
+                <div class="col-xs-8 col-xs-offset-2">
+                  <div>
+                    <label for="InputZIP1">ZIP code</label> <input type="number" class="form-control" required ng-model="lCtrl.newCustomer.zip" id="InputZIP1" placeholder="ZIP code"
+                      data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="{{lCtrl.zipError}}"
+                    >
+                  </div>
+                  <div class="auth-fail alert alert-danger alert-dismissable fade in" role="alert" ng-hide="lCtrl.newZIPOk">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> {{lCtrl.zipError}}
+                  </div>
+                </div>
+              </div>
 
-							<div class="row">
-								<div class="col-xs-8 col-xs-offset-2">
-									<div>
-										<label for="InputPhone1">Phone number</label> <input type="number" class="form-control" required ng-model="lCtrl.newCustomer.phone" id="InputPhone1" placeholder="Phone number" data-trigger="hover"data-toggle="popover" data-placement="bottom" data-content="{{lCtrl.phoneError}}">
-									</div>
-									<div class="auth-fail alert alert-danger alert-dismissable fade in" role="alert" ng-hide="lCtrl.newPhoneOk">
-										<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> {{lCtrl.phoneError}}
-									</div>
-								</div>
-							</div>
+              <div class="row">
+                <div class="col-xs-8 col-xs-offset-2">
+                  <div>
+                    <label for="InputPhone1">Phone number</label> <input type="number" class="form-control" required ng-model="lCtrl.newCustomer.phone" id="InputPhone1" placeholder="Phone number"
+                      data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="{{lCtrl.phoneError}}"
+                    >
+                  </div>
+                  <div class="auth-fail alert alert-danger alert-dismissable fade in" role="alert" ng-hide="lCtrl.newPhoneOk">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> {{lCtrl.phoneError}}
+                  </div>
+                </div>
+              </div>
 
-							<div class="row">
-								<div class="col-xs-8 col-xs-offset-2">
-									<div>
-										<label for="InputPassword1">Password</label> <input type="password" class="form-control" id="InputPassword1" placeholder="Password" ng-model="lCtrl.newCustomer.password" required data-trigger="hover"data-toggle="popover" data-placement="bottom" data-content="{{lCtrl.passError}}">
-									</div>
-									<div class="auth-fail alert alert-danger alert-dismissable fade in" role="alert" ng-hide="lCtrl.newPassOk">
-										<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> {{lCtrl.passError}}
-									</div>
-								</div>
-							</div>
+              <div class="row">
+                <div class="col-xs-8 col-xs-offset-2">
+                  <div>
+                    <label for="InputPassword1">Password</label> <input type="password" class="form-control" id="InputPassword1" placeholder="Password" ng-model="lCtrl.newCustomer.password" required
+                      data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="{{lCtrl.passError}}"
+                    >
+                  </div>
+                  <div class="auth-fail alert alert-danger alert-dismissable fade in" role="alert" ng-hide="lCtrl.newPassOk">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> {{lCtrl.passError}}
+                  </div>
+                </div>
+              </div>
 
-							<div class="row">
-								<div class="col-xs-8 col-xs-offset-2">
-									<div>
-										<label for="InputNickname1">Nickname</label> <input type="text" class="form-control" id="InputNickname1" placeholder="Nickname" ng-model="lCtrl.newCustomer.nickname" required data-trigger="hover"data-toggle="popover" data-placement="bottom" data-content="{{lCtrl.nickError}}">
-									</div>
-									<div class="auth-fail alert alert-danger alert-dismissable fade in" role="alert" ng-hide="lCtrl.newNickOk">
-										<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> {{lCtrl.nickError}}
-									</div>
-								</div>
-							</div>
+              <div class="row">
+                <div class="col-xs-8 col-xs-offset-2">
+                  <div>
+                    <label for="InputNickname1">Nickname</label> <input type="text" class="form-control" id="InputNickname1" placeholder="Nickname" ng-model="lCtrl.newCustomer.nickname" required
+                      data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="{{lCtrl.nickError}}"
+                    >
+                  </div>
+                  <div class="auth-fail alert alert-danger alert-dismissable fade in" role="alert" ng-hide="lCtrl.newNickOk">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> {{lCtrl.nickError}}
+                  </div>
+                </div>
+              </div>
 
-							<div class="row">
-								<div class="col-xs-8 col-xs-offset-2">
-									<div>
-										<label for="InputDescription1">Short description</label> <input type="text" class="form-control optional" ng-model="lCtrl.newCustomer.description" id="InputDescription1" placeholder="Short description" data-trigger="hover"data-toggle="popover" data-placement="bottom" data-content="Please provide a short description of yourself">
-									</div>
-								</div>
-							</div>
+              <div class="row">
+                <div class="col-xs-8 col-xs-offset-2">
+                  <div>
+                    <label for="InputDescription1">Short description</label> <input type="text" class="form-control optional" ng-model="lCtrl.newCustomer.description" id="InputDescription1"
+                      placeholder="Short description" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="Please provide a short description of yourself"
+                    >
+                  </div>
+                </div>
+              </div>
 
-							<div class="row">
-								<div class="col-xs-8 col-xs-offset-2">
-									<div>
-										<label for="InputPhotoURL1">Photo URL</label> <input type="url" class="form-control optional" id="InputPhotoURL1" placeholder="Photo URL" ng-model="lCtrl.newCustomer.photo" data-trigger="hover"data-toggle="popover" data-placement="bottom" data-content="Please provide a URL address for your photo">
-									</div>
-									<div class="auth-fail alert alert-danger alert-dismissable fade in" role="alert" ng-hide="lCtrl.newPhotoOk">
-										<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> {{lCtrl.photoError}}
-									</div>
-								</div>
-							</div>
+              <div class="row">
+                <div class="col-xs-8 col-xs-offset-2">
+                  <div>
+                    <label for="InputPhotoURL1">Photo URL</label> <input type="url" class="form-control optional" id="InputPhotoURL1" placeholder="Photo URL" ng-model="lCtrl.newCustomer.photo"
+                      data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="Please provide a URL address for your photo"
+                    >
+                  </div>
+                  <div class="auth-fail alert alert-danger alert-dismissable fade in" role="alert" ng-hide="lCtrl.newPhotoOk">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> {{lCtrl.photoError}}
+                  </div>
+                </div>
+              </div>
 
-						</div>
-					</form>
-				</div>
-				<div class="row">
-					<div class="col-xs-4 col-xs-offset-2 text-center">
-						<button type="submit" class="btn btn-primary" id="registerButton" ng-click="lCtrl.register()">Register</button>
-					</div>
-					<div class="col-xs-4 text-center">
-						<button type="submit" class="btn btn-default" ng-click="lCtrl.toLogin()">Back to Sing-in</button>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col debug" >Review form is {{registerForm.$valid}}</div>
-				</div>
-			</div>
+            </div>
+          </form>
+        </div>
+        <div class="row">
+          <div class="col-xs-4 col-xs-offset-2 text-center">
+            <button type="submit" class="btn btn-primary" id="registerButton" ng-click="lCtrl.register()">Register</button>
+          </div>
+          <div class="col-xs-4 text-center">
+            <button type="submit" class="btn btn-default" ng-click="lCtrl.toLogin()">Back to Sing-in</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col debug">Review form is {{registerForm.$valid}}</div>
+        </div>
+      </div>
 
-		</div>
-	</div>
-	
+    </div>
+  </div>
+
 </body>
 </html>
