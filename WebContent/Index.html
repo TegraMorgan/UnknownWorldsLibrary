@@ -10,6 +10,7 @@
 <script type="text/javascript" src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="lib/angular.min.js"></script>
 <script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="js/popoverInit.js""></script>
 </head>
 <body data-ng-app="webapp">
 	<div class="container-fluid" ng-controller="LandingController as lCtrl">
@@ -83,7 +84,7 @@
 								<div class="col-xs-8 col-xs-offset-2">
 									<div>
 										<label for="InputUsername1">Username</label> <input type="text" name="InputUsername1" class="form-control" id="InputUsername1" placeholder="Username" ng-model="lCtrl.newCustomer.username" data-trigger="hover"
-											data-toggle="popover" data-placement="bottom" title="English character and/or numbers" data-content="Up to 10" required
+											data-toggle="popover" data-placement="bottom" data-content="{{lCtrl.usernameError}}" required
 										>
 									</div>
 									<div class="auth-fail alert alert-danger alert-dismissable fade in" role="alert" ng-hide="lCtrl.newUserNameOk">
@@ -95,7 +96,9 @@
 							<div class="row">
 								<div class="col-xs-8 col-xs-offset-2">
 									<div>
-										<label for="InputEmail1">Email address</label> <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="Em@il" required ng-model="lCtrl.newCustomer.email">
+										<label for="InputEmail1">Email address</label> <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" placeholder="Em@il" required
+											ng-model="lCtrl.newCustomer.email" data-trigger="hover" data-toggle="popover" data-placement="bottom" data-content="{{lCtrl.emailerror}}"
+										>
 									</div>
 									<div class="auth-fail alert alert-danger alert-dismissable fade in" role="alert" ng-hide="lCtrl.newEmailOk">
 										<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> {{lCtrl.emailerror}}
@@ -106,7 +109,7 @@
 							<div class="row">
 								<div class="col-xs-8 col-xs-offset-2">
 									<div>
-										<label for="InputAdress1">Address</label> <input type="text" class="form-control" required ng-model="lCtrl.newCustomer.address" id="InputAdress1" placeholder="Street name">
+										<label for="InputAdress1">Address</label> <input type="text" class="form-control" required ng-model="lCtrl.newCustomer.address" id="InputAdress1" placeholder="Street name" data-trigger="hover"data-toggle="popover" data-placement="bottom" data-content="{{lCtrl.adressError}}">
 									</div>
 									<div class="auth-fail alert alert-danger alert-dismissable fade in" role="alert" ng-hide="lCtrl.newAdressOk">
 										<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> {{lCtrl.adressError}}
@@ -117,7 +120,7 @@
 							<div class="row">
 								<div class="col-xs-8 col-xs-offset-2">
 									<div>
-										<label for="InputNumber1">Block number</label> <input type="number" class="form-control" required ng-model="lCtrl.newCustomer.blockNum" id="InputNumber1" placeholder="Block number">
+										<label for="InputNumber1">Block number</label> <input type="number" class="form-control" required ng-model="lCtrl.newCustomer.blockNum" id="InputNumber1" placeholder="Block number" data-trigger="hover"data-toggle="popover" data-placement="bottom" data-content="{{lCtrl.blockError}}">
 									</div>
 									<div class="auth-fail alert alert-danger alert-dismissable fade in" role="alert" ng-hide="lCtrl.newBlockNumberOk">
 										<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> {{lCtrl.blockError}}
@@ -128,7 +131,7 @@
 							<div class="row">
 								<div class="col-xs-8 col-xs-offset-2">
 									<div>
-										<label for="InputCity1">City name</label> <input type="text" class="form-control" required ng-model="lCtrl.newCustomer.city" id="InputCity1" placeholder="City name">
+										<label for="InputCity1">City name</label> <input type="text" class="form-control" required ng-model="lCtrl.newCustomer.city" id="InputCity1" placeholder="City name" data-trigger="hover"data-toggle="popover" data-placement="bottom" data-content="{{lCtrl.cityError}}">
 									</div>
 									<div class="auth-fail alert alert-danger alert-dismissable fade in" role="alert" ng-hide="lCtrl.newCityOk">
 										<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> {{lCtrl.cityError}}
@@ -139,7 +142,7 @@
 							<div class="row">
 								<div class="col-xs-8 col-xs-offset-2">
 									<div>
-										<label for="InputZIP1">ZIP code</label> <input type="number" class="form-control" required ng-model="lCtrl.newCustomer.zip" id="InputZIP1" placeholder="ZIP code">
+										<label for="InputZIP1">ZIP code</label> <input type="number" class="form-control" required ng-model="lCtrl.newCustomer.zip" id="InputZIP1" placeholder="ZIP code"  data-trigger="hover"data-toggle="popover" data-placement="bottom" data-content="{{lCtrl.zipError}}">
 									</div>
 									<div class="auth-fail alert alert-danger alert-dismissable fade in" role="alert" ng-hide="lCtrl.newZIPOk">
 										<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> {{lCtrl.zipError}}
@@ -150,7 +153,7 @@
 							<div class="row">
 								<div class="col-xs-8 col-xs-offset-2">
 									<div>
-										<label for="InputPhone1">Phone number</label> <input type="number" class="form-control" required ng-model="lCtrl.newCustomer.phone" id="InputPhone1" placeholder="Phone number">
+										<label for="InputPhone1">Phone number</label> <input type="number" class="form-control" required ng-model="lCtrl.newCustomer.phone" id="InputPhone1" placeholder="Phone number" data-trigger="hover"data-toggle="popover" data-placement="bottom" data-content="{{lCtrl.phoneError}}">
 									</div>
 									<div class="auth-fail alert alert-danger alert-dismissable fade in" role="alert" ng-hide="lCtrl.newPhoneOk">
 										<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> {{lCtrl.phoneError}}
@@ -161,7 +164,7 @@
 							<div class="row">
 								<div class="col-xs-8 col-xs-offset-2">
 									<div>
-										<label for="InputPassword1">Password</label> <input type="password" class="form-control" id="InputPassword1" placeholder="Password" ng-model="lCtrl.newCustomer.password" required>
+										<label for="InputPassword1">Password</label> <input type="password" class="form-control" id="InputPassword1" placeholder="Password" ng-model="lCtrl.newCustomer.password" required data-trigger="hover"data-toggle="popover" data-placement="bottom" data-content="{{lCtrl.passError}}">
 									</div>
 									<div class="auth-fail alert alert-danger alert-dismissable fade in" role="alert" ng-hide="lCtrl.newPassOk">
 										<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> {{lCtrl.passError}}
@@ -172,7 +175,7 @@
 							<div class="row">
 								<div class="col-xs-8 col-xs-offset-2">
 									<div>
-										<label for="InputNickname1">Nickname</label> <input type="text" class="form-control" id="InputNickname1" placeholder="Nickname" ng-model="lCtrl.newCustomer.nickname" required>
+										<label for="InputNickname1">Nickname</label> <input type="text" class="form-control" id="InputNickname1" placeholder="Nickname" ng-model="lCtrl.newCustomer.nickname" required data-trigger="hover"data-toggle="popover" data-placement="bottom" data-content="{{lCtrl.nickError}}">
 									</div>
 									<div class="auth-fail alert alert-danger alert-dismissable fade in" role="alert" ng-hide="lCtrl.newNickOk">
 										<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> {{lCtrl.nickError}}
@@ -183,7 +186,7 @@
 							<div class="row">
 								<div class="col-xs-8 col-xs-offset-2">
 									<div>
-										<label for="InputDescription1">Short description</label> <input type="text" class="form-control optional" ng-model="lCtrl.newCustomer.description" id="InputDescription1" placeholder="Short description">
+										<label for="InputDescription1">Short description</label> <input type="text" class="form-control optional" ng-model="lCtrl.newCustomer.description" id="InputDescription1" placeholder="Short description" data-trigger="hover"data-toggle="popover" data-placement="bottom" data-content="Please provide a short description of yourself">
 									</div>
 								</div>
 							</div>
@@ -191,7 +194,7 @@
 							<div class="row">
 								<div class="col-xs-8 col-xs-offset-2">
 									<div>
-										<label for="InputPhotoURL1">Photo URL</label> <input type="url" class="form-control optional" id="InputPhotoURL1" placeholder="Photo URL" ng-model="lCtrl.newCustomer.photo">
+										<label for="InputPhotoURL1">Photo URL</label> <input type="url" class="form-control optional" id="InputPhotoURL1" placeholder="Photo URL" ng-model="lCtrl.newCustomer.photo" data-trigger="hover"data-toggle="popover" data-placement="bottom" data-content="Please provide a URL address for your photo">
 									</div>
 									<div class="auth-fail alert alert-danger alert-dismissable fade in" role="alert" ng-hide="lCtrl.newPhotoOk">
 										<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> {{lCtrl.photoError}}
@@ -217,10 +220,6 @@
 
 		</div>
 	</div>
-	<script>
-		$(document).ready(function() {
-			$('[data-toggle="popover"]').popover();
-		});
-	</script>
+	
 </body>
 </html>
