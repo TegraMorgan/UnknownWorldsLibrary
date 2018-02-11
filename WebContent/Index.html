@@ -14,7 +14,7 @@
 	<div class="container-fluid" ng-controller="LandingController as lCtrl">
 
 		<!-- login section, visible by default on opening the page -->
-		<form name="loginForm" ng-submit="lCtrl.login()" novalidate>
+		<form id="loginForm" name="loginForm" ng-submit="lCtrl.login()" novalidate>
 			<div class="row" ng-show="lCtrl.userLogin">
 				<div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3">
 					<div class="account-wall">
@@ -48,7 +48,7 @@
 								<button type="submit" class="btn btn-primary">Sing-in</button>
 							</div>
 							<div class="col-xs-4 text-center">
-								<button type="submit" class="btn btn-default" ng-click="lCtrl.toRegister()">Resister</button>
+								<button type="submit" class="btn btn-default" ng-click="lCtrl.toRegister()">Register</button>
 							</div>
 						</div>
 					</div>
@@ -60,7 +60,7 @@
 
 		<!-- Registration, not visible by default -->
 
-		<div class="row" ng-show="lCtrl.userRegister">
+		<div class="row" id="registrationForm" style="display:none" ng-show="lCtrl.userRegister">
 			<div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3">
 				<div class="account-wall">
 					<div class="row">
@@ -202,7 +202,7 @@
 				</div>
 				<div class="row">
 					<div class="col-xs-4 col-xs-offset-2 text-center">
-						<button type="submit" class="btn btn-primary" ng-click="lCtrl.register()">Register</button>
+						<button type="submit" class="btn btn-primary" id="registerButton" ng-click="lCtrl.register()">Register</button>
 					</div>
 					<div class="col-xs-4 text-center">
 						<button type="submit" class="btn btn-default" ng-click="lCtrl.toLogin()">Back to Sing-in</button>

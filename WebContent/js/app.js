@@ -8,10 +8,10 @@
 	app.controller('LibController',function() {
 		this.products = books;
 	});
-	app.controller('LandingController',function() {
+	app.controller('LandingController',['$rootScope','$scope',function($rootScope,$scope) {
 		/* Properties */
 		// TODO: don't forget to change these two back
-		this.userLogin = false;
+		this.userLogin = true;
 		this.userRegister = true;
 		
 		this.errorUsername = false;
@@ -42,16 +42,22 @@
 		this.nickError = "Nickname must be unique and up to 20 characters";
 		this.photoError = "Not recognized as valid URL";
 
+		
 		/* Functions */
 
 		this.toRegister = function() {
-			this.userLogin = false;
-			this.userRegister = true;
+			$('#loginForm').fadeOut("fast",function(){$('#registrationForm').fadeIn("fast");});
+			
 		};
 		this.toLogin = function() {
-			this.userLogin = true;
-			this.userRegister = false;
+			$('#registrationForm').fadeOut("fast",function(){$('#loginForm').fadeIn("fast");});
 		};
+		this.disableButton = function(){
+			alert('a');
+			if($scope.registerForm.$valid) return '';
+			else return "disabled='disabled'";
+		};
+		
 		/** Register new user */
 		this.register = function() {
 			/* Input check */
@@ -64,7 +70,7 @@
 			this.error1 = "";
 			this.error2 = "";
 		};
-	});
+	}]);
 
 	var books = [
 
@@ -103,3 +109,9 @@
 	;
 
 })();
+
+function abc(obj){
+	alert('a');
+	obj.userLogin = false;
+	obj.userRegister = true;
+}
