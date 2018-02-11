@@ -10,28 +10,14 @@
 	});
 	app.controller('LandingController',['$rootScope','$scope',function($rootScope,$scope) {
 		/* Properties */
-		// TODO: don't forget to change these two back
-		this.userLogin = true;
-		this.userRegister = true;
+		resetErrors(this);
 		
-		this.errorUsername = false;
-		this.error1 = "";
-		this.error2 = "";
-		this.authFailureWarningHidden = true;
-		this.newUserNameOk = true;
-		this.newEmailOk = true;
-		this.newAdressOk = true;
-		this.newBlockNumberOk = true;
-		this.newCityOk = true;
-		this.newZIPOk = true;
-		this.newPhoneOk = true;
-		this.newPassOk = true;
-		this.newNickOk = true;
-		this.newPhotoOk = true;
+		/* TODO remove this later */
+		$('#loginForm').fadeOut("fast",function(){$('#registrationForm').fadeIn("fast");});
 		
 		this.newCustomer = {};
 
-		this.usernameError = "Username must be unique, can have only English characters and can't be longer than 10 characters";
+		this.usernameError = "Username must be unique, can have only English characters and numbers and can't be longer than 10 characters";
 		this.emailerror = "Please provide a valid email, that has @ character and a domain dot";
 		this.adressError = "Address must contain English characters only, and be longer than 3 characters";
 		this.blockError = "Block number has to be a number";
@@ -47,30 +33,31 @@
 
 		this.toRegister = function() {
 			$('#loginForm').fadeOut("fast",function(){$('#registrationForm').fadeIn("fast");});
-			
 		};
 		this.toLogin = function() {
 			$('#registrationForm').fadeOut("fast",function(){$('#loginForm').fadeIn("fast");});
 		};
 		this.disableButton = function(){
-			alert('a');
 			if($scope.registerForm.$valid) return '';
 			else return "disabled='disabled'";
 		};
-		
+
 		/** Register new user */
 		this.register = function() {
+			resetErrors(this);
 			/* Input check */
 			var passed = true;
 			/* Test Username */
-			if (!testNewUsername())
+			if (!testNewUsername(this.newCustomer.username)) {
 				passed = false;
+				this.newUserNameOk=false;
+			}
 			/* what happens if there is an error */
 			this.authFailureWarningHidden = false;
 			this.error1 = "";
 			this.error2 = "";
 		};
-	}]);
+	} ]);
 
 	var books = [
 
@@ -103,15 +90,25 @@
 			} ]
 		} ];
 
-	function testNewUsername() {
-
-	}
-	;
+	
 
 })();
+function resetErrors(obj){
+	obj.newUserNameOk = true;
+	obj.newEmailOk = true;
+	obj.newAdressOk = true;
+	obj.newBlockNumberOk = true;
+	obj.newCityOk = true;
+	obj.newZIPOk = true;
+	obj.newPhoneOk = true;
+	obj.newPassOk = true;
+	obj.newNickOk = true;
+	obj.newPhotoOk = true;
+}
 
-function abc(obj){
-	alert('a');
-	obj.userLogin = false;
-	obj.userRegister = true;
+function testNewUsername(str) {
+	var len=str.length;
+	if (len>10) return false;
+	var regex1 = /^[a-zA-Z0-9]+$/;
+	return regex1.test(str);
 }

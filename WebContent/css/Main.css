@@ -49,13 +49,3 @@ html, body {
 	background-color: black;
 	color:white;
 }
-
-.ng-invalid.ng-dirty{
-	border-color:#FA787E;
-	/*box-shadow: 0px 0px 10px 1px #FA787E;*/
-}
-
-.ng-valid.ng-dirty{
-	border-color:#78FA89;
-	/*box-shadow: 0px 0px 10px 1px #78FA89;*/
-}
