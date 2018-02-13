@@ -65,7 +65,7 @@
 
     /* set navigation variables */
     $scope.navLogin = false;
-    $scope.navRegister = true;
+    $scope.navRegister = false;
     $scope.navLibrary = true;
     // more to come
 

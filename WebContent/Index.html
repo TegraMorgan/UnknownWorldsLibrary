@@ -43,7 +43,10 @@
                   <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand" href="#"><ul class="list-inline"><li><img class="img-rounded" width="32px" src="img/logo.png" alt="logo"> </li><li>Unknown Worlds</li></ul></a>
+                  <a class="navbar-brand" href="#"><ul class="list-inline">
+                      <li><img class="img-rounded" width="32px" src="img/logo.png" alt="logo"></li>
+                      <li>Unknown Worlds</li>
+                    </ul></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -80,15 +83,15 @@
           <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1">
             <table class="table table-hover table-striped table-bordered ">
               <tr class="center" ng-show="product.canRead" ng-repeat="product in lib.products">
-                <td><img class="img-thumbnail" style="height:128px;" ng-src="{{product.imageURL}}"></td>
+                <td><img class="img-thumbnail" style="height: 128px;" ng-src="{{product.imageURL}}"></td>
                 <td>
                   <div>{{product.name}}</div>
                   <div>{{product.price | currency}}</div>
                   <div>{{product.description}}</div>
                 </td>
                 <td>
-                  <div data-trigger="hover" data-toggle="popover" data-placement="bottom" title="Liked by" data-content="here names of people that like this book "
-                    >Likes count here</div>
+                  <div data-trigger="hover" data-toggle="popover" data-placement="bottom" title="Liked by" data-content="here names of people that like this book ">Likes
+                    count here</div>
                   <div>
                     <button class="btn btn-default" on-click="lib.openreview(product.name)">
                       Read reviews <span class="glyphicon glyphicon-eye-open"</span>
@@ -108,22 +111,7 @@
     </div>
   </div>
 
-<!-- Loading placeholder -->
-  <div class="container">
-    <div class="row">
-      <div id="loader">
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="lading"></div>
-      </div>
-    </div>
-  </div>
+
 
 </body>
 </html>
