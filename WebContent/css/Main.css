@@ -59,12 +59,3 @@ html, body {
 	vertical-align: middle;
 	align-content: center;
 }
-.navbar-brand {
-  display: flex;
-  align-items: center;
-  }
-.navbar-brand>img {
-  height: 100%;
-  padding: 15px;
-  width: auto;
-}

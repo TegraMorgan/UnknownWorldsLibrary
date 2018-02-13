@@ -11,11 +11,12 @@
   var books = [
 
   {
-    name : '48 rules of power',
+    name : '48 laws of power',
     price : 12.3,
     description : 'Some description',
     canRead : true,
     canBuy : false,
+    imageURL : "http://patrickbetdavid.com/wp-content/uploads/2015/04/48lawspower.jpg",
     reviews : [ {
       author : "user3",
       body : "Some",
@@ -24,12 +25,12 @@
       body : "Review",
     } ]
   }, {
-    name : '12 rules to meaningfull life',
+    name : '12 rules for life',
     price : 17.1,
     description : 'Some description',
     canRead : true,
     canBuy : true,
-    imageURL : "",
+    imageURL : "https://dynamic.indigoimages.ca/books/0345816021.jpg?width=400&quality=100&lang=en",
     reviews : [ {
       author : "user1",
       body : "Some review",
