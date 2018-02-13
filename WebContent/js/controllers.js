@@ -46,6 +46,7 @@
     /* Properties */
     resetErrors(this);
 
+    $scope.navPointer= "'inDevelopment/login.htm'";
     this.newCustomer = {};
 
     /* TODO remove all this section this later */

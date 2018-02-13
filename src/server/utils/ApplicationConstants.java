@@ -1,9 +1,6 @@
 package server.utils;
 
-
-import java.lang.*;
-
-public class ApplicationConstants {
+public final class ApplicationConstants {
 
 	public final String DB_NAME = "projectDB";
 	public final String DB_DATASOURCE = "DB_DATASOURCE";
