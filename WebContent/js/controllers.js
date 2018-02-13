@@ -1,7 +1,9 @@
 /**
  * http://usejsdoc.org/
  */
-(function() {
+(function(global) {
+  'use strict';
+  
   var app = angular.module('library', []);
 
   app.controller('LibController', function() {
