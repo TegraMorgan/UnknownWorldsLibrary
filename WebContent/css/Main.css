@@ -29,7 +29,8 @@ html, body {
 }
 
 .Title {
-	font-family: Georgia, serif;
+	font-family: 'Oxygen', sans-serif;
+	/* font-family: Georgia, serif; */
 }
 
 .optional {
