@@ -1,6 +1,7 @@
 package server.model;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Customer {
 private int uid;
@@ -26,8 +27,15 @@ public Customer(int uId, String userName,String eMail, String pHone, String pAss
 	this.photo_url=pHoto_url;
 }
 
-public Customer(ResultSet rs) {
-	
+public Customer(ResultSet rs) throws SQLException {
+	this.uid=rs.getInt("uid");
+	this.username=rs.getString("username");
+	this.email=rs.getString("email");
+	this.phone=rs.getString("phone");
+	this.password=rs.getString("password");
+	this.nickname=rs.getString("nickname");
+	this.description=rs.getString("description");
+	this.photo_url=rs.getString("photo_url");
 }
 
 }
