@@ -35,7 +35,7 @@ public interface ApplicationConstants {
 		photo_url varchar*/
 		
 		public final String INSERT_NEW_CUSTOMER = "INSERT INTO customer VALUES (default,?,?,?,?,?,?,?)";
-		public final String FIND_CUSTOMER_BY_USERNAME = "SELECT * FROM customer WHERE username=?";
+		public final String FIND_CUSTOMER_BY_USERNAME_AND_PASS = "SELECT * FROM customer WHERE username=? AND password=?";
 		public final String FIND_CUSTOMER_BY_ID = "SELECT * FROM customer WHERE uid=?";
 		public final String FIND_CUSTOMER_BY_NICKNAME = "SELECT * FROM customer WHERE nickname=?";
 		public final String UPDATE_CUSTOMER_BY_ID = "UPDATE customer SET username=?, email=?, phone=?,password=?, nickname=?, description=?,photo_url=? WHERE uid=?;";

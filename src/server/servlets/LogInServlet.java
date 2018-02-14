@@ -2,6 +2,7 @@ package server.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,25 +11,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
-
-import server.model.Customer;
+import server.model.*;
 
 /**
- * Servlet implementation class UserServlet
+ * Servlet implementation class LogInServlet
  */
-@WebServlet("/UserServlet")
-public class SignUpServlet extends HttpServlet {
+@WebServlet("/LogInServlet")
+public class LogInServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public SignUpServlet() {
+	public LogInServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -38,37 +36,31 @@ public class SignUpServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		signUpRequest(request, response);
+		logInRequest(request, response);
 	}
 
-	private void signUpRequest(HttpServletRequest request, HttpServletResponse response)
+	private void logInRequest(HttpServletRequest request, HttpServletResponse response)
 			throws JsonSyntaxException, JsonIOException, IOException {
-		System.out.println("signUpRequest 1");
-		Gson gson = new GsonBuilder().setDateFormat("MMM dd,yyyy HH:mm:ss").create();
+		Gson gson = new GsonBuilder().create();
 		Customer customer = gson.fromJson(request.getReader(), Customer.class);
 		response.setContentType("application/json; charset=UTF-8");
 		PrintWriter printWriter = response.getWriter();
 		String data;
-		try {
-			
-			// addUser is a method at User class wich add the user to the DB
-			System.out.println("signUpRequest 2");
-			if (customer.addCustomer() > 0) {
-				HttpSession session = request.getSession();
-				request.setAttribute("customer", customer);
-				session.setAttribute("customer", customer); 
-				request.setAttribute("httpSession", session);
-				String CustomerInJson = gson.toJson(customer, Customer.class);
-				data = "{\"result\": \"success\",\"user\": " + CustomerInJson + "}";
-			} else {
-				data = "{ \"result\": \"fail\"}";
-			}
-			printWriter.println(data);
-			printWriter.close();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+		try {	
+			if(customer.getCustomer(customer.getUsername(), customer.getPassword())>0) {// this method connect to the db and check the user data return 1 if user is exist else -1
+			HttpSession session = request.getSession();
+			session.setAttribute("customer", customer);
+			//request.setAttribute("httpSession", session);
+			String CustomerInJson = gson.toJson(customer, Customer.class);
+			data = "{\"result\": \"success\",\"customer\": " + CustomerInJson+"}";
+			System.out.println("getting user 1>>>>>>>>>"+data);//////////
+		} else {
+			data = "{ \"result\": \"fail\"}";
+		}
+		printWriter.println(data);
+		printWriter.close();
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
 }
