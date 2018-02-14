@@ -5,9 +5,8 @@
 
 CREATE TABLE admin (
   aid int NOT NULL,
-  a_login varchar(30) DEFAULT NULL,
-  a_password varchar(45) DEFAULT NULL,
-  admincol varchar(45) DEFAULT NULL,
+  login varchar(30) DEFAULT NULL,
+  password varchar(45) DEFAULT NULL,
   PRIMARY KEY (aid)
 );
 
@@ -17,7 +16,7 @@ CREATE TABLE admin (
 
 CREATE TABLE book (
   bid int NOT NULL,
-  b_name varchar(255) DEFAULT NULL,
+  name varchar(255) DEFAULT NULL,
   author varchar(45) DEFAULT NULL,
   genre varchar(45) DEFAULT NULL,
   image_url varchar(255) DEFAULT NULL,
@@ -33,11 +32,11 @@ CREATE TABLE book (
 
 CREATE TABLE customer (
   uid int NOT NULL,
-  c_username varchar(11) DEFAULT NULL,
+  username varchar(11) DEFAULT NULL,
   email varchar(40) DEFAULT NULL,
   phone varchar(20) DEFAULT NULL,
-  c_password varchar(100) DEFAULT NULL,
-  c_nickname varchar(20) DEFAULT NULL,
+  password varchar(100) DEFAULT NULL,
+  nickname varchar(20) DEFAULT NULL,
   description varchar(255) DEFAULT NULL,
   photo_url varchar(255) DEFAULT NULL,
   PRIMARY KEY (uid)
