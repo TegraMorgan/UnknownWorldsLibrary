@@ -9,6 +9,12 @@ html, body {
 	padding: 0;
 	background-color: #001922;
 	font-family: Tahoma, Geneva, sans-serif;
+	/* google fonts to test
+	<link href='https://fonts.googleapis.com/css?family=Amiko' rel='stylesheet'>
+	font-family: 'Amiko';
+	font-family: 'Amarante';
+	font-family: 'Alef';
+	font-family: 'Alike'; */
 }
 
 .account-wall {
