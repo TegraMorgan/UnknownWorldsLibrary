@@ -18,7 +18,7 @@
     description : 'Some description',
     canRead : true,
     canBuy : false,
-    imageURL : "http://patrickbetdavid.com/wp-content/uploads/2015/04/48lawspower.jpg",
+    imageURL : "img/books/48lawspower.jpg",
     reviews : [ {
       author : "user3",
       body : "Some",
@@ -32,7 +32,7 @@
     description : 'Some description',
     canRead : true,
     canBuy : true,
-    imageURL : "https://dynamic.indigoimages.ca/books/0345816021.jpg?width=400&quality=100&lang=en",
+    imageURL : "img/books/12rulesforlife.jpg",
     reviews : [ {
       author : "user1",
       body : "Some review",

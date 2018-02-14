@@ -1,38 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
-<title>Unknown Worlds</title>
-<link rel="stylesheet" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="css/Main.css">
-<link rel="stylesheet" href="css/loader.css">
-
-<script type="text/javascript" src="lib/jquery-3.2.1.js"></script>
-<script type="text/javascript" src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="lib/angular.min.js"></script>
-
-<script type="text/javascript" src="js/controllers.js"></script>
-<script type="text/javascript" src="js/validationFunctions.js"></script>
-
-<script type="text/javascript" src="js/popoverInit.js""></script>
-
-</head>
-<body ng-app="library" ng-controller="LandingController as lCtrl">
-  <div class="container-fluid">
-
-    <!-- login section, visible by default on opening the page -->
-
-    <!-- Temporary removed to ease development - look in the login.html -->
-
-<div ng-if="true" ng-include="navPointer"></div>
-
-    <!-- Registration, not visible by default -->
-
-    <!-- Temporary removed to ease development - look in the registration.html -->
-
-
-    <!-- Library begins here -->
-    <div ng-if="navLibrary" ng-controller="LibController as lib">
+<div ng-if="navLibrary" ng-controller="LibController as lib">
       <div class="booklist">
         <div class="row">
           <div class="col-xs-12">
@@ -105,15 +71,8 @@
                   </div>
                 </td>
               </tr>
-              
             </table>
           </div>
         </div>
       </div>
     </div>
-  </div>
-
-
-
-</body>
-</html>

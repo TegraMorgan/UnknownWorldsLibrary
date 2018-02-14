@@ -8,6 +8,7 @@ html, body {
   */
 	padding: 0;
 	background-color: #001922;
+	font-family: Tahoma, Geneva, sans-serif;
 }
 
 .account-wall {
@@ -48,15 +49,32 @@ html, body {
 
 .debug {
 	background-color: black;
-	color:white;
+	color: white;
 }
 
-.booklist{
+.booklist {
 	background: #FFFFFF;
 	border-radius: 6px;
 }
 
-.center{
-	vertical-align: middle;
-	align-content: center;
+.center {
+	text-align: center;
+}
+
+.book-thumb {
+	width: 85%;
+}
+
+.shop-row-1 {
+	width:15%;
+	min-width: 100px;
+	max-width: 200px;
+}
+
+.shop-row-2 {
+	width :70%;
+}
+.shop-row-3 {
+	min-width: 15%;
+	max-width: 15%;
 }

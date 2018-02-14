@@ -13,10 +13,5 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/derby.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/derbyclient.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/derbynet.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/derbytools.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/gson-2.3.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

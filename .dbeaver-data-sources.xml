@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data-sources>
+	<data-source id="derby-16192fb557f-5addca2e37688e48" provider="generic" driver="derby" name="Derby - db" save-password="true" show-system-objects="true" read-only="false">
+		<connection server="" database="E:\eclipse-WEBspace\NewWebProject\db" url="jdbc:derby:E:\eclipse-WEBspace\NewWebProject\db" user="user" password="BhcDMiGi" type="dev"/>
+	</data-source>
+	<data-source id="derby-1619301fd00-52673a36c1b0116c" provider="generic" driver="derby" name="Derby - db" save-password="true" show-system-objects="true" read-only="false">
+		<connection server="" database="E:\eclipse-WEBspace\NewWebProject\db" url="jdbc:derby:E:\eclipse-WEBspace\NewWebProject\db" user="user" password="BhcDMiGi" type="dev"/>
+	</data-source>
+	<filters/>
+</data-sources>
