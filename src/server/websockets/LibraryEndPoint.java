@@ -10,6 +10,7 @@ import javax.naming.NamingException;
 import server.utils.ApplicationConstants;
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;;
 
+
 public class LibraryEndPoint {
 
 	
@@ -20,7 +21,7 @@ public class LibraryEndPoint {
 	private Connection getDataBaseConnection() {
 		try {
 			Context context = new InitialContext(); // obtain projectDB data source from Tomcat's context
-			BasicDataSource ds = (BasicDataSource)context.lookup(AppConstants.DB_CONTEXT + AppConstants.OPEN);
+			BasicDataSource ds = (BasicDataSource)context.lookup(ApplicationConstants.DB_CONTEXT + ApplicationConstants.OPEN);
 			return ds.getConnection();
 		} catch (NamingException | SQLException e) {
 			e.printStackTrace();
