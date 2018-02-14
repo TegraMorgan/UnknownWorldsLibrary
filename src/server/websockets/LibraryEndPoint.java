@@ -8,6 +8,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import server.utils.ApplicationConstants;
+
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;;
 
 
@@ -18,6 +19,7 @@ public class LibraryEndPoint {
 	 * Returns a connection to the database using the tomcat context
 	 * @return the connection to the database
 	 */
+	@SuppressWarnings("unused")
 	private Connection getDataBaseConnection() {
 		try {
 			Context context = new InitialContext(); // obtain projectDB data source from Tomcat's context
