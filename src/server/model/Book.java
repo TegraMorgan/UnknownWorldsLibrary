@@ -53,6 +53,19 @@ public class Book {
 		this.likes = this.GetMyLikes();
 		this.reviews = this.GetMyApprovedReviews();
 	}
+	
+	public Book(ResultSet rs,LinkedList<String> mYlikes, LinkedList<Review> mYreviews) throws SQLException {
+		this.bid = rs.getInt("bid");
+		this.name = rs.getString("name");
+		this.author = rs.getString("author");
+		this.genre = rs.getString("genre");
+		this.imageUrl = rs.getString("image_url");
+		this.price = rs.getDouble("price");
+		this.description = rs.getString("description");
+		this.filepath = rs.getString("filepath");
+		this.likes = mYlikes;
+		this.reviews = mYreviews;
+	}
 
 	private LinkedList<String> GetMyLikes() {
 		LinkedList<String> result = new LinkedList<String>();
@@ -100,9 +113,68 @@ public class Book {
 			return null;
 		}
 	}
+	
+	
+	
 	public static LinkedList<Book> GetAllBooks(){
 		//TODO do this
 		LinkedList<Book> result = new LinkedList<Book>();
+		Connection conn = null;
+		PreparedStatement bookStmt = null;
+		PreparedStatement likesStmt = null;
+		PreparedStatement reviewsStmt = null;
+		int i = 1;
+		try {
+			conn = (Connection) DataStructure.ds.getConnection();
+			bookStmt = conn.prepareStatement(ApplicationConstants.GET_ALL_BOOKS);
+			ResultSet bookSet = bookStmt.executeQuery();
+			likesStmt = conn.prepareStatement(ApplicationConstants.GET_ALL_LIKES);
+			ResultSet likesSet = likesStmt.executeQuery();
+			reviewsStmt = conn.prepareStatement(ApplicationConstants.GET_ALL_APPROVED_REVIEWS);
+			ResultSet reviewsSet = reviewsStmt.executeQuery();
+			LinkedList<String> likedList = new LinkedList<String>();
+			LinkedList<Review> reviewList = new LinkedList<Review>();
+			while(bookSet.next())
+			{
+				likesSet.beforeFirst();
+				reviewsSet.beforeFirst();
+				likedList = filterLikes(bookSet.getInt("bid"), likesSet);
+				reviewList = filterReviews(bookSet.getInt("bid"), reviewsSet);
+				result.add(new Book(bookSet, likedList, reviewList));
+			}
+			bookSet.close();
+			likesSet.close();
+			reviewsSet.close();
+			bookStmt.close();
+			likesStmt.close();
+			reviewsStmt.close();
+			conn.close();
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	private static LinkedList<Review> filterReviews(int bId, ResultSet reviewsSet) throws SQLException {
+		LinkedList<Review> result = new LinkedList<Review>();
+		while(reviewsSet.next()) {
+			if(reviewsSet.getInt("bid")==bId)
+			{
+				result.add(new Review(reviewsSet));
+			}
+		}
+		return result;
+	}
+
+	private static LinkedList<String> filterLikes(int bId, ResultSet likesSet) throws SQLException {
+		LinkedList<String> result = new LinkedList<String>();
+		while(likesSet.next()) {
+			if(likesSet.getInt("bid")==bId)
+			{
+				result.add(likesSet.getString("nickname"));
+			}
+		}
 		return result;
 	}
 }
