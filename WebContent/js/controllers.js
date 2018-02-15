@@ -274,6 +274,7 @@
 
       if (passed == true) {
         /* send this.newCustomer to server */
+        $http.post("http://localhost:8080/UnknownWorldsLibrary/testServlet").success
         alert('user passed all the tests reseting fields');
         this.newCustomer = {};
       }
