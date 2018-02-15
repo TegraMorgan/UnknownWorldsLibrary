@@ -3,7 +3,7 @@
 -- Table structure for table `admin`
 --
 
-CREATE TABLE admin (
+CREATE TABLE admins (
   aid int NOT NULL,
   login varchar(30) DEFAULT NULL,
   password varchar(45) DEFAULT NULL,
@@ -14,7 +14,7 @@ CREATE TABLE admin (
 -- Table structure for table `book`
 --
 
-CREATE TABLE book (
+CREATE TABLE books (
   bid int NOT NULL,
   name varchar(255) DEFAULT NULL,
   author varchar(45) DEFAULT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE book (
 -- Table structure for table `customer`
 --
 
-CREATE TABLE customer (
+CREATE TABLE customers (
   uid int NOT NULL,
   username varchar(11) DEFAULT NULL,
   email varchar(40) DEFAULT NULL,
