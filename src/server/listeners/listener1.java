@@ -1,11 +1,8 @@
 package server.listeners;
 
 import java.sql.Connection;
-//import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
-//import java.util.Collection;
-
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -13,15 +10,13 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
+import server.utils.*;
 
 //import com.google.gson.Gson;
 //import com.google.gson.reflect.TypeToken;
 //import com.model.User;
-import server.utils.*;
 
-//import com.dbConnection.manageDB;
 
 /**
  * This class creates the database tables and populates it with the data
