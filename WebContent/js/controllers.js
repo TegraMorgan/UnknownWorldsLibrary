@@ -287,16 +287,13 @@
           var myObj = JSON.parse(this.responseText);
           alert(myObj.name);
           $("#debug").innerHTML = "name= " + myObj.name + "; email=" + myObj.email + "; textStatus= " + textStatus;
-          $('#notification_success').show();
         }).always(function(data,textStatus, jqXHR) {
             alert("just for debuggin -  in always");
+            $("#debug").innerHTML += "always";
         }).fail(function(data,textStatus, jqXHR) {
              alert( "just for debuggin -  failure" );
-             $('#notification_failure').show();
-             $('#registerSubmit :input').prop("disabled",false);
+             $("#debug").innerHTML += "fail";
         });
-        
-        
         alert('user passed all the tests reseting fields');
         this.newCustomer = {};
       }
