@@ -1,8 +1,13 @@
 package server.model;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
+
+import server.utils.ApplicationConstants;
+import server.utils.DataStructure;
 
 public class Book {
 	private int bid;
@@ -32,17 +37,65 @@ public class Book {
 		this.price = pRice;
 		this.description = dEscription;
 		this.filepath = fIlepath;
-		this.likes = GetLikes(this.bid);
+		this.likes = this.GetMyLikes();
+		this.reviews = this.GetMyApprovedReviews();
 	}
-	
+
 	public Book(ResultSet rs) throws SQLException {
-		this.bid=rs.getInt("bid");
-		this.name=rs.getString("name");
-		this.author=rs.getString("author");
-		this.genre=rs.getString("genre");
-		this.imageUrl=rs.getString("image_url");
-		this.price=rs.getDouble("price");
-		this.description=rs.getString("description");
-		this.filepath=rs.getString("filepath");
+		this.bid = rs.getInt("bid");
+		this.name = rs.getString("name");
+		this.author = rs.getString("author");
+		this.genre = rs.getString("genre");
+		this.imageUrl = rs.getString("image_url");
+		this.price = rs.getDouble("price");
+		this.description = rs.getString("description");
+		this.filepath = rs.getString("filepath");
+	}
+
+	private LinkedList<String> GetMyLikes() {
+		LinkedList<String> result = new LinkedList<String>();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		int i = 1;
+		try {
+			conn = (Connection) DataStructure.ds.getConnection();
+			stmt = conn.prepareStatement(ApplicationConstants.GET_LIKES_FOR_BOOK);
+			stmt.setInt(i++, this.bid);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				result.add(rs.getString("nickname"));
+			}
+			rs.close();
+			stmt.close();
+			conn.close();
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	private LinkedList<Review> GetMyApprovedReviews() {
+		LinkedList<Review> result = new LinkedList<Review>();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		int i = 1;
+		try {
+			conn = (Connection) DataStructure.ds.getConnection();
+			stmt = conn.prepareStatement(ApplicationConstants.GET_REVIEWS_FOR_BOOK);
+			stmt.setInt(i++, this.bid);
+			ResultSet rs = stmt.executeQuery();
+			while(rs.next())
+			{
+				result.add(new Review(rs));
+			}
+			rs.close();
+			stmt.close();
+			conn.close();
+			return result;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }
