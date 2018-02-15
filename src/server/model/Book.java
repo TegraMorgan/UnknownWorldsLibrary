@@ -50,6 +50,8 @@ public class Book {
 		this.price = rs.getDouble("price");
 		this.description = rs.getString("description");
 		this.filepath = rs.getString("filepath");
+		this.likes = this.GetMyLikes();
+		this.reviews = this.GetMyApprovedReviews();
 	}
 
 	private LinkedList<String> GetMyLikes() {
@@ -97,5 +99,10 @@ public class Book {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	public static LinkedList<Book> GetAllBooks(){
+		//TODO do this
+		LinkedList<Book> result = new LinkedList<Book>();
+		return result;
 	}
 }
