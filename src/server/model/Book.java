@@ -2,6 +2,7 @@ package server.model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 public class Book {
 	private int bid;
@@ -12,6 +13,8 @@ public class Book {
 	private Double price;
 	private String description;
 	private String filepath;
+	private LinkedList<String> likes;
+	private LinkedList<Review> reviews;
 
 	/*
 	 * bid int NOT NULL, name varchar(255) DEFAULT NULL, author varchar(45) DEFAULT
@@ -29,6 +32,7 @@ public class Book {
 		this.price = pRice;
 		this.description = dEscription;
 		this.filepath = fIlepath;
+		this.likes = GetLikes(this.bid);
 	}
 	
 	public Book(ResultSet rs) throws SQLException {
