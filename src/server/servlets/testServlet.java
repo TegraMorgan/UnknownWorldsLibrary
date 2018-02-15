@@ -21,39 +21,48 @@ import server.model.Customer;
 @WebServlet("/testServlet")
 public class testServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public testServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public testServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		handleRequest(request, response);
+	}
+
+	private void handleRequest(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		System.out.println("testServlet started");
 		Gson gson = new GsonBuilder().setDateFormat("MMM dd,yyyy HH:mm:ss").create();
 		Customer cc = gson.fromJson(request.getReader(), Customer.class);
-		System.out.printf(" Nickname = %s, Username = %s",cc.getNickname(),cc.getUsername());
+		System.out.printf(" Nickname = %s, Username = %s", cc.getNickname(), cc.getUsername());
 		response.setContentType("application/json);charset=UTF-8");
 		PrintWriter pw = response.getWriter();
 		String data;
 		try {
 			HttpSession session = request.getSession();
 			request.setAttribute("customer", cc);
-			session.setAttribute("customer", cc); 
+			session.setAttribute("customer", cc);
 			request.setAttribute("httpSession", session);
 			String CustomerInJson = gson.toJson(cc, Customer.class);
 			data = "{\"result\": \"success\",\"user\": " + CustomerInJson + "}";

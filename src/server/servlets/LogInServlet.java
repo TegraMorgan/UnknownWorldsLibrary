@@ -21,14 +21,6 @@ import server.model.*;
  * Servlet implementation class LogInServlet
  */
 
-@WebServlet("/testServlet")
-public class TestServlet extends HttpServlet {
-
-	public LogInServlet() {
-		super();
-	}
-}
-
 @WebServlet("/LogInServlet")
 public class LogInServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

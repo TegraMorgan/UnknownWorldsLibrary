@@ -51,7 +51,7 @@ public class SignUpServlet extends HttpServlet {
 		String data;
 		try {
 			
-			// addUser is a method at User class wich add the user to the DB
+			// addUser is a method at User class which add the user to the DB
 			System.out.println("signUpRequest 2");
 			if (customer.addCustomer() > 0) {
 				HttpSession session = request.getSession();

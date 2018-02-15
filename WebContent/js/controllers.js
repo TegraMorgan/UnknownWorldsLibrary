@@ -50,7 +50,7 @@
     this.newCustomer = {};
 
     /* TODO remove all this section this later */
-/*
+
     this.newCustomer.username = "TestName";
     this.newCustomer.email = "Test@mail.com";
     this.newCustomer.street = "Galil";
@@ -63,13 +63,13 @@
     this.newCustomer.nickname = "Megapihar";
     this.newCustomer.description = "Desc";
     this.newCustomer.photo = "http://www.goolag.com";
-*/
+
     /* END OF SECTION TO BE REMOVED */
 
     /* set navigation variables */
     $scope.navLogin = false;
-    $scope.navRegister = false;
-    $scope.navLibrary = true;
+    $scope.navRegister = true;
+    $scope.navLibrary = false;
     // more to come
 
     /* set controller variables */
@@ -275,26 +275,22 @@
       if (passed == true) {
         /* send this.newCustomer to server */
         alert('user passed all the tests - attempting to send the post request');
-        var values = this.newCustomer.serialize();
-        alert(values);
+        var values = angular.toJson(this.newCustomer);
         
         $.ajax({
-          type: "POST",
-          url: '/UnknownWorldsLibrary/testServlet',
+          type: 'POST',
+          url: 'http://localhost:8080/UnknownWorlds/testServlet',
           data: values,
         }).done(function(data, textStatus, jqXHR) {
-          alert("just for debuggin - success");
           var myObj = JSON.parse(this.responseText);
-          alert(myObj.name);
-          $("#debug").innerHTML = "name= " + myObj.name + "; email=" + myObj.email + "; textStatus= " + textStatus;
+          $("#debug").text("name= " + myObj.name + "; email=" + myObj.email + "; textStatus= " + textStatus);
         }).always(function(data,textStatus, jqXHR) {
-            alert("just for debuggin -  in always");
-            $("#debug").innerHTML += "always";
         }).fail(function(data,textStatus, jqXHR) {
-             alert( "just for debuggin -  failure" );
-             $("#debug").innerHTML += "fail";
+             $("#debug").text($("#debug").text() + "fail");
         });
-        alert('user passed all the tests reseting fields');
+        $http.post("http://localhost:8080/UnknownWorlds/testServlet",values).success(function (response) {
+          $("#debug").text($("#debug").text() + "success");
+        });
         this.newCustomer = {};
       }
     };
