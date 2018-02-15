@@ -274,7 +274,29 @@
 
       if (passed == true) {
         /* send this.newCustomer to server */
-        $http.post("http://localhost:8080/UnknownWorldsLibrary/testServlet").success
+        alert('user passed all the tests - attempting to send the post request');
+        var values = this.newCustomer.serialize();
+        alert(values);
+        
+        $.ajax({
+          type: "POST",
+          url: '/UnknownWorldsLibrary/testServlet',
+          data: values,
+        }).done(function(data, textStatus, jqXHR) {
+          alert("just for debuggin - success");
+          var myObj = JSON.parse(this.responseText);
+          alert(myObj.name);
+          $("#debug").innerHTML = "name= " + myObj.name + "; email=" + myObj.email + "; textStatus= " + textStatus;
+          $('#notification_success').show();
+        }).always(function(data,textStatus, jqXHR) {
+            alert("just for debuggin -  in always");
+        }).fail(function(data,textStatus, jqXHR) {
+             alert( "just for debuggin -  failure" );
+             $('#notification_failure').show();
+             $('#registerSubmit :input').prop("disabled",false);
+        });
+        
+        
         alert('user passed all the tests reseting fields');
         this.newCustomer = {};
       }
