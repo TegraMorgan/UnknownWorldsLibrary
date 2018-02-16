@@ -1,6 +1,7 @@
 (function(global) {
   'use strict';
-  var uwl = angular.module('uwl',['services']).controller('LibController', function() {
+  //var uwl = angular.module('uwl',['services'])
+  uwl.controller('LibController', function() {
     this.products = books;
   }).controller('LandingController', [ '$rootScope', '$scope', '$http','comms', function($rootScope, $scope, $http,comms) {
     /* Properties */

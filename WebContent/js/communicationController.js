@@ -1,5 +1,5 @@
-/**
- * 
+/*
+ * DELETE THIS FILE AT THE END OF DEVELOPMENT 
  */
 
 

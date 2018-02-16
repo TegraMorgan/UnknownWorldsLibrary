@@ -1,1 +1,3 @@
-uwl = angular.module('uwl', []);
+(function(global) {
+uwl = angular.module('uwl', ['services']);
+})(this.windows);
