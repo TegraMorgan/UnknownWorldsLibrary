@@ -1,5 +1,8 @@
 
-.class
+
+*.class
+
+*.log
 .metadata
 bin/
 tmp/
