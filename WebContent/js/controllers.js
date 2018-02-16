@@ -64,6 +64,14 @@
     this.descError = "No more than 50 characters please";
     this.photoError = "Not recognized as valid URL";
 
+    /* set watch for ng-include */
+    $rootScope.$watch(function () {
+      return $rootScope.route;
+  }, function (newValue, oldValue) {
+      $scope.templateUrl = "pages/" + newValue + ".html";
+      $location.path(newValue);
+  });
+    
     /* Functions */
 
     this.navToRegister = function() {
