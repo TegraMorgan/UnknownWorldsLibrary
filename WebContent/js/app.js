@@ -1,0 +1,1 @@
+uwl = angular.module('uwl', []);

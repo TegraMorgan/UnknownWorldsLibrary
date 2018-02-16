@@ -1,51 +1,10 @@
-/**
- * http://usejsdoc.org/
- */
 (function(global) {
   'use strict';
-  
-  var app = angular.module('library', []);
-
-  app.controller('LibController', function() {
+  var uwl = angular.module('uwl',['services']).controller('LibController', function() {
     this.products = books;
-  });
-
-  var books = [
-
-  {
-    name : '48 laws of power',
-    price : 12.3,
-    description : 'Some description',
-    canRead : true,
-    canBuy : false,
-    imageURL : "img/books/48lawspower.jpg",
-    reviews : [ {
-      author : "user3",
-      body : "Some",
-    }, {
-      author : "user4",
-      body : "Review",
-    } ]
-  }, {
-    name : '12 rules for life',
-    price : 17.1,
-    description : 'Some description',
-    canRead : true,
-    canBuy : true,
-    imageURL : "img/books/12rulesforlife.jpg",
-    reviews : [ {
-      author : "user1",
-      body : "Some review",
-    }, {
-      author : "user2",
-      body : "Some review",
-    } ]
-  } ];
-
-  app.controller('LandingController', [ '$rootScope', '$scope', '$http', function($rootScope, $scope, $http) {
+  }).controller('LandingController', [ '$rootScope', '$scope', '$http','commsa', function($rootScope, $scope, $http,commsa) {
     /* Properties */
     resetErrors(this);
-
     $scope.navPointer= "'inDevelopment/login.htm'";
     this.newCustomer = {};
 
@@ -275,20 +234,19 @@
       if (passed == true) {
         /* send this.newCustomer to server */
         alert('user passed all the tests - attempting to send the post request');
-        var values = angular.toJson(this.newCustomer);
-        $.ajax({
-          type: 'POST',
-          url: '/UnknownWorldsLibrary/testServlet',
-          data: values
-        }).done(function(data, textStatus, jqXHR) {
+        commsa.call('POST','/UnknownWorldsLibrary/testServlet',this.newCustomer,
+          function(data, textStatus, jqXHR) {
+          alert('sucsess');
           var customer = data;
           $("#debug").text($("#debug").text() + " username - "+customer.username + "| email - "+customer.email);
-          alert('sucsess');
-        }).always(function(data,textStatus, jqXHR) {
-        }).fail(function(data,textStatus, errorThrown) {
-             $("#debug").text($("#debug").text() + "fail");
-             alert('fail');
-        });
+        } ,
+          function(data,textStatus, errorThrown) {
+          $("#debug").text($("#debug").text() + "fail");
+          alert('fail');
+        } ,
+         function(data,textStatus, jqXHR) {
+       alert('always run');
+     });
         
         /*$http.post("/UnknownWorldsLibrary/testServlet",values).success(function (response) {
           $("#debug").text($("#debug").text() + "success3");
@@ -297,4 +255,36 @@
       }
     };
   } ]);
+
+  var books = [
+
+    {
+      name : '48 laws of power',
+      price : 12.3,
+      description : 'Some description',
+      canRead : true,
+      canBuy : false,
+      imageURL : "img/books/48lawspower.jpg",
+      reviews : [ {
+        author : "user3",
+        body : "Some",
+      }, {
+        author : "user4",
+        body : "Review",
+      } ]
+    }, {
+      name : '12 rules for life',
+      price : 17.1,
+      description : 'Some description',
+      canRead : true,
+      canBuy : true,
+      imageURL : "img/books/12rulesforlife.jpg",
+      reviews : [ {
+        author : "user1",
+        body : "Some review",
+      }, {
+        author : "user2",
+        body : "Some review",
+      } ]
+    } ];
 })();
