@@ -26,6 +26,8 @@
     <!-- Temporary removed to ease development - look in the login.htm -->
 
 
+<div id="incl" ng-init="includeView='/login.html'" ng-include="includeView" ng-if="true">ng-include</div>
+
     <!-- Registration, not visible by default -->
 
     <!-- Temporary removed to ease development - look in the registration.html -->
@@ -36,47 +38,8 @@
     <!-- Temporary removed to ease development - look in the store_template.html -->
     
     <!-- Browse reviews of ebook-->
-    <div ng-controller="" class="well well-sm">
-   <div class="row">
-   <div class="col-xs-1"><button type="button" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left
-   "></span> Back</button></div>
-   </div>
-    <div class="row">
-      <div class="col-xs-2 col-xs-offset-0 col-md-2 col-md-offset-1">
-        <img alt="Cover" class="img-responsive" src="img/books/12rulesforlife.jpg">
-      </div>
-        <div class="col-xs-7 col-md-6">
-          <div class="jumbotron">
-            <h1>bookname</h1>
-            <h2>
-              <small>Author</small>
-              <h5>price</h5>
-            </h2>
-            <p>book description / book genre</p>
-          </div>
-        </div>
-        <div class="col-xs-1 well well-sm">List of nicknames who like this book</div>
-        <div class="col-xs-1">
-        <!-- Only one of these will be shown!!! -->
-          <button type="button" class="btn btn-primary">
-            <span class="glyphicon glyphicon-shopping-cart"> </span> Purchase
-          </button>
-          <button type="button" class="btn btn-primary">
-            <span class="glyphicon glyphicon-book"> </span> Read
-          </button>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-          <ul class="list-group">
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item" ng-repeat="">Cras justo odio</li>
-            <li class="list-group-item">Cras justo odio</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <!-- Book reading ends here -->
+    
+    <!-- reviews ends here -->
 
   </div>
 </body>

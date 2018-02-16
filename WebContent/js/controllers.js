@@ -65,11 +65,12 @@
     this.photoError = "Not recognized as valid URL";
 
     /* set watch for ng-include */
-    $rootScope.$watch(function () {
-      return $rootScope.route;
+    $rootScope.includeView="";
+    $rootScope.secondView='login';
+    $scope.$watch(function () {
+      return $rootScope.secondView;
   }, function (newValue, oldValue) {
-      $scope.templateUrl = "pages/" + newValue + ".html";
-      $location.path(newValue);
+      $scope.includeView = "pages/" + newValue + ".html";
   });
     
     /* Functions */
@@ -246,7 +247,7 @@
         comms.call('POST','/UserServlet',this.newCustomer,
           function(data, textStatus, jqXHR) {
           alert('sucsess');
-          var customer = data;
+          var customer = data.user;
           $("#debug").text($("#debug").text() + " username - "+customer.username + "| email - "+customer.email);
         } ,
           function(data,textStatus, errorThrown) {
@@ -255,6 +256,8 @@
         } ,
          function(data,textStatus, jqXHR) {
        alert('always run');
+       var res = data["result"];
+       $("#debug").text($("#debug").text() + " result - "+ res);
      });
         
         /*$http.post("/UnknownWorldsLibrary/testServlet",values).success(function (response) {

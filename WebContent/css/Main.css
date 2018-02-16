@@ -7,7 +7,7 @@ html, body {
   * overflow: hidden
   */
 	padding: 0;
-	background-color: #001922;
+	background-color: #637a7e;
 	font-family: Tahoma, Geneva, sans-serif;
 	/* google fonts to test
 	<link href='https://fonts.googleapis.com/css?family=Amiko' rel='stylesheet'>
@@ -21,10 +21,10 @@ html, body {
 	position: relative;
 	margin-top: 50px;
 	padding: 30px 15px 30px 15px;
-	background-color: #040507;
+	background-color: #eee;
 	box-shadow: 10px 0px 15px rgba(0, 0, 0, 0.3);
 	border-radius: 10px;
-	color: #FFFFC0;
+	color: #142d36;
 }
 
 .auth-fail, .reg-fail {

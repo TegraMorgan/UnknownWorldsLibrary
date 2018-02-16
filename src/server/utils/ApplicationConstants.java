@@ -13,12 +13,12 @@ public interface ApplicationConstants {
 		public final String SHUTDOWN = "Shutdown";
 
 		//sql statements
-		public final String CREATE_ADMIN_TABLE = "CREATE TABLE admins (aid int NOT NULL,login varchar(30) DEFAULT NULL,password varchar(45) DEFAULT NULL,PRIMARY KEY (aid));";
-		public final String CREATE_BOOK_TABLE = "CREATE TABLE books (bid int NOT NULL,name varchar(255) DEFAULT NULL,author varchar(45) DEFAULT NULL,genre varchar(45) DEFAULT NULL,image_url varchar(255) DEFAULT NULL,price double DEFAULT NULL,description varchar(500) DEFAULT NULL,filepath varchar(500) DEFAULT NULL,PRIMARY KEY (bid));";
-		public final String CREATE_CUSTOMER_TABLE = "CREATE TABLE customers (uid int NOT NULL,username varchar(11) DEFAULT NULL,email varchar(40) DEFAULT NULL,phone varchar(20) DEFAULT NULL,password varchar(100) DEFAULT NULL,nickname varchar(20) DEFAULT NULL,description varchar(255) DEFAULT NULL,photo_url varchar(255) DEFAULT NULL,PRIMARY KEY (uid));";
-		public final String CREATE_LIKES_TABLE = "CREATE TABLE likes (bid int NOT NULL,uid int NOT NULL,PRIMARY KEY (bid,uid));";
-		public final String CREATE_OWNS_TABLE = "CREATE TABLE owns (uid int NOT NULL,bid int NOT NULL,dateof timestamp DEFAULT NULL,PRIMARY KEY (uid,bid));";
-		public final String CREATE_REVIEWS_TABLE = "CREATE TABLE reviews (bid int NOT NULL,uid int NOT NULL,text varchar(500) DEFAULT NULL,approved_by int DEFAULT NULL,PRIMARY KEY (bid,uid));";
+		public final String CREATE_ADMIN_TABLE = "CREATE TABLE admins (aid int GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),login varchar(30) DEFAULT NULL,password varchar(45) DEFAULT NULL,PRIMARY KEY (aid))";
+		public final String CREATE_BOOK_TABLE = "CREATE TABLE books (bid int GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),name varchar(255) DEFAULT NULL,author varchar(45) DEFAULT NULL,genre varchar(45) DEFAULT NULL,image_url varchar(255) DEFAULT NULL,price double DEFAULT NULL,description varchar(500) DEFAULT NULL,filepath varchar(500) DEFAULT NULL,PRIMARY KEY (bid))";
+		public final String CREATE_CUSTOMER_TABLE = "CREATE TABLE customers (uid int GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),username varchar(11) DEFAULT NULL,email varchar(40) DEFAULT NULL,phone varchar(20) DEFAULT NULL,password varchar(100) DEFAULT NULL,nickname varchar(20) DEFAULT NULL,description varchar(255) DEFAULT NULL,photo_url varchar(255) DEFAULT NULL,PRIMARY KEY (uid))";
+		public final String CREATE_LIKES_TABLE = "CREATE TABLE likes (bid int NOT NULL,uid int NOT NULL,PRIMARY KEY (bid,uid))";
+		public final String CREATE_OWNS_TABLE = "CREATE TABLE owns (uid int NOT NULL,bid int NOT NULL,dateof timestamp DEFAULT NULL,PRIMARY KEY (uid,bid))";
+		public final String CREATE_REVIEWS_TABLE = "CREATE TABLE reviews (bid int NOT NULL,uid int NOT NULL,text varchar(500) DEFAULT NULL,approved_by int DEFAULT NULL,PRIMARY KEY (bid,uid))";
 		
 		public final String INSERT_NEW_CUSTOMER = "INSERT INTO customers VALUES (default,?,?,?,?,?,?,?)";
 		public final String FIND_CUSTOMER_BY_USERNAME = "SELECT * FROM customers WHERE username=?";
