@@ -15,11 +15,15 @@
 <script type="text/javascript" src="js/services.js"></script>
 <script type="text/javascript" src="js/controllers.js"></script>
 <script type="text/javascript" src="js/validationFunctions.js"></script>
+<script type="text/javascript" src="js/popoverInit.js"></script>
 
 </head>
-<body id="mainbody" data-ng-app="uwl" data-ng-controller="LandingController as lCtrl" data-ng-init="includeView='pages/login.html'">
-<div class="debug">{{includeView}}</div>
-<div id="jwa" ng-include="includeView" ng-if="true"></div>
+<body id="mainbody" data-ng-app="uwl" ng-controller="LandingController as lCtrt">
+
+  <div class="debug">{{includeView}}</div>
+  <div class="container-fluid">
+     <div id="jwa" ng-include="includeView" ng-if="true"></div>
+  </div>
 
 </body>
 </html>
