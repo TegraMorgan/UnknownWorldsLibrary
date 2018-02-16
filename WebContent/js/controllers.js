@@ -2,7 +2,7 @@
   'use strict';
   var uwl = angular.module('uwl',['services']).controller('LibController', function() {
     this.products = books;
-  }).controller('LandingController', [ '$rootScope', '$scope', '$http','commsa', function($rootScope, $scope, $http,commsa) {
+  }).controller('LandingController', [ '$rootScope', '$scope', '$http','comms', function($rootScope, $scope, $http,comms) {
     /* Properties */
     resetErrors(this);
     $scope.navPointer= "'inDevelopment/login.htm'";
@@ -234,7 +234,7 @@
       if (passed == true) {
         /* send this.newCustomer to server */
         alert('user passed all the tests - attempting to send the post request');
-        commsa.call('POST','/UnknownWorldsLibrary/testServlet',this.newCustomer,
+        comms.call('POST','/testServlet',this.newCustomer,
           function(data, textStatus, jqXHR) {
           alert('sucsess');
           var customer = data;
