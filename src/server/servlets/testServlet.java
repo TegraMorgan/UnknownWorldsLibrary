@@ -18,7 +18,7 @@ import server.model.Customer;
 /**
  * Servlet implementation class testServlet
  */
-@WebServlet("/testServlet")
+@WebServlet(urlPatterns = "/testServlet")
 public class testServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -52,11 +52,11 @@ public class testServlet extends HttpServlet {
 
 	private void handleRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("testServlet started");
 		Gson gson = new GsonBuilder().setDateFormat("MMM dd,yyyy HH:mm:ss").create();
 		Customer cc = gson.fromJson(request.getReader(), Customer.class);
-		System.out.printf(" Nickname = %s, Username = %s", cc.getNickname(), cc.getUsername());
-		response.setContentType("application/json);charset=UTF-8");
+		System.out.printf(" Nickname = %s, Username = %s\n", cc.getNickname(), cc.getUsername());
+		response.setContentType("application/json");
+		response.setStatus(HttpServletResponse.SC_OK);
 		PrintWriter pw = response.getWriter();
 		String data;
 		try {
@@ -65,9 +65,10 @@ public class testServlet extends HttpServlet {
 			session.setAttribute("customer", cc);
 			request.setAttribute("httpSession", session);
 			String CustomerInJson = gson.toJson(cc, Customer.class);
-			data = "{\"result\": \"success\",\"user\": " + CustomerInJson + "}";
+			data = CustomerInJson; // "{\"customer\":" +   + " }" 
 			pw.println(data);
 			pw.close();
+			System.out.println("\n end of request");
 		} catch (Exception e) {
 
 		}

@@ -276,21 +276,23 @@
         /* send this.newCustomer to server */
         alert('user passed all the tests - attempting to send the post request');
         var values = angular.toJson(this.newCustomer);
-        
         $.ajax({
           type: 'POST',
-          url: 'http://localhost:8080/UnknownWorlds/testServlet',
-          data: values,
+          url: '/UnknownWorldsLibrary/testServlet',
+          data: values
         }).done(function(data, textStatus, jqXHR) {
-          var myObj = JSON.parse(this.responseText);
-          $("#debug").text("name= " + myObj.name + "; email=" + myObj.email + "; textStatus= " + textStatus);
+          var customer = data;
+          $("#debug").text($("#debug").text() + " username - "+customer.username + "| email - "+customer.email);
+          alert('sucsess');
         }).always(function(data,textStatus, jqXHR) {
-        }).fail(function(data,textStatus, jqXHR) {
+        }).fail(function(data,textStatus, errorThrown) {
              $("#debug").text($("#debug").text() + "fail");
+             alert('fail');
         });
-        $http.post("http://localhost:8080/UnknownWorlds/testServlet",values).success(function (response) {
-          $("#debug").text($("#debug").text() + "success");
-        });
+        
+        /*$http.post("/UnknownWorldsLibrary/testServlet",values).success(function (response) {
+          $("#debug").text($("#debug").text() + "success3");
+        });*/
         this.newCustomer = {};
       }
     };

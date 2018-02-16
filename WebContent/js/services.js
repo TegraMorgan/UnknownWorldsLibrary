@@ -34,7 +34,7 @@
     // this service used to connect to login and register servlets.
     return {
       send: function (pathToServlet, jsonToSend) {
-        $http.post("/webapp/" + pathToServlet, JSON.stringify(jsonToSend)).success(function (response) {
+        $http.post("/UnknownWorldsLibrary/" + pathToServlet, JSON.stringify(jsonToSend)).success(function (response) {
           messageBus.send(response.messageType, response);
 
         }).error(function (response) {
