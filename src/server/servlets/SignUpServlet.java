@@ -54,6 +54,7 @@ public class SignUpServlet extends HttpServlet {
 			// addUser is a method at User class which add the user to the DB
 			System.out.println("signUpRequest 2");
 			if (customer.addCustomer() > 0) {
+				customer.getCustomer(customer.getUsername(), customer.getPassword());
 				HttpSession session = request.getSession();
 				request.setAttribute("customer", customer);
 				session.setAttribute("customer", customer); 
