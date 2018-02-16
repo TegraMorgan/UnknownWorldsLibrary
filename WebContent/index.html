@@ -15,32 +15,11 @@
 <script type="text/javascript" src="js/services.js"></script>
 <script type="text/javascript" src="js/controllers.js"></script>
 <script type="text/javascript" src="js/validationFunctions.js"></script>
-<script type="text/javascript" src="js/popoverInit.js""></script>
 
 </head>
-<body ng-app="uwl" ng-controller="LandingController as lCtrl">
-  <div class="container-fluid">
+<body id="mainbody" data-ng-app="uwl" data-ng-controller="LandingController as lCtrl" data-ng-init="includeView='pages/login.html'">
+<div class="debug">{{includeView}}</div>
+<div id="jwa" ng-include="includeView" ng-if="true"></div>
 
-    <!-- login section, visible by default on opening the page -->
-
-    <!-- Temporary removed to ease development - look in the login.htm -->
-
-
-<div id="incl" ng-init="includeView='/login.html'" ng-include="includeView" ng-if="true">ng-include</div>
-
-    <!-- Registration, not visible by default -->
-
-    <!-- Temporary removed to ease development - look in the registration.html -->
-
-<div class="debug"><p id=debug></p></div>
-    <!-- Book Store begins here -->
-    
-    <!-- Temporary removed to ease development - look in the store_template.html -->
-    
-    <!-- Browse reviews of ebook-->
-    
-    <!-- reviews ends here -->
-
-  </div>
 </body>
 </html>

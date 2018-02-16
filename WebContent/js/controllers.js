@@ -1,12 +1,20 @@
 (function(global) {
   'use strict';
-  //var uwl = angular.module('uwl',['services'])
-  uwl.controller('LibController', function() {
-    this.products = books;
-  }).controller('LandingController', [ '$rootScope', '$scope', '$http','comms', function($rootScope, $scope, $http,comms) {
+  uwl.controller('LandingController', [ '$rootScope', '$scope', '$http','comms','$location', function($rootScope, $scope, $http,comms,$location) {
     /* Properties */
+    
+    
+    /* set watch for ng-include */
+    $rootScope.secondView='pages/login.html';
+    $scope.$watch(function () {
+      return $rootScope.secondView;
+  }, function (newValue, oldValue) {
+      $scope.includeView = newValue;
+  });
+    
     resetErrors(this);
-    $scope.navPointer= "'inDevelopment/login.htm'";
+    
+    
     this.newCustomer = {};
 
     /* TODO remove all this section this later */
@@ -27,9 +35,9 @@
     /* END OF SECTION TO BE REMOVED */
 
     /* set navigation variables */
-    $scope.navLogin = false;
+    $scope.navLogin = true;
     $scope.navRegister = true;
-    $scope.navLibrary = false;
+    $scope.navLibrary = true;
     // more to come
 
     /* set controller variables */
@@ -64,25 +72,14 @@
     this.descError = "No more than 50 characters please";
     this.photoError = "Not recognized as valid URL";
 
-    /* set watch for ng-include */
-    $rootScope.includeView="";
-    $rootScope.secondView='login';
-    $scope.$watch(function () {
-      return $rootScope.secondView;
-  }, function (newValue, oldValue) {
-      $scope.includeView = "pages/" + newValue + ".html";
-  });
-    
     /* Functions */
 
     this.navToRegister = function() {
-      $scope.navLogin = false;
-      $scope.navRegister = true;
+      $rootScope.secondView='pages/registration.html'
     };
 
     this.navToLogin = function() {
-      $scope.navRegister = false;
-      $scope.navLogin = true;
+      $rootScope.secondView='pages/login.html'
     };
 
     this.login = function() {
@@ -266,7 +263,9 @@
         this.newCustomer = {};
       }
     };
-  } ]);
+  } ]).controller('LibController', function() {
+    this.products = books;
+  });
 
   var books = [
 
