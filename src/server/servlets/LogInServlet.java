@@ -24,6 +24,7 @@ import server.model.*;
 @WebServlet("/LogInServlet")
 public class LogInServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -31,6 +32,7 @@ public class LogInServlet extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -47,19 +49,22 @@ public class LogInServlet extends HttpServlet {
 		response.setContentType("application/json; charset=UTF-8");
 		PrintWriter printWriter = response.getWriter();
 		String data;
-		try {	
-			if(customer.getCustomer(customer.getUsername(), customer.getPassword())>0) {// this method connect to the db and check the user data return 1 if user is exist else -1
-			HttpSession session = request.getSession();
-			session.setAttribute("customer", customer);
-			//request.setAttribute("httpSession", session);
-			String CustomerInJson = gson.toJson(customer, Customer.class);
-			data = "{\"result\": \"success\",\"customer\": " + CustomerInJson+"}";
-			System.out.println("getting user 1>>>>>>>>>"+data);//////////
-		} else {
-			data = "{ \"result\": \"fail\"}";
-		}
-		printWriter.println(data);
-		printWriter.close();
+		try {
+			if (customer.getCustomer(customer.getUsername(), customer.getPassword()) > 0) {// this method connect to the
+																							// db and check the user
+																							// data return 1 if user is
+																							// exist else -1
+				HttpSession session = request.getSession();
+				session.setAttribute("customer", customer);
+				// request.setAttribute("httpSession", session);
+				String CustomerInJson = gson.toJson(customer, Customer.class);
+				data = "{\"result\": \"success\",\"customer\": " + CustomerInJson + "}";
+				System.out.println("getting user 1>>>>>>>>>" + data);//////////
+			} else {
+				data = "{ \"result\": \"fail\"}";
+			}
+			printWriter.println(data);
+			printWriter.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

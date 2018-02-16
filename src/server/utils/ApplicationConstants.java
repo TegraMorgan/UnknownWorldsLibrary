@@ -1,10 +1,5 @@
 package server.utils;
 
-import java.lang.reflect.Type;
-import java.util.Collection;
-
-import com.google.gson.reflect.TypeToken;
-
 public interface ApplicationConstants {
 
 	public final String DB_CONTEXT = "java:comp/env/jdbc/ExampleDatasource";

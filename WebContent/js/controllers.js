@@ -243,7 +243,7 @@
       if (passed == true) {
         /* send this.newCustomer to server */
         alert('user passed all the tests - attempting to send the post request');
-        comms.call('POST','/testServlet',this.newCustomer,
+        comms.call('POST','/UserServlet',this.newCustomer,
           function(data, textStatus, jqXHR) {
           alert('sucsess');
           var customer = data;

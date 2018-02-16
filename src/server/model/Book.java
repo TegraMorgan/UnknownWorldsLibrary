@@ -53,8 +53,8 @@ public class Book {
 		this.likes = this.GetMyLikes();
 		this.reviews = this.GetMyApprovedReviews();
 	}
-	
-	public Book(ResultSet rs,LinkedList<String> mYlikes, LinkedList<Review> mYreviews) throws SQLException {
+
+	public Book(ResultSet rs, LinkedList<String> mYlikes, LinkedList<Review> mYreviews) throws SQLException {
 		this.bid = rs.getInt("bid");
 		this.name = rs.getString("name");
 		this.author = rs.getString("author");
@@ -100,8 +100,7 @@ public class Book {
 			stmt = conn.prepareStatement(ApplicationConstants.GET_REVIEWS_FOR_BOOK);
 			stmt.setInt(i++, this.bid);
 			ResultSet rs = stmt.executeQuery();
-			while(rs.next())
-			{
+			while (rs.next()) {
 				result.add(new Review(rs));
 			}
 			rs.close();
