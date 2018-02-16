@@ -28,13 +28,14 @@ public int addCustomer() throws Exception {
 		try {
 			con = (Connection) DataStructure.ds.getConnection();
 			preparedStatement = con.prepareStatement(ApplicationConstants.INSERT_NEW_CUSTOMER);
-			preparedStatement.setString(1, this.username);
-			preparedStatement.setString(2, this.email);
-			preparedStatement.setString(3, this.phone);
-			preparedStatement.setString(4, this.password);
-			preparedStatement.setString(5, this.nickname);
-			preparedStatement.setString(6, this.description);
-			preparedStatement.setString(7, this.photo_url);
+			int i=1;
+			preparedStatement.setString(i++, this.username);
+			preparedStatement.setString(i++, this.email);
+			preparedStatement.setString(i++, this.phone);
+			preparedStatement.setString(i++, this.password);
+			preparedStatement.setString(i++, this.nickname);
+			preparedStatement.setString(i++, this.description);
+			preparedStatement.setString(i++, this.photo_url);
 			st = preparedStatement.executeUpdate();
 			System.out.println("addCustomer 2");
 		} catch (Exception e) {
