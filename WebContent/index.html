@@ -22,6 +22,9 @@
 
   <div class="debug">{{includeView}}</div>
   <div class="container-fluid">
+     <div id="navMenu" ng-if="menuEnabled" ng-include="navmenu">
+     
+     </div>
      <div id="jwa" ng-include="includeView"></div>
   </div>
 

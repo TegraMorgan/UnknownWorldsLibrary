@@ -5,12 +5,16 @@
     
     
     /* set watch for ng-include */
-    $rootScope.secondView='pages/login.html';
+    $rootScope.secondView = 'pages/login.html';
     $scope.$watch(function () {
       return $rootScope.secondView;
   }, function (newValue, oldValue) {
       $scope.includeView = newValue;
   });
+    
+    /* navigation menu variables */
+    $rootScope.navmenu = 'pages/navMenu.html';
+    $rootScope.menuEnabled = false;
     
     resetErrors(this);
     
@@ -18,7 +22,7 @@
     this.newCustomer = {};
 
     /* TODO remove all this section this later */
-
+/*
     this.newCustomer.username = "TestName";
     this.newCustomer.email = "Test@mail.com";
     this.newCustomer.street = "Galil";
@@ -31,14 +35,8 @@
     this.newCustomer.nickname = "Megapihar";
     this.newCustomer.description = "Desc";
     this.newCustomer.photo = "http://www.goolag.com";
-
+*/
     /* END OF SECTION TO BE REMOVED */
-
-    /* set navigation variables */
-    $scope.navLogin = true;
-    $scope.navRegister = true;
-    $scope.navLibrary = true;
-    // more to come
 
     /* set controller variables */
 
@@ -74,6 +72,12 @@
 
     /* Functions */
 
+    /* navigarion menu toggle */
+    this.menutoggle = function(){
+      $rootScope.menuEnabled = $rootScope.menuEnabled == true ? false : true;
+      $rootScope.$apply;
+    }
+    
     this.navToRegister = function() {
       $rootScope.secondView='pages/registration.html'
     };
@@ -83,7 +87,10 @@
     };
 
     this.navToMyBooks = function(){
-      
+      //TODO book navigation
+      /* temporary solution for testing */
+      //inDevelopment/store_template.html
+      $rootScope.secondView='inDevelopment/store_template.html';
     }
     
     this.login = function() {
@@ -98,17 +105,18 @@
       else {
         this.wrongLoginData = false;
         var ctr=this;
-        /* TODO check the server for correct information */
         comms.call('POST', '/LogInServlet', this.oldCustomer, 
           function(data, textStatus, jqXHR) {
-            //ctr.navToMyBooks();
-            
           if(data.result == "fail"){
             alert(data.result);
             ctr.wrongLoginData = true;
             ctr.wrongLoginMessage = "Incorrect credentials";
             }
-          else {listProperties(data.customer);}
+          else {
+          /* TODO LOGIN FUNCTION HERE */  
+            ctr.menutoggle();
+            ctr.navToMyBooks();
+          }
             $rootScope.$apply();
           }, function(data, textStatus, errorThrown) {
           alert('Server error. Please try again');
