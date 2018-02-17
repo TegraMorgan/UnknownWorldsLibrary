@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Dictionary;
 import java.util.LinkedList;
 
 import server.model.Book;
@@ -13,21 +14,26 @@ import server.utils.DataStructure;
 
 public class BookController {
 	
-	public static LinkedList<Book> GetAllBooks(){
+	public static LinkedList<Book> getAllBooks(){
 		LinkedList<Book> result = new LinkedList<Book>();
 		Connection conn = null;
+		Connection conn2 = null;
+		Connection conn3 = null;
 		PreparedStatement bookStmt = null;
 		PreparedStatement likesStmt = null;
 		PreparedStatement reviewsStmt = null;
 		int i = 1;
 		try {
 			conn = (Connection) DataStructure.ds.getConnection();
-			bookStmt = conn.prepareStatement(ApplicationConstants.GET_ALL_BOOKS);
+			conn2 = (Connection) DataStructure.ds.getConnection();
+			conn3 = (Connection) DataStructure.ds.getConnection();
+			bookStmt = conn.prepareStatement(ApplicationConstants.GET_ALL_BOOKS, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			ResultSet bookSet = bookStmt.executeQuery();
-			likesStmt = conn.prepareStatement(ApplicationConstants.GET_ALL_LIKES);
+			likesStmt = conn2.prepareStatement(ApplicationConstants.GET_ALL_LIKES, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			ResultSet likesSet = likesStmt.executeQuery();
-			reviewsStmt = conn.prepareStatement(ApplicationConstants.GET_ALL_APPROVED_REVIEWS);
+			reviewsStmt = conn3.prepareStatement(ApplicationConstants.GET_ALL_APPROVED_REVIEWS, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 			ResultSet reviewsSet = reviewsStmt.executeQuery();
+			System.out.println("Got reviews");
 			LinkedList<String> likedList = new LinkedList<String>();
 			LinkedList<Review> reviewList = new LinkedList<Review>();
 			while(bookSet.next())
@@ -38,6 +44,10 @@ public class BookController {
 				reviewList = filterReviews(bookSet.getInt("bid"), reviewsSet);
 				result.add(new Book(bookSet, likedList, reviewList));
 			}
+			
+			
+			
+			
 			bookSet.close();
 			likesSet.close();
 			reviewsSet.close();
@@ -45,6 +55,8 @@ public class BookController {
 			likesStmt.close();
 			reviewsStmt.close();
 			conn.close();
+			conn2.close();
+			conn3.close();
 			return result;
 		} catch (Exception e) {
 			e.printStackTrace();
