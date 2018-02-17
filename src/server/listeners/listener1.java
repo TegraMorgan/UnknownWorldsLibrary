@@ -132,6 +132,34 @@ public class listener1 implements ServletContextListener {
 			try {	
 				Statement stmt = conn.createStatement();
 				stmt.executeUpdate(ApplicationConstants.CREATE_BOOK_TABLE);
+				// commit update
+				conn.commit();
+				// close statements
+				stmt.close();
+			}
+			catch (SQLException e) {
+				if (!(newDB = tableAlreadyExists(e))) {
+					throw e;
+				}
+
+			}
+				
+				
+				if (!newDB){
+	                // Populate customers table with customer data from json file
+	    			try {
+		                Collection<Book> books = loadBooks(cntx.getResourceAsStream(File.separator + ApplicationConstants.BOOKS_FILE));
+		                for (Book book : books) {
+							System.out.println("Customer : " + book.getName() + ", Password : " + book.getBid());
+		                	book.addBook();
+		                }
+	    			} catch (Exception e) { }
+	    		}
+				
+				
+				try {
+				Statement stmt = conn.createStatement();
+				
 				stmt.executeUpdate(ApplicationConstants.CREATE_LIKES_TABLE);
 				stmt.executeUpdate(ApplicationConstants.CREATE_OWNS_TABLE);
 				stmt.executeUpdate(ApplicationConstants.CREATE_REVIEWS_TABLE);
@@ -146,6 +174,8 @@ public class listener1 implements ServletContextListener {
 				if (!(newDB = tableAlreadyExists(e))) { // if not a 'table already exists' exception, rethrow
 					throw e;
 				}
+				
+				
 
 			}
 
@@ -214,4 +244,27 @@ public class listener1 implements ServletContextListener {
 			return null;
 		}
     }
+
+	private Collection<Book> loadBooks(InputStream is) throws IOException {
+	   	try {
+    		if (is != null) {
+    			BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+    			StringBuilder jsonFileContent = new StringBuilder();
+
+    			String nextLine = null;
+    			while ((nextLine = reader.readLine()) != null) {
+    				jsonFileContent.append(nextLine);
+    			}
+    			Gson gson = new Gson();
+    			Type type = new TypeToken<Collection<Book>>() { }.getType();
+    			Collection<Book> books = gson.fromJson(jsonFileContent.toString(), type);
+    			reader.close();
+    			return books;
+    		}
+    		return null;
+		} catch (NullPointerException e) {
+			return null;
+		}
+		
+	}
 }

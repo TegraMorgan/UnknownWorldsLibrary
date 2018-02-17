@@ -17,9 +17,10 @@ public interface ApplicationConstants {
 		public final String FILE_FORMAT = ".json";
 		public final String CUSTOMERS = "customers";
 		public final String ADMINS = "admins";
+		public final String BOOKS = "books";
 		public final String ADMINS_FILE = ADMINS + FILE_FORMAT;
 		public final String CUSTOMERS_FILE = CUSTOMERS + FILE_FORMAT;
-		
+		public final String BOOKS_FILE = BOOKS + FILE_FORMAT;
 		//sql statements
 		public final String CREATE_ADMIN_TABLE = "CREATE TABLE admins (aid int GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),login varchar(30) DEFAULT NULL,password varchar(45) DEFAULT NULL,PRIMARY KEY (aid))";
 		public final String CREATE_BOOK_TABLE = "CREATE TABLE books (bid int GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),name varchar(255) DEFAULT NULL,author varchar(45) DEFAULT NULL,genre varchar(45) DEFAULT NULL,image_url varchar(255) DEFAULT NULL,price double DEFAULT NULL,description varchar(500) DEFAULT NULL,filepath varchar(500) DEFAULT NULL,PRIMARY KEY (bid))";

@@ -192,4 +192,10 @@ public class Book {
 	public void setReviews(LinkedList<Review> reviews) {
 		this.reviews = reviews;
 	}
+
+	public int addBook() {
+		return bid;
+		// TODO Auto-generated method stub
+		
+	}
 }
