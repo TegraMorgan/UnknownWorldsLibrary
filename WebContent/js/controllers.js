@@ -241,26 +241,19 @@
       if (passed == true) {
         /* send this.newCustomer to server */
         alert('user passed all the tests - attempting to send the post request');
-        comms.call('POST','/UserServlet',this.newCustomer,
-          function(data, textStatus, jqXHR) {
-          alert('sucsess');
+        comms.call('POST', '/UserServlet', this.newCustomer,
+           function(data, textStatus, jqXHR) {
+          alert('success');
           var customer = data.user;
-          $("#debug").text($("#debug").text() + " username - "+customer.username + "| email - "+customer.email);
+          $("#debug").text($("#debug").text() + " username - " + customer.username + "| email - " + customer.email);
+          this.newCustomer = {};
+          this.registrationSuccessful = true;
+          this.navToLogin();
         } ,
           function(data,textStatus, errorThrown) {
           $("#debug").text($("#debug").text() + "fail");
           alert('fail');
-        } ,
-         function(data,textStatus, jqXHR) {
-       alert('always run');
-       var res = data["result"];
-       $("#debug").text($("#debug").text() + " result - "+ res);
-     });
-        
-        /*$http.post("/UnknownWorldsLibrary/testServlet",values).success(function (response) {
-          $("#debug").text($("#debug").text() + "success3");
-        });*/
-        this.newCustomer = {};
+        } ,null);
       }
     };
   } ]).controller('LibController', function() {
