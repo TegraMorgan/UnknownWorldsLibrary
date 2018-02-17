@@ -77,31 +77,31 @@ public class listener1 implements ServletContextListener {
 				// close statements
 				stmt.close();
 
-			}
-			catch (SQLException e) {
+			} catch (SQLException e) {
 				if (!(newDB = tableAlreadyExists(e))) { // if not a 'table already exists' exception, rethrow
 					throw e;
 				}
 			}
-			
-			if (!newDB){
-                // Populate admin table with admin data from json file
-    			try {
-	                Collection<Admin> admins = loadAdmins(cntx.getResourceAsStream(File.separator + ApplicationConstants.ADMINS_FILE));
-	                PreparedStatement pstmt2 = conn.prepareStatement(ApplicationConstants.INSERT_NEW_ADMIN);
-	                int i;
-	                for (Admin admin : admins) {
-	                	i=1;
-	                    pstmt2.setString(i++, admin.getLogin());
-	                    pstmt2.setString(i++, admin.getPassword());
-	                    pstmt2.executeUpdate();
-	                }
-	                conn.commit();
-	                pstmt2.close();
-    			} catch (IOException | NullPointerException e) { }
-    		}
-			
-			newDB=false;
+
+			if (!newDB) {
+				// Populate admin table with admin data from json file
+				try {
+					Collection<Admin> admins = loadAdmins(
+							cntx.getResourceAsStream(File.separator + ApplicationConstants.ADMINS_FILE));
+					PreparedStatement pstmt2 = conn.prepareStatement(ApplicationConstants.INSERT_NEW_ADMIN);
+					int i;
+					for (Admin admin : admins) {
+						i = 1;
+						pstmt2.setString(i++, admin.getLogin());
+						pstmt2.setString(i++, admin.getPassword());
+						pstmt2.executeUpdate();
+					}
+					conn.commit();
+					pstmt2.close();
+				} catch (IOException | NullPointerException e) {}
+			}
+
+			newDB = false;
 			try {
 				// create customer table
 				Statement stmt = conn.createStatement();
@@ -110,56 +110,50 @@ public class listener1 implements ServletContextListener {
 				conn.commit();
 				// close statements
 				stmt.close();
+			} catch (SQLException e) {
+				if (!(newDB = tableAlreadyExists(e))) {throw e;}
 			}
-			catch (SQLException e) {
-				if (!(newDB = tableAlreadyExists(e))) {
-					throw e;
-				}
 
+			if (!newDB) {
+				// Populate customers table with customer data from json file
+				try {
+					Collection<Customer> customers = loadCustomers(
+							cntx.getResourceAsStream(File.separator + ApplicationConstants.CUSTOMERS_FILE));
+					for (Customer customer : customers) {
+						System.out.println(
+								"Customer : " + customer.getUsername() + ", Password : " + customer.getPassword());
+						customer.addCustomer();
+					}
+				} catch (Exception e) {}
 			}
-			
-			if (!newDB){
-                // Populate customers table with customer data from json file
-    			try {
-	                Collection<Customer> customers = loadCustomers(cntx.getResourceAsStream(File.separator + ApplicationConstants.CUSTOMERS_FILE));
-	                for (Customer customer : customers) {
-						System.out.println("Customer : " + customer.getUsername() + ", Password : " + customer.getPassword());
-	                	customer.addCustomer();
-	                }
-    			} catch (Exception e) { }
-    		}
-			
-			try {	
+
+			try {
 				Statement stmt = conn.createStatement();
 				stmt.executeUpdate(ApplicationConstants.CREATE_BOOK_TABLE);
 				// commit update
 				conn.commit();
 				// close statements
 				stmt.close();
-			}
-			catch (SQLException e) {
+			} catch (SQLException e) {
 				if (!(newDB = tableAlreadyExists(e))) {
 					throw e;
 				}
-
 			}
-				
-				
-				if (!newDB){
-	                // Populate customers table with customer data from json file
-	    			try {
-		                Collection<Book> books = loadBooks(cntx.getResourceAsStream(File.separator + ApplicationConstants.BOOKS_FILE));
-		                for (Book book : books) {
-							System.out.println("Customer : " + book.getName() + ", Password : " + book.getBid());
-		                	book.addBook();
-		                }
-	    			} catch (Exception e) { }
-	    		}
-				
-				
+
+			if (!newDB) {
+				// Populate customers table with customer data from json file
 				try {
+					Collection<Book> books = loadBooks(cntx.getResourceAsStream(File.separator + ApplicationConstants.BOOKS_FILE));
+					for (Book book : books) {
+						System.out.println("Book name : " + book.getName() + ", Price : " + book.getPrice());
+						book.addBook();
+					}
+				} catch (Exception e) {}
+			}
+
+			try {
 				Statement stmt = conn.createStatement();
-				
+
 				stmt.executeUpdate(ApplicationConstants.CREATE_LIKES_TABLE);
 				stmt.executeUpdate(ApplicationConstants.CREATE_OWNS_TABLE);
 				stmt.executeUpdate(ApplicationConstants.CREATE_REVIEWS_TABLE);
@@ -174,8 +168,6 @@ public class listener1 implements ServletContextListener {
 				if (!(newDB = tableAlreadyExists(e))) { // if not a 'table already exists' exception, rethrow
 					throw e;
 				}
-				
-				
 
 			}
 

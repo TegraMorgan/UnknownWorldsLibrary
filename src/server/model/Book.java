@@ -193,9 +193,31 @@ public class Book {
 		this.reviews = reviews;
 	}
 
-	public int addBook() {
-		return bid;
-		// TODO Auto-generated method stub
-		
+	public int addBook() throws SQLException {
+		PreparedStatement stmt = null;
+		Connection con = null;
+		System.out.println("Adding a book");
+		try {
+			con = (Connection) DataStructure.ds.getConnection();
+			stmt = con.prepareStatement(ApplicationConstants.INSERT_BOOK);
+			int i = 1;
+			stmt.setString(i++, this.name);
+			stmt.setString(i++, this.author);
+			stmt.setString(i++, this.genre);
+			stmt.setString(i++, this.imageUrl);
+			stmt.setDouble(i++, this.price);
+			stmt.setString(i++, this.description);
+			stmt.setString(i++, this.filepath);
+			if (stmt.executeUpdate()!=1) {
+				throw new Exception();
+			}
+			System.out.println("Book added");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			stmt.close();
+			con.close();
+		}
+		return this.bid;
 	}
 }
