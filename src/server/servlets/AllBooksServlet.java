@@ -1,0 +1,84 @@
+package server.servlets;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.LinkedList;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import server.model.*;
+import server.controllers.*;
+
+/**
+ * Servlet implementation class testServlet
+ */
+@WebServlet(urlPatterns = "/GetBookList")
+public class AllBooksServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public AllBooksServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		handleRequest(request, response);
+	}
+
+	private void handleRequest(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		System.out.println("Handling request for books");
+		Gson gson = new GsonBuilder().setDateFormat("MMM dd,yyyy HH:mm:ss").create();
+		System.out.println("Getting books");
+		LinkedList<Book> books = BookController.getAllBooks();
+		System.out.println("Got "+ books.size() + " books");
+		Book[] books2 = (Book[]) books.toArray();
+		response.setContentType("application/json");
+		response.setStatus(HttpServletResponse.SC_OK);
+		PrintWriter pw = response.getWriter();
+		String data;
+		try {
+			HttpSession session = request.getSession();
+			request.setAttribute("books", books);
+			session.setAttribute("books", books);
+			request.setAttribute("httpSession", session);
+			System.out.println("trying to parse to json");
+			String booksInJson = gson.toJson(books2, Book[].class);
+			data = booksInJson; // "{\"customer\":" +   + " }" 
+			System.out.println("data: " + data);
+			pw.println(data);
+			pw.close();
+			System.out.println("\n end of request");
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+	}
+
+}
