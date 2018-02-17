@@ -282,20 +282,21 @@
         } ,null);
       }
     };
-  } ]).controller('LibController', function() {
+  } ]).controller('LibController',['$rootScope', '$scope', '$http','comms', function($rootScope, $scope, $http,comms) {
     this.products = books;
+    alert('Starting lib constructor');
     var myc = this;
-    comms.call('POST','GETBOOKLIST',null,
+    comms.call('POST','/GetBookList',null,
       function(data, textStatus, jqXHR)
       {
-       myc.products = data.books;
-      
+       /*myc.products = data.books;*/
+      listProperties(data[0]);
       }, function(data,textStatus, errorThrown)
       {
         alert('Server error. Please try again');
         $('.debug2').text($('.debug2').text() + errorThrown);
       },null);
-  });
+  }]);
 
   var books = [
 

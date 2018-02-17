@@ -2,6 +2,9 @@ package server.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedList;
 
 import javax.servlet.ServletException;
@@ -13,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import server.model.*;
 import server.controllers.*;
@@ -57,9 +61,9 @@ public class AllBooksServlet extends HttpServlet {
 		System.out.println("Handling request for books");
 		Gson gson = new GsonBuilder().setDateFormat("MMM dd,yyyy HH:mm:ss").create();
 		System.out.println("Getting books");
-		LinkedList<Book> books = BookController.getAllBooks();
-		System.out.println("Got "+ books.size() + " books");
-		Book[] books2 = (Book[]) books.toArray();
+		ArrayList<Book> books = BookController.getAllBooks();
+		Type type = new TypeToken<ArrayList<Book>>() {}.getType();
+		System.out.println("Got " + books.size() + " books");
 		response.setContentType("application/json");
 		response.setStatus(HttpServletResponse.SC_OK);
 		PrintWriter pw = response.getWriter();
@@ -70,7 +74,7 @@ public class AllBooksServlet extends HttpServlet {
 			session.setAttribute("books", books);
 			request.setAttribute("httpSession", session);
 			System.out.println("trying to parse to json");
-			String booksInJson = gson.toJson(books2, Book[].class);
+			String booksInJson = gson.toJson(books, type);
 			data = booksInJson; // "{\"customer\":" +   + " }" 
 			System.out.println("data: " + data);
 			pw.println(data);

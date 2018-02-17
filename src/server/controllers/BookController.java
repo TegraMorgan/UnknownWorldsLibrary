@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.LinkedList;
 
@@ -14,8 +15,8 @@ import server.utils.DataStructure;
 
 public class BookController {
 	
-	public static LinkedList<Book> getAllBooks(){
-		LinkedList<Book> result = new LinkedList<Book>();
+	public static ArrayList<Book> getAllBooks(){
+		ArrayList<Book> result = new ArrayList<Book>();
 		Connection conn = null;
 		Connection conn2 = null;
 		Connection conn3 = null;
