@@ -22,6 +22,7 @@
     this.newCustomer = {};
 
     /* TODO remove all this section this later */
+    $rootScope.secondView = 'inDevelopment/store_template.html';
 /*
     this.newCustomer.username = "TestName";
     this.newCustomer.email = "Test@mail.com";
@@ -283,17 +284,28 @@
       }
     };
   } ]).controller('LibController',['$rootScope', '$scope', '$http','comms', function($rootScope, $scope, $http,comms) {
-    var myc = this;
     $rootScope.products = [];
     comms.sync('/GetBookList', null,
         function(data, textStatus, jqXHR) {
         data.forEach(function(item){$rootScope.products.push(item);})
-        //listProperties($rootScope.products[0]);
+        $rootScope.products.forEach(function(el) {
+          var alllikes = "";
+          if(el.likes.length!=0){
+          el.likes.foeEach(function(li) {
+            alert('insile likes');
+            alllikes = alllikes + li + '\n';
+          });}
+          el.likesstring = alllikes;
+        });
         $scope.$apply();
     }, function(data, textStatus, errorThrown) {
         alert('Server error. Please try again');
         $('.debug2').text($('.debug2').text() + errorThrown);
       },null);
+      //listProperties($rootScope.products);
+      //$scope.$apply();
+      setTimeout(function(){$('.mypop').popover();}, 700);
+    
   }]);
 
   

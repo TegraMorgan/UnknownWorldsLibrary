@@ -2,16 +2,16 @@
       <div class="booklist">
         <div class="row">
           <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1">
-            <table class="center table table-hover table-striped table-bordered">
+            <table class="table table-hover table-striped table-bordered">
               <tr ng-show="true" ng-repeat="product in products track by product.bid">
                 <td class="shop-row-1"><img class="book-thumb img-thumbnail" ng-src="{{product.imageUrl}}"></td>
                 <td class="shop-row-2">
-                  <div><strong>{{product.name}}</strong></div>
-                  <div>{{product.price | currency}}</div>
-                  <div>{{product.description}}</div>
+                   <div style="text-align: left;"><strong>{{product.name}}</strong> {{product.price | currency}}</div>
+                   <div>By {{product.author}}</div>
+                  <div class="center">{{product.description}}</div>
                 </td>
                 <td width="25%">
-                  <div data-trigger="hover" data-toggle="popover" data-placement="bottom" title="Liked by" data-content="here names of people that like this book ">Likes
+                  <div data-trigger="hover" class="mypop" data-toggle="popover" data-placement="bottom" title="Liked by" data-content="{{product.likesstring}}">Likes
                     count here</div>
                   <div>
                     <button class="btn btn-default" on-click="lib.openreview(product.name)">
