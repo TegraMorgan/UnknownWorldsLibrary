@@ -246,6 +246,8 @@
           myC.navToLogin();
           myC.newCustomer = {};
           myC.registrationSuccessful = true;
+          $("#debug").text($("#debug").text() + "success");
+          $rootScope.$apply();
         } ,
           function(data,textStatus, errorThrown) {
           $("#debug").text($("#debug").text() + "fail");
