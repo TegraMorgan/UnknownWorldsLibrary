@@ -1,34 +1,37 @@
 [
 
     {
-      name : '48 laws of power',
-      price : 12.3,
-      description : 'Some description',
-      canRead : true,
-      canBuy : false,
-      imageURL : "img/books/48lawspower.jpg",
-      reviews : [ {
-        author : "user3",
-        body : "Some",
-      }, {
-        author : "user4",
-        body : "Review",
+      "name" : "48 laws of power",
+      "price" : 12.3,
+      "description" : "Some description",
+      "canRead" : true,
+      "canBuy" : false,
+      "imageURL" : "img/books/48lawspower.jpg",
+      "reviews" :
+       [ {
+        "author" : "user3",
+        "body" : "Some"
+      }, 
+      {
+        "author" : "user4",
+        "body" : "Review"
       } ]
     },
-     {
-      name : '12 rules for life',
-      price : 17.1,
-      description : 'Some description',
-      canRead : true,
-      canBuy : true,
-      imageURL : "img/books/12rulesforlife.jpg",
-      reviews : 
-      [ {
-        author : "user1",
-        body : "Some review",
-      }, {
-        author : "user2",
-        body : "Some review",
+        {
+      "name" : "12 rules for life",
+      "price" : 17.1,
+      "description" : "Some description",
+      "canRead" : true,
+      "canBuy" : true,
+      "imageURL" : "img/books/12rulesforlife.jpg",
+      "reviews" :
+       [ {
+        "author" : "user1",
+        "body" : "Some review"
+      }, 
+      {
+        "author" : "user2",
+        "body" : "Some review"
       } ]
-    }
+   		 }
      ]
