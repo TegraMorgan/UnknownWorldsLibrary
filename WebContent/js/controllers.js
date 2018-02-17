@@ -82,6 +82,10 @@
       $rootScope.secondView='pages/login.html'
     };
 
+    this.navToMyBooks = function(){
+      
+    }
+    
     this.login = function() {
       if (!this.oldCustomer.username || !this.oldCustomer.password || this.oldCustomer.username.length <= 0 || this.oldCustomer.password.length <= 0) {
         this.wrongLoginData = true;
@@ -93,7 +97,18 @@
       }
       else {
         this.wrongLoginData = false;
+        var ctr=this;
         /* TODO check the server for correct information */
+        comms.call('POST', '/LogInServlet', this.oldCustomer, 
+          function(data, textStatus, jqXHR) {
+            ctr.navToMyBooks();
+            alert(data.result);
+            listProperties(data.customer);
+            //$rootScope.$apply();
+          }, function(data, textStatus, errorThrown) {
+          alert('Server error. Please try again');
+        }, null);
+        
       }
     };
 
@@ -241,7 +256,7 @@
       if (passed == true) {
         /* send this.newCustomer to server */
         /*alert('user passed all the tests - attempting to send the post request');*/
-        comms.call('POST', '/UserServlet', this.newCustomer,
+        comms.call('POST', 'UserServlet', this.newCustomer,
            function(data, textStatus, jqXHR) {
           myC.navToLogin();
           myC.newCustomer = {};

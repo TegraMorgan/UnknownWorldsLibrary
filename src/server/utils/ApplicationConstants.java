@@ -15,10 +15,10 @@ public interface ApplicationConstants {
 
 		// files constants
 		public final String FILE_FORMAT = ".json";
-		public final String USERS = "users";
+		public final String CUSTOMERS = "cutomers";
 		public final String ADMINS = "admins";
-		public final String ADMINS_FILE = ADMINS+FILE_FORMAT;
-		public final String USERS_FILE = USERS + FILE_FORMAT;
+		public final String ADMINS_FILE = ADMINS + FILE_FORMAT;
+		public final String CUSTOMERS_FILE = CUSTOMERS + FILE_FORMAT;
 		
 		//sql statements
 		public final String CREATE_ADMIN_TABLE = "CREATE TABLE admins (aid int GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),login varchar(30) DEFAULT NULL,password varchar(45) DEFAULT NULL,PRIMARY KEY (aid))";
@@ -45,5 +45,6 @@ public interface ApplicationConstants {
 		public final String GET_BOOK_BY_ID ="SELECT * FROM books WHERE bid=?";
 		public final String GET_LIKES_FOR_BOOK ="SELECT c.nickname as nickname FROM likes l INNER JOIN customers c ON l.bid=c.bid WHERE l.bid=?";
 		public final String GET_REVIEWS_FOR_BOOK ="SELECT r.uid AS uid, r.bid AS bid, c.nickname AS nickname, b.name AS book_name, r.approved_by AS approved_by, r.text as text FROM reviews r INNER JOIN books b ON r.bid=b.bid INNER JOIN customers c ON r.bid=c.bid WHERE r.bid=? AND r.approved_by NOT NULL";
+		
 		
 }

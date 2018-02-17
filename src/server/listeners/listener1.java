@@ -60,8 +60,7 @@ public class listener1 implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
 		ServletContext cntx = event.getServletContext();
-		
-		
+
 		try {
 			DataStructure.context = new InitialContext();
 			DataStructure.ds = (BasicDataSource) DataStructure.context
@@ -83,7 +82,6 @@ public class listener1 implements ServletContextListener {
 				if (!(newDB = tableAlreadyExists(e))) { // if not a 'table already exists' exception, rethrow
 					throw e;
 				}
-
 			}
 			
 			if (!newDB){
@@ -103,10 +101,40 @@ public class listener1 implements ServletContextListener {
     			} catch (IOException | NullPointerException e) { }
     		}
 			
+			
+			
+			
+			newDB=false;
+			try {
+				// create all tables
+				Statement stmt = conn.createStatement();
+				stmt.executeUpdate(ApplicationConstants.CREATE_CUSTOMER_TABLE);
+				// commit update
+				conn.commit();
+				// close statements
+				stmt.close();
+
+			}
+			catch (SQLException e) {
+				if (!(newDB = tableAlreadyExists(e))) {
+					throw e;
+				}
+
+			}
+			
+			if (!newDB){
+                // Create customers table with customer data from json file
+    			try {
+	                Collection<Customer> customers = loadCustomers(cntx.getResourceAsStream(File.separator + ApplicationConstants.CUSTOMERS_FILE));
+	                for (Customer customer : customers) {
+	                	customer.addCustomer();
+	                }
+    			} catch (Exception e) { }
+    		}
+			
 			try {	
 				Statement stmt = conn.createStatement();
 				stmt.executeUpdate(ApplicationConstants.CREATE_BOOK_TABLE);
-				stmt.executeUpdate(ApplicationConstants.CREATE_CUSTOMER_TABLE);
 				stmt.executeUpdate(ApplicationConstants.CREATE_LIKES_TABLE);
 				stmt.executeUpdate(ApplicationConstants.CREATE_OWNS_TABLE);
 				stmt.executeUpdate(ApplicationConstants.CREATE_REVIEWS_TABLE);
@@ -161,6 +189,29 @@ public class listener1 implements ServletContextListener {
     			Collection<Admin> admins = gson.fromJson(jsonFileContent.toString(), type);
     			reader.close();
     			return admins;
+    		}
+    		return null;
+		} catch (NullPointerException e) {
+			return null;
+		}
+    }
+	
+	private Collection<Customer> loadCustomers(InputStream is) throws IOException {
+    	try {
+    		if (is != null) {
+    			BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+    			StringBuilder jsonFileContent = new StringBuilder();
+
+    			String nextLine = null;
+    			while ((nextLine = reader.readLine()) != null) {
+    				jsonFileContent.append(nextLine);
+    			}
+
+    			Gson gson = new Gson();
+    			Type type = new TypeToken<Collection<Customer>>() { }.getType();
+    			Collection<Customer> customers = gson.fromJson(jsonFileContent.toString(), type);
+    			reader.close();
+    			return customers;
     		}
     		return null;
 		} catch (NullPointerException e) {
