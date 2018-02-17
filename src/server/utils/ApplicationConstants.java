@@ -15,7 +15,7 @@ public interface ApplicationConstants {
 
 		// files constants
 		public final String FILE_FORMAT = ".json";
-		public final String CUSTOMERS = "cutomers";
+		public final String CUSTOMERS = "customers";
 		public final String ADMINS = "admins";
 		public final String ADMINS_FILE = ADMINS + FILE_FORMAT;
 		public final String CUSTOMERS_FILE = CUSTOMERS + FILE_FORMAT;

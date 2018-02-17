@@ -69,7 +69,7 @@ public class listener1 implements ServletContextListener {
 			System.out.println("data base create at listener1");
 			boolean newDB = false;
 			try {
-				// create all tables
+				// Create admin table
 				Statement stmt = conn.createStatement();
 				stmt.executeUpdate(ApplicationConstants.CREATE_ADMIN_TABLE);
 				// commit update
@@ -85,12 +85,14 @@ public class listener1 implements ServletContextListener {
 			}
 			
 			if (!newDB){
-                // Create admin table with admin data from json file
+                // Populate admin table with admin data from json file
     			try {
+    				System.out.println("Populating admins");
 	                Collection<Admin> admins = loadAdmins(cntx.getResourceAsStream(File.separator + ApplicationConstants.ADMINS_FILE));
 	                PreparedStatement pstmt2 = conn.prepareStatement(ApplicationConstants.INSERT_NEW_ADMIN);
 	                int i;
 	                for (Admin admin : admins) {
+	                	System.out.println("Admin " + admin.getLogin());
 	                	i=1;
 	                    pstmt2.setString(i++, admin.getLogin());
 	                    pstmt2.setString(i++, admin.getPassword());
@@ -101,19 +103,15 @@ public class listener1 implements ServletContextListener {
     			} catch (IOException | NullPointerException e) { }
     		}
 			
-			
-			
-			
 			newDB=false;
 			try {
-				// create all tables
+				// create customer table
 				Statement stmt = conn.createStatement();
 				stmt.executeUpdate(ApplicationConstants.CREATE_CUSTOMER_TABLE);
 				// commit update
 				conn.commit();
 				// close statements
 				stmt.close();
-
 			}
 			catch (SQLException e) {
 				if (!(newDB = tableAlreadyExists(e))) {
@@ -123,10 +121,12 @@ public class listener1 implements ServletContextListener {
 			}
 			
 			if (!newDB){
-                // Create customers table with customer data from json file
+                // Populate customers table with customer data from json file
     			try {
+    				System.out.println("Populating customers");
 	                Collection<Customer> customers = loadCustomers(cntx.getResourceAsStream(File.separator + ApplicationConstants.CUSTOMERS_FILE));
 	                for (Customer customer : customers) {
+						System.out.println("Customer : " + customer.getUsername() + ", Password : " + customer.getPassword());
 	                	customer.addCustomer();
 	                }
     			} catch (Exception e) { }
@@ -198,6 +198,7 @@ public class listener1 implements ServletContextListener {
 	
 	private Collection<Customer> loadCustomers(InputStream is) throws IOException {
     	try {
+    		System.out.println("Loading customers");
     		if (is != null) {
     			BufferedReader reader = new BufferedReader(new InputStreamReader(is));
     			StringBuilder jsonFileContent = new StringBuilder();
@@ -206,11 +207,12 @@ public class listener1 implements ServletContextListener {
     			while ((nextLine = reader.readLine()) != null) {
     				jsonFileContent.append(nextLine);
     			}
-
+    			System.out.println(jsonFileContent.toString());
     			Gson gson = new Gson();
     			Type type = new TypeToken<Collection<Customer>>() { }.getType();
     			Collection<Customer> customers = gson.fromJson(jsonFileContent.toString(), type);
     			reader.close();
+    			System.out.println("Returnning customers");
     			return customers;
     		}
     		return null;

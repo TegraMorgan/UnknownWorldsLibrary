@@ -101,10 +101,15 @@
         /* TODO check the server for correct information */
         comms.call('POST', '/LogInServlet', this.oldCustomer, 
           function(data, textStatus, jqXHR) {
-            ctr.navToMyBooks();
+            //ctr.navToMyBooks();
+            
+          if(data.result == "fail"){
             alert(data.result);
-            listProperties(data.customer);
-            //$rootScope.$apply();
+            ctr.wrongLoginData = true;
+            ctr.wrongLoginMessage = "Incorrect credentials";
+            }
+            //listProperties(data.customer);
+            $rootScope.$apply();
           }, function(data, textStatus, errorThrown) {
           alert('Server error. Please try again');
         }, null);
