@@ -108,7 +108,7 @@
             ctr.wrongLoginData = true;
             ctr.wrongLoginMessage = "Incorrect credentials";
             }
-            //listProperties(data.customer);
+          else {listProperties(data.customer);}
             $rootScope.$apply();
           }, function(data, textStatus, errorThrown) {
           alert('Server error. Please try again');
