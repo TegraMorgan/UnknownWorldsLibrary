@@ -278,11 +278,23 @@
         } ,
           function(data,textStatus, errorThrown) {
           alert('Server error. Please try again');
+          $('.debug2').text($('.debug2').text() + errorThrown);
         } ,null);
       }
     };
   } ]).controller('LibController', function() {
     this.products = books;
+    var myc = this;
+    comms.call('POST','GETBOOKLIST',null,
+      function(data, textStatus, jqXHR)
+      {
+       myc.products = data.books;
+      
+      }, function(data,textStatus, errorThrown)
+      {
+        alert('Server error. Please try again');
+        $('.debug2').text($('.debug2').text() + errorThrown);
+      },null);
   });
 
   var books = [
