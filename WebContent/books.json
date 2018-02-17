@@ -1,37 +1,26 @@
 [
-
-    {
-      "name" : "48 laws of power",
-      "price" : 12.3,
-      "description" : "Some description",
-      "canRead" : true,
-      "canBuy" : false,
-      "imageURL" : "img/books/48lawspower.jpg",
-      "reviews" :
-       [ {
-        "author" : "user3",
-        "body" : "Some"
-      }, 
-      {
-        "author" : "user4",
-        "body" : "Review"
-      } ]
-    },
-        {
-      "name" : "12 rules for life",
-      "price" : 17.1,
-      "description" : "Some description",
-      "canRead" : true,
-      "canBuy" : true,
-      "imageURL" : "img/books/12rulesforlife.jpg",
-      "reviews" :
-       [ {
-        "author" : "user1",
-        "body" : "Some review"
-      }, 
-      {
-        "author" : "user2",
-        "body" : "Some review"
-      } ]
-   		 }
-     ]
+	{
+		"name": "48 laws of power",
+		"price": 12.3,
+		"description": "Some description",
+		"canRead": true,
+		"canBuy": false,
+		"imageURL": "img/books/48lawspower.jpg"
+	},
+	{
+		"name": "12 rules for life",
+		"price": 17.1,
+		"description": "Some description",
+		"canRead": true,
+		"canBuy": true,
+		"imageURL": "img/books/12rulesforlife.jpg"
+	},
+	{
+		"name": "The Rational Male",
+		"price": 10.02,
+		"description": "The Rational Male is a rational and pragmatic approach to intergender dynamics and the social and psychological underpinnings of intergender relations. The book is the compiled, ten-year core writing of author/blogger Rollo Tomassi from therationalmale.com. Rollo Tomassi is one of the leading voices in the globally growing, male-focused online consortium known as the 'Manosphere'. Outlined are the concepts of positive masculinity, the feminine imperative, plate theory, operative social conventions and the core psychological theory behind Game awareness and 'redpill' ideology. Tomassi explains and outlines the principles of intergender social dynamics and foundational reasoning behind them.",
+		"canRead": true,
+		"canBuy": true,
+		"imageUrl": "img/books/rm_cover.jpg"
+	}
+]
