@@ -237,18 +237,15 @@
         passed = false;
         this.newPhotoOk = false;
       }
-
+      var myC = this;
       if (passed == true) {
         /* send this.newCustomer to server */
-        alert('user passed all the tests - attempting to send the post request');
+        /*alert('user passed all the tests - attempting to send the post request');*/
         comms.call('POST', '/UserServlet', this.newCustomer,
            function(data, textStatus, jqXHR) {
-          alert('success');
-          var customer = data.user;
-          $("#debug").text($("#debug").text() + " username - " + customer.username + "| email - " + customer.email);
-          this.newCustomer = {};
-          this.registrationSuccessful = true;
-          this.navToLogin();
+          myC.navToLogin();
+          myC.newCustomer = {};
+          myC.registrationSuccessful = true;
         } ,
           function(data,textStatus, errorThrown) {
           $("#debug").text($("#debug").text() + "fail");

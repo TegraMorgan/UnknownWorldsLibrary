@@ -137,3 +137,11 @@ function testNewPhoto(str){
   
   return true;
 }
+
+function listProperties(obj) {
+  var keys = [];
+  for (var key in obj) {
+    keys.push(key);
+  }
+  alert(keys);
+}
