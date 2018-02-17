@@ -33,7 +33,14 @@
         url : '/UnknownWorldsLibrary/'+url,
         data : values
       }).done(onsuccsess).always(always).fail(onfail);
-    }
+    },
+  sync : function(url, input, onsuccsess, onfail, always) {
+    var values = angular.toJson(input);
+    $.post({
+      url : '/UnknownWorldsLibrary/'+url,
+      data : values
+    }).done(onsuccsess).always(always).fail(onfail);
+  }
   }
 } ]);
 })(this.window);

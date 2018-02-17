@@ -283,50 +283,18 @@
       }
     };
   } ]).controller('LibController',['$rootScope', '$scope', '$http','comms', function($rootScope, $scope, $http,comms) {
-    this.products = books;
-    alert('Starting lib constructor');
     var myc = this;
-    comms.call('POST','/GetBookList',null,
-      function(data, textStatus, jqXHR)
-      {
-       /*myc.products = data.books;*/
-      listProperties(data[0]);
-      }, function(data,textStatus, errorThrown)
-      {
+    $rootScope.products = [];
+    comms.sync('/GetBookList', null,
+        function(data, textStatus, jqXHR) {
+        data.forEach(function(item){$rootScope.products.push(item);})
+        //listProperties($rootScope.products[0]);
+        $scope.$apply();
+    }, function(data, textStatus, errorThrown) {
         alert('Server error. Please try again');
         $('.debug2').text($('.debug2').text() + errorThrown);
       },null);
   }]);
 
-  var books = [
-
-    {
-      name : '48 laws of power',
-      price : 12.3,
-      description : 'Some description',
-      canRead : true,
-      canBuy : false,
-      imageURL : "img/books/48lawspower.jpg",
-      reviews : [ {
-        author : "user3",
-        body : "Some",
-      }, {
-        author : "user4",
-        body : "Review",
-      } ]
-    }, {
-      name : '12 rules for life',
-      price : 17.1,
-      description : 'Some description',
-      canRead : true,
-      canBuy : true,
-      imageURL : "img/books/12rulesforlife.jpg",
-      reviews : [ {
-        author : "user1",
-        body : "Some review",
-      }, {
-        author : "user2",
-        body : "Some review",
-      } ]
-    } ];
+  
 })();

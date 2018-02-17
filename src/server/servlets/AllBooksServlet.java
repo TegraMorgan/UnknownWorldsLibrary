@@ -58,9 +58,7 @@ public class AllBooksServlet extends HttpServlet {
 
 	private void handleRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("Handling request for books");
 		Gson gson = new GsonBuilder().setDateFormat("MMM dd,yyyy HH:mm:ss").create();
-		System.out.println("Getting books");
 		ArrayList<Book> books = BookController.getAllBooks();
 		Type type = new TypeToken<ArrayList<Book>>() {}.getType();
 		System.out.println("Got " + books.size() + " books");
@@ -73,7 +71,6 @@ public class AllBooksServlet extends HttpServlet {
 			request.setAttribute("books", books);
 			session.setAttribute("books", books);
 			request.setAttribute("httpSession", session);
-			System.out.println("trying to parse to json");
 			String booksInJson = gson.toJson(books, type);
 			data = booksInJson; // "{\"customer\":" +   + " }" 
 			System.out.println("data: " + data);
