@@ -1,0 +1,37 @@
+[
+	{
+		"uid": 0,
+		"bid": 0,
+		"dateOf": null
+	},
+	{
+		"uid": 1,
+		"bid": 2,
+		"dateOf": null
+	},
+	{
+		"uid": 0,
+		"bid": 2,
+		"dateOf": null
+	},
+	{
+		"uid": 3,
+		"bid": 2,
+		"dateOf": null
+	},
+	{
+		"uid": 3,
+		"bid": 0,
+		"dateOf": null
+	},
+	{
+		"uid": 3,
+		"bid": 1,
+		"dateOf": null
+	},
+	{
+		"uid": 2,
+		"bid": 1,
+		"dateOf": null
+	}
+]
