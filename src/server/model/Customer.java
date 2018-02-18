@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import server.utils.ApplicationConstants;
 import server.utils.DataStructure;
@@ -19,6 +20,7 @@ public class Customer implements Serializable {
 	private String nickname;
 	private String description;
 	private String photo_url;
+	private ArrayList<Owns> owns;
 
 	public int addCustomer() throws Exception {
 		int st = 0;
@@ -48,7 +50,7 @@ public class Customer implements Serializable {
 	}
 
 	public Customer(int uId, String userName, String eMail, String pHone, String pAssword, String nickName,
-			String dEscription, String pHoto_url) {
+			String dEscription, String pHoto_url,ArrayList<Owns> oWns) {
 		this.uid = uId;
 		this.username = userName;
 		this.email = eMail;
@@ -57,6 +59,7 @@ public class Customer implements Serializable {
 		this.nickname = nickName;
 		this.description = dEscription;
 		this.photo_url = pHoto_url;
+		this.owns = oWns;
 	}
 
 	public Customer(ResultSet rs) throws SQLException {
@@ -68,8 +71,84 @@ public class Customer implements Serializable {
 		this.nickname = rs.getString("nickname");
 		this.description = rs.getString("description");
 		this.photo_url = rs.getString("photo_url");
+		this.owns = this.getMyBooks();
 	}
 
+	private ArrayList<Owns> getMyBooks() {
+		 ArrayList<Owns> result = new  ArrayList<Owns>();
+		Connection con = null;
+		PreparedStatement Statement = null;
+		try {
+			con = (Connection) DataStructure.ds.getConnection();
+			Statement = con.prepareStatement(ApplicationConstants.FIND_CUSTOMER_BOOKS);
+			Statement.setString(1, userName);
+			Statement.setString(2, password);
+			ResultSet resltset = Statement.executeQuery();
+			if (resltset.next()) {
+				this.uid = resltset.getInt("uid");
+				this.username = resltset.getString("username");
+				this.email = resltset.getString("email");
+				this.phone = resltset.getString("phone");
+				this.password = resltset.getString("password");
+				this.nickname = resltset.getString("nickname");
+				this.description = resltset.getString("description");
+				this.photo_url = resltset.getString("photo_url");
+				return 1;
+			} else
+				return -1;
+		} catch (Exception e) {
+	
+			e.printStackTrace();
+		} finally {
+			Statement.close();
+			con.close();
+		}
+		return -1;
+	}
+
+	public int getCustomer(String userName, String password) throws SQLException {
+		Connection con = null;
+		PreparedStatement Statement = null;
+		try {
+			con = (Connection) DataStructure.ds.getConnection();
+			Statement = con.prepareStatement(ApplicationConstants.FIND_CUSTOMER_BY_USERNAME_AND_PASS);
+			Statement.setString(1, userName);
+			Statement.setString(2, password);
+			ResultSet resltset = Statement.executeQuery();
+			if (resltset.next()) {
+				this.uid = resltset.getInt("uid");
+				this.username = resltset.getString("username");
+				this.email = resltset.getString("email");
+				this.phone = resltset.getString("phone");
+				this.password = resltset.getString("password");
+				this.nickname = resltset.getString("nickname");
+				this.description = resltset.getString("description");
+				this.photo_url = resltset.getString("photo_url");
+				return 1;
+			} else
+				return -1;
+		} catch (Exception e) {
+	
+			e.printStackTrace();
+		} finally {
+			Statement.close();
+			con.close();
+		}
+		return -1;
+	}
+
+	public Customer(ResultSet rs,ArrayList<Owns> oWns) throws SQLException {
+		this.uid = rs.getInt("uid");
+		this.username = rs.getString("username");
+		this.email = rs.getString("email");
+		this.phone = rs.getString("phone");
+		this.password = rs.getString("password");
+		this.nickname = rs.getString("nickname");
+		this.description = rs.getString("description");
+		this.photo_url = rs.getString("photo_url");
+		this.owns = oWns;
+	}
+	
 	public int getUid() {
 		return uid;
 	}
@@ -132,37 +211,6 @@ public class Customer implements Serializable {
 
 	public void setPhoto_url(String photo_url) {
 		this.photo_url = photo_url;
-	}
-
-	public int getCustomer(String userName, String password) throws SQLException {
-		Connection con = null;
-		PreparedStatement Statement = null;
-		try {
-			con = (Connection) DataStructure.ds.getConnection();
-			Statement = con.prepareStatement(ApplicationConstants.FIND_CUSTOMER_BY_USERNAME_AND_PASS);
-			Statement.setString(1, userName);
-			Statement.setString(2, password);
-			ResultSet resltset = Statement.executeQuery();
-			if (resltset.next()) {
-				this.uid = resltset.getInt("uid");
-				this.username = resltset.getString("username");
-				this.email = resltset.getString("email");
-				this.phone = resltset.getString("phone");
-				this.password = resltset.getString("password");
-				this.nickname = resltset.getString("nickname");
-				this.description = resltset.getString("description");
-				this.photo_url = resltset.getString("photo_url");
-				return 1;
-			} else
-				return -1;
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		} finally {
-			Statement.close();
-			con.close();
-		}
-		return -1;
 	}
 
 }

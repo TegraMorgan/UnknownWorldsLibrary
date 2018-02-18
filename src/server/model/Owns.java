@@ -2,7 +2,7 @@ package server.model;
 
 import com.sun.jmx.snmp.Timestamp;
 
-public class owns {
+public class Owns {
 	private int uid;
 	private int bid;
 	private Timestamp dateOf;

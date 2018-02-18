@@ -115,6 +115,7 @@
             }
           else {
           /* TODO LOGIN FUNCTION HERE */  
+            $rootScope.user=data.customer;
             ctr.menutoggle();
             ctr.navToMyBooks();
           }
@@ -285,33 +286,32 @@
     };
   } ]).controller('LibController',['$rootScope', '$scope', '$http','comms', function($rootScope, $scope, $http,comms) {
     $rootScope.products = [];
+    var us = $rootScope.user;
     comms.sync('/GetBookList', null,
-        function(data, textStatus, jqXHR) {
-        data.forEach(function(item){$rootScope.products.push(item);})
-        $rootScope.products.forEach(function(el) {
-          var alllikes = "<ul class=\"list-unstyled text-info\"  >";
-          el.likescount = el.likes.length;
-        if (el.likes.length != 0) {
-          el.likes.foeEach(function(li) {
-            alllikes = alllikes + "<li>" + li + "</li>";
-          });
-        }
-        /* test section */
-        alllikes = alllikes + "<li>" + "test" + "</li>";
-        alllikes = alllikes + "<li>" + "test" + "</li>";
-        alllikes = alllikes + "<li>" + "test" + "</li>";
-        el.likesButtonEnabled
-        /* end of test section */ 
-        alllikes = alllikes + "</ul>"
-        el.likesstring = alllikes;
-        });
-        $scope.$apply();
-    }, function(data, textStatus, errorThrown) {
+        function(data, textStatus, jqXHR)
+        {
+          data.forEach(function(item){$rootScope.products.push(item);})
+          $rootScope.products.forEach(function(el) 
+              {
+                var alllikes = "<ul class=\"list-unstyled text-info\"  >";
+                el.likescount = el.likes.length;
+                  if (el.likes.length != 0) 
+                  {
+                   el.likes.foeEach(function(li) 
+                   {
+                    alllikes = alllikes + "<li>" + li + "</li>";
+                   });
+                  }
+                alllikes = alllikes + "</ul>"
+                el.likesstring = alllikes;
+                el.reviewCount = el.reviews.length;
+              });
+          $scope.$apply();
+        }, function(data, textStatus, errorThrown) {
         alert('Server error. Please try again');
         $('.debug2').text($('.debug2').text() + errorThrown);
       },null);
-      //listProperties($rootScope.products);
-      //$scope.$apply();
+    /* klutch - wait for async to complete */
       setTimeout(function(){
         $('.mypop').popover();
         $rootScope.products.forEach(function(el) {
@@ -320,7 +320,7 @@
             $('#but' + el.bid).addClass('disabled').popover('destroy');
           }  
         });
-        },100);
+        },1000);
         
         
   }]);

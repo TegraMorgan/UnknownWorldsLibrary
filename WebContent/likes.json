@@ -1,0 +1,42 @@
+[
+	{
+		"uid": 0,
+		"username": "Geck",
+		"email": "Geck@mail.com",
+		"phone": "054-716-25-49",
+		"password": "1234",
+		"nickname": "Gecko",
+		"description": "AFC",
+		"photo_url": ""
+	},
+	{
+		"uid": 1,
+		"username": "Chook",
+		"email": "chook@mail.com",
+		"phone": "044-125-954",
+		"password": "1234",
+		"nickname": "Chooka",
+		"description": "AFC",
+		"photo_url": ""
+	},
+	{
+		"uid": 2,
+		"username": "Stardusk",
+		"email": "Stardusk@youtube.com",
+		"phone": "055-555-55-55",
+		"password": "1234",
+		"nickname": "Stardusk",
+		"description": "MGTOW",
+		"photo_url": ""
+	},
+	{
+		"uid": 3,
+		"username": "tomm",
+		"email": "admin@therationalmale.com",
+		"phone": "admin",
+		"password": "1234",
+		"nickname": "Rollo",
+		"description": "PUA",
+		"photo_url": ""
+	}
+]
