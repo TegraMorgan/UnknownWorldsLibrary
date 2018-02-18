@@ -76,7 +76,9 @@ html, body {
 	min-width: 100px;
 	max-width: 200px;
 }
-
+.popover-title{
+    background-color: #d9edf7;
+}
 .shop-row-2 {
 	width :70%;
 }

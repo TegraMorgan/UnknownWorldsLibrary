@@ -11,8 +11,11 @@
                   <div class="center">{{product.description}}</div>
                 </td>
                 <td width="25%">
-                  <div data-trigger="hover" class="mypop" data-toggle="popover" data-placement="bottom" title="Liked by" data-content="{{product.likesstring}}">Likes
-                    count here</div>
+                  <button id="but{{product.bid}}" data-trigger="hover" 
+                  data-html="true" class="mypop btn btn-sm btn-info" data-toggle="popover" 
+                  data-placement="bottom" title="Liked by" data-content="{{product.likesstring}}">
+                  <span class="badge">{{product.likescount}}</span>
+                  <span class="glyphicon glyphicon-thumbs-up"></span></button>
                   <div>
                     <button class="btn btn-default" on-click="lib.openreview(product.name)">
                       Read reviews <span class="glyphicon glyphicon-eye-open"></span>

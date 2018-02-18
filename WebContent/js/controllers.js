@@ -289,13 +289,21 @@
         function(data, textStatus, jqXHR) {
         data.forEach(function(item){$rootScope.products.push(item);})
         $rootScope.products.forEach(function(el) {
-          var alllikes = "";
-          if(el.likes.length!=0){
+          var alllikes = "<ul class=\"list-unstyled text-info\"  >";
+          el.likescount = el.likes.length;
+        if (el.likes.length != 0) {
           el.likes.foeEach(function(li) {
-            alert('insile likes');
-            alllikes = alllikes + li + '\n';
-          });}
-          el.likesstring = alllikes;
+            alllikes = alllikes + "<li>" + li + "</li>";
+          });
+        }
+        /* test section */
+        alllikes = alllikes + "<li>" + "test" + "</li>";
+        alllikes = alllikes + "<li>" + "test" + "</li>";
+        alllikes = alllikes + "<li>" + "test" + "</li>";
+        el.likesButtonEnabled
+        /* end of test section */ 
+        alllikes = alllikes + "</ul>"
+        el.likesstring = alllikes;
         });
         $scope.$apply();
     }, function(data, textStatus, errorThrown) {
@@ -304,8 +312,17 @@
       },null);
       //listProperties($rootScope.products);
       //$scope.$apply();
-      setTimeout(function(){$('.mypop').popover();}, 700);
-    
+      setTimeout(function(){
+        $('.mypop').popover();
+        $rootScope.products.forEach(function(el) {
+          if (el.likescount == 0)
+          {
+            $('#but' + el.bid).addClass('disabled').popover('destroy');
+          }  
+        });
+        },100);
+        
+        
   }]);
 
   
