@@ -18,9 +18,15 @@ public interface ApplicationConstants {
 		public final String CUSTOMERS = "customers";
 		public final String ADMINS = "admins";
 		public final String BOOKS = "books";
+		public final String LIKES = "likes";
+		public final String OWNS = "owns";
+		public final String REVIEWS = "reviews";
 		public final String ADMINS_FILE = ADMINS + FILE_FORMAT;
 		public final String CUSTOMERS_FILE = CUSTOMERS + FILE_FORMAT;
 		public final String BOOKS_FILE = BOOKS + FILE_FORMAT;
+		public final String LIKES_FILE = LIKES + FILE_FORMAT;
+		public final String OWNS_FILE = OWNS + FILE_FORMAT;
+		public final String REVIEWS_FILE = REVIEWS + FILE_FORMAT;
 		//sql statements
 		public final String CREATE_ADMIN_TABLE = "CREATE TABLE admins (aid int GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),login varchar(30) DEFAULT NULL,password varchar(45) DEFAULT NULL,PRIMARY KEY (aid))";
 		public final String CREATE_BOOK_TABLE = "CREATE TABLE books (bid int GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),name varchar(255) DEFAULT NULL,author varchar(45) DEFAULT NULL,genre varchar(45) DEFAULT NULL,image_url varchar(255) DEFAULT NULL,price double DEFAULT NULL,description varchar(1000) DEFAULT NULL,filepath varchar(500) DEFAULT NULL,PRIMARY KEY (bid))";
@@ -48,5 +54,7 @@ public interface ApplicationConstants {
 		public final String GET_LIKES_FOR_BOOK ="SELECT c.nickname as nickname FROM likes l INNER JOIN customers c ON l.bid=c.bid WHERE l.bid=?";
 		public final String GET_REVIEWS_FOR_BOOK ="SELECT r.uid AS uid, r.bid AS bid, c.nickname AS nickname, b.name AS book_name, r.approved_by AS approved_by, r.text as text FROM reviews r INNER JOIN books b ON r.bid=b.bid INNER JOIN customers c ON r.uid=c.uid WHERE r.bid=? AND r.approved_by IS NOT NULL";
 		
-		
+		public final String INSERT_NEW_LIKE = "INSERT INTO likes VALUES (?,?)";
+		public final String INSERT_NEW_REVIEW = "INSERT INTO reviews VALUES (?,?,?,?)";
+		public final String INSERT_NEW_OWN = "INSERT INTO owns VALUES (?,?,?)";
 }
