@@ -9,6 +9,9 @@ public class Owns {
 	private int bid;
 	private Timestamp dateOf;
 
+	// Dummy constructor for json parsing
+	public Owns() {};
+	
 	public Owns(int uId, int bId, Timestamp dAteOf) {
 		this.uid = uId;
 		this.bid = bId;
