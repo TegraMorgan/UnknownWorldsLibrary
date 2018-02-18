@@ -1,4 +1,4 @@
-<div class="row" style="padding-top: 50px;" data-ng-coltroller='navMenuController as nCntrl'>
+<div class="row" style="padding-top: 50px;">
   <div class="col-xs-12">
 
     <nav class="navbar navbar-default navbar-fixed-top">
@@ -17,11 +17,14 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="myNavBar">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Marketplace<span class="sr-only">(current)</span></a></li>
-            <li><a href="#">My books</a></li>
+            <li class="active"><button id="btnStore" type="button" class="btn navbar-btn" ng-click="lCtrt.navToStore()">Store</button></li>
+            <li><button id="btnMyBooks" type="button" class="btn navbar-btn btn-default" ng-click="lCtrt.navToMyBooks()">My books</button></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li class="active"><button class="mypop btn btn-danger navbar-btn" data-toggle="popover" data-html="false" data-trigger="hover" data-placement="bottom" data-content="Log out">Greetings {{user.nickname}} </button></li>
+            <li class="active"><button class="mypop btn btn-danger navbar-btn" 
+            data-toggle="popover" 
+            data-html="false" data-trigger="hover" data-placement="bottom" 
+            data-content="Log out">Greetings {{user.nickname}} </button></li>
           </ul>
         </div>
         <!-- /.navbar-collapse -->
