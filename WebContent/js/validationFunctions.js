@@ -145,3 +145,11 @@ function listProperties(obj) {
   }
   alert(keys);
 }
+
+function listPropertiesConsole(obj) {
+  var keys = [];
+  for (var key in obj) {
+    keys.push(key);
+  }
+  console.log(keys);
+}
