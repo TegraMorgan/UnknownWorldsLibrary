@@ -22,6 +22,31 @@ public class Customer implements Serializable {
 	private String photo_url;
 	private ArrayList<Owns> owns;
 
+	public Customer(int uId, String userName, String eMail, String pHone, String pAssword, String nickName,
+			String dEscription, String pHoto_url,ArrayList<Owns> oWns) {
+		this.uid = uId;
+		this.username = userName;
+		this.email = eMail;
+		this.phone = pHone;
+		this.password = pAssword;
+		this.nickname = nickName;
+		this.description = dEscription;
+		this.photo_url = pHoto_url;
+		this.owns = oWns;
+	}
+
+	public Customer(ResultSet rs) throws SQLException {
+		this.uid = rs.getInt("uid");
+		this.username = rs.getString("username");
+		this.email = rs.getString("email");
+		this.phone = rs.getString("phone");
+		this.password = rs.getString("password");
+		this.nickname = rs.getString("nickname");
+		this.description = rs.getString("description");
+		this.photo_url = rs.getString("photo_url");
+		this.owns = this.getMyBooks();
+	}
+
 	public int addCustomer() throws Exception {
 		int st = 0;
 		PreparedStatement preparedStatement = null;
@@ -49,61 +74,26 @@ public class Customer implements Serializable {
 		return st;
 	}
 
-	public Customer(int uId, String userName, String eMail, String pHone, String pAssword, String nickName,
-			String dEscription, String pHoto_url,ArrayList<Owns> oWns) {
-		this.uid = uId;
-		this.username = userName;
-		this.email = eMail;
-		this.phone = pHone;
-		this.password = pAssword;
-		this.nickname = nickName;
-		this.description = dEscription;
-		this.photo_url = pHoto_url;
-		this.owns = oWns;
-	}
-
-	public Customer(ResultSet rs) throws SQLException {
-		this.uid = rs.getInt("uid");
-		this.username = rs.getString("username");
-		this.email = rs.getString("email");
-		this.phone = rs.getString("phone");
-		this.password = rs.getString("password");
-		this.nickname = rs.getString("nickname");
-		this.description = rs.getString("description");
-		this.photo_url = rs.getString("photo_url");
-		this.owns = this.getMyBooks();
-	}
-
 	private ArrayList<Owns> getMyBooks() {
-		 ArrayList<Owns> result = new  ArrayList<Owns>();
+		 ArrayList<Owns> result = new ArrayList<Owns>();
 		Connection con = null;
-		PreparedStatement Statement = null;
+		PreparedStatement stmt = null;
 		try {
 			con = (Connection) DataStructure.ds.getConnection();
-			Statement = con.prepareStatement(ApplicationConstants.FIND_CUSTOMER_BOOKS);
-			Statement.setString(1, userName);
-			Statement.setString(2, password);
-			ResultSet resltset = Statement.executeQuery();
-			if (resltset.next()) {
-				this.uid = resltset.getInt("uid");
-				this.username = resltset.getString("username");
-				this.email = resltset.getString("email");
-				this.phone = resltset.getString("phone");
-				this.password = resltset.getString("password");
-				this.nickname = resltset.getString("nickname");
-				this.description = resltset.getString("description");
-				this.photo_url = resltset.getString("photo_url");
-				return 1;
-			} else
-				return -1;
+			stmt = con.prepareStatement(ApplicationConstants.FIND_CUSTOMER_BOOKS);
+			stmt.setInt(1, this.uid);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				result.add(new Owns(rs));
+			}
+			rs.close();
+			stmt.close();
+			con.close();
 		} catch (Exception e) {
 	
 			e.printStackTrace();
-		} finally {
-			Statement.close();
-			con.close();
 		}
-		return -1;
+		return result;
 	}
 
 	public int getCustomer(String userName, String password) throws SQLException {
@@ -124,6 +114,7 @@ public class Customer implements Serializable {
 				this.nickname = resltset.getString("nickname");
 				this.description = resltset.getString("description");
 				this.photo_url = resltset.getString("photo_url");
+				this.owns = this.getMyBooks();
 				return 1;
 			} else
 				return -1;

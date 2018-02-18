@@ -33,7 +33,7 @@ public interface ApplicationConstants {
 		public final String FIND_CUSTOMER_BY_USERNAME = "SELECT * FROM customers WHERE username=?";
 		public final String FIND_CUSTOMER_BY_USERNAME_AND_PASS = "SELECT * FROM customers WHERE username=? AND password=?";
 		public final String FIND_CUSTOMER_BY_ID = "SELECT * FROM customers WHERE uid=?";
-		public final String FIND_CUSTOMER_BOOKS = "SELECT o.bid as bid, b.name as name FROM owns o INNER JOIN books b ON o.bid=b.bid WHERE uid=?";
+		public final String FIND_CUSTOMER_BOOKS = "SELECT o.bid as bid, o.uid as uid, o.dateof as dateof FROM owns o WHERE o.uid=?";
 		public final String FIND_CUSTOMER_BY_NICKNAME = "SELECT * FROM customers WHERE nickname=?";
 		public final String UPDATE_CUSTOMER_BY_ID = "UPDATE customers SET username=?, email=?, phone=?,password=?, nickname=?, description=?,photo_url=? WHERE uid=?;";
 		public final String INSERT_NEW_ADMIN = "INSERT INTO admins VALUES (default,?,?)";
