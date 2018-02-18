@@ -32,7 +32,7 @@ public class Customer implements Serializable {
 		this.nickname = nickName;
 		this.description = dEscription;
 		this.photo_url = pHoto_url;
-		this.owns = oWns;
+		this.setOwns(oWns);
 	}
 
 	public Customer(ResultSet rs) throws SQLException {
@@ -44,7 +44,7 @@ public class Customer implements Serializable {
 		this.nickname = rs.getString("nickname");
 		this.description = rs.getString("description");
 		this.photo_url = rs.getString("photo_url");
-		this.owns = this.getMyBooks();
+		this.setOwns(this.getMyBooks());
 	}
 
 	public int addCustomer() throws Exception {
@@ -114,7 +114,7 @@ public class Customer implements Serializable {
 				this.nickname = resltset.getString("nickname");
 				this.description = resltset.getString("description");
 				this.photo_url = resltset.getString("photo_url");
-				this.owns = this.getMyBooks();
+				this.setOwns(this.getMyBooks());
 				return 1;
 			} else
 				return -1;
@@ -137,7 +137,7 @@ public class Customer implements Serializable {
 		this.nickname = rs.getString("nickname");
 		this.description = rs.getString("description");
 		this.photo_url = rs.getString("photo_url");
-		this.owns = oWns;
+		this.setOwns(oWns);
 	}
 	
 	public int getUid() {
@@ -202,6 +202,14 @@ public class Customer implements Serializable {
 
 	public void setPhoto_url(String photo_url) {
 		this.photo_url = photo_url;
+	}
+
+	public ArrayList<Owns> getOwns() {
+		return owns;
+	}
+
+	public void setOwns(ArrayList<Owns> owns) {
+		this.owns = owns;
 	}
 
 }

@@ -20,10 +20,16 @@
     
     
     this.newCustomer = {};
-
+    this.newCustomer.owns = [];
+    this.oldCustomer = {};
+    this.oldCustomer.owns = [];
+    
+    
+    
     /* TODO remove all this section this later */
-    $rootScope.secondView = 'inDevelopment/store_template.html';
 /*
+    $rootScope.secondView = 'inDevelopment/store_template.html';
+
     this.newCustomer.username = "TestName";
     this.newCustomer.email = "Test@mail.com";
     this.newCustomer.street = "Galil";
@@ -114,7 +120,6 @@
             ctr.wrongLoginMessage = "Incorrect credentials";
             }
           else {
-          /* TODO LOGIN FUNCTION HERE */  
             $rootScope.user=data.customer;
             ctr.menutoggle();
             ctr.navToMyBooks();
@@ -287,6 +292,14 @@
   } ]).controller('LibController',['$rootScope', '$scope', '$http','comms', function($rootScope, $scope, $http,comms) {
     $rootScope.products = [];
     var us = $rootScope.user;
+    us.owns2=[];
+    if(us.owns.length !=0)
+      {
+      us.owns.forEach(function(el){
+        us.owns2.push(el.bid);
+      });
+      $rootScope.owns2=us.owns2;
+      }
     comms.sync('/GetBookList', null,
         function(data, textStatus, jqXHR)
         {
@@ -315,12 +328,21 @@
       setTimeout(function(){
         $('.mypop').popover();
         $rootScope.products.forEach(function(el) {
-          if (el.likescount == 0)
-          {
-            $('#but' + el.bid).addClass('disabled').popover('destroy');
-          }  
+          /* if there are zero likes, dim the button and disable popover */
+          if (el.likescount == 0) {$('#bntLike' + el.bid).addClass('disabled').popover('destroy');}
+          /* if user owns the book - hide purchase button, else hide read button */
+          
+          if(us.owns2.length == 0 || us.owns2.findIndex(el.bid) == -1)
+            {
+              $('#btnRead' + el.bid).remove();
+             }
+          else 
+            {
+              $('#btnBuy' + el.bid).remove();
+            }
+          
         });
-        },1000);
+        },50);
         
         
   }]);

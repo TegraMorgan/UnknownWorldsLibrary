@@ -32,18 +32,18 @@
                     </div>
                 </td>
                 <td width="25%">
-                  <button id="but{{product.bid}}" data-trigger="hover" 
+                  <button id="bntLike{{product.bid}}" data-trigger="hover" 
                   data-html="true" class="mypop btn btn-sm btn-info" data-toggle="popover" 
                   data-placement="bottom" title="Liked by" data-content="{{product.likesstring}}">
                   <span class="badge">{{product.likescount}}</span>
                   <span class="glyphicon glyphicon-thumbs-up"></span></button>
                   <div>
-                    <button class="btn btn-default" on-click="lib.openreview(product.name)">
+                    <button id="btnRead{{product.bid}}" class="btn btn-default" on-click="lib.openreview(product.name)">
                       Read <span class="glyphicon glyphicon-book"></span>
                     </button>
                   </div>
                   <div>
-                    <button class="btn btn-default" ng-show="true">
+                    <button id="btnBuy{{product.bid}}" class="btn btn-default" ng-show="true">
                       Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span>
                     </button>
                   </div>
