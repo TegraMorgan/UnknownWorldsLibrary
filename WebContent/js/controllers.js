@@ -297,33 +297,32 @@
       {
       us.owns.forEach(function(el){
         us.owns2.push(el.bid);
-      });
+      }); // forEach owns
       $rootScope.owns2=us.owns2;
-      }
+      } // if
     comms.sync('/GetBookList', null,
         function(data, textStatus, jqXHR)
         {
-          data.forEach(function(item){$rootScope.products.push(item);})
-          $rootScope.products.forEach(function(el) 
-              {
-                var alllikes = "<ul class=\"list-unstyled text-info\"  >";
-                el.likescount = el.likes.length;
-                  if (el.likes.length != 0) 
-                  {
-                   el.likes.foeEach(function(li) 
-                   {
-                    alllikes = alllikes + "<li>" + li + "</li>";
-                   });
-                  }
-                alllikes = alllikes + "</ul>"
-                el.likesstring = alllikes;
-                el.reviewCount = el.reviews.length;
-              });
+          data.forEach(function(item){$rootScope.products.push(item);});
+          /*for (el in $rootScope.products)*/ 
+          $rootScope.products.forEach(function(el){
+            var alllikes = "<ul class=\"list-unstyled text-info\">";
+            el.likescount = el.likes.length;
+            if (el.likes.length != 0){
+            el.likes.forEach(function(li) {
+              alllikes = alllikes + "<li>" + li + "</li>";
+            }); // foreach
+            }   // if
+            alllikes = alllikes + "</ul>"
+            el.likesstring = alllikes;
+            el.reviewCount = el.reviews.length;
+          }); // forEach product
           $scope.$apply();
         }, function(data, textStatus, errorThrown) {
         alert('Server error. Please try again');
         $('.debug2').text($('.debug2').text() + errorThrown);
-      },null);
+      },null); // comms.sync
+    
     /* klutch - wait for async to complete */
       setTimeout(function(){
         $('.mypop').popover();
@@ -341,11 +340,28 @@
               $('#btnBuy' + el.bid).remove();
             }
           
-        });
-        },50);
+        });     //forEach products
+        },1000); //setTimeout
         
         
-  }]);
-
-  
+  }]).controller('navMenuController',['$rootScope', '$scope', '$http','comms', function($rootScope, $scope, $http,comms) {
+    $scope.search = function(){
+    if (!$scope.query || $scope.query.length == 0)
+    {
+      $scope.result = $scope.records;
+    } // if
+    else 
+    {
+      var qstr = $scope.query.toLowerCase();
+      $scope.result = [];
+      $rootScope.products.forEach(function(el){
+        el.
+        
+      }); //foreach
+    } // else
+    
+    
+    }; //$scope.search 
+    
+  }]);// controller
 })();
