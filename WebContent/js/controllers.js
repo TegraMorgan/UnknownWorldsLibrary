@@ -114,7 +114,6 @@
             ctr.wrongLoginMessage = "Incorrect credentials";
             }
           else {
-          /* TODO LOGIN FUNCTION HERE */  
             $rootScope.user=data.customer;
             ctr.menutoggle();
             ctr.navToMyBooks();
@@ -287,6 +286,14 @@
   } ]).controller('LibController',['$rootScope', '$scope', '$http','comms', function($rootScope, $scope, $http,comms) {
     $rootScope.products = [];
     var us = $rootScope.user;
+    us.owns2=[];
+    if(us.owns.length !=0)
+      {
+      us.owns.forEach(function(el){
+        us.owns2.push(el.bid);
+      });
+      $rootScope.owns2=us.owns2;
+      }
     comms.sync('/GetBookList', null,
         function(data, textStatus, jqXHR)
         {
@@ -315,12 +322,14 @@
       setTimeout(function(){
         $('.mypop').popover();
         $rootScope.products.forEach(function(el) {
-          if (el.likescount == 0)
-          {
-            $('#but' + el.bid).addClass('disabled').popover('destroy');
-          }  
+          /* if there are zero likes, dim the button and disable popover */
+          if (el.likescount == 0) {$('#bntLike' + el.bid).addClass('disabled').popover('destroy');}
+          /* if user owns the book - hide purchase button, else hide read button */
+          if(us.owns2.findIndex(el.bid) == -1) {$('#bntRead' + el.bid).remove();}
+          else {$('#bntBuy' + el.bid).remove();}
+          
         });
-        },1000);
+        },700);
         
         
   }]);
