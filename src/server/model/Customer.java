@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import server.utils.ApplicationConstants;
 import server.utils.DataStructure;
@@ -210,6 +211,29 @@ public class Customer implements Serializable {
 
 	public void setOwns(ArrayList<Owns> owns) {
 		this.owns = owns;
+	}
+
+	public Collection<Like> getMyLikes() {
+		Collection<Like> likes = new ArrayList<Like>();
+		Connection con = null; 
+		PreparedStatement Statement = null;
+		try {
+			con = (Connection) DataStructure.ds.getConnection();
+			Statement = con.prepareStatement(ApplicationConstants.SELECT_LIKES_BY_UID);
+			Statement.setInt(1, uid);
+			ResultSet resltset = Statement.executeQuery();
+			while (resltset.next()) {
+				Like like = new Like();
+				like.setBid(resltset.getInt("bid"));
+				like.setUid(resltset.getInt("uid"));
+				likes.add(like);
+			}
+		}
+			 catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		return likes;
 	}
 
 }
