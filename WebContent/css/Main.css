@@ -98,7 +98,7 @@ html, body {
 	text-align: justify;
 	padding: 0px 12px;
 }
-.reading_pane>*>.pagenum
+.pagenum
 {
 	display: none;
 }
