@@ -72,51 +72,56 @@ html, body {
 }
 
 .shop-row-1 {
-	width:15%;
+	width: 15%;
 	min-width: 100px;
 	max-width: 200px;
 }
-.popover-title{
-    background-color: #d9edf7;
+
+.popover-title {
+	background-color: #d9edf7;
 }
+
 .shop-row-2 {
-	width :70%;
+	width: 70%;
 }
+
 .shop-row-3 {
-	width:15%;
+	width: 15%;
 }
 
-.reading_pane{
-background-color: #FFFFE8A0;	
+.reading_pane {
+	background-color: #FFFFE8;
 }
 
-.reading_pane>*>p
-{
+.reading_pane>*>p {
 	font-size: medium;
 	text-align: justify;
+	padding: 0px 12px;
+}
+.reading_pane>*>.pagenum
+{
+	display: none;
+}
+.reading_pane>*>.blockquot {
+	text-align: center;
 }
 
-.reading_pane>*>.blockquot
-{
-text-align: center;	
-}
-.reading_pane>*>.sig
-{
-text-align: center;	
-}
-.reading_pane>*>h1
-{
+.reading_pane>*>.sig {
 	text-align: center;
 }
-.reading_pane>*>h2
-{
+
+.reading_pane>*>h1 {
 	text-align: center;
 }
-.reading_pane>*>h3
-{
+
+.reading_pane>*>h2 {
 	text-align: center;
 }
-.reading_pane>*>h4
-{
+
+.reading_pane>*>h3 {
+	text-align: center;
+}
+
+.reading_pane>*>h4 {
 	text-align: center;
 }
