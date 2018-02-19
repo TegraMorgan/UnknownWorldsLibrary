@@ -55,6 +55,10 @@ public interface ApplicationConstants {
 		public final String GET_REVIEWS_FOR_BOOK ="SELECT r.uid AS uid, r.bid AS bid, c.nickname AS nickname, b.name AS book_name, r.approved_by AS approved_by, r.text as text FROM reviews r INNER JOIN books b ON r.bid=b.bid INNER JOIN customers c ON r.uid=c.uid WHERE r.bid=? AND r.approved_by IS NOT NULL";
 		
 		public final String INSERT_NEW_LIKE = "INSERT INTO likes VALUES (?,?)";
+		public final String DELETE_LIKE_BY_UID = "DELETE * FROM SUBS WHERE uid=?";
+		public final String SELECT_LIKES_BY_UID = "SELECT * FROM likes WHERE uid=?";
+		public final String SELECT_LIKES_BY_BID = "SELECT * FROM likes WHERE bid=?";
+		
 		public final String INSERT_NEW_REVIEW = "INSERT INTO reviews VALUES (?,?,?,?)";
 		public final String INSERT_NEW_OWN = "INSERT INTO owns VALUES (?,?,?)";
 }

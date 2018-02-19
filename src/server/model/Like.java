@@ -46,4 +46,26 @@ public class Like {
 		return this.bID;
 		
 	}
+	public int deleteLikeAtDB() throws SQLException {
+		PreparedStatement stmt = null;
+		Connection con = null;
+		System.out.println("Adding a like to DB");
+		try {
+			con = (Connection) DataStructure.ds.getConnection();
+			stmt = con.prepareStatement(ApplicationConstants.DELETE_LIKE_BY_UID);
+			int i = 1;
+			stmt.setInt(i++, this.bID);
+			stmt.setInt(i++, this.uID);
+			if (stmt.executeUpdate()!=1) {
+				throw new Exception();
+			}
+			System.out.println("like deleted, uid:" + uID + " and bid:"+bID);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			stmt.close();
+			con.close();
+		}
+		return this.bID;
+	}
 }
