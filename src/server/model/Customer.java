@@ -22,6 +22,8 @@ public class Customer implements Serializable {
 	private String description;
 	private String photo_url;
 	private ArrayList<Owns> owns;
+	private ArrayList<Like> likes;
+	private ArrayList<Review> reviews;
 
 	public Customer(int uId, String userName, String eMail, String pHone, String pAssword, String nickName,
 			String dEscription, String pHoto_url,ArrayList<Owns> oWns) {
