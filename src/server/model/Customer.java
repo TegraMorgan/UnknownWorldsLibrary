@@ -24,48 +24,103 @@ public class Customer implements Serializable {
 	private ArrayList<Owns> owns;
 	private ArrayList<Like> likes;
 	private ArrayList<Review> reviews;
-
-	public ArrayList<Like> getLikes() {
+	
+	
+	//get my likes from DB
+	public Collection<Like> getMyLikes() {
+		Connection con = null; 
+		PreparedStatement Statement = null;
+		try {
+			con = (Connection) DataStructure.ds.getConnection();
+			Statement = con.prepareStatement(ApplicationConstants.SELECT_LIKES_BY_UID);
+			Statement.setInt(1, uid);
+			ResultSet resltset = Statement.executeQuery();
+			while (resltset.next()) {
+				Like like = new Like();
+				like.setBid(resltset.getInt("bid"));
+				like.setUid(resltset.getInt("uid"));
+				likes.add(like);
+			}
+			resltset.close();
+			Statement.close();
+			con.close();
+		}
+		
+			 catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		return likes;
 	}
-
-	public void setLikes(ArrayList<Like> likes) {
-		this.likes = likes;
-	}
-
-	public ArrayList<Review> getReviews() {
+	//get my reviews from DB
+	public Collection<Review> getMyreviews() {
+		Connection con = null; 
+		PreparedStatement Statement = null;
+		try {
+			con = (Connection) DataStructure.ds.getConnection();
+			Statement = con.prepareStatement(ApplicationConstants.SELECT_REVIEWS_BY_UID);
+			Statement.setInt(1, uid);
+			ResultSet resltset = Statement.executeQuery();
+			while (resltset.next()) {
+				Review rev= new Review(resltset);
+				reviews.add(rev);
+			}
+			resltset.close();
+			Statement.close();
+			con.close();
+		}
+			 catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		return reviews;
 	}
-
-	public void setReviews(ArrayList<Review> reviews) {
-		this.reviews = reviews;
+	// get my Owns from DB
+/*	public Collection<Owns> getMyOwns() {
+		Connection con = null; 
+		PreparedStatement Statement = null;
+		try {
+			con = (Connection) DataStructure.ds.getConnection();
+			Statement = con.prepareStatement(ApplicationConstants.SELECT_OWNS_BY_UID);
+			Statement.setInt(1, uid);
+			ResultSet resltset = Statement.executeQuery();
+			while (resltset.next()) {
+				Owns own= new Owns(resltset);
+				owns.add(own);
+			}
+			resltset.close();
+			Statement.close();
+			con.close();
+		}
+			 catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		return owns;
+	}*/
+	// get my books Lst from DB
+	public ArrayList<Owns> getMyBooks() {
+		// ArrayList<Owns> result = new ArrayList<Owns>();
+		Connection con = null;
+		PreparedStatement stmt = null;
+		try {
+			con = (Connection) DataStructure.ds.getConnection();
+			stmt = con.prepareStatement(ApplicationConstants.FIND_CUSTOMER_BOOKS);
+			stmt.setInt(1, this.uid);
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				owns.add(new Owns(rs));
+			}
+			rs.close();
+			stmt.close();
+			con.close();
+		} catch (Exception e) {
+	
+			e.printStackTrace();
+		}
+		return owns;
 	}
-
-	public Customer(int uId, String userName, String eMail, String pHone, String pAssword, String nickName,
-			String dEscription, String pHoto_url,ArrayList<Owns> oWns) {
-		this.uid = uId;
-		this.username = userName;
-		this.email = eMail;
-		this.phone = pHone;
-		this.password = pAssword;
-		this.nickname = nickName;
-		this.description = dEscription;
-		this.photo_url = pHoto_url;
-		this.setOwns(oWns);
-	}
-
-	public Customer(ResultSet rs) throws SQLException {
-		this.uid = rs.getInt("uid");
-		this.username = rs.getString("username");
-		this.email = rs.getString("email");
-		this.phone = rs.getString("phone");
-		this.password = rs.getString("password");
-		this.nickname = rs.getString("nickname");
-		this.description = rs.getString("description");
-		this.photo_url = rs.getString("photo_url");
-		this.setOwns(this.getMyBooks());
-	}
-
+	// add this to the DB
 	public int addCustomer() throws Exception {
 		int st = 0;
 		PreparedStatement preparedStatement = null;
@@ -92,29 +147,7 @@ public class Customer implements Serializable {
 		}
 		return st;
 	}
-
-	private ArrayList<Owns> getMyBooks() {
-		 ArrayList<Owns> result = new ArrayList<Owns>();
-		Connection con = null;
-		PreparedStatement stmt = null;
-		try {
-			con = (Connection) DataStructure.ds.getConnection();
-			stmt = con.prepareStatement(ApplicationConstants.FIND_CUSTOMER_BOOKS);
-			stmt.setInt(1, this.uid);
-			ResultSet rs = stmt.executeQuery();
-			while (rs.next()) {
-				result.add(new Owns(rs));
-			}
-			rs.close();
-			stmt.close();
-			con.close();
-		} catch (Exception e) {
 	
-			e.printStackTrace();
-		}
-		return result;
-	}
-
 	public int getCustomer(String userName, String password) throws SQLException {
 		Connection con = null;
 		PreparedStatement Statement = null;
@@ -157,6 +190,31 @@ public class Customer implements Serializable {
 		this.description = rs.getString("description");
 		this.photo_url = rs.getString("photo_url");
 		this.setOwns(oWns);
+	}
+
+	public Customer(int uId, String userName, String eMail, String pHone, String pAssword, String nickName,
+			String dEscription, String pHoto_url,ArrayList<Owns> oWns) {
+		this.uid = uId;
+		this.username = userName;
+		this.email = eMail;
+		this.phone = pHone;
+		this.password = pAssword;
+		this.nickname = nickName;
+		this.description = dEscription;
+		this.photo_url = pHoto_url;
+		this.setOwns(oWns);
+	}
+	
+	public Customer(ResultSet rs) throws SQLException {
+		this.uid = rs.getInt("uid");
+		this.username = rs.getString("username");
+		this.email = rs.getString("email");
+		this.phone = rs.getString("phone");
+		this.password = rs.getString("password");
+		this.nickname = rs.getString("nickname");
+		this.description = rs.getString("description");
+		this.photo_url = rs.getString("photo_url");
+		this.setOwns(this.getMyBooks());
 	}
 	
 	public int getUid() {
@@ -231,27 +289,19 @@ public class Customer implements Serializable {
 		this.owns = owns;
 	}
 
-	public Collection<Like> getMyLikes() {
-		Collection<Like> likes = new ArrayList<Like>();
-		Connection con = null; 
-		PreparedStatement Statement = null;
-		try {
-			con = (Connection) DataStructure.ds.getConnection();
-			Statement = con.prepareStatement(ApplicationConstants.SELECT_LIKES_BY_UID);
-			Statement.setInt(1, uid);
-			ResultSet resltset = Statement.executeQuery();
-			while (resltset.next()) {
-				Like like = new Like();
-				like.setBid(resltset.getInt("bid"));
-				like.setUid(resltset.getInt("uid"));
-				likes.add(like);
-			}
-		}
-			 catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+	public ArrayList<Like> getLikes() {
 		return likes;
 	}
 
-}
+	public void setLikes(ArrayList<Like> likes) {
+		this.likes = likes;
+	}
+
+	public ArrayList<Review> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(ArrayList<Review> reviews) {
+		this.reviews = reviews;
+	}
+	}
