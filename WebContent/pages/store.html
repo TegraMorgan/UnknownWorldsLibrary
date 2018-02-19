@@ -1,0 +1,61 @@
+<div ng-controller="LibController as lib">
+      <div class="booklist">
+    <div class="row">
+      <div class="col-xs-4 col-xs-offset-4">
+        <div class="input-group input-group-sm">
+           <span class="input-group-addon" id="sizing-addon3"><span class="glyphicon glyphicon-filter"></span></span> <input type="text" class="form-control" placeholder="Filter by name, genre or author" ng-model="searchBook">
+        </div>
+      </div>
+      <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1">
+        <table class="table table-hover table-striped table-bordered">
+          <tr ng-show="true" ng-repeat="product in products | filter:searchBook">
+            <td class="shop-row-1"><img class="book-thumb img-thumbnail" ng-src="{{product.imageUrl}}"></td>
+            <td class="shop-row-2">
+              <div style="text-align: left;">
+                <strong>{{product.name}}</strong> {{product.price | currency}}
+              </div>
+              <div>By {{product.author}}</div>
+              <div class="center">{{product.description}}</div>
+              <div class="panel-group">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <button id="btnRev{{product.bid}}" class="btn btn-info" data-toggle="collapse" data-target="#collapse{{product.bid}}">
+                        <span class="glyphicon glyphicon-comment"></span> Reviews <span class="badge">{{product.reviewCount}}</span>
+                      </button>
+                    </h4>
+                  </div>
+                  <div id="collapse{{product.bid}}" class="panel-collapse collapse">
+                    <ul class="list-group">
+                      <li class="list-group-item" data-ng-repeat="re in product.reviews">
+                        <div>{{re.nickname}}</div>
+                        <div>{{re.reviewBody}}</div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td width="25%">
+              <button id="btnLike{{product.bid}}" data-trigger="hover" data-html="true" class="mypop btn btn-sm btn-info" data-toggle="popover" data-placement="bottom" title="Liked by"
+                data-content="{{product.likesstring}}"
+              >
+                <span class="badge">{{product.likescount}}</span> <span class="glyphicon glyphicon-thumbs-up"></span>
+              </button>
+              <div>
+                <button id="btnRead{{product.bid}}" class="btn btn-default" on-click="lib.openreview(product.name)">
+                  Read <span class="glyphicon glyphicon-book"></span>
+                </button>
+              </div>
+              <div>
+                <button id="btnBuy{{product.bid}}" class="btn btn-default" ng-show="true">
+                  Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+    </div>

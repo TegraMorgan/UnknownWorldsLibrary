@@ -1,7 +1,7 @@
 [
 	{
-		"uid": 0,
-		"username": "Geck",
+		"uid": 1,
+		"username": "geck",
 		"email": "Geck@mail.com",
 		"phone": "054-716-25-49",
 		"password": "1234",
@@ -10,8 +10,8 @@
 		"photo_url": ""
 	},
 	{
-		"uid": 1,
-		"username": "Chook",
+		"uid": 2,
+		"username": "chook",
 		"email": "chook@mail.com",
 		"phone": "044-125-954",
 		"password": "1234",
@@ -20,7 +20,7 @@
 		"photo_url": ""
 	},
 	{
-		"uid": 2,
+		"uid": 3,
 		"username": "Stardusk",
 		"email": "Stardusk@youtube.com",
 		"phone": "055-555-55-55",
@@ -30,7 +30,7 @@
 		"photo_url": ""
 	},
 	{
-		"uid": 3,
+		"uid": 4,
 		"username": "tomm",
 		"email": "admin@therationalmale.com",
 		"phone": "admin",

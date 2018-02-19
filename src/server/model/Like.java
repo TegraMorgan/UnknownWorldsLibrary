@@ -8,20 +8,20 @@ import server.utils.ApplicationConstants;
 import server.utils.DataStructure;
 
 public class Like {
-	private int uID;
-	private int bID;
+	private int uid;
+	private int bid;
 	
 	public int getUid() {
-		return uID;
+		return uid;
 	}
 	public void setUid(int uID) {
-		this.uID = uID;
+		this.uid = uID;
 	}
 	public int getBid() {
-		return bID;
+		return bid;
 	}
 	public void setBid(int bID) {
-		this.bID = bID;
+		this.bid = bID;
 	}
 	public int addLikeToDB() throws SQLException {
 		PreparedStatement stmt = null;
@@ -31,8 +31,8 @@ public class Like {
 			con = (Connection) DataStructure.ds.getConnection();
 			stmt = con.prepareStatement(ApplicationConstants.INSERT_NEW_LIKE);
 			int i = 1;
-			stmt.setInt(i++, this.bID);
-			stmt.setInt(i++, this.uID);
+			stmt.setInt(i++, this.bid);
+			stmt.setInt(i++, this.uid);
 			if (stmt.executeUpdate()!=1) {
 				throw new Exception();
 			}
@@ -43,7 +43,7 @@ public class Like {
 			stmt.close();
 			con.close();
 		}
-		return this.bID;
+		return this.bid;
 		
 	}
 	public int deleteLikeAtDB() throws SQLException {

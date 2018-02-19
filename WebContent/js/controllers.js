@@ -93,11 +93,16 @@
       $rootScope.secondView='pages/login.html'
     };
 
+    this.navToStore = function(){
+      $rootScope.secondView='pages/store.html';
+      $('#btnStore').removeClass().addClass('btn navbar-btn');
+      $('#btnMyBooks').removeClass().addClass('btn navbar-btn btn-default');
+    }
+    
     this.navToMyBooks = function(){
-      //TODO book navigation
-      /* temporary solution for testing */
-      //inDevelopment/store_template.html
-      $rootScope.secondView='inDevelopment/store_template.html';
+      $rootScope.secondView='pages/myBooks.html';
+      $('#btnMyBooks').removeClass().addClass('btn navbar-btn');
+      $('#btnStore').removeClass().addClass('btn navbar-btn btn-default');
     }
     
     this.login = function() {
@@ -122,7 +127,7 @@
           else {
             $rootScope.user=data.customer;
             ctr.menutoggle();
-            ctr.navToMyBooks();
+            ctr.navToStore();
           }
             $rootScope.$apply();
           }, function(data, textStatus, errorThrown) {
@@ -288,64 +293,193 @@
           $('.debug2').text($('.debug2').text() + errorThrown);
         } ,null);
       }
-    };
+    }; // this.register
+    
+    
   } ]).controller('LibController',['$rootScope', '$scope', '$http','comms', function($rootScope, $scope, $http,comms) {
     $rootScope.products = [];
     var us = $rootScope.user;
-    us.owns2=[];
-    if(us.owns.length !=0)
+    us.owns2 = [];
+    //listProperties(us);
+    if(us.owns.length != 0)
       {
       us.owns.forEach(function(el){
         us.owns2.push(el.bid);
-      });
-      $rootScope.owns2=us.owns2;
-      }
+      }); // forEach owns
+      //$rootScope.user.owns2
+      } // if
     comms.sync('/GetBookList', null,
         function(data, textStatus, jqXHR)
         {
-          data.forEach(function(item){$rootScope.products.push(item);})
-          $rootScope.products.forEach(function(el) 
-              {
-                var alllikes = "<ul class=\"list-unstyled text-info\"  >";
-                el.likescount = el.likes.length;
-                  if (el.likes.length != 0) 
-                  {
-                   el.likes.foeEach(function(li) 
-                   {
-                    alllikes = alllikes + "<li>" + li + "</li>";
-                   });
-                  }
-                alllikes = alllikes + "</ul>"
-                el.likesstring = alllikes;
-                el.reviewCount = el.reviews.length;
-              });
+          data.forEach(function(item){$scope.products.push(item);});
+          $scope.products.forEach(function(el){
+            var alllikes = "<ul class=\"list-unstyled text-info\">";
+            el.likescount = el.likes.length;
+            if (el.likes.length != 0){
+            el.likes.forEach(function(li) {
+              alllikes = alllikes + "<li>" + li + "</li>";
+            }); // foreach
+            }   // if
+            alllikes = alllikes + "</ul>"
+            el.likesstring = alllikes;
+            el.reviewCount = el.reviews.length;
+          }); // forEach product
           $scope.$apply();
         }, function(data, textStatus, errorThrown) {
         alert('Server error. Please try again');
-        $('.debug2').text($('.debug2').text() + errorThrown);
-      },null);
+        $('#debug2').text($('#debug2').text() + errorThrown);
+      },null); // comms.sync
+      
     /* klutch - wait for async to complete */
+      $scope.refreshme = function(){
+        $('.mypop').popover();
+      $scope.products.forEach(function(el) {
+        /* if there are zero likes, dim the button and disable popover */
+        if (el.likescount == 0) {
+          $('#btnLike' + el.bid).addClass('disabled').popover('destroy');
+        }
+        /* if there are zero reviews - disable button */
+        if (el.likescount == 0) {
+          $('#btnRev' + el.bid).addClass('disabled');
+        }
+        /* if user owns the book - hide purchase button, else hide read button */
+        if (us.owns2.length == 0 || !us.owns2.includes(el.bid)) {
+          $('#btnRead' + el.bid).remove();
+        }
+        else {
+          $('#btnBuy' + el.bid).remove();
+        }
+      });// forEach products
+      }; // refresh function
+      
+      $scope.$watch(function () {
+        return $scope.searchBook;
+    }, function (newValue, oldValue) {
       setTimeout(function(){
         $('.mypop').popover();
-        $rootScope.products.forEach(function(el) {
+        $scope.products.forEach(function(el) {
           /* if there are zero likes, dim the button and disable popover */
-          if (el.likescount == 0) {$('#bntLike' + el.bid).addClass('disabled').popover('destroy');}
+          if (el.likescount == 0) {
+            $('#btnLike' + el.bid).addClass('disabled').popover('destroy');
+          }
+          /* if there are zero reviews - disable button */
+          if (el.likescount == 0) {
+            $('#btnRev' + el.bid).addClass('disabled');
+          }
           /* if user owns the book - hide purchase button, else hide read button */
-          
-          if(us.owns2.length == 0 || us.owns2.findIndex(el.bid) == -1)
-            {
-              $('#btnRead' + el.bid).remove();
-             }
-          else 
-            {
-              $('#btnBuy' + el.bid).remove();
-            }
-          
-        });
-        },50);
-        
-        
-  }]);
+          if (us.owns2.length == 0 || !us.owns2.includes(el.bid)) {
+            $('#btnRead' + el.bid).remove();
+          }
+          else {
+            $('#btnBuy' + el.bid).remove();
+          }
+        });// forEach products
+        } // refresh function
+          ,50);
+    });
+      setTimeout(function(){
+        $('.mypop').popover();
+        $scope.products.forEach(function(el) {
+          /* if there are zero likes, dim the button and disable popover */
+          if (el.likescount == 0) {
+            $('#btnLike' + el.bid).addClass('disabled').popover('destroy');
+          }
+          /* if there are zero reviews - disable button */
+          if (el.likescount == 0) {
+            $('#btnRev' + el.bid).addClass('disabled');
+          }
+          /* if user owns the book - hide purchase button, else hide read button */
+          if (us.owns2.length == 0 || !us.owns2.includes(el.bid)) {
+            $('#btnRead' + el.bid).remove();
+          }
+          else {
+            $('#btnBuy' + el.bid).remove();
+          }
+        });// forEach products
+        } // refresh function
+        ,50); //setTimeout
+  }]).controller('booksController',['$rootScope', '$scope', '$http','comms', function($rootScope, $scope, $http,comms) {
+    
+//    console.log('aa');
+    $rootScope.myPr = [];
+    var us = $rootScope.user;
+    us.owns2 = [];
+    if(us.owns.length != 0)
+      {
+        us.owns.forEach(function(el){
+          us.owns2.push(el.bid);
+        }); // forEach owns
+      } // if
+    /* make a list of my books */
+    $scope.products.forEach(function(el) {
+      if (us.owns2.includes(el.bid)) {
+        $rootScope.myPr.push(el);
+      }
+    });
+    /* if I have books, for my every book do */
+    if ($rootScope.myPr.length != 0) {
+      $rootScope.myPr.forEach(function(el) {
+        /* build likes popover snippet */
+        var alllikes = "<ul class=\"list-unstyled text-info\">";
+        el.likescount = el.likes.length;
+        if (el.likes.length != 0) {
+          el.likes.forEach(function(li) {
+            alllikes = alllikes + "<li>" + li + "</li>";
+          }); // foreach like
+        } // if
+        alllikes = alllikes + "</ul>"
+        /* put popover code into the object as a property */
+        el.likesstring = alllikes;
+        /* also count reviews and put as a property */
+        el.reviewCount = el.reviews.length;
+      }); // forEach product
+    }
+    
 
-  
+    $scope.$watch(function() {
+      return $scope.searchMyBook;
+    }, function(newValue, oldValue) {
+      setTimeout(function() {
+        $('.mypop').popover();
+        $scope.products.forEach(function(el) {
+          /* if there are zero likes, dim the button and disable popover */
+          if (el.likescount == 0) {
+            $('#btnLike' + el.bid).addClass('disabled').popover('destroy');
+          }
+          /* if there are zero reviews - disable button */
+          if (el.likescount == 0) {
+            $('#btnRev' + el.bid).addClass('disabled');
+          }
+          /* if user owns the book - hide purchase button, else hide read button */
+          if (us.owns2.length == 0 || !us.owns2.includes(el.bid)) {
+            $('#btnRead' + el.bid).remove();
+          }
+          else {
+            $('#btnBuy' + el.bid).remove();
+          }
+        });// forEach products
+      } // refresh function
+      , 50);
+    });
+
+    $('.mypop').popover();
+    $scope.products.forEach(function(el) {
+      /* if there are zero likes, dim the button and disable popover */
+      if (el.likescount == 0) {
+        $('#btnLike' + el.bid).addClass('disabled').popover('destroy');
+      }
+      /* if there are zero reviews - disable button */
+      if (el.likescount == 0) {
+        $('#btnRev' + el.bid).addClass('disabled');
+      }
+      /* if user owns the book - hide purchase button, else hide read button */
+      if (us.owns2.length == 0 || !us.owns2.includes(el.bid)) {
+        $('#btnRead' + el.bid).remove();
+      }
+      else {
+        $('#btnBuy' + el.bid).remove();
+      }
+    });// forEach products
+      
+  }]);// controller
 })();

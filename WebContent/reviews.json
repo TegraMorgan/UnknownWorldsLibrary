@@ -1,31 +1,31 @@
 [
 	{
-		"uid": 0,
-		"bid": 0,
+		"uid": 1,
+		"bid": 1,
 		"nickname": "Gecko",
 		"bookName": "48 laws of power",
 		"approvedBy": "0",
 		"reviewBody": "Geckos Review"
 	},
 	{
-		"uid": 0,
-		"bid": 2,
+		"uid": 1,
+		"bid": 3,
 		"nickname": "Gecko",
 		"bookName": "The Rational Male",
 		"approvedBy": "0",
 		"reviewBody": "I finally got laid"
 	},
 	{
-		"uid": 1,
-		"bid": 2,
+		"uid": 2,
+		"bid": 3,
 		"nickname": "Chooka",
 		"bookName": "The Rational Male",
 		"approvedBy": "0",
 		"reviewBody": "I finally understood women"
 	},
 	{
-		"uid": 2,
-		"bid": 2,
+		"uid": 3,
+		"bid": 3,
 		"nickname": "Stardusk",
 		"bookName": "The Rational Male",
 		"approvedBy": "0",
