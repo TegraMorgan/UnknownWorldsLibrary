@@ -398,6 +398,13 @@
         });// forEach products
         } // refresh function
         ,50); //setTimeout
+      
+      this.openBook = function(bid){
+        
+        
+        
+      };// openBook function
+      
   }]).controller('booksController',['$rootScope', '$scope', '$http','comms', function($rootScope, $scope, $http,comms) {
     
 //    console.log('aa');
