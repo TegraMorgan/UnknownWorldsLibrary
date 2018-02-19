@@ -474,9 +474,17 @@
           if (us.likes.length != 0) {
             if (us.likes.find(function(li){return (li.bid == el.bid);}))
              {
-              $('#btnGiveLike' + el.bid).addClass('active');
+              $('#btnLike' + el.bid).addClass('active');
              }
           }
+          /* check if the user has already reviews the book */
+          if (us.reviews.length != 0)
+            if (us.reviews.find(function(rew){rew.bid = el.bid;}))
+            {
+              /* $('btnMyReview' + el.bid).text('Edit your review'); */
+              /* Possibly will make an option to edit reviews */
+              }
+            else{$('btnMyReview' + el.bid).removeClass('hidden');}
           
         });// forEach products
       } // refresh function

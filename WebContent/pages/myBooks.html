@@ -38,10 +38,12 @@
               </div>
             </td>
             <td class="shop-row-3">
-              <button id="btnLike{{el.bid}}" data-trigger="hover" data-html="true" class="mypop btn btn-sm btn-info" data-toggle="popover" data-placement="bottom" title="Liked by"
-                data-content="{{el.likesstring}}"
-              >
-                <span class="badge">{{el.likescount}}</span> <span class="glyphicon glyphicon-thumbs-up"></span>
+              <button id="btnLike{{el.bid}}" data-trigger="hover" 
+              data-html="true" class="mypop btn btn-sm btn-info" 
+              data-toggle="popover" data-placement="bottom" 
+              title="Liked by" data-content="{{el.likesstring}}" 
+              ng-click="bCtrl.giveLike(el.bid)">
+                <span class="glyphicon glyphicon-thumbs-up"></span> <span class="badge">  {{el.likescount}}</span> 
               </button>
               <div>
                 <button id="btnMyRead{{el.bid}}" class="btn btn-default" ng-click="bCtrl.navToOpenBook(el.bid)">
@@ -49,8 +51,8 @@
                 </button>
               </div>
               <div>
-                <button id="btnMyBuy{{el.bid}}" class="btn btn-default" ng-show="true">
-                  Add to Cart <span class="glyphicon glyphicon-shopping-cart"></span>
+                <button id="btnMyReview{{el.bid}}" class="btn btn-default hidden" ng-click="bCtrl.navToOpenBook(el.bid)">
+                  Write a review <span class="glyphicon glyphicon-pencil"></span>
                 </button>
               </div>
             </td>
