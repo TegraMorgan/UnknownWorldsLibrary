@@ -466,10 +466,10 @@
           }
           /* if user owns the book - hide purchase button, else hide read button */
           if (us.owns2.length == 0 || !us.owns2.includes(el.bid)) {
-            $('#btnRead' + el.bid).remove();
+            $('#btnMyRead' + el.bid).remove();
           }
           else {
-            $('#btnBuy' + el.bid).remove();
+            $('#btnMyBuy' + el.bid).remove();
           }
         });// forEach products
       } // refresh function
@@ -488,10 +488,10 @@
       }
       /* if user owns the book - hide purchase button, else hide read button */
       if (us.owns2.length == 0 || !us.owns2.includes(el.bid)) {
-        $('#btnRead' + el.bid).remove();
+        $('#btnMyRead' + el.bid).remove();
       }
       else {
-        $('#btnBuy' + el.bid).remove();
+        $('#btnMyBuy' + el.bid).remove();
       }
     });// forEach products
       
