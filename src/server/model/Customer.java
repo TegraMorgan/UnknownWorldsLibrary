@@ -131,7 +131,7 @@ public class Customer implements Serializable {
 		return -1;
 	}
 
-	public Customer(ResultSet rs, ArrayList<Owns> oWns) throws SQLException {
+	public Customer(ResultSet rs, ArrayList<Owns> oWns,ArrayList<Like> lIkes,ArrayList<Review> rEviews) throws SQLException {
 		this.uid = rs.getInt("uid");
 		this.username = rs.getString("username");
 		this.email = rs.getString("email");
