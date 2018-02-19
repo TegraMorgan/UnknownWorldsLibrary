@@ -37,14 +37,14 @@
                 </div>
               </div>
             </td>
-            <td width="25%">
+            <td class="shop-row-3">
               <button id="btnLike{{el.bid}}" data-trigger="hover" data-html="true" class="mypop btn btn-sm btn-info" data-toggle="popover" data-placement="bottom" title="Liked by"
                 data-content="{{el.likesstring}}"
               >
                 <span class="badge">{{el.likescount}}</span> <span class="glyphicon glyphicon-thumbs-up"></span>
               </button>
               <div>
-                <button id="btnMyRead{{el.bid}}" class="btn btn-default" ng-click="bCtrl.navToOpenBook()">
+                <button id="btnMyRead{{el.bid}}" class="btn btn-default" ng-click="bCtrl.navToOpenBook(el.bid)">
                   Read <span class="glyphicon glyphicon-book"></span>
                 </button>
               </div>

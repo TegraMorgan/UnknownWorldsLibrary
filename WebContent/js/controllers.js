@@ -368,10 +368,10 @@
           }
           /* if user owns the book - hide purchase button, else hide read button */
           if (us.owns2.length == 0 || !us.owns2.includes(el.bid)) {
-            $('#btnRead' + el.bid).remove();
+            $('#btnMeRead' + el.bid).remove();
           }
           else {
-            $('#btnBuy' + el.bid).remove();
+            $('#btnMeBuy' + el.bid).remove();
           }
         });// forEach products
         } // refresh function
@@ -390,25 +390,25 @@
           }
           /* if user owns the book - hide purchase button, else hide read button */
           if (us.owns2.length == 0 || !us.owns2.includes(el.bid)) {
-            $('#btnRead' + el.bid).remove();
+            $('#btnMeRead' + el.bid).remove();
           }
           else {
-            $('#btnBuy' + el.bid).remove();
+            $('#btnMeBuy' + el.bid).remove();
           }
         });// forEach products
         } // refresh function
         ,50); //setTimeout
       
-
-          this.navToOpenBook = function(bid) {
-      $rootScope.bookToRead = $rootScope.products.find(function(bk) {
-        return bk.bid == bookid;
-      });
-      console.log(bookToRead.filepath);
-      $rootScope.secondView = 'pages/reading.html';
-      $('#btnStore').removeClass().addClass('btn navbar-btn btn-default');
-      $('#btnMyBooks').removeClass().addClass('btn navbar-btn btn-default');
-      
+      /* store function */
+      this.navToOpenBook = function(tr) {
+        $rootScope.bookToRead = $rootScope.products.find(function(bk) {
+          return bk.bid == tr;
+        });
+        console.log('got ' + $rootScope.bookToRead.name);
+        console.log('filepath is :' + $rootScope.bookToRead.filepath);
+        $rootScope.secondView = 'pages/reading.html';
+        $('#btnStore').removeClass().addClass('btn navbar-btn btn-default');
+        $('#btnMyBooks').removeClass().addClass('btn navbar-btn btn-default');
         
       };// openBook function
       
@@ -495,13 +495,13 @@
       }
     });// forEach products
       
-
-        this.navToOpenBook = function(bookid) {
-          console.log("opening book " + bookid);
+    /* myBooks function */
+    this.navToOpenBook = function(tr) {
       $rootScope.bookToRead = $rootScope.products.find(function(bk) {
-        return bk.bid == bookid;
+        return bk.bid == tr;
       });
-      console.log(bookToRead.filepath);
+      console.log('got ' + $rootScope.bookToRead.name);
+      console.log('filepath is :' + $rootScope.bookToRead.filepath);
       $rootScope.secondView = 'pages/reading.html';
       $('#btnStore').removeClass().addClass('btn navbar-btn btn-default');
       $('#btnMyBooks').removeClass().addClass('btn navbar-btn btn-default');

@@ -83,6 +83,40 @@ html, body {
 	width :70%;
 }
 .shop-row-3 {
-	min-width: 15%;
-	max-width: 15%;
+	width:15%;
+}
+
+.reading_pane{
+background-color: #FFFFE8A0;	
+}
+
+.reading_pane>*>p
+{
+	font-size: medium;
+	text-align: justify;
+}
+
+.reading_pane>*>.blockquot
+{
+text-align: center;	
+}
+.reading_pane>*>.sig
+{
+text-align: center;	
+}
+.reading_pane>*>h1
+{
+	text-align: center;
+}
+.reading_pane>*>h2
+{
+	text-align: center;
+}
+.reading_pane>*>h3
+{
+	text-align: center;
+}
+.reading_pane>*>h4
+{
+	text-align: center;
 }
