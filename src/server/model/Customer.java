@@ -22,9 +22,11 @@ public class Customer implements Serializable {
 	private String description;
 	private String photo_url;
 	private ArrayList<Owns> owns;
+	private ArrayList<Like> likes;
+	private ArrayList<Review> reviews;
 
 	public Customer(int uId, String userName, String eMail, String pHone, String pAssword, String nickName,
-			String dEscription, String pHoto_url,ArrayList<Owns> oWns) {
+			String dEscription, String pHoto_url, ArrayList<Owns> oWns) {
 		this.uid = uId;
 		this.username = userName;
 		this.email = eMail;
@@ -76,7 +78,7 @@ public class Customer implements Serializable {
 	}
 
 	private ArrayList<Owns> getMyBooks() {
-		 ArrayList<Owns> result = new ArrayList<Owns>();
+		ArrayList<Owns> result = new ArrayList<Owns>();
 		Connection con = null;
 		PreparedStatement stmt = null;
 		try {
@@ -91,7 +93,7 @@ public class Customer implements Serializable {
 			stmt.close();
 			con.close();
 		} catch (Exception e) {
-	
+
 			e.printStackTrace();
 		}
 		return result;
@@ -120,7 +122,7 @@ public class Customer implements Serializable {
 			} else
 				return -1;
 		} catch (Exception e) {
-	
+
 			e.printStackTrace();
 		} finally {
 			Statement.close();
@@ -129,7 +131,7 @@ public class Customer implements Serializable {
 		return -1;
 	}
 
-	public Customer(ResultSet rs,ArrayList<Owns> oWns) throws SQLException {
+	public Customer(ResultSet rs, ArrayList<Owns> oWns) throws SQLException {
 		this.uid = rs.getInt("uid");
 		this.username = rs.getString("username");
 		this.email = rs.getString("email");
@@ -140,7 +142,29 @@ public class Customer implements Serializable {
 		this.photo_url = rs.getString("photo_url");
 		this.setOwns(oWns);
 	}
-	
+
+	public Collection<Like> getMyLikes() {
+		Collection<Like> likes = new ArrayList<Like>();
+		Connection con = null;
+		PreparedStatement Statement = null;
+		try {
+			con = (Connection) DataStructure.ds.getConnection();
+			Statement = con.prepareStatement(ApplicationConstants.SELECT_LIKES_BY_UID);
+			Statement.setInt(1, uid);
+			ResultSet resltset = Statement.executeQuery();
+			while (resltset.next()) {
+				Like like = new Like();
+				like.setBid(resltset.getInt("bid"));
+				like.setUid(resltset.getInt("uid"));
+				likes.add(like);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return likes;
+	}
+
 	public int getUid() {
 		return uid;
 	}
@@ -213,27 +237,20 @@ public class Customer implements Serializable {
 		this.owns = owns;
 	}
 
-	public Collection<Like> getMyLikes() {
-		Collection<Like> likes = new ArrayList<Like>();
-		Connection con = null; 
-		PreparedStatement Statement = null;
-		try {
-			con = (Connection) DataStructure.ds.getConnection();
-			Statement = con.prepareStatement(ApplicationConstants.SELECT_LIKES_BY_UID);
-			Statement.setInt(1, uid);
-			ResultSet resltset = Statement.executeQuery();
-			while (resltset.next()) {
-				Like like = new Like();
-				like.setBid(resltset.getInt("bid"));
-				like.setUid(resltset.getInt("uid"));
-				likes.add(like);
-			}
-		}
-			 catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+	public ArrayList<Like> getLikes() {
 		return likes;
+	}
+
+	public void setLikes(ArrayList<Like> likes) {
+		this.likes = likes;
+	}
+
+	public ArrayList<Review> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(ArrayList<Review> reviews) {
+		this.reviews = reviews;
 	}
 
 }
