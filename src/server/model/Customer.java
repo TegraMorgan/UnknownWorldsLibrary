@@ -25,22 +25,6 @@ public class Customer implements Serializable {
 	private ArrayList<Like> likes;
 	private ArrayList<Review> reviews;
 
-	public ArrayList<Like> getLikes() {
-		return likes;
-	}
-
-	public void setLikes(ArrayList<Like> likes) {
-		this.likes = likes;
-	}
-
-	public ArrayList<Review> getReviews() {
-		return reviews;
-	}
-
-	public void setReviews(ArrayList<Review> reviews) {
-		this.reviews = reviews;
-	}
-
 	public Customer(int uId, String userName, String eMail, String pHone, String pAssword, String nickName,
 			String dEscription, String pHoto_url, ArrayList<Owns> oWns) {
 		this.uid = uId;
@@ -147,7 +131,8 @@ public class Customer implements Serializable {
 		return -1;
 	}
 
-	public Customer(ResultSet rs, ArrayList<Owns> oWns,ArrayList<Like> lIkes,ArrayList<Review> rEviews) throws SQLException {
+	public Customer(ResultSet rs, ArrayList<Owns> oWns, ArrayList<Like> lIkes, ArrayList<Review> rEviews)
+			throws SQLException {
 		this.uid = rs.getInt("uid");
 		this.username = rs.getString("username");
 		this.email = rs.getString("email");
