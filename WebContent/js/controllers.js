@@ -2,7 +2,7 @@
   'use strict';
   uwl.controller('LandingController', [ '$rootScope', '$scope', '$http','comms','$location', function($rootScope, $scope, $http,comms,$location) {
     /* Properties */
-    
+    $rootScope.raceCond = 100;
     
     /* set watch for ng-include */
     $rootScope.secondView = 'pages/login.html';
@@ -375,7 +375,7 @@
           }
         });// forEach products
         } // refresh function
-          ,50);
+          ,$rootScope.raceCond);
     });
       setTimeout(function(){
         $('.mypop').popover();
@@ -397,7 +397,7 @@
           }
         });// forEach products
         } // refresh function
-        ,50); //setTimeout
+      ,1000); //setTimeout
       
       /* store function */
       this.navToOpenBook = function(tr) {
@@ -473,7 +473,7 @@
           }
         });// forEach products
       } // refresh function
-      , 50);
+      , $rootScope.raceCond);
     });
 
     $('.mypop').popover();
