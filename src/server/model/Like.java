@@ -54,18 +54,18 @@ public class Like {
 			con = (Connection) DataStructure.ds.getConnection();
 			stmt = con.prepareStatement(ApplicationConstants.DELETE_LIKE_BY_UID);
 			int i = 1;
-			stmt.setInt(i++, this.bID);
-			stmt.setInt(i++, this.uID);
+			stmt.setInt(i++, this.bid);
+			stmt.setInt(i++, this.uid);
 			if (stmt.executeUpdate()!=1) {
 				throw new Exception();
 			}
-			System.out.println("like deleted, uid:" + uID + " and bid:"+bID);
+			System.out.println("like deleted, uid:" + uid + " and bid:"+bid);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			stmt.close();
 			con.close();
 		}
-		return this.bID;
+		return this.bid;
 	}
 }
