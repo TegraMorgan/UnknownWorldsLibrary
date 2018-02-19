@@ -54,6 +54,10 @@ public class LogInServlet extends HttpServlet {
 																							// db and check the user
 																							// data return 1 if user is
 																							// exist else -1
+				customer.getMyLikes();
+				customer.getMyreviews();
+				customer.getMyBooks();
+				
 				HttpSession session = request.getSession();
 				session.setAttribute("customer", customer);
 				// request.setAttribute("httpSession", session);

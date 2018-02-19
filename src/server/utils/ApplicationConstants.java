@@ -60,5 +60,8 @@ public interface ApplicationConstants {
 		public final String SELECT_LIKES_BY_BID = "SELECT * FROM likes WHERE bid=?";
 		
 		public final String INSERT_NEW_REVIEW = "INSERT INTO reviews VALUES (?,?,?,?)";
+		public final String SELECT_REVIEWS_BY_UID = "SELECT * FROM reviews WHERE uid=?";
+		
 		public final String INSERT_NEW_OWN = "INSERT INTO owns VALUES (?,?,?)";
+		public final String SELECT_OWNS_BY_UID = "SELECT * FROM owns WHERE uid=?";
 }
