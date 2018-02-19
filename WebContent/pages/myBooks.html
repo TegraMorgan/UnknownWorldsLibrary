@@ -44,7 +44,7 @@
                 <span class="badge">{{el.likescount}}</span> <span class="glyphicon glyphicon-thumbs-up"></span>
               </button>
               <div>
-                <button id="btnRead{{el.bid}}" class="btn btn-default">
+                <button id="btnRead{{el.bid}}" class="btn btn-default" ng-click="bCtrl.navToOpenBook({{el.bid}})">
                   Read <span class="glyphicon glyphicon-book"></span>
                 </button>
               </div>

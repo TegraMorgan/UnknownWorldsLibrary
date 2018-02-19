@@ -1,22 +1,44 @@
 [
 	{
 		"name": "48 laws of power",
+		"author": "Robert Greene",
+		"genre": "Self Help",
 		"price": 12.3,
 		"description": "Some description",
 		"imageUrl": "img/books/48lawspower.jpg"
 	},
 	{
 		"name": "12 rules for life",
+		"author": "Jordan Peterson",
+		"genre": "Self Education",
 		"price": 17.1,
 		"description": "Some description",
 		"imageUrl": "img/books/12rulesforlife.jpg"
 	},
 	{
 		"name": "The Rational Male",
-		"author":"Rollo Tomassi",
-		"genre":"Game",
+		"author": "Rollo Tomassi",
+		"genre": "Game",
 		"price": 10.02,
 		"description": "The Rational Male is a rational and pragmatic approach to intergender dynamics and the social and psychological underpinnings of intergender relations. The book is the compiled, ten-year core writing of author/blogger Rollo Tomassi from therationalmale.com. Rollo Tomassi is one of the leading voices in the globally growing, male-focused online consortium known as the 'Manosphere'. Outlined are the concepts of positive masculinity, the feminine imperative, plate theory, operative social conventions and the core psychological theory behind Game awareness and 'redpill' ideology. Tomassi explains and outlines the principles of intergender social dynamics and foundational reasoning behind them.",
 		"imageUrl": "img/books/rm_cover.jpg"
+	},
+	{
+		"name": "Star Born",
+		"author": "Andre Norton",
+		"genre": "Science fiction",
+		"price": 0.99,
+		"description": "Fifty men and women set out on the Wotan to discover new habitable worlds and break free of a stagnant utopia. They are connected with Earth via a telepathic link between a crew member and her sister. However, the link is broken, stranding the Wotan far from home, where they encounter an alien presence and begin to reconsider their assumptions about life and death and the universe.",
+		"imageUrl": "img/books/Star_Born.jpg",
+		"filepath":"pages/books/StarBorn.html"
+	},
+	{
+		"name": "Youth",
+		"author": "Isaac Asimov",
+		"genre": "Science fiction",
+		"price": 0.99,
+		"description": "Slim is a boy whose astronomer father is visiting the country estate of an important industrialist. The industrialist's son, Red, has found two strange animals, and he enlists Slim in a plan to turn the animals into a circus act. The astronomer, meanwhile, tells the industrialist that he has been in contact with space aliens who want to open up their world to interstellar trade. Their world needs help, the astronomer says; for ever since the atomic wars that destroyed their old civilization, their world has been regressing. Unless something is done, their culture may face total collapse.",
+		"imageUrl": "img/books/youth.jpg",
+		"filepath":"pages/books/Youth.html"
 	}
 ]

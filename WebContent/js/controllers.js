@@ -399,9 +399,16 @@
         } // refresh function
         ,50); //setTimeout
       
-      this.openBook = function(bid){
-        
-        
+
+          this.navToOpenBook = function(bid) {
+      $rootScope.bookToRead = $rootScope.products.find(function(bk) {
+        return bk.bid == bookid;
+      });
+      console.log(bookToRead.filepath);
+      $rootScope.secondView = 'pages/reading.html';
+      $('#btnStore').removeClass().addClass('btn navbar-btn btn-default');
+      $('#btnMyBooks').removeClass().addClass('btn navbar-btn btn-default');
+      
         
       };// openBook function
       
@@ -488,5 +495,17 @@
       }
     });// forEach products
       
+
+        this.navToOpenBook = function(bookid) {
+          console.log("opening book " + bookid);
+      $rootScope.bookToRead = $rootScope.products.find(function(bk) {
+        return bk.bid == bookid;
+      });
+      console.log(bookToRead.filepath);
+      $rootScope.secondView = 'pages/reading.html';
+      $('#btnStore').removeClass().addClass('btn navbar-btn btn-default');
+      $('#btnMyBooks').removeClass().addClass('btn navbar-btn btn-default');
+    };// openBook function
+    
   }]);// controller
 })();

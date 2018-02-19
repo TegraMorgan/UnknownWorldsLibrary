@@ -26,12 +26,17 @@
 	},
 	{
 		"uid": 4,
-		"bid": 2,
+		"bid": 5,
 		"dateOf": null
 	},
 	{
 		"uid": 3,
 		"bid": 2,
+		"dateOf": null
+	},
+	{
+		"uid": 4,
+		"bid": 4,
 		"dateOf": null
 	}
 ]
