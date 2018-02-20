@@ -1,11 +1,26 @@
 package server.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
+import server.controllers.BookController;
+import server.controllers.CustomerController;
+import server.model.Book;
+import server.model.Customer;
+import server.response.GetAllUsersResponse;
 
 /**
  * Servlet implementation class GetAllUsersServlet
@@ -35,7 +50,43 @@ public class GetAllUsersServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		handleRequest(request, response);	
 	}
 
+	private void handleRequest(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		Gson gson = new GsonBuilder().setDateFormat("MMM dd,yyyy HH:mm:ss").create();
+
+		
+		GetAllUsersResponse resp = new GetAllUsersResponse();
+
+		response.setContentType("application/json");
+		response.setStatus(HttpServletResponse.SC_OK);
+		PrintWriter printWriter = response.getWriter();
+		String data;
+		try {
+			ArrayList<Customer> customers;
+			customers= CustomerController.getAllCustomers();
+			System.out.println("Got " + customers.size() + " customers");
+			if(customers.size() >0)
+			{
+				HttpSession session = request.getSession();
+				request.setAttribute("customers", customers);
+				session.setAttribute("customers", customers);
+				request.setAttribute("httpSession", session);
+				resp.setCustomers(customers);
+				resp.setResultSuccess();
+				data = resp.tojson();
+			}
+			else
+			{
+				resp.setResultFail();
+				data = resp.tojson();
+			}
+			printWriter.println(data);
+			printWriter.close();
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+	}
 }
