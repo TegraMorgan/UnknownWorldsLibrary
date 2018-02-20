@@ -52,26 +52,7 @@ public class testServlet extends HttpServlet {
 
 	private void handleRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Gson gson = new GsonBuilder().setDateFormat("MMM dd,yyyy HH:mm:ss").create();
-		Customer cc = gson.fromJson(request.getReader(), Customer.class);
-		System.out.printf(" Nickname = %s, Username = %s\n", cc.getNickname(), cc.getUsername());
-		response.setContentType("application/json");
 		response.setStatus(HttpServletResponse.SC_OK);
-		PrintWriter pw = response.getWriter();
-		String data;
-		try {
-			HttpSession session = request.getSession();
-			request.setAttribute("customer", cc);
-			session.setAttribute("customer", cc);
-			request.setAttribute("httpSession", session);
-			String CustomerInJson = gson.toJson(cc, Customer.class);
-			data = CustomerInJson; // "{\"customer\":" +   + " }" 
-			pw.println(data);
-			pw.close();
-			System.out.println("\n end of request");
-		} catch (Exception e) {
-
-		}
 	}
 
 }
