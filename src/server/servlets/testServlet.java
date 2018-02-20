@@ -16,7 +16,7 @@ import com.google.gson.GsonBuilder;
 import server.model.Customer;
 
 /**
- * Servlet implementation class testServlet
+ * This servlet is for connection testing purposes
  */
 @WebServlet(urlPatterns = "/testServlet")
 public class testServlet extends HttpServlet {
