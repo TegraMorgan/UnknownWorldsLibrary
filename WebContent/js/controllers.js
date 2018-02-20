@@ -613,21 +613,36 @@
     $('#composeReview').on('show.bs.modal',function(event){
       var button = $(event.relatedTarget); // button that triggered the event
       var bookId = button.data('book'); // get book id from the button
-      console.log(bookId);
       var thbook = $scope.myPr.find(function(bk){return bk.bid==bookId});
       var mo = $(this);
       mo.find('.modal-title').text('Compose public review for ' + thbook.name + ' as '+ $scope.user.nickname);
       var btnSubRev = mo.find('.modal-footer #publishReview')[0];
-      console.log(btnSubRev);
       btnSubRev.setAttribute("data-book",bookId);
       
     }); // end modal manipulation
     
-    $scope.writeReview = function(event){
-      console.log('inside write review');
-      var button = $(event.relatedTarget); // button that triggered the event
-      var bookId = button.data('book'); // get book id from the button
-      console.log(bookId);
+    $rootScope.writeReview = function(){
+      var btnSubRev = $('#publishReview');
+      var bookId = btnSubRev.data('book');
+      var payload={};
+      payload.bid=bookId;
+      payload.uid=us.uid;
+      payload.approved_by=null;
+      payload.reviewBody =$('#reviewBody').value; 
+        console.log($('#reviewBody').value);
+      /* comm test */
+      /*comms.sync('/AddReview', payload,
+          function(data, textStatus, jqXHR)
+          {
+            console.log(data.result);
+          },
+        function(data, textStatus, errorThrown)
+        {
+          alert(textStatus + " " + errorThrown);
+        console.log(textStatus + " " + errorThrown);
+          },null);
+      console.log('Review for book ' + bookId + ' from '+us.nickname);
+      */
       $('#composeReview').modal('hide');
     }
     

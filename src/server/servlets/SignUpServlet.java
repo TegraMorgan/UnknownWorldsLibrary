@@ -65,8 +65,10 @@ public class SignUpServlet extends HttpServlet {
 				request.setAttribute("httpSession", session);
 				resp.setResultSuccess();
 				resp.setCustomer(cust);
+				response.setStatus(HttpServletResponse.SC_OK);
 			} else {
 				resp.setResultFail();
+				response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 			}
 			printWriter.println(resp.tojson());
 			printWriter.close();

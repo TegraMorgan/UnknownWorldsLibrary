@@ -16,6 +16,7 @@ import server.utils.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import server.model.*;
+import server.response.BasicResponse;
 
 /**
  * Servlet implementation class addLike
@@ -42,17 +43,24 @@ public class addReviewServlet extends HttpServlet {
 		PrintWriter printWriter = response.getWriter();
 		Gson gson = new GsonBuilder().create();
 		Review rev = gson.fromJson(request.getReader(), Review.class);
-		String data;
+		BasicResponse resp = new BasicResponse();
 		try {
 			if(rev.addToDB()>0)
-				data="{\"result\": \"success\" }";
+			{
+				resp.setResultSuccess();
+				response.setStatus(HttpServletResponse.SC_OK);
+			}
 			else 
-				data="{\"result\": \"fail\"}";
+			{
+				resp.setResultFail();
+				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			data="{\"result\": \"fail\"}";
+			resp.setResultFail();
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		}
-		printWriter.println(data);
+		printWriter.println(resp.tojson());
 		printWriter.close();
 	}
 }

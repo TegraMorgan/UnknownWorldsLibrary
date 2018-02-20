@@ -2,6 +2,7 @@ package server.model;
 
 import java.io.Serializable;
 import java.sql.Connection;
+import java.sql.JDBCType;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -47,11 +48,14 @@ public class Review implements Serializable {
 			stmt.setInt(i++, this.bid);
 			stmt.setInt(i++, this.uid);
 			stmt.setString(i++, this.reviewBody);
-			stmt.setInt(i++, this.approvedBy);
+			if (this.approvedBy != 0)
+				stmt.setInt(i++, this.approvedBy);
+			else
+				stmt.setNull(i++, java.sql.Types.INTEGER);
 			if (stmt.executeUpdate()!=1) {
 				throw new Exception();
 			}
-			System.out.println("Book added");
+			System.out.println("Review added");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

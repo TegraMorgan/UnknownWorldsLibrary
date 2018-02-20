@@ -71,16 +71,16 @@
         <h4 class="modal-title" id="composeLabel">Compose public review</h4>
       </div>
       <div class="modal-body">
-        <form onsubmit="writeReview()">
+        <form>
           <div class="form-group">
             <label for="review-text" class="control-label">Review:</label>
-            <textarea class="form-control" id="review-text"></textarea>
+            <textarea id="reviewBody" class="form-control" rows="10" id="review-text"></textarea>
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <button id="publishReview" type="submit" type="button" class="btn btn-primary">Publish review</button>
+        <button id="publishReview" ng-click="writeReview()" type="button" class="btn btn-primary">Publish review</button>
       </div>
     </div>
   </div>
