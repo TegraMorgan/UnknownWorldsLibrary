@@ -43,7 +43,7 @@ public class Like {
 			if (stmt.executeUpdate()!=1) {
 				throw new Exception();
 			}
-			System.out.println("Book added");
+			System.out.println("Like added");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
