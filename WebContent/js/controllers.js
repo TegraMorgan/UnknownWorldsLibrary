@@ -484,40 +484,16 @@
               /* $('btnMyReview' + el.bid).text('Edit your review'); */
               /* Possibly will make an option to edit reviews */
               }
-            else{$('btnMyReview' + el.bid).removeClass('hidden');}
+            else{
+              console.log('enabling review button for ' + el.name);
+              $('#btnMyReview' + el.bid).removeClass('hidden');
+              }
           
         });// forEach products
       } // refresh function
       , $rootScope.raceCond);
     });
 
-    $('.mypop').popover();
-    $scope.myPr.forEach(function(el) {
-      /* if there are zero likes disable popover */
-      if (el.likescount == 0) {
-        $('#btnLike' + el.bid).popover('destroy');
-      }
-      /* if there are zero reviews - disable button */
-      if (el.reviewCount == 0) {
-        $('#btnRev' + el.bid).addClass('disabled');
-      }
-      /* if user likes the book - activate button and change the text */
-      if (us.likes.length != 0) {
-        if (us.likes.find(function(li){return (li.bid == el.bid);}))
-        {
-          $('#btnLike' + el.bid).addClass('active').text('Unlike');
-        }
-      }
-      /* check if the user has already reviews the book */
-      if (us.reviews.length != 0)
-        if (us.reviews.find(function(rew){return rew.bid == el.bid;}))
-        {
-          /* $('btnMyReview' + el.bid).text('Edit your review'); */
-          /* Possibly will make an option to edit reviews */
-        }
-        else{$('btnMyReview' + el.bid).removeClass('hidden');}
-    });// forEach products
-      
     /* myBooks function */
     this.navToOpenBook = function(tr) {
       $rootScope.bookToRead = $rootScope.products.find(function(bk) {
@@ -530,6 +506,8 @@
       $('#btnMyBooks').removeClass().addClass('btn navbar-btn btn-default');
     };// openBook function
     
+    /* section here was removed for testing purposes */
+    /* you can find in in the scrapbook */
     
     /* like or unlike a book */
     this.giveLike = function(bookId)
@@ -627,9 +605,31 @@
         }, function(data, textStatus, errorThrown) {
           console.log(errorThrown);
         }, null);
-        
-        }
-    };
+        } // end else
+    }; // end give like
+    
+    /* write new review for book */
+    
+    $('#composeReview').on('show.bs.modal',function(event){
+      var button = $(event.relatedTarget); // button that triggered the event
+      var bookId = button.data('book'); // get book id from the button
+      console.log(bookId);
+      var thbook = $scope.myPr.find(function(bk){return bk.bid==bookId});
+      var mo = $(this);
+      mo.find('.modal-title').text('Compose public review for ' + thbook.name + ' as '+ $scope.user.nickname);
+      var btnSubRev = mo.find('.modal-footer #publishReview')[0];
+      console.log(btnSubRev);
+      btnSubRev.setAttribute("data-book",bookId);
+      
+    }); // end modal manipulation
+    
+    $scope.writeReview = function(event){
+      console.log('inside write review');
+      var button = $(event.relatedTarget); // button that triggered the event
+      var bookId = button.data('book'); // get book id from the button
+      console.log(bookId);
+      $('#composeReview').modal('hide');
+    }
     
   }]);// controller
 })();

@@ -51,13 +51,36 @@
                 </button>
               </div>
               <div>
-                <button id="btnMyReview{{el.bid}}" class="btn btn-default hidden" ng-click="bCtrl.navToOpenBook(el.bid)">
+                <button id="btnMyReview{{el.bid}}" class="btn btn-default hidden" data-toggle="modal" data-target="#composeReview" data-book="{{el.bid}}">
                   Write a review <span class="glyphicon glyphicon-pencil"></span>
                 </button>
               </div>
             </td>
           </tr>
         </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="composeReview" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+        <h4 class="modal-title" id="composeLabel">Compose public review</h4>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="writeReview()">
+          <div class="form-group">
+            <label for="review-text" class="control-label">Review:</label>
+            <textarea class="form-control" id="review-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button id="publishReview" type="submit" type="button" class="btn btn-primary">Publish review</button>
       </div>
     </div>
   </div>

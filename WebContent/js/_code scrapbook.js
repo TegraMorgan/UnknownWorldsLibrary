@@ -69,3 +69,37 @@ angular.module('myApp', [ 'helper' ]).controller('myController', [ '$scope', '$h
   });
 
 } ]);
+
+
+//from my book controller
+$('.mypop').popover();
+$scope.myPr.forEach(function(el) {
+  /* if there are zero likes disable popover */
+  if (el.likescount == 0) {
+    $('#btnLike' + el.bid).popover('destroy');
+  }
+  /* if there are zero reviews - disable button */
+  if (el.reviewCount == 0) {
+    $('#btnRev' + el.bid).addClass('disabled');
+  }
+  /* if user likes the book - activate button and change the text */
+  if (us.likes.length != 0) {
+    if (us.likes.find(function(li){return (li.bid == el.bid);}))
+    {
+      $('#btnLike' + el.bid).addClass('active').text('Unlike');
+    }
+  }
+  /* check if the user has already reviews the book */
+  if (us.reviews.length != 0)
+    if (us.reviews.find(function(rew){rew.bid = el.bid;}))
+    {
+      /* $('btnMyReview' + el.bid).text('Edit your review'); */
+      /* Possibly will make an option to edit reviews */
+      }
+    else{
+      console.log('enabling review button for ' + el.name);
+      $('#btnMyReview' + el.bid).removeClass('hidden');
+      }
+});// forEach products
+
+
