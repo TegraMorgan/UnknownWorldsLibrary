@@ -36,6 +36,7 @@ public class CustomerController {
 		return result;
 	}
 	
+
 	@SuppressWarnings("null")
 	public static ArrayList<Customer> getAllCustomers() {
 		ArrayList<Customer> users = null;

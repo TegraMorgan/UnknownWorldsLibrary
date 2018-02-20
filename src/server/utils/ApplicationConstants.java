@@ -42,7 +42,7 @@ public interface ApplicationConstants {
 		public final String FIND_CUSTOMER_BY_ID = "SELECT * FROM customers WHERE uid=?";
 		public final String FIND_CUSTOMER_BOOKS = "SELECT o.bid as bid, o.uid as uid, o.dateof as dateof FROM owns o WHERE o.uid=?";
 		public final String FIND_CUSTOMER_BY_NICKNAME = "SELECT * FROM customers WHERE nickname=?";
-		public final String UPDATE_CUSTOMER_BY_ID = "UPDATE customers SET username=?, email=?, phone=?,password=?, nickname=?, description=?,photo_url=? WHERE uid=?;";
+		public final String UPDATE_CUSTOMER_BY_ID = "UPDATE customers SET username=?, email=?, phone=?,password=?, nickname=?, description=?,photo_url=? WHERE uid=?";
 		public final String INSERT_NEW_ADMIN = "INSERT INTO admins VALUES (default,?,?)";
 		
 		public final String INSERT_BOOK = "INSERT INTO books VALUES (default,?,?,?,?,?,?,?)";
@@ -61,11 +61,13 @@ public interface ApplicationConstants {
 		public final String SELECT_LIKES_BY_BID = "SELECT * FROM likes WHERE bid=?";
 		
 		public final String INSERT_NEW_REVIEW = "INSERT INTO reviews VALUES (?,?,?,?)";
-		public final String SELECT_REVIEWS_BY_UID = "SELECT r.bid as bid, r.uid as uid, r.text as text, r.approved_by as approved_by, c.nickname as nickname,  b.name as book_name FROM reviews r INNER JOIN books b ON r.bid=b.bid INNER JOIN customers c ON r.uid=c.uid WHERE r.uid=?"; 
+		public final String SELECT_REVIEWS_BY_UID = "SELECT r.bid as bid, r.uid as uid, r.text as text, r.approved_by as approved_by, c.nickname as nickname,  b.name as book_name FROM reviews r INNER JOIN books b ON r.bid=b.bid INNER JOIN customers c ON r.uid=c.uid WHERE r.uid=?";
+		public final String UPDATE_REVIEW_BY_BID_AND_UID = "UPDATE reviews SET approved_by=?  WHERE bid=? AND uid=?";
 		
 		public final String INSERT_NEW_OWN = "INSERT INTO owns VALUES (?,?,?)";
 		public final String SELECT_OWNS_BY_UID = "SELECT * FROM owns WHERE uid=?";
 		
 		public final String FIND_ADMIN_BY_LOGIN_AND_PASS = "SELECT * FROM admins WHERE login=? AND password=?";
+		public final String DELETE_Customer = "DELETE FROM customers WHERE uid=?";
 
 }
