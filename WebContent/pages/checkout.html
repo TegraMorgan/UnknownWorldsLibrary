@@ -21,20 +21,23 @@
             </div>
             <div id="divzip" class="form-group">
               <label for="zp">ZIP Code</label><input id="zp" ng-model="zp" ng-change="chCtrl.testzip()" class="form-control" placeholder="ZIP">
+              <span id="hbstrt" class="help-block">Precisely seven numbers</span>
             </div>
-            <div class="form-group">
-              <label for="city">City</label><input id="city" ng-model="city" ng-change="chCtrl." class="form-control" placeholder="City">
+            <div id="divcity" class="form-group">
+              <label for="city">City</label><input id="city" ng-model="city" ng-change="chCtrl.testcity()" class="form-control" placeholder="City">
+              <span id="hbstrt" class="help-block">Only English letters allowed</span>
             </div>
-            <div class="form-group">
-              <label for="cntr">Country</label><input id="cntr" ng-model="cntr" ng-change="chCtrl." class="form-control" placeholder="Country">
+            <div id="divcntr" class="form-group">
+              <label for="cntr">Country</label><input id="cntr" ng-model="cntr" ng-change="chCtrl.testcntr" class="form-control" placeholder="Country">
+              <span id="hbstrt" class="help-block">Only English letters allowed</span>
             </div>
-            <div class="form-group">
+            <div id="divcard" class="form-group">
               <ul class="list-inline">
-                <li><label for="credCarNum">Credit card number</label> <input id="credCarNum" aria-label="Credit card number" ng-change="chCtrl." ng-keyup="chCtrl.testcard()" class="form-control" ng-model="cardNum"
+                <li><label for="credCarNum">Credit card number</label> <input id="credCarNum" aria-label="Credit card number" ng-change="chCtrl.testcard()" class="form-control" ng-model="cardNum"
                   placeholder="Credit card number" autocorrect="off" maxlength="19" style="width: 180px;"
-                ></li>
+                ><span id="hbstrt" class="help-block">Only numbers</span></li>
                 <li><img src="img/cc-visaS.gif"></li>
-                <li><img src="img/cc-mcS.gif"></li>
+                <li><img src="img/cc-amex.gif"></li>
               </ul>
             </div>
             <div class="form-group">

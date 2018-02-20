@@ -673,13 +673,14 @@
     };
     
     //$scope.buyBook;
-    
+     /* test card holder name */
     this.testchn = function(){
       var result = testFullName($scope.chn);
       markErrorSuccess(result,'#divchn');
       return result;
     };
     
+    /* test street */
     this.teststrt = function(){
       var result = testNewStreet($scope.strt);
       markErrorSuccess(result,'#divstrt');
@@ -692,15 +693,25 @@
       return result;
     };
     
-    this.testzip = function(){
-      var result = testNewZip($scope.zp);
-      markErrorSuccess(result,'#divzip');
+    this.testcity = function(){
+      var result = testNewStreet($scope.city);
+      markErrorSuccess(result,'#divcity');
       return result;
     };
     
+    /* test country */
+    this.testcntr = function(){
+      var result = testNewStreet($scope.cntr);
+      markErrorSuccess(result,'#divcntr');
+      return result;
+    };
+    
+    
     this.testcard = function(){
       var cn = $scope.cardNum;
-      
+      var result = testCardNum(cn.toString());
+      markErrorSuccess(result,'#divcard');
+      return result;
     }
     
     
