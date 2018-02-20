@@ -1,0 +1,30 @@
+<div class="container-fluid">
+  <div class="well well-lg" ng-controller="checkoutController as chCtrl">
+    <div class="jumbotron">
+      <h1>Reading gives us someplace to go when we have to stay where we are</h1>
+      <h4>-Mason Cooley</h4>
+      <div>Congratulations on deciding to purchase a book. Please fill in your credit card information.</div>
+    </div>
+
+    <form>
+      <div class="form-group">
+        <label for="credCarNum">Credit card number</label> <input id="credCarNum" aria-label="Credit card number" class="form-control" ng-model="cardNum" placeholder="Credit card number"
+          autocorrect="off" maxlength="19" style="width: 132px;"
+        >
+      </div>
+      <div class="form-group">
+        <label for="expiration">Expiration (mm/yyyy)</label><br> <select id="" class="form-control" aria-label="Credit card expiration month">
+          <option>1</option>
+        </select> <select id="" class="form-control" aria-label="Credit card expiration year" name="" style="margin-left: 5px;">
+          <option value="2018" selected="selected">2018</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="secCode">Security code</label> <input id="secCode" class="form-control" placeholder="CVV" aria-label="Credit card security code" type="tel" autocorrect="off" maxlength="4" value="">
+      </div>
+      <div class="left">
+        <span class="icon-header-help" title="Security code" onclick=""></span>
+      </div>
+    </form>
+  </div>
+</div>
