@@ -478,14 +478,14 @@
              }
           }
           /* check if the user has already reviews the book */
-          if (us.reviews.length != 0)
-            if (us.reviews.find(function(rew){rew.bid = el.bid;}))
+            if (us.reviews.find(function(rew){
+              return rew.bid == el.bid;}))
             {
+              console.log('review exists');
               /* $('btnMyReview' + el.bid).text('Edit your review'); */
               /* Possibly will make an option to edit reviews */
               }
             else{
-              console.log('enabling review button for ' + el.name);
               $('#btnMyReview' + el.bid).removeClass('hidden');
               }
           
@@ -628,10 +628,9 @@
       payload.bid=bookId;
       payload.uid=us.uid;
       payload.approved_by=null;
-      payload.reviewBody =$('#reviewBody').value; 
-        console.log($('#reviewBody').value);
+      payload.reviewBody =$('#reviewBody')[0].value; 
       /* comm test */
-      /*comms.sync('/AddReview', payload,
+      comms.sync('/AddReview', payload,
           function(data, textStatus, jqXHR)
           {
             console.log(data.result);
@@ -642,7 +641,6 @@
         console.log(textStatus + " " + errorThrown);
           },null);
       console.log('Review for book ' + bookId + ' from '+us.nickname);
-      */
       $('#composeReview').modal('hide');
     }
     
