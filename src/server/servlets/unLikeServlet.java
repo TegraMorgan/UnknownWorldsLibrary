@@ -2,10 +2,12 @@ package server.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Type;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +18,10 @@ import javax.servlet.http.HttpServletResponse;
 import server.utils.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
 import server.model.*;
+import server.resopnse.BasicResponse;
 
 /**
  * Servlet implementation class unLike
@@ -42,15 +47,23 @@ public class unLikeServlet extends HttpServlet {
 		Gson gson = new GsonBuilder().create();
 		server.model.Like like = gson.fromJson(request.getReader(), server.model.Like.class);
 		String data;
+		BasicResponse resp = new BasicResponse();
 		try {
-			if(like.deleteLikeAtDB()>0)
-				data="{\"result\": \"success\" }";
-			else 
-				data="{\"result\": \"fail\"}";
+			if(like.deleteLikeAtDB()>0) 
+			{
+				resp.setResult("succsess");
+				response.setStatus(HttpServletResponse.SC_OK);	
+			}
+			else {
+				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				resp.setResult("fail");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			data="{\"result\": \"fail\"}";
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			resp.setResult("fail");
 		}
+		data=resp.tojson();
 		printWriter.println(data);
 		printWriter.close();
 	}
