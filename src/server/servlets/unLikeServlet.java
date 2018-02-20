@@ -51,17 +51,17 @@ public class unLikeServlet extends HttpServlet {
 		try {
 			if(like.deleteLikeAtDB()>0) 
 			{
-				resp.setResult("succsess");
+				resp.setResultSuccess();
 				response.setStatus(HttpServletResponse.SC_OK);	
 			}
 			else {
 				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-				resp.setResult("fail");
+				resp.setResultFail();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-			resp.setResult("fail");
+			resp.setResultFail();
 		}
 		data=resp.tojson();
 		printWriter.println(data);

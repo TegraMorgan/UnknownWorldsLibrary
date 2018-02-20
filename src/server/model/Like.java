@@ -56,7 +56,7 @@ public class Like {
 	public int deleteLikeAtDB() throws SQLException {
 		PreparedStatement stmt = null;
 		Connection con = null;
-		System.out.println("Adding a like to DB");
+		System.out.println("Removing like");
 		try {
 			con = (Connection) DataStructure.ds.getConnection();
 			stmt = con.prepareStatement(ApplicationConstants.DELETE_LIKE);
