@@ -65,7 +65,33 @@ public class Review implements Serializable {
 		return this.bid;
 		
 	}
+	
+	public int approve() throws SQLException {
+		PreparedStatement stmt = null;
+		Connection con = null;
+		System.out.println("approving review");
+		try {
+			con = (Connection) DataStructure.ds.getConnection();
+			stmt = con.prepareStatement(ApplicationConstants.UPDATE_REVIEW_BY_BID_AND_UID);
+			int i = 1;
+			stmt.setInt(i++, this.approvedBy);
+			stmt.setInt(i++, this.bid);
+			stmt.setInt(i++, this.uid);
+			if (stmt.executeUpdate()!=1) {
+				throw new Exception();
+			}
+			System.out.println("Review approved");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			stmt.close();
+			con.close();
+		}
+		return this.bid;
+		
+	}
 
+	
 	public int getUid() {
 		return uid;
 	}
