@@ -148,6 +148,14 @@ function testFullName(str) {
   return true;
 }
 
+function testCardNum(str)
+{
+  if (str.length == 0) return false;
+  if (str.startsWith('34') && str.length == 15){return true;}
+  if (str.startsWith('4') && str.length == 16) {return true;}
+  return false;
+}
+
 function markErrorSuccess(result,tag)
 {
   if (result) {
