@@ -73,10 +73,8 @@ public class AllBooksServlet extends HttpServlet {
 			request.setAttribute("httpSession", session);
 			String booksInJson = gson.toJson(books, type);
 			data = booksInJson; // "{\"customer\":" +   + " }" 
-			System.out.println("data: " + data);
 			pw.println(data);
 			pw.close();
-			System.out.println("\n end of request");
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
