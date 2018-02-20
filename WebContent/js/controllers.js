@@ -493,21 +493,29 @@
 
     $('.mypop').popover();
     $scope.products.forEach(function(el) {
-      /* if there are zero likes, dim the button and disable popover */
+      /* if there are zero likes disable popover */
       if (el.likescount == 0) {
-        $('#btnLike' + el.bid).addClass('disabled').popover('destroy');
+        $('#btnLike' + el.bid).popover('destroy');
       }
       /* if there are zero reviews - disable button */
-      if (el.likescount == 0) {
+      if (el.reviewCount == 0) {
         $('#btnRev' + el.bid).addClass('disabled');
       }
-      /* if user owns the book - hide purchase button, else hide read button */
-      if (us.owns2.length == 0 || !us.owns2.includes(el.bid)) {
-        $('#btnMyRead' + el.bid).remove();
+      /* if user likes the book - activate button and change the text */
+      if (us.likes.length != 0) {
+        if (us.likes.find(function(li){return (li.bid == el.bid);}))
+        {
+          $('#btnLike' + el.bid).addClass('active').text('Unlike');
+        }
       }
-      else {
-        $('#btnMyBuy' + el.bid).remove();
-      }
+      /* check if the user has already reviews the book */
+      if (us.reviews.length != 0)
+        if (us.reviews.find(function(rew){return rew.bid == el.bid;}))
+        {
+          /* $('btnMyReview' + el.bid).text('Edit your review'); */
+          /* Possibly will make an option to edit reviews */
+        }
+        else{$('btnMyReview' + el.bid).removeClass('hidden');}
     });// forEach products
       
     /* myBooks function */
@@ -523,6 +531,51 @@
     };// openBook function
     
     
+    /* like or unlike a book */
+    this.giveLike = function(bookId)
+    {
+      if (us.likes.find(function(li){return li.bid == bookId;}))
+        {
+        //unLike
+        var payload;
+        /* prepare payload for server */
+        payload.uid=us.uid;
+        payload.bid=bookId;
+        /* async call to server */
+        comms.call('POST', '/unLike', payload,
+            function(data, textStatus, jqXHR) {
+          /* if like was deleted run this*/
+          /* chance button apperance */
+          $('#btnLike'+bookId).removeClass('active');
+          /* remove the like from the user likes array */
+          var ind = us.likes.findIndex(function(lik){return lik.bid == bookId});
+          us.likes.splice(ind,1);
+          /* rebuild this like popover */
+          /* find the book in scope */
+          var el = $scope.myPr.find(function(bk) {
+            return bk.bid == bookId
+          });
+          var alllikes = "<ul class=\"list-unstyled text-info\">";
+          el.likescount = el.likes.length;
+          if (el.likes.length != 0) {
+            el.likes.forEach(function(li) {
+              alllikes = alllikes + "<li>" + li + "</li>";
+            }); // foreach like
+          } // if
+          alllikes = alllikes + "</ul>"
+          /* put popover code into the object as a property */
+          el.likesstring = alllikes;
+          
+          $rootScope.$apply();
+        }, function(data, textStatus, errorThrown) {
+          console.log(errorThrown);
+        }, null);
+        }
+      else
+        {
+        //AddLike
+        }
+    };
     
   }]);// controller
 })();
