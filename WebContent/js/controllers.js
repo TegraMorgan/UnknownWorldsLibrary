@@ -549,10 +549,7 @@
           $('#btnLike'+bookId).removeClass('active');
           /* remove the like from the user likes array */
           var ind = us.likes.findIndex(function(lik){return lik.bid == bookId});
-          console.log(us.likes);
-          console.log(ind);
           us.likes.splice(ind,1);
-          console.log(us.likes);
           
           /* find the book in scope */
           var el = $scope.myPr.find(function(bk) {
@@ -581,7 +578,6 @@
           el.likesstring = alllikes;
           console.log(el);
         }, function(data, textStatus, errorThrown) {
-          console.log(errorThrown);
         }, null);
         }
       else
@@ -602,9 +598,7 @@
             bid : bookId,
             uid : us.uid
           };
-          console.log(us.likes);
           us.likes.push(newlike);
-          console.log(us.likes);
           
           /* find the book in scope */
           var el = $scope.myPr.find(function(bk) {
