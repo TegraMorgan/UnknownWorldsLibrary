@@ -64,4 +64,7 @@ public interface ApplicationConstants {
 		
 		public final String INSERT_NEW_OWN = "INSERT INTO owns VALUES (?,?,?)";
 		public final String SELECT_OWNS_BY_UID = "SELECT * FROM owns WHERE uid=?";
+		
+		public final String FIND_ADMIN_BY_LOGIN_AND_PASS = "SELECT * FROM admins WHERE login=? AND password=?";
+
 }
