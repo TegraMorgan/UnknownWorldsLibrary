@@ -2,6 +2,7 @@ package server.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import server.utils.ApplicationConstants;
@@ -10,6 +11,12 @@ import server.utils.DataStructure;
 public class Like {
 	private int uid;
 	private int bid;
+	
+	
+	public Like(ResultSet rs) throws SQLException {
+		this.bid=rs.getInt("bid");
+		this.uid=rs.getInt("uid");
+	}
 	
 	public int getUid() {
 		return uid;
@@ -52,7 +59,7 @@ public class Like {
 		System.out.println("Adding a like to DB");
 		try {
 			con = (Connection) DataStructure.ds.getConnection();
-			stmt = con.prepareStatement(ApplicationConstants.DELETE_LIKE_BY_UID);
+			stmt = con.prepareStatement(ApplicationConstants.DELETE_LIKE);
 			int i = 1;
 			stmt.setInt(i++, this.bid);
 			stmt.setInt(i++, this.uid);
