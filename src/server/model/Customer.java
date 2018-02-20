@@ -247,4 +247,6 @@ public class Customer implements Serializable {
 	public void setReviews(ArrayList<Review> reviews) {
 		this.reviews = reviews;
 	}
+
+	
 }
