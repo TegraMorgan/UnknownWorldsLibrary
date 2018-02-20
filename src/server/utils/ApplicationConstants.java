@@ -35,6 +35,7 @@ public interface ApplicationConstants {
 		public final String CREATE_OWNS_TABLE = "CREATE TABLE owns (uid int NOT NULL,bid int NOT NULL,dateof timestamp DEFAULT NULL,PRIMARY KEY (uid,bid))";
 		public final String CREATE_REVIEWS_TABLE = "CREATE TABLE reviews (bid int NOT NULL,uid int NOT NULL,text varchar(500) DEFAULT NULL,approved_by int DEFAULT NULL,PRIMARY KEY (bid,uid))";
 		
+		public final String GET_ALL_Customers = "SELECT * FROM customers";
 		public final String INSERT_NEW_CUSTOMER = "INSERT INTO customers VALUES (default,?,?,?,?,?,?,?)";
 		public final String FIND_CUSTOMER_BY_USERNAME = "SELECT * FROM customers WHERE username=?";
 		public final String FIND_CUSTOMER_BY_USERNAME_AND_PASS = "SELECT * FROM customers WHERE username=? AND password=?";

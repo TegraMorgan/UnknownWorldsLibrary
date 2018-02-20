@@ -10,6 +10,7 @@ import server.utils.ApplicationConstants;
 import server.utils.DataStructure;
 
 public class AdminController {
+	
 	public static Admin getAdmin(String login, String password) throws SQLException {
 		Admin result = null;
 		Connection con = null;
