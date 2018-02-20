@@ -60,7 +60,7 @@ public interface ApplicationConstants {
 		public final String SELECT_LIKES_BY_BID = "SELECT * FROM likes WHERE bid=?";
 		
 		public final String INSERT_NEW_REVIEW = "INSERT INTO reviews VALUES (?,?,?,?)";
-		public final String SELECT_REVIEWS_BY_UID = "SELECT * FROM reviews WHERE uid=?";
+		public final String SELECT_REVIEWS_BY_UID = "SELECT r.bid as bid, r.uid as uid, r.text as text, r.approved_by as approved_by, c.nickname as nickname,  b.name as book_name FROM reviews r INNER JOIN books b ON r.bid=b.bid INNER JOIN customers c ON r.uid=c.uid WHERE r.uid=?"; 
 		
 		public final String INSERT_NEW_OWN = "INSERT INTO owns VALUES (?,?,?)";
 		public final String SELECT_OWNS_BY_UID = "SELECT * FROM owns WHERE uid=?";

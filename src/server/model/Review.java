@@ -36,6 +36,32 @@ public class Review implements Serializable {
 		this.reviewBody = rs.getString("text");
 	}
 
+	public int addToDB() throws SQLException {
+		PreparedStatement stmt = null;
+		Connection con = null;
+		System.out.println("Adding a review to DB");
+		try {
+			con = (Connection) DataStructure.ds.getConnection();
+			stmt = con.prepareStatement(ApplicationConstants.INSERT_NEW_REVIEW);
+			int i = 1;
+			stmt.setInt(i++, this.bid);
+			stmt.setInt(i++, this.uid);
+			stmt.setString(i++, this.reviewBody);
+			stmt.setInt(i++, this.approvedBy);
+			if (stmt.executeUpdate()!=1) {
+				throw new Exception();
+			}
+			System.out.println("Book added");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			stmt.close();
+			con.close();
+		}
+		return this.bid;
+		
+	}
+
 	public int getUid() {
 		return uid;
 	}
@@ -82,31 +108,5 @@ public class Review implements Serializable {
 
 	public void setReviewBody(String reviewBody) {
 		this.reviewBody = reviewBody;
-	}
-
-	public int addToDB() throws SQLException {
-		PreparedStatement stmt = null;
-		Connection con = null;
-		System.out.println("Adding a review to DB");
-		try {
-			con = (Connection) DataStructure.ds.getConnection();
-			stmt = con.prepareStatement(ApplicationConstants.INSERT_NEW_REVIEW);
-			int i = 1;
-			stmt.setInt(i++, this.bid);
-			stmt.setInt(i++, this.uid);
-			stmt.setString(i++, this.reviewBody);
-			stmt.setInt(i++, this.approvedBy);
-			if (stmt.executeUpdate()!=1) {
-				throw new Exception();
-			}
-			System.out.println("Book added");
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			stmt.close();
-			con.close();
-		}
-		return this.bid;
-		
 	}
 }
