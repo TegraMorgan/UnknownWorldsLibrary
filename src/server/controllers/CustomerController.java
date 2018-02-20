@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import server.model.Customer;
 import server.utils.ApplicationConstants;
@@ -32,6 +33,11 @@ public class CustomerController {
 			con.close();
 		}
 		return result;
+	}
+	
+	public static ArrayList<Customer> getAllCustomers() {
+		return null;
+		
 	}
 
 }
