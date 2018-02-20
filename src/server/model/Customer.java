@@ -26,7 +26,8 @@ public class Customer implements Serializable {
 	private ArrayList<Review> reviews;
 
 	public Customer(int uId, String userName, String eMail, String pHone, String pAssword, String nickName,
-			String dEscription, String pHoto_url, ArrayList<Owns> oWns) {
+			String dEscription, String pHoto_url, ArrayList<Owns> oWns, ArrayList<Like> lIkes,
+			ArrayList<Review> rEviews) {
 		this.uid = uId;
 		this.username = userName;
 		this.email = eMail;
@@ -35,7 +36,9 @@ public class Customer implements Serializable {
 		this.nickname = nickName;
 		this.description = dEscription;
 		this.photo_url = pHoto_url;
-		this.setOwns(oWns);
+		this.owns = oWns;
+		this.likes = lIkes;
+		this.reviews = rEviews;
 	}
 
 	public Customer(ResultSet rs, ArrayList<Owns> oWns, ArrayList<Like> lIkes, ArrayList<Review> rEviews)
@@ -62,14 +65,14 @@ public class Customer implements Serializable {
 		this.nickname = rs.getString("nickname");
 		this.description = rs.getString("description");
 		this.photo_url = rs.getString("photo_url");
-		this.setOwns(this.getMyBooks());
-		this.setLikes(this.getMyLikes());
-		this.setReviews(this.getMyreviews());
+		this.getMyBooks();
+		this.getMyLikes();
+		this.getMyreviews();
 	}
 
 	// get my books List from DB
-	public ArrayList<Owns> getMyBooks() {
-		// ArrayList<Owns> result = new ArrayList<Owns>();
+	public void getMyBooks() {
+		this.owns = new ArrayList<Owns>();
 		Connection con = null;
 		PreparedStatement stmt = null;
 		try {
@@ -86,12 +89,11 @@ public class Customer implements Serializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return owns;
 	}
 
 	// get my likes from DB
-	public ArrayList<Like> getMyLikes() {
-		ArrayList<Like> result = new ArrayList<Like>();
+	public void getMyLikes() {
+		this.likes = new ArrayList<Like>();
 		Connection con = null;
 		PreparedStatement Statement = null;
 		try {
@@ -100,18 +102,17 @@ public class Customer implements Serializable {
 			Statement.setInt(1, uid);
 			ResultSet resltset = Statement.executeQuery();
 			while (resltset.next()) {
-				result.add(new Like(resltset));
+				likes.add(new Like(resltset));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return result;
 	}
 
 	// get my reviews from DB
-	public ArrayList<Review> getMyreviews() {
-		ArrayList<Review> result = new ArrayList<Review>();
+	public void getMyreviews() {
+		this.reviews = new ArrayList<Review>();
 		Connection con = null;
 		PreparedStatement Statement = null;
 		try {
@@ -120,8 +121,7 @@ public class Customer implements Serializable {
 			Statement.setInt(1, uid);
 			ResultSet resltset = Statement.executeQuery();
 			while (resltset.next()) {
-				Review rev = new Review(resltset);
-				result.add(rev);
+				this.reviews.add(new Review(resltset));
 			}
 			resltset.close();
 			Statement.close();
@@ -130,7 +130,6 @@ public class Customer implements Serializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return result;
 	}
 
 	// add this to the DB
