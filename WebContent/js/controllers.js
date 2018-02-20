@@ -461,8 +461,7 @@
     }, function(newValue, oldValue) {
       setTimeout(function() {
         $('.mypop').popover();
-        console.log($scope.products);
-        $scope.products.forEach(function(el) {
+        $scope.myPr.forEach(function(el) {
           /* if there are zero likes disable popover */
           if (el.likescount == 0) {
             $('#btnLike' + el.bid).popover('destroy');
@@ -493,8 +492,7 @@
     });
 
     $('.mypop').popover();
-    console.log('502:products ' + $scope.products);
-    $scope.products.forEach(function(el) {
+    $scope.myPr.forEach(function(el) {
       /* if there are zero likes disable popover */
       if (el.likescount == 0) {
         $('#btnLike' + el.bid).popover('destroy');
@@ -504,7 +502,6 @@
         $('#btnRev' + el.bid).addClass('disabled');
       }
       /* if user likes the book - activate button and change the text */
-      console.log(us);
       if (us.likes.length != 0) {
         if (us.likes.find(function(li){return (li.bid == el.bid);}))
         {
@@ -540,24 +537,34 @@
       if (us.likes.find(function(li){return li.bid == bookId;}))
         {
         //unLike
-        var payload;
+        var payload = {};
         /* prepare payload for server */
-        payload.uid=us.uid;
-        payload.bid=bookId;
+        payload.uid = us.uid;
+        payload.bid = bookId;
         /* async call to server */
-        comms.call('POST', '/unLike', payload,
+        comms.call('POST', 'unLike', payload,
             function(data, textStatus, jqXHR) {
           /* if like was deleted run this*/
           /* chance button apperance */
           $('#btnLike'+bookId).removeClass('active');
           /* remove the like from the user likes array */
           var ind = us.likes.findIndex(function(lik){return lik.bid == bookId});
+          console.log(us.likes);
+          console.log(ind);
           us.likes.splice(ind,1);
-          /* rebuild this like popover */
+          console.log(us.likes);
+          
           /* find the book in scope */
           var el = $scope.myPr.find(function(bk) {
             return bk.bid == bookId
           });
+          
+          /* delete current user from this book likes */
+          var booklikes = el.likes;
+          ind = booklikes.findIndex(function(lik){return lik == us.nickname});
+          booklikes.splice(ind,1);
+          
+          /* rebuild this like popover */
           var alllikes = "<ul class=\"list-unstyled text-info\">";
           el.likescount = el.likes.length;
           if (el.likes.length != 0) {
@@ -565,11 +572,14 @@
               alllikes = alllikes + "<li>" + li + "</li>";
             }); // foreach like
           } // if
+          /* disable popover */
+          else {
+            $('#btnLike'+bookId).popover('destroy');
+          }
           alllikes = alllikes + "</ul>"
           /* put popover code into the object as a property */
           el.likesstring = alllikes;
-          
-          $rootScope.$apply();
+          console.log(el);
         }, function(data, textStatus, errorThrown) {
           console.log(errorThrown);
         }, null);
@@ -577,6 +587,53 @@
       else
         {
         //AddLike
+        var payload = {};
+        /* prepare payload for server */
+        payload.uid = us.uid;
+        payload.bid = bookId;
+        /* async call to server */
+        comms.call('POST', 'AddLike', payload,
+            function(data, textStatus, jqXHR) {
+          /* if like was added run this*/
+          /* chance button apperance */
+          $('#btnLike'+bookId).addClass('active');
+          /* add like to the user likes array */
+          var newlike = {
+            bid : bookId,
+            uid : us.uid
+          };
+          console.log(us.likes);
+          us.likes.push(newlike);
+          console.log(us.likes);
+          
+          /* find the book in scope */
+          var el = $scope.myPr.find(function(bk) {
+            return bk.bid == bookId
+          });
+          
+          /* add current user to this book likes */
+          var booklikes = el.likes;
+          booklikes.push(us.uid);
+          
+          /* rebuild this like popover */
+          var alllikes = "<ul class=\"list-unstyled text-info\">";
+          el.likescount = el.likes.length;
+          if (el.likes.length != 0) {
+            el.likes.forEach(function(li) {
+              alllikes = alllikes + "<li>" + li + "</li>";
+            }); // foreach like
+          } // if
+          /* disable popover */
+          else {
+            $('#btnLike'+bookId).popover('destroy');
+          }
+          alllikes = alllikes + "</ul>"
+          /* put popover code into the object as a property */
+          el.likesstring = alllikes;
+        }, function(data, textStatus, errorThrown) {
+          console.log(errorThrown);
+        }, null);
+        
         }
     };
     
