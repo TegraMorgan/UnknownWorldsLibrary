@@ -68,5 +68,6 @@ public interface ApplicationConstants {
 		public final String SELECT_OWNS_BY_UID = "SELECT * FROM owns WHERE uid=?";
 		
 		public final String FIND_ADMIN_BY_LOGIN_AND_PASS = "SELECT * FROM admins WHERE login=? AND password=?";
+		public final String DELETE_Customer = "DELETE FROM customers WHERE uid=?";
 
 }
