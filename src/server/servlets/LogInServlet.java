@@ -16,7 +16,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import server.model.*;
-import server.resopnse.LogInResponse;
+import server.response.LogInResponse;
+import server.controllers.*;
 
 /**
  * Servlet implementation class LogInServlet
@@ -46,7 +47,7 @@ public class LogInServlet extends HttpServlet {
 	private void logInRequest(HttpServletRequest request, HttpServletResponse response)
 			throws JsonSyntaxException, JsonIOException, IOException {
 		Gson gson = new GsonBuilder().create();
-		Customer customer = gson.fromJson(request.getReader(), Customer.class);
+		Customer credentials = gson.fromJson(request.getReader(), Customer.class);
 		response.setContentType("application/json; charset=UTF-8");
 		PrintWriter printWriter = response.getWriter();
 		String data;
@@ -54,15 +55,17 @@ public class LogInServlet extends HttpServlet {
 		try {// this method connect to the db and check the user data return 1 if user is
 				// exist else -1
 			LogInResponse resp = new LogInResponse();
-			if (customer.getCustomer(customer.getUsername(), customer.getPassword()) > 0) {
+			Customer cust;
+			cust = CustomerController.getCustomer(credentials.getUsername(),credentials.getPassword());
+			if (cust != null) {
 				HttpSession session = request.getSession();
-				session.setAttribute("customer", customer);
-				// request.setAttribute("httpSession", session);
-				resp.setCustomer(customer);
-				resp.setResult("success");
+				session.setAttribute("customer", cust);
+				request.setAttribute("httpSession", session);
+				resp.setCustomer(cust);
+				resp.setResultSuccess();
 				data = resp.tojson();
 			} else {
-				resp.setResult("fail");
+				resp.setResultFail();
 				data = resp.tojson();
 			}
 			printWriter.println(data);

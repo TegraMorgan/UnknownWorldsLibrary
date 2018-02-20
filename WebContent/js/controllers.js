@@ -461,6 +461,7 @@
     }, function(newValue, oldValue) {
       setTimeout(function() {
         $('.mypop').popover();
+        console.log($scope.products);
         $scope.products.forEach(function(el) {
           /* if there are zero likes disable popover */
           if (el.likescount == 0) {
@@ -492,6 +493,7 @@
     });
 
     $('.mypop').popover();
+    console.log('502:products ' + $scope.products);
     $scope.products.forEach(function(el) {
       /* if there are zero likes disable popover */
       if (el.likescount == 0) {
@@ -502,6 +504,7 @@
         $('#btnRev' + el.bid).addClass('disabled');
       }
       /* if user likes the book - activate button and change the text */
+      console.log(us);
       if (us.likes.length != 0) {
         if (us.likes.find(function(li){return (li.bid == el.bid);}))
         {

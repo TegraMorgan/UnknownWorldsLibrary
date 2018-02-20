@@ -21,7 +21,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import server.model.*;
-import server.resopnse.BasicResponse;
+import server.response.BasicResponse;
 
 /**
  * Servlet implementation class unLike

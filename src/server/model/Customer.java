@@ -161,38 +161,6 @@ public class Customer implements Serializable {
 		return st;
 	}
 
-	public int getCustomer(String userName, String password) throws SQLException {
-		Connection con = null;
-		PreparedStatement Statement = null;
-		try {
-			con = (Connection) DataStructure.ds.getConnection();
-			Statement = con.prepareStatement(ApplicationConstants.FIND_CUSTOMER_BY_USERNAME_AND_PASS);
-			Statement.setString(1, userName);
-			Statement.setString(2, password);
-			ResultSet resltset = Statement.executeQuery();
-			if (resltset.next()) {
-				this.uid = resltset.getInt("uid");
-				this.username = resltset.getString("username");
-				this.email = resltset.getString("email");
-				this.phone = resltset.getString("phone");
-				this.password = resltset.getString("password");
-				this.nickname = resltset.getString("nickname");
-				this.description = resltset.getString("description");
-				this.photo_url = resltset.getString("photo_url");
-				this.setOwns(this.getMyBooks());
-				return 1;
-			} else
-				return -1;
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		} finally {
-			Statement.close();
-			con.close();
-		}
-		return -1;
-	}
-
 	public int getUid() {
 		return uid;
 	}

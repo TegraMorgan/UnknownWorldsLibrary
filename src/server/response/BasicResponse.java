@@ -1,4 +1,4 @@
-package server.resopnse;
+package server.response;
 
 import java.io.Serializable;
 import java.lang.reflect.Type;
@@ -24,11 +24,11 @@ public class BasicResponse implements Serializable {
 	}
 
 	public java.lang.reflect.Type getType() {
-		return new TypeToken<BasicResponse>() {}.getType();
+		return new TypeToken<BasicResponse>() {
+		}.getType();
 	}
 
-	public String tojson()
-	{
+	public String tojson() {
 		Gson gson = new GsonBuilder().create();
 		Type type = this.getType();
 		return gson.toJson(this, type);
@@ -40,6 +40,14 @@ public class BasicResponse implements Serializable {
 
 	public void setResult(String response) {
 		this.result = response;
+	}
+
+	public void setResultSuccess() {
+		this.result = "success";
+	}
+
+	public void setResultFail() {
+		this.result = "fail";
 	}
 
 }

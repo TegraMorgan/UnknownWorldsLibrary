@@ -1,4 +1,4 @@
-package server.resopnse;
+package server.response;
 
 import java.lang.reflect.Type;
 
