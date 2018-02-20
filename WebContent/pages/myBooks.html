@@ -43,7 +43,7 @@
               data-toggle="popover" data-placement="bottom" 
               title="Liked by" data-content="{{el.likesstring}}" 
               ng-click="bCtrl.giveLike(el.bid)">
-                <span class="glyphicon glyphicon-thumbs-up"></span> <span class="badge">  {{el.likescount}}</span> 
+                <span class="glyphicon glyphicon-thumbs-up"></span> <span class="mylikesbadge badge">  {{el.likescount}}</span> 
               </button>
               <div>
                 <button id="btnMyRead{{el.bid}}" class="btn btn-default" ng-click="bCtrl.navToOpenBook(el.bid)">
