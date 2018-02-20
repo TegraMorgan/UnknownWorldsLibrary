@@ -131,3 +131,8 @@ html, body {
 .reading_pane>*>h4 {
 	text-align: center;
 }
+
+.btn-info .mylikesbadge {
+	color: #ffffff;
+	background-color: #333;
+}
