@@ -1,30 +1,64 @@
-<div class="container-fluid">
-  <div class="well well-lg" ng-controller="checkoutController as chCtrl">
-    <div class="jumbotron">
-      <h1>Reading gives us someplace to go when we have to stay where we are</h1>
-      <h4>-Mason Cooley</h4>
-      <div>Congratulations on deciding to purchase a book. Please fill in your credit card information.</div>
-    </div>
+<div class="container-fluid" ng-controller="checkoutController as chCtrl">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <div class="well well-lg">
+        <div class="jumbotron">
+          <h3>
+            Reading gives us someplace to go when we have to stay where we are
+            </h1>
+            <h4>-Mason Cooley</h4>
+            <div class="">Congratulations on deciding to purchase a book. Please fill in your credit card information.</div>
+        </div>
+        <form ng-submit="chCtrl">
+          <div class="wellwellwell">
+            <div id="divchn" class="form-group">
+              <label for="chn">Card Holder Name</label><input id="chn" ng-model="chn" ng-change="chCtrl.testchn()" class="form-control" placeholder="Full Name">
+              <span id="hbchn" class="help-block">Only English letters allowed</span>
+            </div>
+            <div id="divstrt" class="form-group">
+              <label for="strt">Street</label><input id="strt" ng-model="strt" ng-change="chCtrl.teststrt()" class="form-control" placeholder="Street">
+              <span id="hbstrt" class="help-block">Only English letters allowed</span>
+            </div>
+            <div id="divzip" class="form-group">
+              <label for="zp">ZIP Code</label><input id="zp" ng-model="zp" ng-change="chCtrl.testzip()" class="form-control" placeholder="ZIP">
+            </div>
+            <div class="form-group">
+              <label for="city">City</label><input id="city" ng-model="city" ng-change="chCtrl." class="form-control" placeholder="City">
+            </div>
+            <div class="form-group">
+              <label for="cntr">Country</label><input id="cntr" ng-model="cntr" ng-change="chCtrl." class="form-control" placeholder="Country">
+            </div>
+            <div class="form-group">
+              <ul class="list-inline">
+                <li><label for="credCarNum">Credit card number</label> <input id="credCarNum" aria-label="Credit card number" ng-change="chCtrl." ng-keyup="chCtrl.testcard()" class="form-control" ng-model="cardNum"
+                  placeholder="Credit card number" autocorrect="off" maxlength="19" style="width: 180px;"
+                ></li>
+                <li><img src="img/cc-visaS.gif"></li>
+                <li><img src="img/cc-mcS.gif"></li>
+              </ul>
+            </div>
+            <div class="form-group">
+              <label>Expiration (mm/yyyy)</label>
+              <ul class="list-inline">
+                <li><select id="expiration" style="width: 120px;" class="form-control" ng-model="selMonth" ng-change="chCtrl." ng-options="item for item in months" aria-label="Credit card expiration month">
+                    <option value="" selected="selected">Month</option></select></li>
+                <li><select id="expiration2" class="form-control" aria-label="Credit card expiration year" ng-change="chCtrl." ng-model="selYear" ng-options="item for item in years" style="margin-left: 5px; width: 120px;">
+                    <option value="" selected="selected">Year</option>
+                </select></li>
+              </ul>
+            </div>
+            <div class="form-group">
+              <label for="secCode">Security code</label> <input id="secCode" ng-change="chCtrl." class="form-control" placeholder="CVV" aria-label="Credit card security code" type="tel" autocorrect="off" maxlength="4"
+                ng-model="cvv" style="width: 70px;"
+              >
+            </div>
+            <div class="form-group">
+              <button class="btn btn-success">Place my order</button>
+            </div>
 
-    <form>
-      <div class="form-group">
-        <label for="credCarNum">Credit card number</label> <input id="credCarNum" aria-label="Credit card number" class="form-control" ng-model="cardNum" placeholder="Credit card number"
-          autocorrect="off" maxlength="19" style="width: 132px;"
-        >
+          </div>
+        </form>
       </div>
-      <div class="form-group">
-        <label for="expiration">Expiration (mm/yyyy)</label><br> <select id="" class="form-control" aria-label="Credit card expiration month">
-          <option>1</option>
-        </select> <select id="" class="form-control" aria-label="Credit card expiration year" name="" style="margin-left: 5px;">
-          <option value="2018" selected="selected">2018</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="secCode">Security code</label> <input id="secCode" class="form-control" placeholder="CVV" aria-label="Credit card security code" type="tel" autocorrect="off" maxlength="4" value="">
-      </div>
-      <div class="left">
-        <span class="icon-header-help" title="Security code" onclick=""></span>
-      </div>
-    </form>
+    </div>
   </div>
 </div>

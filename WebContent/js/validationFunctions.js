@@ -138,6 +138,26 @@ function testNewPhoto(str){
   return true;
 }
 
+function testFullName(str) {
+  var len = str.length;
+  if (len < 4) return false;
+  var regex1 = /^[a-z ,.'-]+$/i;
+  if (!regex1.test(str)) {
+    return false;
+  }
+  return true;
+}
+
+function markErrorSuccess(result,tag)
+{
+  if (result) {
+    $(tag).removeClass('has-error').addClass('has-success');
+  }
+  else {
+    $(tag).removeClass('has-success').addClass('has-error');
+  }
+}
+
 function listProperties(obj) {
   var keys = [];
   for (var key in obj) {

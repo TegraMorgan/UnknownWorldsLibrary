@@ -27,8 +27,10 @@
     
     
     /* TODO remove all this section this later */
-/*
-    $rootScope.secondView = 'inDevelopment/store_template.html';
+
+    $rootScope.secondView = 'pages/checkout.html';
+    /*
+    
 
     this.newCustomer.username = "TestName";
     this.newCustomer.email = "Test@mail.com";
@@ -418,6 +420,11 @@
         
       };// openBook function
       
+      this.navToBuyBook = function(bookId){
+        //TODO finish this function
+        $scope.buyBook=bookId;
+      };
+      
   }]).controller('booksController',['$rootScope', '$scope', '$http','comms', function($rootScope, $scope, $http,comms) {
     
 //    console.log('aa');
@@ -644,5 +651,59 @@
       $('#composeReview').modal('hide');
     }
     
+  }]).controller('checkoutController',['$rootScope', '$scope', '$http','comms', function($rootScope, $scope, $http,comms) {
+
+    $scope.months = [];
+    var i = 0;
+    var j = "";
+    for (i = 1; i < 13; i++) {
+      j = i < 10 ? '0' + i.toString() : i.toString();
+      $scope.months.push(j);
+    }
+    $scope.years = [];
+    i = new Date();
+    j = i.getFullYear();
+    for (i = 0; i < 10; i++) {
+      $scope.years.push(j + i);
+      }
+    
+    this.print = function(){
+      console.log($scope.selMonth);
+      console.log($scope.selYear);
+    };
+    
+    //$scope.buyBook;
+    
+    this.testchn = function(){
+      var result = testFullName($scope.chn);
+      markErrorSuccess(result,'#divchn');
+      return result;
+    };
+    
+    this.teststrt = function(){
+      var result = testNewStreet($scope.strt);
+      markErrorSuccess(result,'#divstrt');
+      return result;
+    };
+    
+    this.testzip = function(){
+      var result = testNewZip($scope.zp);
+      markErrorSuccess(result,'#divzip');
+      return result;
+    };
+    
+    this.testzip = function(){
+      var result = testNewZip($scope.zp);
+      markErrorSuccess(result,'#divzip');
+      return result;
+    };
+    
+    this.testcard = function(){
+      var cn = $scope.cardNum;
+      
+    }
+    
+    
+  
   }]);// controller
 })();
