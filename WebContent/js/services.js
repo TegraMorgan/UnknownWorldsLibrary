@@ -40,6 +40,16 @@
       url : '/UnknownWorldsLibrary/'+url,
       data : values
     }).done(onsuccsess).always(always).fail(onfail);
+  },
+  nsync: function(url, input, onsuccsess, onfail) {
+    var values = angular.toJson(input);
+        $.ajax({
+          method : 'POST',
+          async : false,
+          url : '/UnknownWorldsLibrary/'+url,
+          data : values,
+          context:document.body,
+    }).done(onsuccsess).fail(onfail);
   }
   }
 } ]);
