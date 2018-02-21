@@ -534,7 +534,7 @@
       }
       /* check if the user has already reviews the book */
       if (us.reviews.length != 0)
-        if (us.reviews.find(function(rew){rew.bid = el.bid;}))
+        if (us.reviews.find(function(rew){return rew.bid == el.bid;}))
         {
           /* $('btnMyReview' + el.bid).text('Edit your review'); */
           /* Possibly will make an option to edit reviews */
@@ -668,11 +668,17 @@
       payload.uid=us.uid;
       payload.approved_by=null;
       payload.reviewBody =$('#reviewBody')[0].value; 
-      /* comm test */
       comms.sync('/AddReview', payload,
           function(data, textStatus, jqXHR)
           {
             console.log(data.result);
+            $('#btnMyReview'+bookId).addClass('hidden');
+            var rev={};
+            rev.uid=us.uid;
+            rev.bid=bookId;
+            console.log(us.reviews);
+            us.reviews.push(rev);
+            console.log(us.reviews);
           },
         function(data, textStatus, errorThrown)
         {
