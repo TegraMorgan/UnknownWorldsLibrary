@@ -49,18 +49,22 @@
     this.navToBooks = function() {
       // TODO not implemented
       $rootScope.secondView = 'pages/admin/books.html';
-      $('#btnStore').removeClass().addClass('btn navbar-btn btn-default active');
-      $('#btnMyBooks').removeClass().addClass('btn navbar-btn btn-default');
+      $('#btnMybooks').removeClass().addClass('btn navbar-btn btn-default active');
+      $('#btnUsers').removeClass().addClass('btn navbar-btn btn-default');
     }
 
     this.navToUsers = function() {
       // TODO not implemented
+      this.menutoggle();
       $rootScope.secondView = 'pages/admin/users.html';
-      $('#btnMyBooks').removeClass().addClass('btn navbar-btn btn-default active');
-      $('#btnStore').removeClass().addClass('btn navbar-btn btn-default');
+      $('#btnUsers').removeClass().addClass('btn navbar-btn btn-default active');
+      $('#btnMybooks').removeClass().addClass('btn navbar-btn btn-default');
     }
 
-    this.login = function() {
+    this.adlogin = function() {
+      console.log('login function fired');
+      console.log(this);
+      console.log(this.admin);
       if (!this.admin.login || !this.admin.password || this.admin.login.length <= 0 || this.admin.password.length <= 0) {
         this.wrongLoginData = true;
         this.wrongLoginMessage = "These fields cannot be empty";
@@ -72,23 +76,29 @@
       else {
         this.wrongLoginData = false;
         var ctr = this;
-        comms.call('POST', '/AdminLogIn', this.admin, function(data, textStatus, jqXHR) {
-          if (data.result == "fail") {
-            alert(data.result);
-            ctr.wrongLoginData = true;
-            ctr.wrongLoginMessage = "Incorrect credentials";
-          }
-          else {
-            $rootScope.user = data.customer;
-            ctr.menutoggle();
-            ctr.navToStore();
-          }
-          $rootScope.$apply();
-        }, function(data, textStatus, errorThrown) {
-          alert('Server error. Please try again');
-        }, null);
-
+        var adm = JSON.stringify(this.admin);
+        console.log(adm);
+        $.ajax({
+          method:'POST',
+          async : false,
+          url:'/UnknownWorldsLibrary/AdminLogIn',
+          data:adm,
+          context:document.body,
+        }).done(function(data, textStatus, jqXHR){
+          console.log(data);
+          $rootScope.admin = data.admin;
+          console.log($rootScope.admin);
+          ctr.navToUsers();
+        }).fail(function(data, textStatus, errorThrown){
+          console.log('login failed');
+          ctr.wrongLoginData = true;
+          ctr.wrongLoginMessage = "Incorrect credentials";
+        });
       }
-    };
-  } ]);// controller
+    }; // mainController
+  } ]).controller('usersController', [ '$rootScope', '$scope', '$http', 'comms', '$location', function($rootScope, $scope, $http, comms, $location) {
+    var ad = $rootScope.admin;
+    
+    
+  }]);// usersController
 })();

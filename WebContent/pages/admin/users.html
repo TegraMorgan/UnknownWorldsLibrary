@@ -1,0 +1,66 @@
+<div ng-controller="usersController as uCtrl">
+  <div class="container-fluid>">
+    <table class="table table-stripped table-condensed">
+      <tr>
+        <th>Picture</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr ng-repeat="us in uCtrl.users">
+        <td>
+          <!-- photo --> <img class="img-responsive" src="us.photo_url">
+        </td>
+        <td>
+          <!-- username nickname email -->
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Username</label>
+              <div class="col-sm-10">
+                <p class="form-control-static">{{us.username}}</p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Nickname</label>
+              <div class="col-sm-10">
+                <p class="form-control-static">{{us.nickname}}</p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Email</label>
+              <div class="col-sm-10">
+                <p class="form-control-static">{{us.email}}</p>
+              </div>
+            </div>
+          </form>
+        </td>
+        <td>
+          <!-- adress telephone -->
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Username</label>
+              <div class="col-sm-10">
+                <p class="form-control-static">{{us.username}}</p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Nickname</label>
+              <div class="col-sm-10">
+                <p class="form-control-static">{{us.nickname}}</p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">Email</label>
+              <div class="col-sm-10">
+                <p class="form-control-static">{{us.email}}</p>
+              </div>
+            </div>
+          </form>
+        </td>
+        <td class="col-md-3">
+          <!-- description -->
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
