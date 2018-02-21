@@ -21,12 +21,16 @@ public class Customer implements Serializable {
 	private String nickname;
 	private String description;
 	private String photo_url;
+	private String stName;
+	private int blNum;
+	private String cityName;
+	private String zip;
 	private ArrayList<Owns> owns;
 	private ArrayList<Like> likes;
 	private ArrayList<Review> reviews;
 
 	public Customer(int uId, String userName, String eMail, String pHone, String pAssword, String nickName,
-			String dEscription, String pHoto_url, ArrayList<Owns> oWns, ArrayList<Like> lIkes,
+			String dEscription, String pHoto_url, String sTName,int bLNum,String cItyName,String zIp, ArrayList<Owns> oWns, ArrayList<Like> lIkes,
 			ArrayList<Review> rEviews) {
 		this.uid = uId;
 		this.username = userName;
@@ -36,6 +40,10 @@ public class Customer implements Serializable {
 		this.nickname = nickName;
 		this.description = dEscription;
 		this.photo_url = pHoto_url;
+		this.stName=sTName;
+		this.blNum=bLNum;
+		this.cityName=cItyName;
+		this.zip=zIp;
 		this.owns = oWns;
 		this.likes = lIkes;
 		this.reviews = rEviews;
@@ -51,6 +59,10 @@ public class Customer implements Serializable {
 		this.nickname = rs.getString("nickname");
 		this.description = rs.getString("description");
 		this.photo_url = rs.getString("photo_url");
+		this.stName = rs.getString("st_name");
+		this.blNum = rs.getInt("bl_num");
+		this.cityName = rs.getString("city_nm");
+		this.zip = rs.getString("zip");
 		this.owns = oWns;
 		this.likes = lIkes;
 		this.reviews = rEviews;
@@ -65,6 +77,11 @@ public class Customer implements Serializable {
 		this.nickname = rs.getString("nickname");
 		this.description = rs.getString("description");
 		this.photo_url = rs.getString("photo_url");
+		this.photo_url = rs.getString("photo_url");
+		this.stName = rs.getString("st_name");
+		this.blNum = rs.getInt("bl_num");
+		this.cityName = rs.getString("city_nm");
+		this.zip = rs.getString("zip");
 		this.getMyBooks();
 		this.getMyLikes();
 		this.getMyreviews();
@@ -149,6 +166,10 @@ public class Customer implements Serializable {
 			preparedStatement.setString(i++, this.nickname);
 			preparedStatement.setString(i++, this.description);
 			preparedStatement.setString(i++, this.photo_url);
+			preparedStatement.setString(i++, this.stName);
+			preparedStatement.setInt(i++, this.blNum);
+			preparedStatement.setString(i++, this.cityName);
+			preparedStatement.setString(i++, this.zip);
 			st = preparedStatement.executeUpdate();
 			System.out.println("addCustomer 2");
 		} catch (Exception e) {

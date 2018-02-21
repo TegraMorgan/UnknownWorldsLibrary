@@ -216,6 +216,9 @@
         passed = false;
         this.newZIPOk = false;
       }
+      else {
+        this.newCustomer.zip = this.newCustomer.zip.toString();
+      }
 
       /* Test Phone */
       if (this.newCustomer.phone == undefined) {
