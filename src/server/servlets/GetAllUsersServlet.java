@@ -55,7 +55,6 @@ public class GetAllUsersServlet extends HttpServlet {
 
 	private void handleRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 		GetAllUsersResponse resp = new GetAllUsersResponse();
 		response.setContentType("application/json");
 		PrintWriter printWriter = response.getWriter();
@@ -66,6 +65,7 @@ public class GetAllUsersServlet extends HttpServlet {
 			System.out.println("Got " + customers.size() + " customers");
 			if(customers.size() >0)
 			{
+				response.setStatus(HttpServletResponse.SC_OK);
 				HttpSession session = request.getSession();
 				request.setAttribute("customers", customers);
 				session.setAttribute("customers", customers);
@@ -73,7 +73,6 @@ public class GetAllUsersServlet extends HttpServlet {
 				resp.setCustomers(customers);
 				resp.setResultSuccess();
 				data = resp.tojson();
-				response.setStatus(HttpServletResponse.SC_OK);
 			}
 			else
 			{

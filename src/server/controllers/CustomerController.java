@@ -73,6 +73,7 @@ public class CustomerController {
 			if (resltset.next()) {
 				result = new Customer(resltset);
 			}
+			resltset.close();
 		} catch (Exception e) {
 
 			e.printStackTrace();

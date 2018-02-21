@@ -30,8 +30,8 @@ public class Customer implements Serializable {
 	private ArrayList<Review> reviews;
 
 	public Customer(int uId, String userName, String eMail, String pHone, String pAssword, String nickName,
-			String dEscription, String pHoto_url, String sTName,int bLNum,String cItyName,String zIp, ArrayList<Owns> oWns, ArrayList<Like> lIkes,
-			ArrayList<Review> rEviews) {
+			String dEscription, String pHoto_url, String sTName, int bLNum, String cItyName, String zIp,
+			ArrayList<Owns> oWns, ArrayList<Like> lIkes, ArrayList<Review> rEviews) {
 		this.uid = uId;
 		this.username = userName;
 		this.email = eMail;
@@ -40,10 +40,10 @@ public class Customer implements Serializable {
 		this.nickname = nickName;
 		this.description = dEscription;
 		this.photo_url = pHoto_url;
-		this.stName=sTName;
-		this.blNum=bLNum;
-		this.cityName=cItyName;
-		this.zip=zIp;
+		this.stName = sTName;
+		this.blNum = bLNum;
+		this.cityName = cItyName;
+		this.zip = zIp;
 		this.owns = oWns;
 		this.likes = lIkes;
 		this.reviews = rEviews;
@@ -109,7 +109,7 @@ public class Customer implements Serializable {
 	}
 
 	// get my likes from DB
-	public void getMyLikes() {
+	public void getMyLikes() throws SQLException {
 		this.likes = new ArrayList<Like>();
 		Connection con = null;
 		PreparedStatement Statement = null;
@@ -121,9 +121,14 @@ public class Customer implements Serializable {
 			while (resltset.next()) {
 				likes.add(new Like(resltset));
 			}
+			resltset.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+
+			Statement.close();
+			con.close();
 		}
 	}
 
@@ -134,15 +139,29 @@ public class Customer implements Serializable {
 		PreparedStatement Statement = null;
 		try {
 			con = (Connection) DataStructure.ds.getConnection();
-			Statement = con.prepareStatement(ApplicationConstants.SELECT_REVIEWS_BY_UID);
-			Statement.setInt(1, uid);
-			ResultSet resltset = Statement.executeQuery();
-			while (resltset.next()) {
-				this.reviews.add(new Review(resltset));
+			try {
+				Statement = con.prepareStatement(ApplicationConstants.SELECT_REVIEWS_BY_UID);
+				try {
+					Statement.setInt(1, uid);
+					ResultSet resltset = Statement.executeQuery();
+					try {
+						while (resltset.next()) {
+							this.reviews.add(new Review(resltset));
+						}
+					} catch (Exception e) {
+					} finally {
+						resltset.close();
+					}
+				} catch (Exception e) {
+
+				} finally {
+					Statement.close();
+				}
+			} catch (Exception e) {
+
+			} finally {
+				con.close();
 			}
-			resltset.close();
-			Statement.close();
-			con.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -269,5 +288,4 @@ public class Customer implements Serializable {
 		this.reviews = reviews;
 	}
 
-	
 }

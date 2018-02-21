@@ -24,22 +24,21 @@ import server.model.*;
 
 /**
  * Servlet implementation class addLike
- *  
- *  @author toshiba2015
- *  
+ * 
+ * @author toshiba2015
+ * 
  */
 @WebServlet("/LikesByUid")
 public class GetLikesOfUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		 GetLikesOfUserRequest(request, response);
+		GetLikesOfUserRequest(request, response);
 	}
 
 	/**
@@ -48,24 +47,26 @@ public class GetLikesOfUserServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		 GetLikesOfUserRequest(request, response);
+		GetLikesOfUserRequest(request, response);
 	}
 
 	private void GetLikesOfUserRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setContentType("application/json; charset=UTF-8");
-		PrintWriter printWriter = response.getWriter();	
+		PrintWriter printWriter = response.getWriter();
 		Gson gson = new GsonBuilder().create();
 		Customer customer = gson.fromJson(request.getReader(), Customer.class);
-		String likesInJson="";
-			{
-				ArrayList<server.model.Like> likes = new ArrayList<server.model.Like>();
-				likes=(ArrayList<server.model.Like>) customer.getMyLikes();
-				Type type = new TypeToken<ArrayList<Like>>() {}.getType();
-				likesInJson = gson.toJson(likes, type);
-				
-			}
-			printWriter.println(likesInJson);
-			printWriter.close();
+		String likesInJson = "";
+		{
+			ArrayList<server.model.Like> likes = new ArrayList<server.model.Like>();
+			customer.getMyLikes();
+			likes = customer.getLikes();
+			Type type = new TypeToken<ArrayList<Like>>() {
+			}.getType();
+			likesInJson = gson.toJson(likes, type);
+
+		}
+		printWriter.println(likesInJson);
+		printWriter.close();
 	}
 
 }
