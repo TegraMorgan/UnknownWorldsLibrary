@@ -9,15 +9,15 @@
             <h4>-Mason Cooley</h4>
             <div class="">Congratulations on deciding to purchase a book. Please fill in your credit card information.</div>
         </div>
-        <form ng-submit="chCtrl">
+        <form ng-submit="chCtrl.makepurchase()" novalidate>
           <div class="wellwellwell">
             <div id="divchn" class="form-group">
               <label for="chn">Card Holder Name</label><input id="chn" ng-model="chn" ng-change="chCtrl.testchn()" class="form-control" placeholder="Full Name">
-              <span id="hbchn" class="help-block">Only English letters allowed</span>
+              <span id="hbchn" class="help-block">Only English letters allowed, at least four letters</span>
             </div>
             <div id="divstrt" class="form-group">
               <label for="strt">Street</label><input id="strt" ng-model="strt" ng-change="chCtrl.teststrt()" class="form-control" placeholder="Street">
-              <span id="hbstrt" class="help-block">Only English letters allowed</span>
+              <span id="hbstrt" class="help-block">Only English letters allowed, at least four letters</span>
             </div>
             <div id="divzip" class="form-group">
               <label for="zp">ZIP Code</label><input id="zp" ng-model="zp" ng-change="chCtrl.testzip()" class="form-control" placeholder="ZIP">
@@ -25,42 +25,60 @@
             </div>
             <div id="divcity" class="form-group">
               <label for="city">City</label><input id="city" ng-model="city" ng-change="chCtrl.testcity()" class="form-control" placeholder="City">
-              <span id="hbstrt" class="help-block">Only English letters allowed</span>
+              <span id="hbstrt" class="help-block">Only English letters allowed, at least four letters</span>
             </div>
             <div id="divcntr" class="form-group">
-              <label for="cntr">Country</label><input id="cntr" ng-model="cntr" ng-change="chCtrl.testcntr" class="form-control" placeholder="Country">
-              <span id="hbstrt" class="help-block">Only English letters allowed</span>
+              <label for="cntr">Country</label><input id="cntr" ng-model="cntr" ng-change="chCtrl.testcntr()" class="form-control" placeholder="Country">
+              <span id="hbstrt" class="help-block">Only English letters allowed, at least two letters</span>
             </div>
             <div id="divcard" class="form-group">
               <ul class="list-inline">
                 <li><label for="credCarNum">Credit card number</label> <input id="credCarNum" aria-label="Credit card number" ng-change="chCtrl.testcard()" class="form-control" ng-model="cardNum"
                   placeholder="Credit card number" autocorrect="off" maxlength="19" style="width: 180px;"
-                ><span id="hbstrt" class="help-block">Only numbers</span></li>
+                >
                 <li><img src="img/cc-visaS.gif"></li>
                 <li><img src="img/cc-amex.gif"></li>
               </ul>
+              <span id="hbstrt" class="help-block">Only numbers</span></li>
             </div>
-            <div class="form-group">
+            <div id="divDate" class="form-group">
               <label>Expiration (mm/yyyy)</label>
               <ul class="list-inline">
-                <li><select id="expiration" style="width: 120px;" class="form-control" ng-model="selMonth" ng-change="chCtrl." ng-options="item for item in months" aria-label="Credit card expiration month">
+                <li><select id="expiration" style="width: 120px;" class="form-control" ng-model="selMonth" ng-change="chCtrl.testCardDate()" ng-options="item for item in months" aria-label="Credit card expiration month">
                     <option value="" selected="selected">Month</option></select></li>
-                <li><select id="expiration2" class="form-control" aria-label="Credit card expiration year" ng-change="chCtrl." ng-model="selYear" ng-options="item for item in years" style="margin-left: 5px; width: 120px;">
+                <li><select id="expiration2" class="form-control" aria-label="Credit card expiration year" ng-change="chCtrl.testCardDate()" ng-model="selYear" ng-options="item for item in years" style="margin-left: 5px; width: 120px;">
                     <option value="" selected="selected">Year</option>
                 </select></li>
               </ul>
             </div>
-            <div class="form-group">
-              <label for="secCode">Security code</label> <input id="secCode" ng-change="chCtrl." class="form-control" placeholder="CVV" aria-label="Credit card security code" type="tel" autocorrect="off" maxlength="4"
+            <div id="divcvv" class="form-group">
+              <label for="secCode">Security code</label> <input id="secCode" ng-change="chCtrl.testcvv()" class="form-control" placeholder="CVV" aria-label="Credit card security code" type="tel" autocorrect="off" maxlength="4"
                 ng-model="cvv" style="width: 70px;"
               >
             </div>
             <div class="form-group">
-              <button class="btn btn-success">Place my order</button>
+              <button class="btn btn-success" type="submit">Place my order</button>
             </div>
 
           </div>
         </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="showError" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+        <h4 class="modal-title" id="">Some of the provided data is incorrect</h4>
+      </div>
+      <div class="modal-body">
+      <div id="errorsoutput"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">Ok</button>
       </div>
     </div>
   </div>

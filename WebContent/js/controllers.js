@@ -2,7 +2,7 @@
   'use strict';
   uwl.controller('LandingController', [ '$rootScope', '$scope', '$http','comms','$location', function($rootScope, $scope, $http,comms,$location) {
     /* Properties */
-    $rootScope.raceCond = 100;
+    $rootScope.raceCond = 200;
     
     /* set watch for ng-include */
     $rootScope.secondView = 'pages/login.html';
@@ -27,9 +27,9 @@
     
     
     /* TODO remove all this section this later */
-
-    $rootScope.secondView = 'pages/checkout.html';
     /*
+    $rootScope.secondView = 'pages/checkout.html';
+    
     
 
     this.newCustomer.username = "TestName";
@@ -301,6 +301,7 @@
   } ]).controller('LibController',['$rootScope', '$scope', '$http','comms', function($rootScope, $scope, $http,comms) {
     $rootScope.products = [];
     var us = $rootScope.user;
+    console.log($rootScope.user);
     us.owns2 = [];
     //listProperties(us);
     if(us.owns.length != 0)
@@ -412,8 +413,6 @@
         $rootScope.bookToRead = $rootScope.products.find(function(bk) {
           return bk.bid == tr;
         });
-        console.log('got ' + $rootScope.bookToRead.name);
-        console.log('filepath is :' + $rootScope.bookToRead.filepath);
         $rootScope.secondView = 'pages/reading.html';
         $('#btnStore').removeClass().addClass('btn navbar-btn btn-default');
         $('#btnMyBooks').removeClass().addClass('btn navbar-btn btn-default');
@@ -422,7 +421,10 @@
       
       this.navToBuyBook = function(bookId){
         //TODO finish this function
-        $scope.buyBook=bookId;
+        $rootScope.buyBook=bookId;
+        $('#btnStore').removeClass().addClass('btn navbar-btn btn-default');
+        $('#btnMyBooks').removeClass().addClass('btn navbar-btn btn-default');
+        $rootScope.secondView = 'pages/checkout.html';
       };
       
   }]).controller('booksController',['$rootScope', '$scope', '$http','comms', function($rootScope, $scope, $http,comms) {
@@ -513,8 +515,35 @@
       $('#btnMyBooks').removeClass().addClass('btn navbar-btn btn-default');
     };// openBook function
     
-    /* section here was removed for testing purposes */
-    /* you can find in in the scrapbook */
+    $('.mypop').popover();
+    $scope.myPr.forEach(function(el) {
+      /* if there are zero likes disable popover */
+      if (el.likescount == 0) {
+        $('#btnLike' + el.bid).popover('destroy');
+      }
+      /* if there are zero reviews - disable button */
+      if (el.reviewCount == 0) {
+        $('#btnRev' + el.bid).addClass('disabled');
+      }
+      /* if user likes the book - activate button and change the text */
+      if (us.likes.length != 0) {
+        if (us.likes.find(function(li){return (li.bid == el.bid);}))
+        {
+          $('#btnLike' + el.bid).addClass('active').text('Unlike');
+        }
+      }
+      /* check if the user has already reviews the book */
+      if (us.reviews.length != 0)
+        if (us.reviews.find(function(rew){rew.bid = el.bid;}))
+        {
+          /* $('btnMyReview' + el.bid).text('Edit your review'); */
+          /* Possibly will make an option to edit reviews */
+          }
+        else{
+          console.log('enabling review button for ' + el.name);
+          $('#btnMyReview' + el.bid).removeClass('hidden');
+          }
+    });// forEach products
     
     /* like or unlike a book */
     this.giveLike = function(bookId)
@@ -540,7 +569,7 @@
           var el = $scope.myPr.find(function(bk) {
             return bk.bid == bookId
           });
-          
+
           /* delete current user from this book likes */
           var booklikes = el.likes;
           ind = booklikes.findIndex(function(lik){return lik == us.nickname});
@@ -561,7 +590,7 @@
           alllikes = alllikes + "</ul>"
           /* put popover code into the object as a property */
           el.likesstring = alllikes;
-          console.log(el);
+          $scope.$apply();
         }, function(data, textStatus, errorThrown) {
         }, null);
         }
@@ -592,7 +621,7 @@
           
           /* add current user to this book likes */
           var booklikes = el.likes;
-          booklikes.push(us.uid);
+          booklikes.push(us.nickname);
           
           /* rebuild this like popover */
           var alllikes = "<ul class=\"list-unstyled text-info\">";
@@ -601,6 +630,8 @@
             el.likes.forEach(function(li) {
               alllikes = alllikes + "<li>" + li + "</li>";
             }); // foreach like
+            /* turn on popover */
+            $('#btnLike'+bookId).popover();
           } // if
           /* disable popover */
           else {
@@ -609,6 +640,7 @@
           alllikes = alllikes + "</ul>"
           /* put popover code into the object as a property */
           el.likesstring = alllikes;
+          $scope.$apply();
         }, function(data, textStatus, errorThrown) {
           console.log(errorThrown);
         }, null);
@@ -653,6 +685,17 @@
     
   }]).controller('checkoutController',['$rootScope', '$scope', '$http','comms', function($rootScope, $scope, $http,comms) {
 
+    /* testing assignments */
+  /*  $scope.chn=
+      $scope.chn="abcd";
+      $scope.strt="abcd";
+      $scope.zp="1234567";
+      $scope.city="asdc";
+      $scope.cntr="abcd";
+      $scope.cardNum="4874587458745874";
+      $scope.cvv="123";
+    */
+    /* end of testing assignments */
     $scope.months = [];
     var i = 0;
     var j = "";
@@ -667,12 +710,7 @@
       $scope.years.push(j + i);
       }
     
-    this.print = function(){
-      console.log($scope.selMonth);
-      console.log($scope.selYear);
-    };
     
-    //$scope.buyBook;
      /* test card holder name */
     this.testchn = function(){
       var result = testFullName($scope.chn);
@@ -701,7 +739,7 @@
     
     /* test country */
     this.testcntr = function(){
-      var result = testNewStreet($scope.cntr);
+      var result = testCountry($scope.cntr);
       markErrorSuccess(result,'#divcntr');
       return result;
     };
@@ -714,6 +752,88 @@
       return result;
     }
     
+    this.testCardDate = function(){
+      var mo = $scope.selMonth;
+      var ye = $scope.selYear;
+      var result = true;
+      if (typeof mo !== "undefined" && mo !== null){}else {result=false;}
+      if (typeof ye !== "undefined" && ye !== null){}else {result=false;}
+      markErrorSuccess(result,'#divDate');
+      return result;
+    }
+    
+    this.testcvv = function(){
+      var result = testCVV($scope.cardNum.toString(),$scope.cvv.toString());
+      markErrorSuccess(result,'#divcvv');
+      return result;
+    }
+    
+
+    this.makepurchase = function() {
+      var res = true;
+      var errorBody = "<ul>"
+        if (!this.testchn()) {
+          res = false;
+          errorBody += "<li>The name you entered is invalid</li>";
+        }
+      if (!this.teststrt()) {
+        res = false;
+        errorBody += "<li>Street name is invalid</li>";
+      }
+      if (!this.testzip()) {
+        res = false;
+        errorBody += "<li>ZIP code is invalid</li>";
+      }
+      if (!this.testcity()) {
+        res = false;
+        errorBody += "<li>City name is invalid</li>";
+      }
+      if (!this.testcntr()) {
+        res = false;
+        errorBody += "<li>Country name is invalid</li>";
+      }
+      if (!this.testcard()) {
+        res = false;
+        errorBody += "<li>Card number is incorrect</li>";
+      }
+      if (!this.testCardDate()) {
+        res = false;
+        errorBody += "<li>Expiration dates are incorrect</li>";
+      }
+      if (!this.testcvv()) {
+        res = false;
+        errorBody += "<li>CVV number is incorrect</li>";
+      }
+      errorBody += "</ul>";
+
+      if (res == true) {
+        /* submit form */
+        var payload = {};
+        payload.uid = $scope.user.uid;
+        payload.bid = $rootScope.buyBook;
+        var d = new Date();
+        payload.dateOf = d.toJSON();
+        console.log(payload);
+        comms.sync('/AddOwn', payload, function(data, textStatus, jqXHR) {
+          console.log(data.result);
+          $rootScope.buyBook = null;
+          $rootScope.secondView = 'pages/myBooks.html';
+          $rootScope.user = data.customer;
+          console.log($rootScope.user);
+          $('#btnMyBooks').removeClass().addClass('btn navbar-btn btn-default active');
+          $('#btnStore').removeClass().addClass('btn navbar-btn btn-default');
+          $scope.$apply();
+
+        }, function(data, textStatus, errorThrown) {
+          alert(textStatus + " " + errorThrown);
+          console.log(textStatus + " " + errorThrown);
+        }, null);
+      }
+      else {
+        $('#errorsoutput').html(errorBody);
+        $('#showError').modal();
+      }
+    }
     
   
   }]);// controller
