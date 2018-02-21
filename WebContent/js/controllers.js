@@ -180,6 +180,9 @@
         passed = false;
         this.newStreetOk = false;
       }
+      else {
+        this.newCustomer.stName = this.newCustomer.street;
+      }
 
       /* Test block number */
       if (this.newCustomer.blockNum == undefined) {
@@ -191,6 +194,9 @@
         this.blockError = blockError;
         passed = false;
         this.newBlockNumberOk = false;
+      }
+      else {
+        this.newCustomer.blNum = this.newCustomer.blockNum;
       }
 
       /* Test City */
@@ -204,6 +210,10 @@
         passed = false;
         this.newCityOk = false;
       }
+      else
+        {
+        this.newCustomer.cityName=this.newCustomer.city;
+        }
 
       /* Test ZIP */
       if (this.newCustomer.zip == undefined) {
