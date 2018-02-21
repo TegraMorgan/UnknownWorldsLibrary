@@ -1,4 +1,4 @@
-<div ng-controller="LibController as lib">
+<div ng-controller="booksController as bkCtrl">
       <div class="booklist">
     <div class="row">
       <div class="col-xs-4 col-xs-offset-4">
@@ -8,7 +8,7 @@
       </div>
       <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1">
         <table class="table table-hover table-striped table-bordered">
-          <tr ng-show="true" ng-repeat="product in products | filter:searchBook">
+          <tr ng-show="true" ng-repeat="bk in books | filter:searchBook">
             <td class="shop-row-1"><img class="book-thumb img-thumbnail" ng-src="{{product.imageUrl}}"></td>
             <td class="shop-row-2">
               <div style="text-align: left;">
