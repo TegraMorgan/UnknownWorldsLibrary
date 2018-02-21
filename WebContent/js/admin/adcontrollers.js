@@ -78,27 +78,36 @@
         var ctr = this;
         var adm = JSON.stringify(this.admin);
         console.log(adm);
-        $.ajax({
-          method:'POST',
-          async : false,
-          url:'/UnknownWorldsLibrary/AdminLogIn',
-          data:adm,
-          context:document.body,
-        }).done(function(data, textStatus, jqXHR){
+        comms.nsync('AdminLogIn', this.admin, function(data, textStatus, jqXHR) {
           console.log(data);
           $rootScope.admin = data.admin;
           console.log($rootScope.admin);
           ctr.navToUsers();
-        }).fail(function(data, textStatus, errorThrown){
+        }, function(data, textStatus, errorThrown) {
           console.log('login failed');
           ctr.wrongLoginData = true;
           ctr.wrongLoginMessage = "Incorrect credentials";
         });
+        /*
+         * $.ajax({ method:'POST', async : false, url:'/UnknownWorldsLibrary/AdminLogIn', data:adm, context:document.body, }).done(function(data,
+         * textStatus, jqXHR){ console.log(data); $rootScope.admin = data.admin; console.log($rootScope.admin); ctr.navToUsers();
+         * }).fail(function(data, textStatus, errorThrown){ console.log('login failed'); ctr.wrongLoginData = true; ctr.wrongLoginMessage = "Incorrect
+         * credentials"; });
+         */
       }
     }; // mainController
   } ]).controller('usersController', [ '$rootScope', '$scope', '$http', 'comms', '$location', function($rootScope, $scope, $http, comms, $location) {
     var ad = $rootScope.admin;
-    
-    
-  }]);// usersController
+    var ctr = this;
+    comms.nsync('GetAllUsersServlet', null, function(data, textStatus, jqXHR) {
+      ctr.users = data.customers;
+      console.log(ctr.users);
+    }, function(data, textStatus, errorThrown) {
+      console.log(data);
+      console.log(textStatus);
+    });
+
+    // this.users
+
+  } ]);// usersController
 })();
