@@ -2,41 +2,41 @@
 	{
 		"uid": 1,
 		"bid": 1,
-		"dateOf": null
+		"dateOf": "2018-02-21 01:07:33"
 	},
 	{
 		"uid": 2,
 		"bid": 3,
-		"dateOf": null
+		"dateOf": "2018-02-21 01:07:33"
 	},
 	{
 		"uid": 1,
 		"bid": 3,
-		"dateOf": null
+		"dateOf": "2018-02-21 01:07:33"
 	},
 	{
 		"uid": 4,
 		"bid": 3,
-		"dateOf": null
+		"dateOf": "2018-02-21 01:07:33"
 	},
 	{
 		"uid": 4,
 		"bid": 1,
-		"dateOf": null
+		"dateOf": "2018-02-21 01:07:33"
 	},
 	{
 		"uid": 4,
 		"bid": 5,
-		"dateOf": null
+		"dateOf": "2018-02-21 01:07:33"
 	},
 	{
 		"uid": 3,
 		"bid": 2,
-		"dateOf": null
+		"dateOf": "2018-02-21 01:07:33"
 	},
 	{
 		"uid": 4,
 		"bid": 4,
-		"dateOf": null
+		"dateOf": "2018-02-21 01:07:33"
 	}
 ]
