@@ -297,7 +297,6 @@
 
     $rootScope.myBooksFilter = function(subbstr) {
       return function(book) {
-        console.log(subbstr);
         if (typeof subbstr !== "undefined" && subbstr !== null) {
           if (subbstr.length == 0) return book;
           var nam = book.name.toLowerCase();

@@ -51,12 +51,13 @@
       comms.sync('GetBookList', null, function(data, textStatus, jqXHR) {
         // success
         $rootScope.books = data.books;
-        $rootScope.secondView = 'pages/admin/books.html';
-        $('#btnMybooks').removeClass().addClass('btn navbar-btn btn-default active');
-        $('#btnUsers').removeClass().addClass('btn navbar-btn btn-default');
-        $('#btnReviews').removeClass().addClass('btn navbar-btn btn-default');
+        $rootScope.secondView = 'pages/admin/adstore.html';
+        $('#btnMybooks').removeClass().addClass('btn btn-xs navbar-btn btn-default active');
+        $('#btnUsers').removeClass().addClass('btn btn-xs navbar-btn btn-default');
+        $('#btnReviews').removeClass().addClass('btn btn-xs navbar-btn btn-default');
+        $scope.$apply();
       }, function(data, textStatus, errorThrown) {
-        console.log('Could receive books from the server');
+        console.log('Could not receive books from the server');
         // fail
       }, null);
     }
@@ -66,11 +67,10 @@
       comms.sync('GetAllUsersServlet', null, function(data, textStatus, jqXHR) {
         $rootScope.users = data.customers;
         $rootScope.result = data.result;
-        cnt.menutoggle();
         $rootScope.secondView = 'pages/admin/users.html';
-        $('#btnUsers').removeClass().addClass('btn navbar-btn btn-default active');
-        $('#btnMybooks').removeClass().addClass('btn navbar-btn btn-default');
-        $('#btnReviews').removeClass().addClass('btn navbar-btn btn-default');
+        $('#btnUsers').removeClass().addClass('btn btn-xs navbar-btn btn-default active');
+        $('#btnMybooks').removeClass().addClass('btn btn-xs navbar-btn btn-default');
+        $('#btnReviews').removeClass().addClass('btn btn-xs navbar-btn btn-default');
         $scope.$apply();
       }, function(data, textStatus, errorThrown) {
         console.log(data);
@@ -91,9 +91,8 @@
         this.wrongLoginData = false;
         var ctr = this;
         var adm = JSON.stringify(this.admin);
-        console.log(adm);
-        console.log('Sending request to server');
         comms.sync('AdminLogIn', this.admin, function(data, textStatus, jqXHR) {
+          ctr.menutoggle();
           ctr.navToUsers();
         }, function(data, textStatus, errorThrown) {
           ctr.wrongLoginData = true;
@@ -101,7 +100,24 @@
         }, null);
 
       }
-    };
+    }; // admin login
+    
+    $rootScope.BooksFilter = function(subbstr) {
+      return function(book) {
+        if (typeof subbstr !== "undefined" && subbstr !== null) {
+          if (subbstr.length == 0) return book;
+          var nam = book.name.toLowerCase();
+          var auth = book.author.toLowerCase();
+          var subs = subbstr.toLowerCase();
+          if (nam.includes(subs) || auth.includes(subs)) {
+            return book;
+          }
+        }
+        else {
+          return book;
+        }
+      };};  //book filter
+    
     // mainController
   } ]).controller('usersController', [ '$rootScope', '$scope', '$http', 'comms', '$location', function($rootScope, $scope, $http, comms, $location) {
     var ad = $rootScope.admin;
@@ -116,29 +132,24 @@
       return $scope.searchBook;
   }, function (newValue, oldValue) {
     setTimeout(function(){
-      $('.mypop').popover();
-      $scope.products.forEach(function(el) {
+      $scope.books.forEach(function(el) {
+        console.log(el.bid);
         /* if there are zero likes disable popover */
         if (el.likescount == 0) {
           $('#btnLike' + el.bid).popover('destroy');
         }
         /* dim all the buttons */ 
-        /*$('#btnLike' + el.bid).addClass('disabled');*/
-        /* if there are zero reviews - disable button */
         if (el.reviewCount == 0) {
           $('#btnRev' + el.bid).addClass('disabled');
         }
-        /* if user owns the book - hide purchase button, else hide read button */
-        if (us.owns2.length == 0 || !us.owns2.includes(el.bid)) {
-          $('#btnMeBuy' + el.bid).removeClass('hidden');
-        }
-        else {
-          $('#btnMeRead' + el.bid).removeClass('hidden');
-        }
+
+        $('#btnLike'+el.bid)[0].onmouseover = function(){alert("a");};//btnLike{{product.bid}}
+        
       });// forEach products
       } // refresh function
         ,$rootScope.raceCond);
   });
+    
     
     
   } ]) // booksController
