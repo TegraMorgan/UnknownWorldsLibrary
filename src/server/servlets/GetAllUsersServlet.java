@@ -61,7 +61,6 @@ public class GetAllUsersServlet extends HttpServlet {
 		GetAllUsersResponse resp = new GetAllUsersResponse();
 
 		response.setContentType("application/json");
-		response.setStatus(HttpServletResponse.SC_OK);
 		PrintWriter printWriter = response.getWriter();
 		String data;
 		try {
@@ -77,16 +76,19 @@ public class GetAllUsersServlet extends HttpServlet {
 				resp.setCustomers(customers);
 				resp.setResultSuccess();
 				data = resp.tojson();
+				response.setStatus(HttpServletResponse.SC_OK);
 			}
 			else
 			{
 				resp.setResultFail();
 				data = resp.tojson();
+				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			}
 			printWriter.println(data);
 			printWriter.close();
 		} catch (Exception e) {
 			System.out.println(e.toString());
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		}
 	}
 }
