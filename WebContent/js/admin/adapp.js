@@ -1,0 +1,1 @@
+admod = angular.module('admod', ['services']);

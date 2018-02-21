@@ -1,0 +1,36 @@
+<div class="row" style="padding-top: 50px;">
+  <div class="col-xs-12">
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myNavBar" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><ul class="list-inline">
+              <li><img class="img-rounded" width="32px" src="img/logo.png" alt="logo"></li>
+              <li>Unknown Worlds</li>
+            </ul></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="myNavBar">
+          <ul class="nav navbar-nav">
+            <li><button id="btnStore" type="button" class="btn navbar-btn btn-default active" ng-click="lCtrt.navToStore()">Store</button></li>
+            <li><button id="btnMyBooks" type="button" class="btn navbar-btn btn-default" ng-click="lCtrt.navToMyBooks()">My books</button></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><button class="mypop btn btn-danger navbar-btn" 
+            data-toggle="popover" 
+            data-html="false" data-trigger="hover" data-placement="bottom" 
+            data-content="Log out">Greetings {{user.nickname}} </button></li>
+          </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container-fluid -->
+    </nav>
+
+  </div>
+</div>
