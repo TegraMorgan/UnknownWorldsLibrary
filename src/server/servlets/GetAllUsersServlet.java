@@ -55,7 +55,7 @@ public class GetAllUsersServlet extends HttpServlet {
 
 	private void handleRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Gson gson = new GsonBuilder().setDateFormat("MMM dd,yyyy HH:mm:ss").create();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
 		
 		GetAllUsersResponse resp = new GetAllUsersResponse();
