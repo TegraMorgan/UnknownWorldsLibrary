@@ -7,7 +7,7 @@
 		"password": "1234",
 		"nickname": "Gecko",
 		"description": "AFC",
-		"photo_url": ""
+		"photo_url": "img/users/Default.gif"
 	},
 	{
 		"uid": 2,
@@ -17,7 +17,7 @@
 		"password": "1234",
 		"nickname": "Chooka",
 		"description": "AFC",
-		"photo_url": ""
+		"photo_url": "img/users/Default.gif"
 	},
 	{
 		"uid": 3,
@@ -27,7 +27,7 @@
 		"password": "1234",
 		"nickname": "Stardusk",
 		"description": "MGTOW",
-		"photo_url": ""
+		"photo_url": "img/users/Default.gif"
 	},
 	{
 		"uid": 4,
@@ -37,6 +37,6 @@
 		"password": "1234",
 		"nickname": "Rollo",
 		"description": "PUA",
-		"photo_url": ""
+		"photo_url": "img/users/Default.gif"
 	}
 ]
