@@ -19,6 +19,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import server.model.*;
+import server.response.GetAllBooksResponse;
 import server.controllers.*;
 
 /**
@@ -58,25 +59,30 @@ public class AllBooksServlet extends HttpServlet {
 
 	private void handleRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Gson gson = new GsonBuilder().setDateFormat("MMM dd,yyyy HH:mm:ss").create();
-		ArrayList<Book> books = BookController.getAllBooks();
-		Type type = new TypeToken<ArrayList<Book>>() {}.getType();
-		System.out.println("Got " + books.size() + " books");
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MMM-dd HH:mm:ss").create();
 		response.setContentType("application/json");
-		response.setStatus(HttpServletResponse.SC_OK);
-		PrintWriter pw = response.getWriter();
-		String data;
-		try {
-			HttpSession session = request.getSession();
-			request.setAttribute("books", books);
-			session.setAttribute("books", books);
-			request.setAttribute("httpSession", session);
-			String booksInJson = gson.toJson(books, type);
-			data = booksInJson; // "{\"customer\":" +   + " }" 
-			pw.println(data);
-			pw.close();
-		} catch (Exception e) {
-			System.out.println(e.toString());
+		GetAllBooksResponse resp = new GetAllBooksResponse();
+		resp.setBooks(BookController.getAllBooks());
+		if (resp.getBooks() != null) {
+			System.out.println("Got " + resp.getBooks().size() + " books");
+			response.setStatus(HttpServletResponse.SC_OK);
+			resp.setResultSuccess();
+			PrintWriter pw = response.getWriter();
+			try {
+				HttpSession session = request.getSession();
+				request.setAttribute("books", resp.getBooks());
+				session.setAttribute("books", resp.getBooks());
+				request.setAttribute("httpSession", session);
+				pw.println(resp.tojson());
+				pw.close();
+			} catch (Exception e) {
+				System.out.println(e.toString());
+				resp.setResultFail();
+				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			}
+		} else {
+			resp.setResultFail();
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		}
 	}
 

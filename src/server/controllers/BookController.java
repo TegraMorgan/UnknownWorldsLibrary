@@ -14,8 +14,8 @@ import server.utils.ApplicationConstants;
 import server.utils.DataStructure;
 
 public class BookController {
-	
-	public static ArrayList<Book> getAllBooks(){
+
+	public static ArrayList<Book> getAllBooks() {
 		ArrayList<Book> result = new ArrayList<Book>();
 		Connection conn = null;
 		Connection conn2 = null;
@@ -26,38 +26,72 @@ public class BookController {
 		int i = 1;
 		try {
 			conn = (Connection) DataStructure.ds.getConnection();
-			conn2 = (Connection) DataStructure.ds.getConnection();
-			conn3 = (Connection) DataStructure.ds.getConnection();
-			bookStmt = conn.prepareStatement(ApplicationConstants.GET_ALL_BOOKS, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			ResultSet bookSet = bookStmt.executeQuery();
-			likesStmt = conn2.prepareStatement(ApplicationConstants.GET_ALL_LIKES, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			ResultSet likesSet = likesStmt.executeQuery();
-			reviewsStmt = conn3.prepareStatement(ApplicationConstants.GET_ALL_APPROVED_REVIEWS, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-			ResultSet reviewsSet = reviewsStmt.executeQuery();
-			System.out.println("Got reviews");
-			LinkedList<String> likedList = new LinkedList<String>();
-			LinkedList<Review> reviewList = new LinkedList<Review>();
-			while(bookSet.next())
-			{
-				likesSet.beforeFirst();
-				reviewsSet.beforeFirst();
-				likedList = filterLikes(bookSet.getInt("bid"), likesSet);
-				reviewList = filterReviews(bookSet.getInt("bid"), reviewsSet);
-				result.add(new Book(bookSet, likedList, reviewList));
+			try {
+				conn2 = (Connection) DataStructure.ds.getConnection();
+				try {
+					conn3 = (Connection) DataStructure.ds.getConnection();
+					try {
+						bookStmt = conn.prepareStatement(ApplicationConstants.GET_ALL_BOOKS,
+								ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+						try {
+							ResultSet bookSet = bookStmt.executeQuery();
+							try {
+								likesStmt = conn2.prepareStatement(ApplicationConstants.GET_ALL_LIKES,
+										ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+								try {
+									ResultSet likesSet = likesStmt.executeQuery();
+									try {
+										reviewsStmt = conn3.prepareStatement(
+												ApplicationConstants.GET_ALL_APPROVED_REVIEWS,
+												ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+										try {
+											ResultSet reviewsSet = reviewsStmt.executeQuery();
+											try {
+												LinkedList<String> likedList = new LinkedList<String>();
+												LinkedList<Review> reviewList = new LinkedList<Review>();
+												while (bookSet.next()) {
+													likesSet.beforeFirst();
+													reviewsSet.beforeFirst();
+													likedList = filterLikes(bookSet.getInt("bid"), likesSet);
+													reviewList = filterReviews(bookSet.getInt("bid"), reviewsSet);
+													result.add(new Book(bookSet, likedList, reviewList));
+												}
+											} catch (Exception e) {
+											} finally {
+												reviewsSet.close();
+											}
+										} catch (Exception e) {
+										} finally {
+											reviewsStmt.close();
+										}
+									} catch (Exception e) {
+									} finally {
+										likesSet.close();
+									}
+								} catch (Exception e) {
+								} finally {
+									likesStmt.close();
+								}
+							} catch (Exception e) {
+							} finally {
+								bookSet.close();
+							}
+						} catch (Exception e) {
+						} finally {
+							bookStmt.close();
+						}
+					} catch (Exception e) {
+					} finally {
+						conn3.close();
+					}
+				} catch (Exception e) {
+				} finally {
+					conn2.close();
+				}
+			} catch (Exception e) {
+			} finally {
+				conn.close();
 			}
-			
-			
-			
-			
-			bookSet.close();
-			likesSet.close();
-			reviewsSet.close();
-			bookStmt.close();
-			likesStmt.close();
-			reviewsStmt.close();
-			conn.close();
-			conn2.close();
-			conn3.close();
 			return result;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -67,9 +101,8 @@ public class BookController {
 
 	public static LinkedList<Review> filterReviews(int bId, ResultSet reviewsSet) throws SQLException {
 		LinkedList<Review> result = new LinkedList<Review>();
-		while(reviewsSet.next()) {
-			if(reviewsSet.getInt("bid")==bId)
-			{
+		while (reviewsSet.next()) {
+			if (reviewsSet.getInt("bid") == bId) {
 				result.add(new Review(reviewsSet));
 			}
 		}
@@ -78,9 +111,8 @@ public class BookController {
 
 	public static LinkedList<String> filterLikes(int bId, ResultSet likesSet) throws SQLException {
 		LinkedList<String> result = new LinkedList<String>();
-		while(likesSet.next()) {
-			if(likesSet.getInt("bid")==bId)
-			{
+		while (likesSet.next()) {
+			if (likesSet.getInt("bid") == bId) {
 				result.add(likesSet.getString("nickname"));
 			}
 		}
