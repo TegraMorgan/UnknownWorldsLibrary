@@ -46,7 +46,6 @@
     };
 
     this.navToBooks = function() {
-      // TODO not implemented
       var cnt = this;
       comms.sync('GetBookList', null, function(data, textStatus, jqXHR) {
         // success
@@ -141,11 +140,31 @@
       };
     }; // book filter
 
+    this.navToDetails = function(uid){
+      //$rootScope.us=uid;
+      var ctr = this;
+      comms.sync('DetailedUser',uid,function(data, textStatus, jqXHR) {
+        $rootScope.us = data.user;
+        $rootScope.secondView = 'pages/admin/userDetails.html';
+        $('#btnUsers').removeClass().addClass('btn btn-xs navbar-btn btn-default');
+        $('#btnMybooks').removeClass().addClass('btn btn-xs navbar-btn btn-default');
+        $('#btnReviews').removeClass().addClass('btn btn-xs navbar-btn btn-default');
+        $scope.$apply();
+      }, function(data, textStatus, errorThrown) {
+        console.log(textStatus);
+      }, null);
+    };
+    
+    
     // mainController
   } ]).controller('usersController', [ '$rootScope', '$scope', '$http', 'comms', '$location', function($rootScope, $scope, $http, comms, $location) {
     var ad = $rootScope.admin;
     this.users = $rootScope.users;
-
+      
+    
+    //DetailedUser
+    
+    
   } // usersController
   ]).controller('booksController', [ '$rootScope', '$scope', '$http', 'comms', '$location', function($rootScope, $scope, $http, comms, $location) {
 
@@ -188,8 +207,14 @@
       } // refresh function
       , $rootScope.raceCond);
     });
-
-  } ]) // booksController
-  ;
+    // booksController
+  } ]).controller('detailsController', [ '$rootScope', '$scope', '$http', 'comms', '$location', function($rootScope, $scope, $http, comms, $location) {
+  
+  
+  
+  
+  
+  
+  }]); //detailsController
 
 })();

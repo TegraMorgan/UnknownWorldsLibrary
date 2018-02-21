@@ -11,25 +11,14 @@ import server.utils.DataStructure;
 public class Like {
 	private int uid;
 	private int bid;
-	
+	private String bName;
 	
 	public Like(ResultSet rs) throws SQLException {
 		this.bid=rs.getInt("bid");
 		this.uid=rs.getInt("uid");
+		this.bName=rs.getString("name");
 	}
 	
-	public int getUid() {
-		return uid;
-	}
-	public void setUid(int uID) {
-		this.uid = uID;
-	}
-	public int getBid() {
-		return bid;
-	}
-	public void setBid(int bID) {
-		this.bid = bID;
-	}
 	public int addLikeToDB() throws SQLException {
 		PreparedStatement stmt = null;
 		Connection con = null;
@@ -74,5 +63,29 @@ public class Like {
 			con.close();
 		}
 		return this.bid;
+	}
+
+	public int getUid() {
+		return uid;
+	}
+
+	public void setUid(int uID) {
+		this.uid = uID;
+	}
+
+	public int getBid() {
+		return bid;
+	}
+
+	public void setBid(int bID) {
+		this.bid = bID;
+	}
+
+	public String getbName() {
+		return bName;
+	}
+
+	public void setbName(String bName) {
+		this.bName = bName;
 	}
 }

@@ -1,7 +1,7 @@
-<div ng-controller="usersController as uCtrl">
+<div ng-controller="detailsController as dCtrl">
   <div class="container-fluid wellwellwell2">
     <table class="table table-stripped table-condensed">
-      <tr ng-repeat="us in uCtrl.users">
+      <tr>
         <td style="width: 10%;">
           <!-- photo --> <img class="img-responsive" src="{{us.photo_url}}">
         </td>
@@ -72,28 +72,29 @@
                 <p class="form-control-static">{{us.description}}</p>
               </div>
             </div>
-          </form>
-          <form class="form-horizontal">
-            <!-- Likes and reviews counters -->
-            <div class="form-group">
-              <label class="control-label col-sm-4">Likes</label>
-              <div>
-                <p class="form-control-static col-sm-4">{{us.likes.length}}</p>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="control-label col-sm-4">Reviews</label>
-              <div>
-                <p class="form-control-static col-sm-4">{{us.reviews.length}}</p>
-              </div>
-            </div>
-            <button class="btn btn-lg btn-default" ng-click="mCtrt.navToDetails(us.uid)">More Information</button>
-          </form>
-        </td>
-        <td>
-          <!-- Control buttons - delete likes reviews -->
+          </form> <!-- Likes and reviews counters -->
+          <button class="btn btn-danger" ng-click="dCtrl.deleteUser(us.uid)">Delete User</button>
         </td>
       </tr>
     </table>
+    <div class="row">
+      <div class="col-md-3">
+        <ul class="list-group">
+          <li class="list-group-item"><div><h5>Likes {{us.likes.length}} books</h5></div>
+          <li class="list-group-item" ng-repeat="li in us.likes">{{li.bName}}</li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <ul class="list-group">
+          <li class="list-group-item"><div><h4>Reviewed {{us.reviews.length}} books</h4></div>
+          <li class="list-group-item" ng-repeat="li in us.reviews">
+            <ul class="list-group">
+              <li class="list-group-item list-group-item-info">{{li.bookName}}</li>
+              <li class="list-group-item">{{li.reviewBody}}</li>
+            </ul>
+      </div>
+    </div>
+
+
   </div>
 </div>

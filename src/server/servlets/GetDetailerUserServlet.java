@@ -20,16 +20,16 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+import server.controllers.CustomerController;
 import server.model.*;
+import server.response.DetailedUserResponse;
 
 /**
  * Servlet implementation class addLike
  * 
- * @author toshiba2015
- * 
  */
-@WebServlet("/LikesByUid")
-public class GetLikesOfUserServlet extends HttpServlet {
+@WebServlet("/DetailedUser")
+public class GetDetailerUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -38,7 +38,7 @@ public class GetLikesOfUserServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		GetLikesOfUserRequest(request, response);
+		getDetailedUser(request, response);
 	}
 
 	/**
@@ -47,26 +47,27 @@ public class GetLikesOfUserServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		GetLikesOfUserRequest(request, response);
+		getDetailedUser(request, response);
 	}
 
-	private void GetLikesOfUserRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	private void getDetailedUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setContentType("application/json; charset=UTF-8");
 		PrintWriter printWriter = response.getWriter();
-		Gson gson = new GsonBuilder().create();
-		Customer customer = gson.fromJson(request.getReader(), Customer.class);
-		String likesInJson = "";
-		{
-			ArrayList<server.model.Like> likes = new ArrayList<server.model.Like>();
-			customer.getMyLikes();
-			likes = customer.getLikes();
-			Type type = new TypeToken<ArrayList<Like>>() {
-			}.getType();
-			likesInJson = gson.toJson(likes, type);
-
+		try {
+			Gson gson = new GsonBuilder().create();
+			int uid = gson.fromJson(request.getReader(), int.class);
+			DetailedUserResponse resp = new DetailedUserResponse();
+			resp.setUser(CustomerController.getCustomer(uid));
+			if (resp.getUser() != null) {
+				resp.setResultSuccess();
+				response.setStatus(HttpServletResponse.SC_OK);
+				printWriter.println(resp.tojson());
+			}
+			else response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+		} catch (Exception e) {
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+		} finally {
+			printWriter.close();
 		}
-		printWriter.println(likesInJson);
-		printWriter.close();
 	}
-
 }

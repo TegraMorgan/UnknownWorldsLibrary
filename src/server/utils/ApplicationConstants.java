@@ -57,8 +57,8 @@ public interface ApplicationConstants {
 		
 		public final String INSERT_NEW_LIKE = "INSERT INTO likes VALUES (?,?)";
 		public final String DELETE_LIKE = "DELETE FROM likes WHERE bid=? AND uid=?";
-		public final String SELECT_LIKES_BY_UID = "SELECT * FROM likes WHERE uid=?";
-		public final String SELECT_LIKES_BY_BID = "SELECT * FROM likes WHERE bid=?";
+		public final String SELECT_LIKES_BY_UID = "SELECT l.bid as bid, l.uid as uid, b.name as name FROM likes l INNER JOIN books b ON l.bid=b.bid WHERE uid=?";
+		public final String SELECT_LIKES_BY_BID = "SELECT l.bid as bid, l.uid as uid, b.name as name FROM likes l INNER JOIN books b ON l.bid=b.bid FROM likes WHERE bid=?";
 		
 		public final String INSERT_NEW_REVIEW = "INSERT INTO reviews VALUES (?,?,?,?)";
 		public final String SELECT_REVIEWS_BY_UID = "SELECT r.bid as bid, r.uid as uid, r.text as text, r.approved_by as approved_by, c.nickname as nickname,  b.name as book_name FROM reviews r INNER JOIN books b ON r.bid=b.bid INNER JOIN customers c ON r.uid=c.uid WHERE r.uid=?";
