@@ -148,6 +148,16 @@ function testFullName(str) {
   return true;
 }
 
+function testCountry(str) {
+  var len = str.length;
+  if (len < 2) return false;
+  var regex1 = /^[a-zA-Z]+$/;
+  if (!regex1.test(str)) {
+    return false;
+  }
+  return true;
+}
+
 function testCardNum(str)
 {
   if (str.length == 0) return false;
@@ -155,6 +165,12 @@ function testCardNum(str)
   if (str.startsWith('4') && str.length == 16) {return true;}
   return false;
 }
+
+function testCVV(card, cvv) {
+  if (card.length == 0 || cvv.length == 0) return false;
+  if (card.startsWith('34') && cvv.length == 4) return true;
+  if (card.startsWith('4') && cvv.length == 3) return true;
+  }
 
 function markErrorSuccess(result,tag)
 {
