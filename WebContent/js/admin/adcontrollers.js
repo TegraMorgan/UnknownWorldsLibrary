@@ -51,6 +51,28 @@
       comms.sync('GetBookList', null, function(data, textStatus, jqXHR) {
         // success
         $rootScope.books = data.books;
+        /*- -*/
+        $scope.books.forEach(function(el) {
+          /* if there are zero likes disable popover */
+          if (el.likescount == 0) {
+            $('#btnLike' + el.bid).popover('destroy');
+          }
+          /* dim all the buttons */
+          if (el.reviewCount == 0) {
+            $('#btnRev' + el.bid).addClass('disabled');
+          }
+          var alllikes = "<ul class=\"list-unstyled text-info\">";
+          el.likescount = el.likes.length;
+          if (el.likes.length != 0) {
+            el.likes.forEach(function(li) {
+              alllikes = alllikes + "<li>" + li + "</li>";
+            }); // foreach
+          } // if
+          alllikes = alllikes + "</ul>"
+          el.likesstring = alllikes;
+          el.reviewCount = el.reviews.length;
+        });
+        /* */
         $rootScope.secondView = 'pages/admin/adstore.html';
         $('#btnMybooks').removeClass().addClass('btn btn-xs navbar-btn btn-default active');
         $('#btnUsers').removeClass().addClass('btn btn-xs navbar-btn btn-default');
@@ -101,7 +123,7 @@
 
       }
     }; // admin login
-    
+
     $rootScope.BooksFilter = function(subbstr) {
       return function(book) {
         if (typeof subbstr !== "undefined" && subbstr !== null) {
@@ -116,8 +138,9 @@
         else {
           return book;
         }
-      };};  //book filter
-    
+      };
+    }; // book filter
+
     // mainController
   } ]).controller('usersController', [ '$rootScope', '$scope', '$http', 'comms', '$location', function($rootScope, $scope, $http, comms, $location) {
     var ad = $rootScope.admin;
@@ -128,30 +151,44 @@
 
     this.books = $rootScope.books;
 
-    $scope.$watch(function () {
+    $scope.$watch(function() {
       return $scope.searchBook;
-  }, function (newValue, oldValue) {
-    setTimeout(function(){
-      $scope.books.forEach(function(el) {
-        console.log(el.bid);
-        /* if there are zero likes disable popover */
-        if (el.likescount == 0) {
-          $('#btnLike' + el.bid).popover('destroy');
-        }
-        /* dim all the buttons */ 
-        if (el.reviewCount == 0) {
-          $('#btnRev' + el.bid).addClass('disabled');
-        }
+    }, function(newValue, oldValue) {
+      setTimeout(function() {
+        $('[data-toggle="popover"]').popover();
+        $('.mypop').on("mouseover",function(){
+          $(this).popover('show');
+          var a =$(this); 
+          setTimeout(function(){a.popover('hide')},3000);
+        });
+        $scope.books.forEach(function(el) {
+          console.log(el.bid);
+          /* if there are zero likes disable popover */
+          if (el.likescount == 0) {
+            $('#btnLike' + el.bid).popover('destroy');
+          }
+          /* dim all the buttons */
+          if (el.reviewCount == 0) {
+            $('#btnRev' + el.bid).addClass('disabled');
+          }
+          var alllikes = "<ul class=\"list-unstyled text-info\">";
+          el.likescount = el.likes.length;
+          if (el.likes.length != 0) {
+            el.likes.forEach(function(li) {
+              alllikes = alllikes + "<li>" + li + "</li>";
+            }); // foreach
+          } // if
+          alllikes = alllikes + "</ul>"
+          el.likesstring = alllikes;
+          el.reviewCount = el.reviews.length;
+          
+          //$('#btnLike' + el.bid)[0].onmouseover = function() {$('#btnLike' + el.bid)[0].popover();};// btnLike{{product.bid}}
 
-        $('#btnLike'+el.bid)[0].onmouseover = function(){alert("a");};//btnLike{{product.bid}}
-        
-      });// forEach products
+        });// forEach products
       } // refresh function
-        ,$rootScope.raceCond);
-  });
-    
-    
-    
+      , $rootScope.raceCond);
+    });
+
   } ]) // booksController
   ;
 
