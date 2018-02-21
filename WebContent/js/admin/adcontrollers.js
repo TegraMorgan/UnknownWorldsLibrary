@@ -48,26 +48,20 @@
 
         this.navToBooks = function() {
             // TODO not implemented
+          var cnt = this;
+          comms.sync('')
             $rootScope.secondView = 'pages/admin/books.html';
             $('#btnMybooks').removeClass().addClass('btn navbar-btn btn-default active');
             $('#btnUsers').removeClass().addClass('btn navbar-btn btn-default');
         }
 
         this.navToUsers = function() {
-            // TODO not implemented
-            console.log('starting navigation function');
             var cnt = this;
             comms.sync('GetAllUsersServlet', null, function(data, textStatus, jqXHR) {
                 $rootScope.users = data.customers;
                 $rootScope.result = data.result;
-                console.log('got response from server');
-                console.log($rootScope.users);
-                console.log($rootScope.result);
-                console.log('toggling console');
                 cnt.menutoggle();
-                console.log('changing page');
                 $rootScope.secondView = 'pages/admin/users.html';
-                console.log($rootScope.includeView);
                 $('#btnUsers').removeClass().addClass('btn navbar-btn btn-default active');
                 $('#btnMybooks').removeClass().addClass('btn navbar-btn btn-default');
                 $scope.$apply();
@@ -78,9 +72,6 @@
         }
 
         this.adlogin = function() {
-            console.log('login function fired');
-            console.log(this);
-            console.log(this.admin);
             if (!this.admin.login || !this.admin.password || this.admin.login.length <= 0 || this.admin.password.length <= 0) {
                 this.wrongLoginData = true;
                 this.wrongLoginMessage = "These fields cannot be empty";
@@ -94,12 +85,8 @@
                 console.log(adm);
                 console.log('Sending request to server');
                 comms.sync('AdminLogIn', this.admin, function(data, textStatus, jqXHR) {
-                    $rootScope.admin = data.admin;
-                    console.log('Got response from server');
-                    console.log($rootScope.admin);
                     ctr.navToUsers();
                 }, function(data, textStatus, errorThrown) {
-                    console.log('login failed');
                     ctr.wrongLoginData = true;
                     ctr.wrongLoginMessage = "Incorrect credentials";
                 }, null);

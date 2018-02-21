@@ -149,3 +149,16 @@ html, body {
     box-shadow: 0px 0px 15px 3px #5cb85c;
 line-height: 1.42857143;
 }
+
+.wellwellwell2
+{
+	min-height: 20px;
+    padding: 19px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0px 0px 15px 3px #5cb85c;
+line-height: 1.42857143;
+}
