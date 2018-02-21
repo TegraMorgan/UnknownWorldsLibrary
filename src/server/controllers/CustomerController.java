@@ -60,4 +60,27 @@ public class CustomerController {
 		
 	}
 
+
+	public static Customer getCustomer(int uid) throws SQLException {
+		Customer result = null;
+		Connection con = null;
+		PreparedStatement stmt = null;
+		try {
+			con = (Connection) DataStructure.ds.getConnection();
+			stmt = con.prepareStatement(ApplicationConstants.FIND_CUSTOMER_BY_ID);
+			stmt.setInt(1, uid);
+			ResultSet resltset = stmt.executeQuery();
+			if (resltset.next()) {
+				result = new Customer(resltset);
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		} finally {
+			stmt.close();
+			con.close();
+		}
+		return result;
+	}
+
 }

@@ -2,10 +2,7 @@ package server.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,10 +10,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import server.utils.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import server.controllers.CustomerController;
 import server.model.*;
+import server.response.BasicResponse;
+import server.response.BuyBookResponse;
+
 /**
  * Servlet implementation class addLike
  * 
@@ -35,6 +36,7 @@ public class addOwnServlet extends HttpServlet {
 			throws ServletException, IOException {
 		insertRequest(request, response);
 	}
+
 	/**
 	 * 
 	 * @param request
@@ -48,20 +50,20 @@ public class addOwnServlet extends HttpServlet {
 		PrintWriter printWriter = response.getWriter();
 		Gson gson = new GsonBuilder().create();
 		Owns own = gson.fromJson(request.getReader(), Owns.class);
-		String data;
+		BuyBookResponse resp = new BuyBookResponse();
 		try {
-			if(own.addToDB()>0)
-				data="{\"result\": \"success\" }";
-			else 
-				data="{\"result\": \"fail\"}";
+			if (own.addToDB() > 0)
+			{
+				resp.setResultSuccess();
+				resp.setCustomer(CustomerController.getCustomer(own.getUid()));
+			}
+			else
+				resp.setResultFail();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			data="{\"result\": \"fail\"}";
+			resp.setResultSuccess();
 		}
-		printWriter.println(data);
+		printWriter.println(resp.tojson());
 		printWriter.close();
 	}
-	
-	
-	
 }
