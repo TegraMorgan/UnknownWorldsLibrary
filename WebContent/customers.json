@@ -8,9 +8,9 @@
 		"nickname": "Gecko",
 		"description": "AFC",
 		"photo_url": "img/Users/Default.gif",
-		"st_name":"Gefen",
-		"bl_num":2,
-		"city_nm":"Haifa",
+		"stName":"Gefen",
+		"blNum":2,
+		"cityName":"Haifa",
 		"zip":"4569874"
 	},
 	{
@@ -22,9 +22,9 @@
 		"nickname": "Chooka",
 		"description": "AFC",
 		"photo_url": "img/Users/Default.gif",
-		"st_name":"Brener",
-		"bl_num":5,
-		"city_nm":"Ashdod",
+		"stName":"Brener",
+		"blNum":5,
+		"cityName":"Ashdod",
 		"zip":"4569874"
 	},
 	{
@@ -36,9 +36,9 @@
 		"nickname": "Stardusk",
 		"description": "MGTOW",
 		"photo_url": "img/Users/Default.gif",
-		"st_name":"Hagalil",
-		"bl_num":33,
-		"city_nm":"Netaniya",
+		"stName":"Hagalil",
+		"blNum":33,
+		"cityName":"Netaniya",
 		"zip":"4569874"
 	},
 	{
@@ -50,9 +50,9 @@
 		"nickname": "Rollo",
 		"description": "PUA",
 		"photo_url": "img/Users/Default.gif",
-		"st_name":"Ben Gurion",
-		"bl_num":46,
-		"city_nm":"Tel-Aviv",
+		"stName":"Ben Gurion",
+		"blNum":46,
+		"cityName":"Tel-Aviv",
 		"zip":"5768574"
 	}
 ]
