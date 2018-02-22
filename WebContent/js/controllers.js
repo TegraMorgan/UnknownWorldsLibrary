@@ -703,14 +703,11 @@
       payload.approved_by = null;
       payload.reviewBody = $('#reviewBody')[0].value;
       comms.sync('/AddReview', payload, function(data, textStatus, jqXHR) {
-        console.log(data.result);
         $('#btnMyReview' + bookId).addClass('hidden');
         var rev = {};
         rev.uid = us.uid;
         rev.bid = bookId;
-        console.log(us.reviews);
         us.reviews.push(rev);
-        console.log(us.reviews);
       }, function(data, textStatus, errorThrown) {
         alert(textStatus + " " + errorThrown);
         console.log(textStatus + " " + errorThrown);

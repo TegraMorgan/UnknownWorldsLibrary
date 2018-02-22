@@ -73,28 +73,56 @@
               </div>
             </div>
           </form> <!-- Likes and reviews counters -->
-          <button class="btn btn-danger" ng-click="dCtrl.deleteUser(us.uid)">Delete User</button>
+          <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#deleteUserD"">Delete User</button>
         </td>
       </tr>
     </table>
     <div class="row">
       <div class="col-md-3">
         <ul class="list-group">
-          <li class="list-group-item"><div><h4>Likes {{us.likes.length}} books</h4></div>
+          <li class="list-group-item"><div>
+              <h4>Likes {{us.likes.length}} books</h4>
+            </div>
           <li class="list-group-item" ng-repeat="li in us.likes">{{li.bName}}</li>
         </ul>
       </div>
       <div class="col-md-3">
         <ul class="list-group">
-          <li class="list-group-item"><div><h4>Reviewed {{us.reviews.length}} books</h4></div>
+          <li class="list-group-item"><div>
+              <h4>Reviewed {{us.reviews.length}} books</h4>
+            </div>
           <li class="list-group-item" ng-repeat="li in us.reviews">
             <ul class="list-group">
               <li class="list-group-item list-group-item-info">{{li.bookName}}</li>
               <li class="list-group-item">{{li.reviewBody}}</li>
             </ul>
-      </div>
+          </li></div>
     </div>
 
 
+  </div>
+</div>
+
+<div class="modal fade" id="deleteUserD" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span>&times;</span>
+        </button>
+        <h4 class="modal-title" id="composeLabel">Warning! Deleting {{us.nickname}} cannot be undone!</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="review-text" class="control-label">Are you sure you want to proceed?</label>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button id="btndeleteUser" ng-click="deleteUser(us.uid)" type="button" class="btn btn-danger">Yes, delete this user</button>
+      </div>
+    </div>
   </div>
 </div>

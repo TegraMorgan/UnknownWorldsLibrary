@@ -1,9 +1,11 @@
 <div ng-controller="booksController as bkCtrl">
-      <div class="booklist">
+  <div class="booklist">
     <div class="row">
       <div class="col-xs-4 col-xs-offset-4">
         <div class="input-group input-group-sm">
-           <span class="input-group-addon" id="sizing-addon3"><span class="glyphicon glyphicon-filter"></span></span> <input type="text" class="form-control" placeholder="Filter by name, genre or author" ng-model="searchBook">
+          <span class="input-group-addon" id="sizing-addon3"><span class="glyphicon glyphicon-filter"></span></span> <input type="text" class="form-control"
+            placeholder="Filter by name, genre or author" ng-model="searchBook"
+          >
         </div>
       </div>
       <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1">
@@ -37,10 +39,10 @@
               </div>
             </td>
             <td class="shop-row-3">
-            <div class="mypop" id="btnLike{{bk.bid}}" data-trigger="manual" data-html="true" data-toggle="popover" data-placement="bottom" title="Liked by" data-content="{{bk.likesstring}}">
-              <span  class="label label-info mylikeclass">
-                <span style="vertical-align: text-bottom;" class="glyphicon glyphicon-thumbs-up"></span> <span class="badge">   {{bk.likescount}}</span> 
-              </span>
+              <div class="mypop" id="btnLike{{bk.bid}}" data-trigger="manual" data-html="true" data-toggle="popover" data-placement="bottom" title="Liked by" data-content="{{bk.likesstring}}">
+                <span class="label label-info mylikeclass"> <span style="vertical-align: text-bottom;" class="glyphicon glyphicon-thumbs-up"></span> <span class="badge">
+                    {{bk.likescount}}</span>
+                </span>
               </div>
             </td>
           </tr>
@@ -48,4 +50,4 @@
       </div>
     </div>
   </div>
-    </div>
+</div>

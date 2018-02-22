@@ -28,29 +28,33 @@ import server.response.GetAllUsersResponse;
 @WebServlet("/GetAllUsersServlet")
 public class GetAllUsersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public GetAllUsersServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public GetAllUsersServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		handleRequest(request, response);	
+		handleRequest(request, response);
 	}
 
 	private void handleRequest(HttpServletRequest request, HttpServletResponse response)
@@ -58,33 +62,25 @@ public class GetAllUsersServlet extends HttpServlet {
 		GetAllUsersResponse resp = new GetAllUsersResponse();
 		response.setContentType("application/json");
 		PrintWriter printWriter = response.getWriter();
-		String data;
 		try {
 			ArrayList<Customer> customers;
-			customers= CustomerController.getAllCustomers();
+			customers = CustomerController.getAllCustomers();
 			System.out.println("Got " + customers.size() + " customers");
-			if(customers.size() >0)
-			{
-				response.setStatus(HttpServletResponse.SC_OK);
-				HttpSession session = request.getSession();
-				request.setAttribute("customers", customers);
-				session.setAttribute("customers", customers);
-				request.setAttribute("httpSession", session);
-				resp.setCustomers(customers);
-				resp.setResultSuccess();
-				data = resp.tojson();
-			}
-			else
-			{
-				resp.setResultFail();
-				data = resp.tojson();
-				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-			}
-			printWriter.println(data);
-			printWriter.close();
+			response.setStatus(HttpServletResponse.SC_OK);
+			HttpSession session = request.getSession();
+			request.setAttribute("customers", customers);
+			session.setAttribute("customers", customers);
+			request.setAttribute("httpSession", session);
+			resp.setCustomers(customers);
+			resp.setResultSuccess();
+			printWriter.println(resp.tojson());
 		} catch (Exception e) {
 			System.out.println(e.toString());
+			resp.setResultFail();
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			printWriter.println(resp.tojson());
+		} finally {
+			printWriter.close();
 		}
 	}
 }
