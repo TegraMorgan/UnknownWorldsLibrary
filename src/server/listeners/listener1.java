@@ -242,6 +242,18 @@ public class listener1 implements ServletContextListener {
 				} catch (Exception e) {
 				}
 			}
+			try {
+				Statement stmt = conn.createStatement();
+				stmt.executeUpdate(ApplicationConstants.CREATE_READPOS_TABLE);
+				// commit update
+				conn.commit();
+				// close statements
+				stmt.close();
+			} catch (SQLException e) {
+				if (!(newDB = tableAlreadyExists(e))) {
+					throw e;
+				}
+			}
 			conn.close();
 		} catch (SQLException | NamingException e) {
 			// log error
