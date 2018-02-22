@@ -34,6 +34,7 @@ public interface ApplicationConstants {
 		public final String CREATE_LIKES_TABLE = "CREATE TABLE likes (bid int NOT NULL,uid int NOT NULL,PRIMARY KEY (bid,uid))";
 		public final String CREATE_OWNS_TABLE = "CREATE TABLE owns (uid int NOT NULL,bid int NOT NULL,dateof timestamp DEFAULT NULL,PRIMARY KEY (uid,bid))";
 		public final String CREATE_REVIEWS_TABLE = "CREATE TABLE reviews (bid int NOT NULL,uid int NOT NULL,text varchar(500) DEFAULT NULL,approved_by int DEFAULT NULL,PRIMARY KEY (bid,uid))";
+		public final String CREATE_READING_TABLE = "CREATE TABLE reading (bid int NOT NULL,uid BIGINT NOT NULL,position int NOT NULL, PRIMARY KEY (bid,uid))";
 		
 		public final String GET_ALL_Customers = "SELECT * FROM customers";
 		public final String INSERT_NEW_CUSTOMER = "INSERT INTO customers VALUES (default,?,?,?,?,?,?,?,?,?,?,?)";
@@ -73,4 +74,10 @@ public interface ApplicationConstants {
 		public final String DELETE_ALL_CUSTOMER_LIKES = "DELETE FROM likes WHERE uid=?";
 		public final String DELETE_ALL_CUSTOMER_REVIEWS = "DELETE FROM reviews WHERE uid=?";
 		public final String GET_TRANSACTIONS = "SELECT o.dateof as dateof, c.nickname as nickname, b.name as book_name, b.price as price FROM owns o INNER JOIN customers c ON o.uid=c.uid INNER JOIN books b ON o.bid=b.bid ORDER BY o.dateof desc";
+		
+		public final String GET_ALL_READERS_POSITIONS = "SELECT * FROM reading";
+		public final String SELECT_READING_BY_UID = "SELECT r.bid as bid, r.uid as uid, b.name as name FROM reading r INNER JOIN books b ON r.bid=b.bid WHERE uid=?";
+		public final String INSERT_NEW_READING_POS = "INSERT INTO reading VALUES (?,?,?)";
+		public final String UPDATE_READING_BY_BID_AND_UID = "UPDATE reading SET position=?, WHERE bid=? AND uid=? ";
+		public final String DELETE_READING = "DELETE FROM reading WHERE bid=? uid=?";
 }
