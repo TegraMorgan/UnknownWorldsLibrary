@@ -34,7 +34,7 @@ public interface ApplicationConstants {
 		public final String CREATE_LIKES_TABLE = "CREATE TABLE likes (bid int NOT NULL,uid int NOT NULL,PRIMARY KEY (bid,uid))";
 		public final String CREATE_OWNS_TABLE = "CREATE TABLE owns (uid int NOT NULL,bid int NOT NULL,dateof timestamp DEFAULT NULL,PRIMARY KEY (uid,bid))";
 		public final String CREATE_REVIEWS_TABLE = "CREATE TABLE reviews (bid int NOT NULL,uid int NOT NULL,text varchar(500) DEFAULT NULL,approved_by int DEFAULT NULL,PRIMARY KEY (bid,uid))";
-		public final String CREATE_READING_TABLE = "CREATE TABLE readPos (bid int NOT NULL,uid BIGINT NOT NULL,position int NOT NULL, PRIMARY KEY (bid,uid))";
+		public final String CREATE_READPOS_TABLE = "CREATE TABLE readPos (bid int NOT NULL,uid BIGINT NOT NULL,position int NOT NULL, PRIMARY KEY (bid,uid))";
 		
 		public final String GET_ALL_Customers = "SELECT * FROM customers";
 		public final String INSERT_NEW_CUSTOMER = "INSERT INTO customers VALUES (default,?,?,?,?,?,?,?,?,?,?,?)";
