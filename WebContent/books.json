@@ -30,7 +30,7 @@
 		"price": 0.99,
 		"description": "Fifty men and women set out on the Wotan to discover new habitable worlds and break free of a stagnant utopia. They are connected with Earth via a telepathic link between a crew member and her sister. However, the link is broken, stranding the Wotan far from home, where they encounter an alien presence and begin to reconsider their assumptions about life and death and the universe.",
 		"imageUrl": "img/books/Star_Born.jpg",
-		"filepath":"pages/books/StarBorn.html"
+		"filepath": "pages/books/StarBorn.html"
 	},
 	{
 		"name": "Youth",
@@ -39,6 +39,15 @@
 		"price": 0.99,
 		"description": "Slim is a boy whose astronomer father is visiting the country estate of an important industrialist. The industrialist's son, Red, has found two strange animals, and he enlists Slim in a plan to turn the animals into a circus act. The astronomer, meanwhile, tells the industrialist that he has been in contact with space aliens who want to open up their world to interstellar trade. Their world needs help, the astronomer says; for ever since the atomic wars that destroyed their old civilization, their world has been regressing. Unless something is done, their culture may face total collapse.",
 		"imageUrl": "img/books/youth.jpg",
-		"filepath":"pages/books/Youth.html"
+		"filepath": "pages/books/Youth.html"
+	},
+	{
+		"name": "Hindu Tales from the Sanskrit",
+		"author": "S. M. Mitra and Nancy Bell",
+		"genre": "Folclore",
+		"price": 0.99,
+		"description": "Thanks to Mr. S. M. Mitra, the well-known Hindu psychologist and politician, who has done so much to draw more closely together the land of his birth and that of his adoption, I am able to bring within reach of English children a number of typical Hindu Tales, translated by him from the Sanskrit, some of them culled from the ancient classics of India, others from widely separated sources. The latter have hitherto been quite inaccessible to western students, as they are not yet embodied in literature, but have been transmitted orally from generation to generation for many centuries.",
+		"imageUrl": "img/books/hindi1.jpg",
+		"filepath": "pages/books/HinduTales.html"
 	}
 ]
