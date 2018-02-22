@@ -85,17 +85,29 @@
     };
 
     this.navToStore = function() {
+      $('#myNavBar').collapse('hide');
       $rootScope.secondView = 'pages/store.html';
       $('#btnStore').removeClass().addClass('btn navbar-btn btn-default active');
       $('#btnMyBooks').removeClass().addClass('btn navbar-btn btn-default');
     }
 
     this.navToMyBooks = function() {
+      $('#myNavBar').collapse('hide');
       $rootScope.secondView = 'pages/myBooks.html';
       $('#btnMyBooks').removeClass().addClass('btn navbar-btn btn-default active');
       $('#btnStore').removeClass().addClass('btn navbar-btn btn-default');
     }
 
+    this.navToBookDetail = function(bid) {
+      $('#myNavBar').collapse('hide');
+      $rootScope.bk = $scope.products.find(function(il){return il.bid==bid;});
+      console.log($rootScope.bk);
+      $rootScope.secondView = 'pages/bookDetails.html';
+      $('#btnMyBooks').removeClass('active');
+      $('#btnStore').removeClass('active');
+    }
+    
+    
     this.login = function() {
       if (!this.oldCustomer.username || !this.oldCustomer.password || this.oldCustomer.username.length <= 0 || this.oldCustomer.password.length <= 0) {
         this.wrongLoginData = true;
@@ -318,7 +330,6 @@
     var us = $rootScope.user;
     console.log($rootScope.user);
     us.owns2 = [];
-    // listProperties(us);
     if (us.owns.length != 0) {
       us.owns.forEach(function(el) {
         us.owns2.push(el.bid);
@@ -347,7 +358,7 @@
       $('#debug2').text($('#debug2').text() + errorThrown);
     }, null); // comms.sync
 
-    /* klutch - wait for async to complete */
+    /* kludge - wait for async to complete */
     $scope.refreshme = function() {
       $('.mypop').popover();
       $scope.products.forEach(function(el) {
@@ -460,7 +471,6 @@
 
   } ]).controller('booksController', [ '$rootScope', '$scope', '$http', 'comms', function($rootScope, $scope, $http, comms) {
 
-    // console.log('aa');
     $rootScope.myPr = [];
     var us = $rootScope.user;
     us.owns2 = [];
@@ -869,6 +879,10 @@
     }
 
       
-    
-  } ]);// controller
+ // end of checkoutController
+  } ]).controller('bookReviewsController', [ '$rootScope', '$scope', '$http', 'comms', function($rootScope, $scope, $http, comms) {
+    console.log($scope.bk);
+    console.log($rootScope.bk);
+  
+  } ]);
 })();
