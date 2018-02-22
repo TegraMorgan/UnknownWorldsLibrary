@@ -114,6 +114,12 @@
       
     }
     
+    this.logout = function()
+    {
+      this.menutoggle();
+      this.oldCustomer = {};
+      this.navToLogin();
+    }
     
     this.login = function() {
       if (!this.oldCustomer.username || !this.oldCustomer.password || this.oldCustomer.username.length <= 0 || this.oldCustomer.password.length <= 0) {
@@ -162,6 +168,13 @@
         this.usernameError = usernameError;
         passed = false;
         this.newUserNameOk = false;
+      }
+      else {
+        comms.nsync('DetailedUserUsername', this.newCustomer.username, null, function() {
+          this.usernameError = "This username is already taken";
+          passed = false;
+          this.newUserNameOk = false;
+        }, null);
       }
 
       /* Test email */

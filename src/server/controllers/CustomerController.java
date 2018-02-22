@@ -105,6 +105,29 @@ public class CustomerController {
 		return result;
 	}
 	
+	public static Customer getCustomerByUsername(String usn) throws SQLException {
+		Customer result = null;
+		Connection con = null;
+		PreparedStatement stmt = null;
+		try {
+			con = (Connection) DataStructure.ds.getConnection();
+			stmt = con.prepareStatement(ApplicationConstants.FIND_CUSTOMER_BY_USERNAME);
+			stmt.setString(1, usn);
+			ResultSet resltset = stmt.executeQuery();
+			if (resltset.next()) {
+				result = new Customer(resltset);
+			}
+			resltset.close();
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		} finally {
+			stmt.close();
+			con.close();
+		}
+		return result;
+	}
+	
 	public static int removeCustomer(int uid) throws SQLException {
 		PreparedStatement stmt = null;
 		Connection con = null;
