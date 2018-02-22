@@ -142,7 +142,6 @@
     }
 
     this.navToReviews = function() {
-      // TODO
       $('#myNavBar').collapse('hide');
       $scope.refreshReviews();
       $rootScope.secondView = 'pages/admin/reviews.html';
@@ -154,8 +153,27 @@
 
     this.navToTransactions = function() {
       // TODO
+      $('#myNavBar').collapse('hide');
 
-    };
+      comms.sync('GetTransactions', null, function(data, textStatus, jqXHR) {
+        $rootScope.transactions = data.transactions;
+        $rootScope.secondView = 'pages/admin/transaction.html';
+        $('#btnUsers').removeClass('active');
+        $('#btnMyBooks').removeClass('active');
+        $('#btnReviews').addClass('active');
+        $('#btnTransactions').removeClass('active');
+        $scope.$apply();
+      }, function(data, textStatus, errorThrown) {
+        console.log(textStatus);
+      }, null);
+
+      $rootScope.secondView = 'pages/admin/reviews.html';
+      $('#btnUsers').removeClass('active');
+      $('#btnMyBooks').removeClass('active');
+      $('#btnReviews').addClass('active');
+      $('#btnTransactions').removeClass('active');
+
+    }; // end of navToTransactions
 
     /* control functions */
 
@@ -268,13 +286,11 @@
           var a = $(this);
           if ($scope.users.length != 0) {
             $scope.users.forEach(function(el) {
-              
-              /* this function will cycle through customers and 
-               * if there is a button with a customer nickname on it
-               * it will generate a new button for him that will
-               * take admin to user personal page
-               * the button is generated from standard button with ng-click
-               * and then compiled using $compile directive
+
+              /*
+               * this function will cycle through customers and if there is a button with a customer nickname on it it will generate a new button for
+               * him that will take admin to user personal page the button is generated from standard button with ng-click and then compiled using
+               * $compile directive
                */
               /* find the button */
               var getel = $('.userDetails-' + el.nickname);
@@ -348,11 +364,11 @@
     // end of detailsController
   } ]).controller('reviewsController', [ '$rootScope', '$scope', '$http', 'comms', '$location', function($rootScope, $scope, $http, comms, $location) {
 
-    this.apprv = function(bid, uid) {
+    this.apprv = function(bid, uid, action) {
       var review = {};
       review.bid = bid;
       review.uid = uid;
-      comms.sync('ApproveReview', review, function(data, textStatus, jqXHR) {
+      comms.sync(action, review, function(data, textStatus, jqXHR) {
         var spl = $scope.unRev.findIndex(function(el) {
           return (el.bid == bid && el.uid == uid);
         });
@@ -366,6 +382,9 @@
 
     // navToReviews2
     // end of reviewsController
+  } ]).controller('transactionsController', [ '$rootScope', '$scope', '$http', 'comms', '$location', function($rootScope, $scope, $http, comms, $location) {
+
+    // end of transactionsController
   } ]);
 
 })();

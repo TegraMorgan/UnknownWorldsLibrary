@@ -6,8 +6,8 @@
       </div>
       <div class="panel-body">{{rev.reviewBody}}</div>
       <div class="panel-footer">
-        <button class="btn btn-lg btn-success" ng-click="reCtrl.apprv(rev.bid,rev.uid)">Approve review</button>
-        <button class="btn btn-sm btn-danger disabled">Delete review</button>
+        <button class="btn btn-lg btn-success" ng-click="reCtrl.apprv(rev.bid,rev.uid,'ApproveReview')">Approve review</button>
+        <button class="btn btn-sm btn-danger" ng-click="reCtrl.apprv(rev.bid,rev.uid,'DisproveReview')">Delete review</button>
       </div>
     </div>
   </div>

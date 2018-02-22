@@ -91,6 +91,40 @@ public class Review implements Serializable {
 
 	}
 
+	public int disprove() throws SQLException {
+		PreparedStatement stmt = null;
+		Connection con = null;
+		System.out.println("approving review");
+		try {
+			con = (Connection) DataStructure.ds.getConnection();
+			try {
+				stmt = con.prepareStatement(ApplicationConstants.DELETE_REVIEW_BY_BID_AND_UID);
+				try {
+					int i = 1;
+					stmt.setInt(i++, this.bid);
+					stmt.setInt(i++, this.uid);
+					if (stmt.executeUpdate() != 1) {
+						throw new Exception();
+					}
+					System.out.println("Review deleted");
+				} catch (Exception e) {
+				} finally {
+					stmt.close();
+				}
+			} catch (Exception e) {
+			} finally {
+				con.close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			stmt.close();
+			con.close();
+		}
+		return this.bid;
+
+	}
+
 	public int getUid() {
 		return uid;
 	}
