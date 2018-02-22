@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import server.controllers.CustomerController;
 import server.model.Admin;
 import server.model.Customer;
 import server.response.BasicResponse;
@@ -52,11 +53,10 @@ public class removeCustomerServlet extends HttpServlet {
 		response.setContentType("application/json; charset=UTF-8");
 		PrintWriter printWriter = response.getWriter();
 		Gson gson = new GsonBuilder().create();
-		Customer custToDEL = gson.fromJson(request.getReader(), Customer.class);
-		String data;
+		int uidDel = gson.fromJson(request.getReader(), int.class);
 		BasicResponse resp = new BasicResponse();
 		try {
-			if(Admin.removeCustomer(custToDEL.getUid())>0) 
+			if(CustomerController.removeCustomer(uidDel)>0) 
 			{
 				resp.setResultSuccess();
 				response.setStatus(HttpServletResponse.SC_OK);	
@@ -70,8 +70,7 @@ public class removeCustomerServlet extends HttpServlet {
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			resp.setResultFail();
 		}
-		data=resp.tojson();
-		printWriter.println(data);
+		printWriter.println(resp.tojson());
 		printWriter.close();
 	}
 

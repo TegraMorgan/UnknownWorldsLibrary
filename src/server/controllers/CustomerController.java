@@ -35,7 +35,6 @@ public class CustomerController {
 		}
 		return result;
 	}
-	
 
 	@SuppressWarnings("null")
 	public static ArrayList<Customer> getAllCustomers() {
@@ -52,14 +51,13 @@ public class CustomerController {
 			rs.close();
 			Statement.close();
 			con.close();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		return users;
-		
-	}
 
+		return users;
+
+	}
 
 	public static Customer getCustomer(int uid) throws SQLException {
 		Customer result = null;
@@ -82,6 +80,50 @@ public class CustomerController {
 			con.close();
 		}
 		return result;
+	}
+
+	public static int removeCustomer(int uid) throws SQLException {
+		PreparedStatement stmt = null;
+		Connection con = null;
+		System.out.println("Removing Customer");
+		try {
+			con = (Connection) DataStructure.ds.getConnection();
+			try {
+				stmt = con.prepareStatement(ApplicationConstants.DELETE_CUSTOMER);
+				try {
+					stmt.setInt(1, uid);
+					if (stmt.executeUpdate() != 1) {
+						throw new Exception();
+					}
+					System.out.println("Customer deleted, uid:" + uid);
+				} catch (Exception e) {
+				} finally {
+					stmt.close();
+				}
+				stmt = con.prepareStatement(ApplicationConstants.DELETE_ALL_CUSTOMER_LIKES);
+				try {
+					stmt.setInt(1, uid);
+					stmt.executeUpdate();
+				} catch (Exception e) {
+				} finally {
+					stmt.close();
+				}
+				stmt = con.prepareStatement(ApplicationConstants.DELETE_ALL_CUSTOMER_REVIEWS);
+				try {
+					stmt.setInt(1, uid);
+					stmt.executeUpdate();
+				} catch (Exception e) {
+				} finally {
+					stmt.close();
+				}
+			} catch (Exception e) {
+			} finally {
+				con.close();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 1;
 	}
 
 }

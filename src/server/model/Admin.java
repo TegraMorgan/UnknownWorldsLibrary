@@ -45,24 +45,5 @@ public String getPassword() {
 public void setPassword(String password) {
 	this.password = password;
 }
-public static int removeCustomer(int uid) throws SQLException {
-	PreparedStatement stmt = null;
-	Connection con = null;
-	System.out.println("Removing Customer");
-	try {
-		con = (Connection) DataStructure.ds.getConnection();
-		stmt = con.prepareStatement(ApplicationConstants.DELETE_Customer);
-		stmt.setInt(1, uid);
-		if (stmt.executeUpdate()!=1) {
-			throw new Exception();
-		}
-		System.out.println("Customer deleted, uid:" + uid );
-	} catch (Exception e) {
-		e.printStackTrace();
-	} finally {
-		stmt.close();
-		con.close();
-	}
-	return 1;
-}
+
 }
