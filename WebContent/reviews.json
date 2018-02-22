@@ -28,14 +28,14 @@
 		"bid": 3,
 		"nickname": "Stardusk",
 		"bookName": "The Rational Male",
-		"approvedBy": 1,
+		"approvedBy": null,
 		"reviewBody": "Good book"
 	},{
 		"uid": 4,
 		"bid": 5,
 		"nickname": "Rollo",
 		"bookName": "Youth",
-		"approvedBy": 1,
+		"approvedBy": null,
 		"reviewBody": "Good old classic"
 	}
 ]

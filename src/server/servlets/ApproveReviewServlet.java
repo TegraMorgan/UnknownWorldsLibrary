@@ -24,28 +24,51 @@ import server.response.BasicResponse;
 @WebServlet("/ApproveReview")
 public class ApproveReviewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ApproveReviewServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		handleApprove(request, response);	}
+	public ApproveReviewServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		handleApprove(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		handleApprove(request, response);
+	}
+
+	private void testing(HttpServletRequest request, HttpServletResponse response)
+			throws JsonSyntaxException, JsonIOException, IOException {
+		response.setContentType("application/json; charset=UTF-8");
+		PrintWriter printWriter = response.getWriter();
+		BasicResponse resp = new BasicResponse();
+		try {
+			resp.setResultSuccess();
+			response.setStatus(HttpServletResponse.SC_OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			resp.setResultFail();
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+		} finally {
+			printWriter.println(resp.tojson());
+			printWriter.close();
+		}
 	}
 
 	private void handleApprove(HttpServletRequest request, HttpServletResponse response)
@@ -59,8 +82,7 @@ public class ApproveReviewServlet extends HttpServlet {
 			rev.approve();
 			resp.setResultSuccess();
 			response.setStatus(HttpServletResponse.SC_OK);
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 			resp.setResultFail();
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

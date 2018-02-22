@@ -52,7 +52,7 @@ public class Review implements Serializable {
 				stmt.setInt(i++, this.approvedBy);
 			else
 				stmt.setNull(i++, java.sql.Types.INTEGER);
-			if (stmt.executeUpdate()!=1) {
+			if (stmt.executeUpdate() != 1) {
 				throw new Exception();
 			}
 			System.out.println("Review added");
@@ -63,9 +63,9 @@ public class Review implements Serializable {
 			con.close();
 		}
 		return this.bid;
-		
+
 	}
-	
+
 	public int approve() throws SQLException {
 		PreparedStatement stmt = null;
 		Connection con = null;
@@ -77,7 +77,7 @@ public class Review implements Serializable {
 			stmt.setInt(i++, this.approvedBy);
 			stmt.setInt(i++, this.bid);
 			stmt.setInt(i++, this.uid);
-			if (stmt.executeUpdate()!=1) {
+			if (stmt.executeUpdate() != 1) {
 				throw new Exception();
 			}
 			System.out.println("Review approved");
@@ -88,10 +88,9 @@ public class Review implements Serializable {
 			con.close();
 		}
 		return this.bid;
-		
+
 	}
 
-	
 	public int getUid() {
 		return uid;
 	}

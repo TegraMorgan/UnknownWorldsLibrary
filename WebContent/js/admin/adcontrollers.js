@@ -15,33 +15,8 @@
     /* navigation menu variables */
     $rootScope.navmenu = 'pages/admin/adMenu.html';
     $rootScope.menuEnabled = false;
-
-    $rootScope.navToDetailsUser = function(unik) {
-      console.log('navigating to user page using nickname');
-      console.log('sending to server ' + unik);
-      comms.sync('DetailedUserByNick', unik, function(data, textStatus, jqXHR) {
-        $rootScope.us = data.user;
-        console.log($rootScope.secondView);
-        $rootScope.secondView = 'pages/admin/userDetails.html';
-        $('#btnUsers').removeClass().addClass('btn btn-xs navbar-btn btn-default');
-        $('#btnMybooks').removeClass().addClass('btn btn-xs navbar-btn btn-default');
-        $('#btnReviews').removeClass().addClass('btn btn-xs navbar-btn btn-default');
-        $scope.$apply();
-      }, function(data, textStatus, errorThrown) {
-        console.log(textStatus);
-      }, null);
-
-    } // end of navToDetailsUser
-
+    $rootScope.unRev = [];
     this.admin = {};
-
-    /* TODO remove all this section later */
-    /*
-     * $rootScope.secondView = 'pages/checkout.html';
-     * 
-     * this.newCustomer.username = "TestName"; this.newCustomer.password = "123";
-     */
-    /* END OF SECTION TO BE REMOVED */
 
     /* set controller variables */
 
@@ -50,55 +25,59 @@
 
     /* Functions */
 
-    /* navigarion menu toggle */
+    /* navigation menu toggle */
     this.menutoggle = function() {
       $rootScope.menuEnabled = $rootScope.menuEnabled == true ? false : true;
+      $scope.refreshReviews();
     }
 
+    /* navigation functions */
     this.navToLogin = function() {
       // ? do i need it?
       $rootScope.secondView = 'pages/login.html'
     };
 
     this.navToBooks = function() {
-      var cnt = this;
       $('#myNavBar').collapse('hide');
-      comms.sync('GetBookList', null, function(data, textStatus, jqXHR) {
-        // success
-        $rootScope.books = data.books;
-        /*- -*/
-        $scope.books.forEach(function(el) {
-          /* if there are zero likes disable popover */
-          if (el.likescount == 0) {
-            $('#btnLike' + el.bid).popover('destroy');
-          }
-          /* dim all the buttons */
-          if (el.reviewCount == 0) {
-            $('#btnRev' + el.bid).addClass('disabled');
-          }
-          var alllikes = "<ul class=\"list-unstyled text-info\">";
-          el.likescount = el.likes.length;
-          if (el.likes.length != 0) {
-            el.likes.forEach(function(li) {
-              alllikes = alllikes + "<li>";
-              alllikes = alllikes + "<button class=\"userDetails-";
-              alllikes = alllikes + li + "\">" + li + "</button></li>";
-            }); // foreach
-          } // if
-          alllikes = alllikes + "</ul>"
-          el.likesstring = alllikes;
-          el.reviewCount = el.reviews.length;
-        });
-        /* */
-        $rootScope.secondView = 'pages/admin/adstore.html';
-        $('#btnMybooks').removeClass().addClass('btn btn-xs navbar-btn btn-default active');
-        $('#btnUsers').removeClass().addClass('btn btn-xs navbar-btn btn-default');
-        $('#btnReviews').removeClass().addClass('btn btn-xs navbar-btn btn-default');
-        $scope.$apply();
-      }, function(data, textStatus, errorThrown) {
-        console.log('Could not receive books from the server');
-        // fail
-      }, null);
+      if ($rootScope.secondView != 'pages/admin/adstore.html') {
+        comms.sync('GetBookList', null, function(data, textStatus, jqXHR) {
+          // success
+          $rootScope.books = data.books;
+          /*- -*/
+          $scope.books.forEach(function(el) {
+            /* if there are zero likes disable popover */
+            if (el.likescount == 0) {
+              $('#btnLike' + el.bid).popover('destroy');
+            }
+            /* dim all the buttons */
+            if (el.reviewCount == 0) {
+              $('#btnRev' + el.bid).addClass('disabled');
+            }
+            var alllikes = "<ul class=\"list-unstyled text-info\">";
+            el.likescount = el.likes.length;
+            if (el.likes.length != 0) {
+              el.likes.forEach(function(li) {
+                alllikes = alllikes + "<li>";
+                alllikes = alllikes + "<button class=\"userDetails-";
+                alllikes = alllikes + li + "\">" + li + "</button></li>";
+              }); // foreach
+            } // if
+            alllikes = alllikes + "</ul>"
+            el.likesstring = alllikes;
+            el.reviewCount = el.reviews.length;
+          });
+          /* */
+          $rootScope.secondView = 'pages/admin/adstore.html';
+          $('#btnMyBooks').addClass('active');
+          $('#btnUsers').removeClass('active');
+          $('#btnReviews').removeClass('active');
+          $('#btnTransactions').removeClass('active');
+          $scope.$apply();
+        }, function(data, textStatus, errorThrown) {
+          console.log('Could not receive books from the server');
+          // fail
+        }, null);
+      }
     }
 
     $rootScope.navToUsers2 = function() {
@@ -106,20 +85,79 @@
     }
 
     this.navToUsers = function() {
-      var cnt = this;
       $('#myNavBar').collapse('hide');
       comms.sync('GetAllUsersServlet', null, function(data, textStatus, jqXHR) {
         $rootScope.users = data.customers;
         $rootScope.result = data.result;
         $rootScope.secondView = 'pages/admin/users.html';
-        $('#btnUsers').removeClass().addClass('btn btn-xs navbar-btn btn-default active');
-        $('#btnMybooks').removeClass().addClass('btn btn-xs navbar-btn btn-default');
-        $('#btnReviews').removeClass().addClass('btn btn-xs navbar-btn btn-default');
+        $('#btnUsers').addClass('active');
+        $('#btnMyBooks').removeClass('active');
+        $('#btnReviews').removeClass('active');
+        $('#btnTransactions').removeClass('active');
         $scope.$apply();
       }, function(data, textStatus, errorThrown) {
         console.log(textStatus);
       }, null);
     }
+
+    $rootScope.navToDetailsUser = function(unik) {
+      comms.sync('DetailedUserByNick', unik, function(data, textStatus, jqXHR) {
+        $rootScope.us = data.user;
+        $rootScope.secondView = 'pages/admin/userDetails.html';
+        $('#btnUsers').removeClass('active');
+        $('#btnMyBooks').removeClass('active');
+        $('#btnReviews').removeClass('active');
+        $('#btnTransactions').removeClass('active');
+        $scope.$apply();
+      }, function(data, textStatus, errorThrown) {
+        console.log(textStatus);
+      }, null);
+
+    } // end of navToDetailsUser
+
+    $scope.$watch(function() {
+      return $rootScope.unRev.length;
+    }, function(newValue, oldValue) {
+      $scope.revs = newValue;
+    });
+
+    this.navToDetails = function(uid) {
+      $scope.refreshReviews();
+      comms.sync('DetailedUser', uid, function(data, textStatus, jqXHR) {
+        $rootScope.us = data.user;
+        $rootScope.secondView = 'pages/admin/userDetails.html';
+        $('#btnUsers').removeClass('active');
+        $('#btnMyBooks').removeClass('active');
+        $('#btnReviews').removeClass('active');
+        $('#btnTransactions').removeClass('active');
+        $scope.$apply();
+      }, function(data, textStatus, errorThrown) {
+        console.log(textStatus);
+      }, null);
+    };
+
+    $rootScope.navToReviews2 = function() {
+      console.log('navigating to reviews');
+      ctr.navToReviews();
+    }
+
+    this.navToReviews = function() {
+      // TODO
+      $('#myNavBar').collapse('hide');
+      $scope.refreshReviews();
+      $rootScope.secondView = 'pages/admin/reviews.html';
+      $('#btnUsers').removeClass('active');
+      $('#btnMyBooks').removeClass('active');
+      $('#btnReviews').addClass('active');
+      $('#btnTransactions').removeClass('active');
+    };
+
+    this.navToTransactions = function() {
+      // TODO
+
+    };
+
+    /* control functions */
 
     this.adlogin = function() {
       if (!this.admin.login || !this.admin.password || this.admin.login.length <= 0 || this.admin.password.length <= 0) {
@@ -132,7 +170,6 @@
       }
       else {
         this.wrongLoginData = false;
-        var ctr = this;
         var adm = JSON.stringify(this.admin);
         comms.sync('AdminLogIn', this.admin, function(data, textStatus, jqXHR) {
           $rootScope.admin = data.admin;
@@ -163,20 +200,14 @@
       };
     }; // book filter
 
-    this.navToDetails = function(uid) {
-      // $rootScope.us=uid;
-      var ctr = this;
-      comms.sync('DetailedUser', uid, function(data, textStatus, jqXHR) {
-        $rootScope.us = data.user;
-        $rootScope.secondView = 'pages/admin/userDetails.html';
-        $('#btnUsers').removeClass().addClass('btn btn-xs navbar-btn btn-default');
-        $('#btnMybooks').removeClass().addClass('btn btn-xs navbar-btn btn-default');
-        $('#btnReviews').removeClass().addClass('btn btn-xs navbar-btn btn-default');
+    $scope.refreshReviews = function() {
+      comms.sync('GetUnappRev', null, function(data, textStatus, jqXHR) {
+        $rootScope.unRev = data.reviews;
         $scope.$apply();
       }, function(data, textStatus, errorThrown) {
         console.log(textStatus);
       }, null);
-    };
+    }
 
     // mainController
   } ]).controller('usersController', [ '$rootScope', '$scope', '$http', 'comms', '$location', function($rootScope, $scope, $http, comms, $location) {
@@ -219,81 +250,79 @@
     /* end delete user buton */
 
   } // usersController
-  ]).controller(
-      'booksController',
-      [
-          '$rootScope',
-          '$scope',
-          '$http',
-          '$compile',
-          'comms',
-          '$location',
-          function($rootScope, $scope, $http, $compile, comms, $location) {
+  ]).controller('booksController', [ '$rootScope', '$scope', '$http', '$compile', 'comms', '$location', function($rootScope, $scope, $http, $compile, comms, $location) {
 
-            var ctr = this;
-            this.books = $rootScope.books;
+    var ctr = this;
+    this.books = $rootScope.books;
+    angular.element(document).ready(function() {
 
-            $scope.test = function() {
-              alert('a');
-            };
-            angular.element(document).ready(function() {
+    }); // end document ready
 
-            }); // end document ready
-
-            $scope.$watch(function() {
-              return $scope.searchBook;
-            }, function(newValue, oldValue) {
-              setTimeout(function() {
-                $('[data-toggle="popover"]').popover();
-                $('.mypop').on(
-                    "mouseover",
-                    function() {
-                      $(this).popover('show');
-                      var a = $(this);
-                      if ($scope.users.length != 0) {
-                        $scope.users.forEach(function(el) {
-                          var getel = $('.userDetails-' + el.nickname);
-                          if (getel.length != 0) {
-                            var but = "<button class=\"btn btn-xs btn-default userDetails-" + el.nickname + "\" type=\"button\" ng-click=\"navToDetailsUser('" + el.nickname + "')\">" + el.nickname
-                                + "</button></li>";
-                            var angbut = $compile(angular.element(but))($scope);
-                            $('.userDetails-' + el.nickname).replaceWith(angbut);
-                          }
-                        }); // end foreach user
-                      }// end if length != 0
-
-                      setTimeout(function() {
-                        a.popover('hide')
-                      }, 30000);
-                    });
-                $scope.books.forEach(function(el) {
-                  /* if there are zero likes disable popover */
-                  if (el.likescount == 0) {
-                    $('#btnLike' + el.bid).popover('destroy');
-                  }
-                  /* dim all the buttons */
-                  if (el.reviewCount == 0) {
-                    $('#btnRev' + el.bid).addClass('disabled');
-                  }
-                  var alllikes = "<ul class=\"list-unstyled text-info\">";
-                  el.likescount = el.likes.length;
-                  if (el.likes.length != 0) {
-                    el.likes.forEach(function(li) {
-                      alllikes = alllikes + "<li>" + li + "</li>";
-                    }); // foreach
-                  } // if
-                  alllikes = alllikes + "</ul>"
-                  el.likesstring = alllikes;
-                  el.reviewCount = el.reviews.length;
-
-                  // $('#btnLike' + el.bid)[0].onmouseover = function() {$('#btnLike' + el.bid)[0].popover();};// btnLike{{product.bid}}
-
-                });// forEach products
-              } // refresh function
-              , $rootScope.raceCond);
-            });
-            // booksController
-          } ]).controller('detailsController', [ '$rootScope', '$scope', '$http', 'comms', '$location', function($rootScope, $scope, $http, comms, $location) {
+    $scope.$watch(function() {
+      return $scope.searchBook;
+    }, function(newValue, oldValue) {
+      setTimeout(function() {
+        $('[data-toggle="popover"]').popover();
+        $('.mypop').on("mouseover", function() {
+          $(this).popover('show');
+          var a = $(this);
+          if ($scope.users.length != 0) {
+            $scope.users.forEach(function(el) {
+              
+              /* this function will cycle through customers and 
+               * if there is a button with a customer nickname on it
+               * it will generate a new button for him that will
+               * take admin to user personal page
+               * the button is generated from standard button with ng-click
+               * and then compiled using $compile directive
+               */
+              /* find the button */
+              var getel = $('.userDetails-' + el.nickname);
+              if (getel.length != 0) {
+                /* combine a new html code for the button */
+                var but = "<button class=\"btn btn-xs btn-default userDetails-" + el.nickname;
+                but += "\" type=\"button\" ng-click=\"navToDetailsUser('" + el.nickname + "')\">" + el.nickname;
+                but += "</button></li>";
+                /* run angular js compiler on the html code */
+                var angbut = $compile(angular.element(but))($scope);
+                /* ??? */
+                $('.userDetails-' + el.nickname).replaceWith(angbut);
+                /* PROFIT */
+              }
+            }); // end foreach user
+          }// end if length != 0
+          /* this will keep popover open for 3 seconds */
+          setTimeout(function() {
+            a.popover('hide')
+          }, 3000);
+        });
+        $scope.books.forEach(function(el) {
+          /* if there are zero likes disable popover */
+          if (el.likescount == 0) {
+            $('#btnLike' + el.bid).popover('destroy');
+          }
+          /* dim all the buttons */
+          if (el.reviewCount == 0) {
+            $('#btnRev' + el.bid).addClass('disabled');
+          }
+          var alllikes = "<ul class=\"list-unstyled text-info\">";
+          el.likescount = el.likes.length;
+          if (el.likes.length != 0) {
+            el.likes.forEach(function(li) {
+              alllikes = alllikes + "<li>";
+              alllikes = alllikes + "<button class=\"userDetails-";
+              alllikes = alllikes + li + "\">" + li + "</button></li>";
+            }); // foreach
+          } // if
+          alllikes = alllikes + "</ul>"
+          el.likesstring = alllikes;
+          el.reviewCount = el.reviews.length;
+        });// forEach products
+      } // refresh function
+      , $rootScope.raceCond);
+    });
+    // booksController
+  } ]).controller('detailsController', [ '$rootScope', '$scope', '$http', 'comms', '$location', function($rootScope, $scope, $http, comms, $location) {
 
     var ctr = this;
     this.navToUsers4 = function() {
@@ -316,6 +345,27 @@
 
     /* end delete user buton */
 
-  } ]); // detailsController
+    // end of detailsController
+  } ]).controller('reviewsController', [ '$rootScope', '$scope', '$http', 'comms', '$location', function($rootScope, $scope, $http, comms, $location) {
+
+    this.apprv = function(bid, uid) {
+      var review = {};
+      review.bid = bid;
+      review.uid = uid;
+      comms.sync('ApproveReview', review, function(data, textStatus, jqXHR) {
+        var spl = $scope.unRev.findIndex(function(el) {
+          return (el.bid == bid && el.uid == uid);
+        });
+        $scope.unRev.splice(spl, 1);
+        $scope.$apply();
+      }, function(data, textStatus, errorThrown) {
+        console.log(textStatus);
+      }, null);
+
+    }
+
+    // navToReviews2
+    // end of reviewsController
+  } ]);
 
 })();

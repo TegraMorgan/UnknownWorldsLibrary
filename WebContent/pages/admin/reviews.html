@@ -1,0 +1,14 @@
+<div ng-controller="reviewsController as reCtrl">
+  <div class="container-fluid wellwellwell2">
+    <div class="panel panel-primary" ng-repeat="rev in unRev">
+      <div class="panel-heading">
+        <h3 class="panel-title">Review of {{rev.bookName}} by {{rev.nickname}}</h3>
+      </div>
+      <div class="panel-body">{{rev.reviewBody}}</div>
+      <div class="panel-footer">
+        <button class="btn btn-lg btn-success" ng-click="reCtrl.apprv(rev.bid,rev.uid)">Approve review</button>
+        <button class="btn btn-sm btn-danger disabled">Delete review</button>
+      </div>
+    </div>
+  </div>
+</div>
