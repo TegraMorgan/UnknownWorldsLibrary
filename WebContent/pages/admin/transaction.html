@@ -1,0 +1,21 @@
+<div ng-controller="transactionsController as trCtrl" ng-init="orderRow='dateOf'">
+  <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">List of transactions</div>
+    <div class="panel-body">You can sort the list by three first columns by clicking on their headers</div>
+    <table class="table">
+      <tr>
+        <th ng-click="orderRow='dateOf'">Purchase Date</th>
+        <th ng-click="orderRow='nickname'">Nickname</th>
+        <th ng-click="orderRow='bookName'">Book name</th>
+        <th>Price</th>
+      </tr>
+      <tr ng-repeat="tr in transactions | orderBy : orderRow">
+        <td>{{tr.dateOf}}</td>
+        <td>{{tr.nickname}}</td>
+        <td>{{tr.bookName}}</td>
+        <td>{{tr.price}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
