@@ -170,11 +170,11 @@
         this.newUserNameOk = false;
       }
       else {
-        comms.nsync('DetailedUserUsername', this.newCustomer.username, null, function() {
+        comms.nsync('DetailedUserUsername', this.newCustomer.username, function(data, textStatus, jqXHR){
           this.usernameError = "This username is already taken";
           passed = false;
           this.newUserNameOk = false;
-        }, null);
+        }, null, null);
       }
 
       /* Test email */
@@ -187,6 +187,13 @@
         this.emailerror = emailerror;
         passed = false;
         this.newEmailOk = false;
+      }
+      else {
+        comms.nsync('DetailedUserByEmail', this.newCustomer.email, function(data, textStatus, jqXHR) {
+          this.emailerror = "This email is already in use";
+          passed = false;
+          this.newUserNameOk = false;
+        }, null, null);
       }
 
       /* Test Street name */
@@ -298,6 +305,13 @@
         this.nickError = nickError;
         passed = false;
         this.newNickOk = false;
+      }
+      else {
+        comms.nsync('DetailedUserByNick', this.newCustomer.email, function(data, textStatus, jqXHR) {
+          this.nickError = "This username is already in use";
+          passed = false;
+          this.newUserNameOk = false;
+        }, null, null);
       }
 
       /* Test Description */
