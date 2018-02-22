@@ -10,12 +10,12 @@
         <table class="table table-hover table-striped table-bordered">
           <tr ng-show="true" ng-repeat="product in products | filter:customBookFilter(searchBook)">
             <td class="shop-row-1"><img class="book-thumb img-thumbnail" ng-src="{{product.imageUrl}}" ng-click="lCtrt.navToBookDetail(product.bid)"></td>
-            <td class="shop-row-2" ng-click="lCtrt.navToBookDetail(product.bid)">
-              <div style="text-align: left;">
+            <td class="shop-row-2">
+              <div style="text-align: left;" ng-click="lCtrt.navToBookDetail(product.bid)">
                 <strong>{{product.name}}</strong> {{product.price | currency}}
               </div>
-              <div>By {{product.author}}</div>
-              <div class="center">{{product.description}}</div>
+              <div ng-click="lCtrt.navToBookDetail(product.bid)">By {{product.author}}</div>
+              <div class="center" ng-click="lCtrt.navToBookDetail(product.bid)">{{product.description}}</div>
               <div class="panel-group">
                 <div class="panel panel-default">
                   <div class="panel-heading">

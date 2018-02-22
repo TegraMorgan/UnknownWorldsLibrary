@@ -100,11 +100,18 @@
 
     this.navToBookDetail = function(bid) {
       $('#myNavBar').collapse('hide');
-      $rootScope.bk = $scope.products.find(function(il){return il.bid==bid;});
-      console.log($rootScope.bk);
-      $rootScope.secondView = 'pages/bookDetails.html';
-      $('#btnMyBooks').removeClass('active');
-      $('#btnStore').removeClass('active');
+      
+      comms.sync('GetBookId',bid,function(data, textStatus, jqXHR) {
+        $rootScope.bk = data.book;
+        console.log($rootScope.bk);
+        $rootScope.secondView = 'pages/bookDetails.html';
+        $('#btnMyBooks').removeClass('active');
+        $('#btnStore').removeClass('active');
+        $scope.$apply();
+      }, function(data, textStatus, errorThrown) {
+        alert('Server error. Please try again');
+      }, null);
+      
     }
     
     

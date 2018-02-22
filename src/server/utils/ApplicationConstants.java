@@ -52,7 +52,7 @@ public interface ApplicationConstants {
 		public final String GET_ALL_UNAPPROVED_REVIEWS = "SELECT r.uid AS uid, r.bid AS bid, c.nickname AS nickname, b.name AS book_name, r.approved_by AS approved_by, r.text as text FROM reviews r INNER JOIN books b ON r.bid=b.bid INNER JOIN customers c ON r.uid=c.uid WHERE r.APPROVED_BY IS NULL ORDER BY r.bid"; 
 		
 		public final String GET_BOOK_BY_ID ="SELECT * FROM books WHERE bid=?";
-		public final String GET_LIKES_FOR_BOOK ="SELECT c.nickname as nickname FROM likes l INNER JOIN customers c ON l.bid=c.bid WHERE l.bid=?";
+		public final String GET_LIKES_FOR_BOOK ="SELECT c.nickname as nickname FROM likes l INNER JOIN customers c ON l.uid=c.uid WHERE l.bid=?";
 		public final String GET_REVIEWS_FOR_BOOK ="SELECT r.uid AS uid, r.bid AS bid, c.nickname AS nickname, b.name AS book_name, r.approved_by AS approved_by, r.text as text FROM reviews r INNER JOIN books b ON r.bid=b.bid INNER JOIN customers c ON r.uid=c.uid WHERE r.bid=? AND r.approved_by IS NOT NULL";
 		
 		public final String INSERT_NEW_LIKE = "INSERT INTO likes VALUES (?,?)";

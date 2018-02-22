@@ -9,11 +9,46 @@ import java.util.Dictionary;
 import java.util.LinkedList;
 
 import server.model.Book;
+import server.model.Customer;
 import server.model.Review;
 import server.utils.ApplicationConstants;
 import server.utils.DataStructure;
 
 public class BookController {
+
+	public static Book GetBookById(int bid) {
+		Book result = null;
+		Connection con = null;
+		PreparedStatement stmt = null;
+		try {
+			con = (Connection) DataStructure.ds.getConnection();
+			try {
+				stmt = con.prepareStatement(ApplicationConstants.GET_BOOK_BY_ID);
+				try {
+					stmt.setInt(1, bid);
+					ResultSet rs = stmt.executeQuery();
+					try {
+						if (rs.next()) {
+							result = new Book(rs);
+						}
+					} catch (Exception e) {
+					} finally {
+						rs.close();
+					}
+				} catch (Exception e) {
+				} finally {
+					stmt.close();
+				}
+			} catch (Exception e) {
+			} finally {
+				con.close();
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 	public static ArrayList<Book> getAllBooks() {
 		ArrayList<Book> result = new ArrayList<Book>();

@@ -10,13 +10,13 @@
       <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1">
         <table class="table table-hover table-striped table-bordered">
           <tr ng-show="true" ng-repeat="el in myPr | filter : myBooksFilter(searchMyBook)">
-            <td class="shop-row-1"><img class="book-thumb img-thumbnail" ng-src="{{el.imageUrl}}"></td>
+            <td class="shop-row-1" ng-click="lCtrt.navToBookDetail(el.bid)"><img class="book-thumb img-thumbnail" ng-src="{{el.imageUrl}}"></td>
             <td class="shop-row-2">
-              <div style="text-align: left;">
+              <div style="text-align: left;" ng-click="lCtrt.navToBookDetail(el.bid)">
                 <strong>{{el.name}}</strong> {{el.price | currency}}
               </div>
-              <div>By {{el.author}}</div>
-              <div class="center">{{el.description}}</div>
+              <div ng-click="lCtrt.navToBookDetail(el.bid)">By {{el.author}}</div>
+              <div class="center" ng-click="lCtrt.navToBookDetail(el.bid)">{{el.description}}</div>
               <div class="panel-group">
                 <div class="panel panel-default">
                   <div class="panel-heading">
