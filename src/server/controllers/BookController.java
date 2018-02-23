@@ -22,7 +22,8 @@ public class BookController {
 	/**
 	 * Gets the book by id.
 	 *
-	 * @param bid the bid
+	 * @param bid
+	 *            the bid
 	 * @return the book
 	 */
 	public static Book GetBookById(int bid) {
@@ -61,7 +62,11 @@ public class BookController {
 
 	/**
 	 * Gets the all books.
-	 *
+	 * Instead of requesting a book and then having each book
+	 * sending requests for it's own data to the database, we request all the data
+	 * in three separate connections and then populate each book on the server by
+	 * looping on books , and their likes and reviews
+	 * 
 	 * @return the all books
 	 */
 	public static ArrayList<Book> getAllBooks() {
@@ -151,10 +156,13 @@ public class BookController {
 	/**
 	 * Filter reviews.
 	 *
-	 * @param bId the b id
-	 * @param reviewsSet the reviews set
+	 * @param bId
+	 *            the b id
+	 * @param reviewsSet
+	 *            the reviews set
 	 * @return the linked list
-	 * @throws SQLException the SQL exception
+	 * @throws SQLException
+	 *             the SQL exception
 	 */
 	public static LinkedList<Review> filterReviews(int bId, ResultSet reviewsSet) throws SQLException {
 		LinkedList<Review> result = new LinkedList<Review>();
@@ -169,10 +177,13 @@ public class BookController {
 	/**
 	 * Filter likes.
 	 *
-	 * @param bId the b id
-	 * @param likesSet the likes set
+	 * @param bId
+	 *            the b id
+	 * @param likesSet
+	 *            the likes set
 	 * @return the linked list
-	 * @throws SQLException the SQL exception
+	 * @throws SQLException
+	 *             the SQL exception
 	 */
 	public static LinkedList<String> filterLikes(int bId, ResultSet likesSet) throws SQLException {
 		LinkedList<String> result = new LinkedList<String>();
