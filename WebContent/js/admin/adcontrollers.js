@@ -33,7 +33,6 @@
 
     /* navigation functions */
     this.navToLogin = function() {
-      // ? do i need it?
       $rootScope.secondView = 'pages/login.html'
     };
 
@@ -137,7 +136,6 @@
     };
 
     $rootScope.navToReviews2 = function() {
-      console.log('navigating to reviews');
       ctr.navToReviews();
     }
 
@@ -152,7 +150,6 @@
     };
 
     this.navToTransactions = function() {
-      // TODO
       $('#myNavBar').collapse('hide');
 
       comms.sync('GetTransactions', null, function(data, textStatus, jqXHR) {
@@ -227,6 +224,12 @@
       }, null);
     }
 
+    this.logOut = function(){
+      this.menutoggle();
+      this.navToLogin();
+      
+    };
+    
     // mainController
   } ]).controller('usersController', [ '$rootScope', '$scope', '$http', 'comms', '$location', function($rootScope, $scope, $http, comms, $location) {
 
@@ -249,7 +252,6 @@
       var btn = mo.find('.modal-footer #btndeleteUser')[0];
       btn.removeAttribute("data-user");
       btn.setAttribute("data-user", uId);
-      console.log('setting uid as ' + uId);
 
     }); // end modal manipulation
 
