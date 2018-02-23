@@ -469,9 +469,12 @@
 
     /* store function */
     this.navToOpenBook = function(tr) {
+      console.log($rootScope.products);
+      console.log(tr);
       $rootScope.bookToRead = $rootScope.products.find(function(bk) {
         return bk.bid == tr;
       });
+      console.log($rootScope.bookToRead);
       $rootScope.secondView = 'pages/reading.html';
       $('#btnStore').removeClass().addClass('btn navbar-btn btn-default');
       $('#btnMyBooks').removeClass().addClass('btn navbar-btn btn-default');
@@ -503,8 +506,8 @@
       };
     };
 
-  } ]).controller('booksController', [ '$rootScope', '$scope', '$http', 'comms', function($rootScope, $scope, $http, comms) {
-
+  } ]).controller('booksController', [ '$rootScope', '$scope', '$http', 'comms','$window', function($rootScope, $scope, $http, comms,$window) {
+    
     $rootScope.myPr = [];
     var us = $rootScope.user;
     us.owns2 = [];
@@ -585,8 +588,8 @@
       console.log('got ' + $rootScope.bookToRead.name);
       console.log('filepath is :' + $rootScope.bookToRead.filepath);
       $rootScope.secondView = 'pages/reading.html';
-      $('#btnStore').removeClass().addClass('btn navbar-btn btn-default');
-      $('#btnMyBooks').removeClass().addClass('btn navbar-btn btn-default');
+      $('#btnStore').removeClass('active');
+      $('#btnMyBooks').removeClass('active');
     };// openBook function
 
     $('.mypop').popover();
@@ -917,6 +920,39 @@
   } ]).controller('bookReviewsController', [ '$rootScope', '$scope', '$http', 'comms', function($rootScope, $scope, $http, comms) {
     console.log($scope.bk);
     console.log($rootScope.bk);
-  
+    
+  } ]).controller('readingController', [ '$rootScope', '$scope', '$http', 'comms', function($rootScope, $scope, $http, comms) {
+
+    $scope.$on('$destroy', function() {
+      var payload = {};
+      payload.bid = $rootScope.bookToRead.bid;
+      payload.uid = $rootScope.user.uid;
+      payload.position = windows.pageYOffset;
+      comms.sync('saveMyPosition', payload, function() {
+        console.log('Position saved');
+      }, function() {
+        consol.log('Failed to save position');
+      }, null);
+    });
+    
+    var oldpos={};
+    oldpos.bid=$rootScope.bookToRead.bid;
+    oldpos.uid=$rootScope.user;
+    comms.sync('getMyOldPosition',oldpos,function(){
+      
+    },function(){
+      
+    },null);
+    
+    this.navToOldPos = function(){
+      
+      
+      window.scrollTo(500, 0);
+    };
+    this.cancelNav = function(){
+      $('#myBookmark').addClass('hidden');
+    };
+    
+    
   } ]);
 })();

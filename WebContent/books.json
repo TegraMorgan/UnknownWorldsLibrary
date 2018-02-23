@@ -21,7 +21,8 @@
 		"genre": "Game",
 		"price": 10.02,
 		"description": "The Rational Male is a rational and pragmatic approach to intergender dynamics and the social and psychological underpinnings of intergender relations. The book is the compiled, ten-year core writing of author/blogger Rollo Tomassi from therationalmale.com. Rollo Tomassi is one of the leading voices in the globally growing, male-focused online consortium known as the 'Manosphere'. Outlined are the concepts of positive masculinity, the feminine imperative, plate theory, operative social conventions and the core psychological theory behind Game awareness and 'redpill' ideology. Tomassi explains and outlines the principles of intergender social dynamics and foundational reasoning behind them.",
-		"imageUrl": "img/books/rm_cover.jpg"
+		"imageUrl": "img/books/rm_cover.jpg",
+		"filepath": "pages/books/TheRationalMale.html"
 	},
 	{
 		"name": "Star Born",
