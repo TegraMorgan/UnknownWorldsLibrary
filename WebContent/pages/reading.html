@@ -1,12 +1,11 @@
 <div class="reading_pane" ng-controller="readingController as reCtrl">
-<div id="myBookmark" class="panel panel-info">
+<div id="myBookmark" class="panel panel-info hidden">
   <div class="panel-heading">
     <h3 class="panel-title">Would you like to go to your last position in the book?</h3>
   </div>
   <div class="panel-body">
-    <div class="btn btn-sm btn-primary" ng-click="reCtrl.navToOldPos()">Yes please</div><div class="btn btn-sm btn-primary" ng-click="reCtrl.cancelNav()">Dismiss</div>
+    <div class="btn btn-sm btn-primary" ng-click="reCtrl.navToOldPos()">Yes please</div><div class="btn btn-sm btn-default" ng-click="reCtrl.cancelNav()">Dismiss</div>
   </div>
 </div>
-
 <div id="bookContent" ng-include="bookToRead.filepath"></div>
 </div>

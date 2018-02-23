@@ -103,7 +103,6 @@
       
       comms.sync('GetBookId',bid,function(data, textStatus, jqXHR) {
         $rootScope.bk = data.book;
-        console.log($rootScope.bk);
         $rootScope.secondView = 'pages/bookDetails.html';
         $('#btnMyBooks').removeClass('active');
         $('#btnStore').removeClass('active');
@@ -362,7 +361,6 @@
   } ]).controller('LibController', [ '$rootScope', '$scope', '$http', 'comms', function($rootScope, $scope, $http, comms) {
     $rootScope.products = [];
     var us = $rootScope.user;
-    console.log($rootScope.user);
     us.owns2 = [];
     if (us.owns.length != 0) {
       us.owns.forEach(function(el) {
@@ -469,12 +467,9 @@
 
     /* store function */
     this.navToOpenBook = function(tr) {
-      console.log($rootScope.products);
-      console.log(tr);
       $rootScope.bookToRead = $rootScope.products.find(function(bk) {
         return bk.bid == tr;
       });
-      console.log($rootScope.bookToRead);
       $rootScope.secondView = 'pages/reading.html';
       $('#btnStore').removeClass().addClass('btn navbar-btn btn-default');
       $('#btnMyBooks').removeClass().addClass('btn navbar-btn btn-default');
@@ -918,41 +913,67 @@
       
  // end of checkoutController
   } ]).controller('bookReviewsController', [ '$rootScope', '$scope', '$http', 'comms', function($rootScope, $scope, $http, comms) {
-    console.log($scope.bk);
-    console.log($rootScope.bk);
     
-  } ]).controller('readingController', [ '$rootScope', '$scope', '$http', 'comms', function($rootScope, $scope, $http, comms) {
 
+    } ]).controller('readingController', [ '$rootScope', '$scope', '$http', 'comms', '$interval', function($rootScope, $scope, $http, comms, $interval) {
+
+    /* to my surprize Opera doesn't support onunload and onbeforeunload
+     * and since we want to support al the browsers my kludge was to
+     * set up an interval and disable it if the user switches to another page
+     */
+       
+      var canint = $interval(function() {
+      if (window.pageYOffset > 1000) {
+        var payload = {};
+        payload.bid = $rootScope.bookToRead.bid;
+        payload.uid = $rootScope.user.uid;
+        payload.position = Math.ceil(window.pageYOffset);
+        console.log('sending to server');
+        console.log(payload);
+        comms.sync('saveMyPosition', payload, function() {
+          console.log('Position saved');
+        }, function() {
+          console.log('Failed to save position');
+        }, null);
+      }
+      ;
+    }, 2000);
+      
     $scope.$on('$destroy', function() {
+      $interval.cancel(canint);
       var payload = {};
       payload.bid = $rootScope.bookToRead.bid;
       payload.uid = $rootScope.user.uid;
-      payload.position = windows.pageYOffset;
+      payload.position = Math.ceil(window.pageYOffset);
+      console.log('sending to server');
+      console.log(payload);
       comms.sync('saveMyPosition', payload, function() {
         console.log('Position saved');
       }, function() {
-        consol.log('Failed to save position');
+        console.log('Failed to save position');
       }, null);
     });
     
     var oldpos={};
-    oldpos.bid=$rootScope.bookToRead.bid;
-    oldpos.uid=$rootScope.user;
-    comms.sync('getMyOldPosition',oldpos,function(){
-      
-    },function(){
-      
-    },null);
+    oldpos.bid = $rootScope.bookToRead.bid;
+    oldpos.uid = $rootScope.user.uid;
+    comms.sync('getMyOldPosition', oldpos, function(data, textStatus, jqXHR) {
+      oldpos = data.pos;
+      console.log(oldpos);
+      $('#myBookmark').removeClass('hidden');
+    }, function(data, textStatus, errorThrown) {
+      console.log(errorThrown);
+    }, null);
     
-    this.navToOldPos = function(){
-      
-      
-      window.scrollTo(500, 0);
-    };
-    this.cancelNav = function(){
+
+        this.navToOldPos = function() {
+      console.log(oldpos.position);
+      window.scrollTo(0, oldpos.position);
       $('#myBookmark').addClass('hidden');
     };
-    
+    this.cancelNav = function() {
+      $('#myBookmark').addClass('hidden');
+    };
     
   } ]);
 })();

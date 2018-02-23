@@ -244,7 +244,9 @@ public class listener1 implements ServletContextListener {
 			}
 			try {
 				Statement stmt = conn.createStatement();
+				System.out.println("building read position");
 				stmt.executeUpdate(ApplicationConstants.CREATE_READPOS_TABLE);
+
 				// commit update
 				conn.commit();
 				// close statements

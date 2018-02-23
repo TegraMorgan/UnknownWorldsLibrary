@@ -77,8 +77,8 @@ public interface ApplicationConstants {
 		public final String GET_TRANSACTIONS = "SELECT o.dateof as dateof, c.nickname as nickname, b.name as book_name, b.price as price FROM owns o INNER JOIN customers c ON o.uid=c.uid INNER JOIN books b ON o.bid=b.bid ORDER BY o.dateof desc";
 		
 		public final String GET_ALL_READERS_POSITIONS = "SELECT * FROM readPos";
-		public final String SELECT_READPOS_BY_UID = "SELECT r.bid as bid, r.uid as uid, b.name as name FROM readPos r INNER JOIN books b ON r.bid=b.bid WHERE uid=?";
+		public final String FIND_READPOS_BY_UID_BID = "SELECT r.bid as bid, r.uid as uid, r.position as position FROM readPos r WHERE r.bid=? AND r.uid=?";
 		public final String INSERT_NEW_READPOS = "INSERT INTO readPos VALUES (?,?,?)";
-		public final String UPDATE_READPOS_BY_BID_AND_UID = "UPDATE readPos SET position=?, WHERE bid=? AND uid=? ";
+		public final String UPDATE_READPOS_BY_BID_AND_UID = "UPDATE readPos SET position=? WHERE bid=? AND uid=? ";
 		public final String DELETE_READPOS = "DELETE FROM readPos WHERE bid=? uid=?";
 }
