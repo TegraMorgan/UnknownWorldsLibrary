@@ -157,18 +157,12 @@
         $rootScope.secondView = 'pages/admin/transaction.html';
         $('#btnUsers').removeClass('active');
         $('#btnMyBooks').removeClass('active');
-        $('#btnReviews').addClass('active');
-        $('#btnTransactions').removeClass('active');
+        $('#btnReviews').removeClass('active');
+        $('#btnTransactions').addClass('active');
         $scope.$apply();
       }, function(data, textStatus, errorThrown) {
         console.log(textStatus);
       }, null);
-
-      $rootScope.secondView = 'pages/admin/reviews.html';
-      $('#btnUsers').removeClass('active');
-      $('#btnMyBooks').removeClass('active');
-      $('#btnReviews').addClass('active');
-      $('#btnTransactions').removeClass('active');
 
     }; // end of navToTransactions
 
