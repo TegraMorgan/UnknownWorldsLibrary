@@ -73,8 +73,17 @@
 		"author": "Morrison & Gibb Ltd., Edinburgh",
 		"genre": "Psychology",
 		"price": 0.99,
-		"description": "o-day on all sides we hear of the extreme importance of Preventive Medicine and the great future which lies before us in this aspect of our work. If so, it follows that the study of infancy and childhood must rise into corresponding prominence. More and more a considerable part of the Profession must busy itself in nurseries and in schools, seeking to apply there the teachings of Psychology, Physiology, Heredity, and Hygiene. To work of this kind, in some of its aspects, this book may serve as an introduction. It deals with the influences which mould the mentality of the child and shape his conduct. Extreme susceptibility to these influences is the mark of the nervous child.",
+		"description": "o-day on all sides we hear of the extreme importance of Preventive Medicine and the great future which lies before us in this aspect of our work. If so, it follows that the study of infancy and childhood must rise into corresponding prominence. ",
 		"imageUrl": "img/books/theNervousChild.jpg",
 		"filepath": "pages/books/theNervousChild.html"
+	},
+	{
+		"name": "NERVES AND COMMON SENSE",
+		"author": "ANNIE PAYSON CALL",
+		"genre": "Psychology",
+		"price": 0.99,
+		"description": "PEOPLE form habits which cause nervous strain. When these habits have fixed themselves for long enough upon their victims, the nerves give way and severe depression or some other form of nervous prostration is the result.",
+		"imageUrl": "img/books/nerveCense.jpg",
+		"filepath": "pages/books/nervesCommon.html"
 	}
 ]
