@@ -1,21 +1,5 @@
 [
 	{
-		"name": "48 laws of power",
-		"author": "Robert Greene",
-		"genre": "Self Help",
-		"price": 12.3,
-		"description": "Some description",
-		"imageUrl": "img/books/48lawspower.jpg"
-	},
-	{
-		"name": "12 rules for life",
-		"author": "Jordan Peterson",
-		"genre": "Self Education",
-		"price": 17.1,
-		"description": "Some description",
-		"imageUrl": "img/books/12rulesforlife.jpg"
-	},
-	{
 		"name": "The Rational Male",
 		"author": "Rollo Tomassi",
 		"genre": "Game",
