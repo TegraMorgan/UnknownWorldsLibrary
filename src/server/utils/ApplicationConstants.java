@@ -44,7 +44,6 @@ public interface ApplicationConstants {
 		public final String FIND_CUSTOMER_BOOKS = "SELECT o.bid as bid, o.uid as uid, o.dateof as dateof FROM owns o WHERE o.uid=?";
 		public final String FIND_CUSTOMER_BY_NICKNAME = "SELECT * FROM customers WHERE nickname=?";
 		public final String FIND_CUSTOMER_BY_EMAIL = "SELECT * FROM customers WHERE email=?";
-		public final String UPDATE_CUSTOMER_BY_ID = "UPDATE customers SET username=?, email=?, phone=?,password=?, nickname=?, description=?,photo_url=?,st_name=?,bl_num=?,city_nm=?,zip=? WHERE uid=?";
 		public final String INSERT_NEW_ADMIN = "INSERT INTO admins VALUES (default,?,?)";
 		
 		public final String INSERT_BOOK = "INSERT INTO books VALUES (default,?,?,?,?,?,?,?)";
