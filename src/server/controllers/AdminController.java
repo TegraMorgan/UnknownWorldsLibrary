@@ -15,11 +15,11 @@ import server.utils.DataStructure;
 public class AdminController {
 
 	/**
-	 * Gets the admin.
+	 * Gets the admin by login and password.
 	 *
 	 * @param login the login
 	 * @param password the password
-	 * @return the admin
+	 * @return the admin object
 	 * @throws SQLException the SQL exception
 	 */
 	public static Admin getAdmin(String login, String password) throws SQLException {
