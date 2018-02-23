@@ -50,5 +50,23 @@
 		"description": "Thanks to Mr. S. M. Mitra, the well-known Hindu psychologist and politician, who has done so much to draw more closely together the land of his birth and that of his adoption, I am able to bring within reach of English children a number of typical Hindu Tales, translated by him from the Sanskrit, some of them culled from the ancient classics of India, others from widely separated sources. The latter have hitherto been quite inaccessible to western students, as they are not yet embodied in literature, but have been transmitted orally from generation to generation for many centuries.",
 		"imageUrl": "img/books/hindi1.jpg",
 		"filepath": "pages/books/HinduTales.html"
+	},
+	{
+		"name": "Dont Marry or, Advice on How, When and Who to Marry",
+		"author": "James W. Donovan",
+		"genre": "Sociology",
+		"price": 0.99,
+		"description": "It is not intended to advise against marriage, nor to draw the line too closely as to the don’t-marry class, but simply to hint at the errors of some persons who match badly on so long a contract.",
+		"imageUrl": "img/books/dontMarry.jpg",
+		"filepath": "pages/books/doNotMarry.html"
+	},
+	{
+		"name": "STUDY OF CHILD LIFE",
+		"author": "Marion Foster Washburne",
+		"genre": "Sociology",
+		"price": 0.99,
+		"description": "We must remember that children are much more alike than they are different. One may have blue eyes, another gray, another black, but they all have two. We are, therefore, in a position to make rules for creatures having two eyes and these rules apply to eyes of all colors. Children may be nervous, sanguine, bilious, or plethoric, but they all have the same kind of internal organs end the same general rules of health apply to them all.",
+		"imageUrl": "img/books/childLife.jpg",
+		"filepath": "pages/books/childLife.html"
 	}
 ]
