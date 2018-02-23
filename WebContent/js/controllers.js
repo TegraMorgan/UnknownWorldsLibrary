@@ -131,6 +131,7 @@
       }
       else {
         this.wrongLoginData = false;
+        myC.registrationSuccessful = false;
         var ctr = this;
         comms.call('POST', '/LogInServlet', this.oldCustomer, function(data, textStatus, jqXHR) {
           if (data.result == "fail") {
@@ -335,7 +336,6 @@
           $rootScope.$apply();
         }, function(data, textStatus, errorThrown) {
           alert('Server error. Please try again');
-          $('.debug2').text($('.debug2').text() + errorThrown);
         }, null);
       }
     }; // this.register
@@ -387,7 +387,6 @@
       $scope.$apply();
     }, function(data, textStatus, errorThrown) {
       alert('Server error. Please try again');
-      $('#debug2').text($('#debug2').text() + errorThrown);
     }, null); // comms.sync
 
     /* kludge - wait for async to complete */
