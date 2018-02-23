@@ -34,13 +34,13 @@ import server.utils.*;
 //import com.model.User;
 
 /**
- * This class creates the database tables and populates it with the data.
+ * The Class listener1.
  */
 @WebListener
 public class listener1 implements ServletContextListener {
 
 	/**
-	 * Default C'tor.
+	 * Instantiates a new listener 1.
 	 */
 	public listener1() {
 	}
@@ -290,7 +290,7 @@ public class listener1 implements ServletContextListener {
 	/**
 	 * Load admins.
 	 *
-	 * @param is the is
+	 * @param is input file stream
 	 * @return the collection
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
@@ -322,7 +322,7 @@ public class listener1 implements ServletContextListener {
 	/**
 	 * Load customers.
 	 *
-	 * @param is the is
+	 * @param is input file stream
 	 * @return the collection
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
@@ -352,7 +352,7 @@ public class listener1 implements ServletContextListener {
 	/**
 	 * Load books.
 	 *
-	 * @param is the is
+	 * @param is input file stream
 	 * @return the collection
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
@@ -383,7 +383,7 @@ public class listener1 implements ServletContextListener {
 	/**
 	 * Load likes.
 	 *
-	 * @param is the is
+	 * @param is input file stream
 	 * @return the collection
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
@@ -412,7 +412,7 @@ public class listener1 implements ServletContextListener {
 	/**
 	 * Load owns.
 	 *
-	 * @param is the is
+	 * @param is input file stream
 	 * @return the collection
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
@@ -441,7 +441,7 @@ public class listener1 implements ServletContextListener {
 	/**
 	 * Load reviews.
 	 *
-	 * @param is the is
+	 * @param is input file stream
 	 * @return the collection
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
