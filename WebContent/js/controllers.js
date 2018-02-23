@@ -917,7 +917,7 @@
 
     } ]).controller('readingController', [ '$rootScope', '$scope', '$http', 'comms', '$interval','$window', function($rootScope, $scope, $http, comms, $interval,$window) {
 
-     
+     /* this function fill save reader position if he chooses to go to the store or his books page */
     $scope.$on('$destroy', function() {
             var payload = {};
       payload.bid = $rootScope.bookToRead.bid;
@@ -961,12 +961,12 @@
       $('#myBookmark').addClass('hidden');
     };
     
+    /* this function will save the reader position when he closes the window */
     $window.onbeforeunload = function(){
       var pos = {};
       pos.bid = oldpos.bid;
       pos.uid = oldpos.uid;
       pos.position = Math.ceil(window.pageYOffset);
-      var values = angular.toJson(pos);
       comms.sync('saveMyPosition',pos,null,null,null);
   }
   
