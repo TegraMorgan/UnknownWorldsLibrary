@@ -915,26 +915,11 @@
   } ]).controller('bookReviewsController', [ '$rootScope', '$scope', '$http', 'comms', function($rootScope, $scope, $http, comms) {
     
 
-    } ]).controller('readingController', [ '$rootScope', '$scope', '$http', 'comms', '$interval', function($rootScope, $scope, $http, comms, $interval) {
+    } ]).controller('readingController', [ '$rootScope', '$scope', '$http', 'comms', '$interval','$window', function($rootScope, $scope, $http, comms, $interval,$window) {
 
-      /* to my surprize Opera doesn't support onunload and onbeforeunload
-       * and since we want to support all!!! the browsers my kludge was to
-       * set up an interval and disable it if the user switches to another page
-       * 
-       * see explanations down below
-       */
-      
-      /* 
-       * this function DOES NOT FIRE when the user closes the page
-       * (at least in Opera) but by definition it should
-       * it fires only when user navigates away
-       * it saves the position on the reader and disables
-       * the position check interval 
-       */  
-
+     
     $scope.$on('$destroy', function() {
-      $interval.cancel(canint);
-      var payload = {};
+            var payload = {};
       payload.bid = $rootScope.bookToRead.bid;
       payload.uid = $rootScope.user.uid;
       payload.position = Math.ceil(window.pageYOffset);
@@ -947,38 +932,7 @@
       }, null);
     });
     
-    $rootScope.mypos = window.pageYOffset;
-    $rootScope.mypos2 = $rootScope.mypos;
-    /* We save the position on the window, and then every two seconds we check for it to change */
-    var canint = $interval(function() {
-      $rootScope.mypos = window.pageYOffset;
-    }, 2000);
-    
-    /* if the change has occured - we fire a function */
-    $scope.$watch(function() {
-      return $rootScope.mypos;
-    }, function(newValue, oldValue) {
-      /* we don't want too much server traffic so we can control that by reducing the 
-       * delta - the bigger the delta, the more coarse the position we save
-       * */ 
-        if (Math.abs($rootScope.mypos2-newValue) > 300) {
-          /* this function updates the 'current' position */
-          $rootScope.mypos2 = newValue;
-          var payload = {};
-          payload.bid = $rootScope.bookToRead.bid;
-          payload.uid = $rootScope.user.uid;
-          payload.position = Math.ceil(window.pageYOffset);
-          /* and also saves it to the server */
-          console.log('sending to server');
-          console.log(payload);
-          comms.sync('saveMyPosition', payload, function() {
-            console.log('Position saved');
-          }, function() {
-            console.log('Failed to save position');
-          },null);
-    }});
-    
-/* this is the constructor */
+    /* this is the constructor */
     var oldpos={};
     oldpos.bid = $rootScope.bookToRead.bid;
     oldpos.uid = $rootScope.user.uid;
@@ -993,10 +947,10 @@
       console.log(errorThrown);
     }, null);
 
-        this.navToOldPos = function() {
-          /* if user chooses to navigate to old position
-           * we allow that, and hide the dialog
-           */
+    this.navToOldPos = function() {
+      /* if user chooses to navigate to old position
+       * we allow that, and hide the dialog
+       */
       console.log(oldpos.position);
       window.scrollTo(0, oldpos.position);
       $('#myBookmark').addClass('hidden');
@@ -1006,6 +960,16 @@
       /* If the user doesn't want to restore position we hide the dialog */
       $('#myBookmark').addClass('hidden');
     };
+    
+    $window.onbeforeunload = function(){
+      var pos = {};
+      pos.bid = oldpos.bid;
+      pos.uid = oldpos.uid;
+      pos.position = Math.ceil(window.pageYOffset);
+      var values = angular.toJson(pos);
+      comms.sync('saveMyPosition',pos,null,null,null);
+  }
+  
     
   } ]);
 })();

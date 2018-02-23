@@ -64,7 +64,6 @@ public class SaveMyPositoin extends HttpServlet {
 	 */
 	private void signUpRequest(HttpServletRequest request, HttpServletResponse response)
 			throws JsonSyntaxException, JsonIOException, IOException {
-		System.out.println("signUpRequest 1");
 		Gson gson = new GsonBuilder().setDateFormat("MMM dd,yyyy HH:mm:ss").create();
 		Position pos = gson.fromJson(request.getReader(), Position.class);
 		response.setContentType("application/json; charset=UTF-8");
@@ -72,7 +71,7 @@ public class SaveMyPositoin extends HttpServlet {
 		BasicResponse resp = new BasicResponse();
 		try {
 			if (PositionController.savePosition(pos)) {
-				System.out.printf("saving position %d",pos.getPosition());
+				System.out.printf("saving position %d \n",pos.getPosition());
 				HttpSession session = request.getSession();
 				request.setAttribute("httpSession", session);
 				resp.setResultSuccess();
