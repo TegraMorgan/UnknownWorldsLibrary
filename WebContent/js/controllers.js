@@ -40,7 +40,7 @@
 
     /* login variables */
     this.wrongLoginData = false;
-
+    var myC = this;
     /* Register variables */
     var fieldEmpty = "This is a reqired field";
     var usernameError = "Username must be unique, can have only English characters and numbers and can't be longer than 10 characters";
@@ -325,7 +325,7 @@
         passed = false;
         this.newPhotoOk = false;
       }
-      var myC = this;
+      
       if (passed == true) {
         /* send this.newCustomer to server */
         /* alert('user passed all the tests - attempting to send the post request'); */
