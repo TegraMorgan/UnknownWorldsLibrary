@@ -19,13 +19,17 @@ import server.model.Review;
 import server.response.BasicResponse;
 
 /**
- * Servlet implementation class ApproveReviewServlet
+ * Servlet implementation class ApproveReviewServlet.
  */
 @WebServlet("/DisproveReview")
 public class DisproveReview extends HttpServlet {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/**
+	 * Instantiates a new disprove review.
+	 *
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public DisproveReview() {
@@ -34,6 +38,12 @@ public class DisproveReview extends HttpServlet {
 	}
 
 	/**
+	 * Do get.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
@@ -44,6 +54,12 @@ public class DisproveReview extends HttpServlet {
 	}
 
 	/**
+	 * Do post.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
@@ -53,6 +69,15 @@ public class DisproveReview extends HttpServlet {
 		handleApprove(request, response);
 	}
 
+	/**
+	 * Testing.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws JsonSyntaxException the json syntax exception
+	 * @throws JsonIOException the json IO exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private void testing(HttpServletRequest request, HttpServletResponse response)
 			throws JsonSyntaxException, JsonIOException, IOException {
 		response.setContentType("application/json; charset=UTF-8");
@@ -71,6 +96,15 @@ public class DisproveReview extends HttpServlet {
 		}
 	}
 
+	/**
+	 * Handle approve.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws JsonSyntaxException the json syntax exception
+	 * @throws JsonIOException the json IO exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private void handleApprove(HttpServletRequest request, HttpServletResponse response)
 			throws JsonSyntaxException, JsonIOException, IOException {
 		response.setContentType("application/json; charset=UTF-8");

@@ -9,8 +9,16 @@ import server.model.Transaction;
 import server.utils.ApplicationConstants;
 import server.utils.DataStructure;
 
+/**
+ * The Class TransactionController.
+ */
 public class TransactionController {
 
+	/**
+	 * Gets the transactions.
+	 *
+	 * @return the transactions
+	 */
 	public static ArrayList<Transaction> getTransactions() {
 		ArrayList<Transaction> result = new ArrayList<Transaction>();
 		Connection con = null;

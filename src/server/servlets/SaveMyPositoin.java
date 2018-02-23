@@ -20,13 +20,17 @@ import server.model.Position;
 import server.response.BasicResponse;
 
 /**
- * Servlet implementation class UserServlet
+ * Servlet implementation class UserServlet.
  */
 @WebServlet("/saveMyPosition")
 public class SaveMyPositoin extends HttpServlet {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/**
+	 * Instantiates a new save my positoin.
+	 *
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public SaveMyPositoin() {
@@ -35,6 +39,12 @@ public class SaveMyPositoin extends HttpServlet {
 	}
 
 	/**
+	 * Do post.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
@@ -43,6 +53,15 @@ public class SaveMyPositoin extends HttpServlet {
 		signUpRequest(request, response);
 	}
 
+	/**
+	 * Sign up request.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws JsonSyntaxException the json syntax exception
+	 * @throws JsonIOException the json IO exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private void signUpRequest(HttpServletRequest request, HttpServletResponse response)
 			throws JsonSyntaxException, JsonIOException, IOException {
 		System.out.println("signUpRequest 1");

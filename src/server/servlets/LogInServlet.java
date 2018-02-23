@@ -20,14 +20,18 @@ import server.response.LogInResponse;
 import server.controllers.*;
 
 /**
- * Servlet implementation class LogInServlet
+ * Servlet implementation class LogInServlet.
  */
 
 @WebServlet("/LogInServlet")
 public class LogInServlet extends HttpServlet {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/**
+	 * Instantiates a new log in servlet.
+	 *
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public LogInServlet() {
@@ -36,6 +40,12 @@ public class LogInServlet extends HttpServlet {
 	}
 
 	/**
+	 * Do post.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
@@ -44,6 +54,15 @@ public class LogInServlet extends HttpServlet {
 		logInRequest(request, response);
 	}
 
+	/**
+	 * Log in request.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws JsonSyntaxException the json syntax exception
+	 * @throws JsonIOException the json IO exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private void logInRequest(HttpServletRequest request, HttpServletResponse response)
 			throws JsonSyntaxException, JsonIOException, IOException {
 		Gson gson = new GsonBuilder().create();

@@ -8,17 +8,38 @@ import java.sql.SQLException;
 import server.utils.ApplicationConstants;
 import server.utils.DataStructure;
 
+/**
+ * The Class Like.
+ */
 public class Like {
+	
+	/** The uid. */
 	private int uid;
+	
+	/** The bid. */
 	private int bid;
+	
+	/** The b name. */
 	private String bName;
 	
+	/**
+	 * Instantiates a new like.
+	 *
+	 * @param rs the rs
+	 * @throws SQLException the SQL exception
+	 */
 	public Like(ResultSet rs) throws SQLException {
 		this.bid=rs.getInt("bid");
 		this.uid=rs.getInt("uid");
 		this.bName=rs.getString("name");
 	}
 	
+	/**
+	 * Adds the like to DB.
+	 *
+	 * @return the int
+	 * @throws SQLException the SQL exception
+	 */
 	public int addLikeToDB() throws SQLException {
 		PreparedStatement stmt = null;
 		Connection con = null;
@@ -42,6 +63,13 @@ public class Like {
 		return this.bid;
 		
 	}
+	
+	/**
+	 * Delete like at DB.
+	 *
+	 * @return the int
+	 * @throws SQLException the SQL exception
+	 */
 	public int deleteLikeAtDB() throws SQLException {
 		PreparedStatement stmt = null;
 		Connection con = null;
@@ -65,26 +93,56 @@ public class Like {
 		return this.bid;
 	}
 
+	/**
+	 * Gets the uid.
+	 *
+	 * @return the uid
+	 */
 	public int getUid() {
 		return uid;
 	}
 
+	/**
+	 * Sets the uid.
+	 *
+	 * @param uID the new uid
+	 */
 	public void setUid(int uID) {
 		this.uid = uID;
 	}
 
+	/**
+	 * Gets the bid.
+	 *
+	 * @return the bid
+	 */
 	public int getBid() {
 		return bid;
 	}
 
+	/**
+	 * Sets the bid.
+	 *
+	 * @param bID the new bid
+	 */
 	public void setBid(int bID) {
 		this.bid = bID;
 	}
 
+	/**
+	 * Gets the b name.
+	 *
+	 * @return the b name
+	 */
 	public String getbName() {
 		return bName;
 	}
 
+	/**
+	 * Sets the b name.
+	 *
+	 * @param bName the new b name
+	 */
 	public void setbName(String bName) {
 		this.bName = bName;
 	}

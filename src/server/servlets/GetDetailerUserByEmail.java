@@ -25,14 +25,21 @@ import server.model.*;
 import server.response.DetailedUserResponse;
 
 /**
- * Servlet implementation class addLike
- * 
+ * Servlet implementation class addLike.
  */
 @WebServlet("/DetailedUserByEmail")
 public class GetDetailerUserByEmail extends HttpServlet {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/**
+	 * Do get.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
@@ -42,6 +49,12 @@ public class GetDetailerUserByEmail extends HttpServlet {
 	}
 
 	/**
+	 * Do post.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
@@ -50,6 +63,14 @@ public class GetDetailerUserByEmail extends HttpServlet {
 		getDetailedUser(request, response);
 	}
 
+	/**
+	 * Gets the detailed user.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @return the detailed user
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private void getDetailedUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setContentType("application/json; charset=UTF-8");
 		PrintWriter printWriter = response.getWriter();

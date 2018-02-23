@@ -10,15 +10,42 @@ import java.sql.SQLException;
 import server.utils.ApplicationConstants;
 import server.utils.DataStructure;
 
+/**
+ * The Class Review.
+ */
 public class Review implements Serializable {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The uid. */
 	private int uid;
+	
+	/** The bid. */
 	private int bid;
+	
+	/** The nickname. */
 	private String nickname;
+	
+	/** The book name. */
 	private String bookName;
+	
+	/** The approved by. */
 	private int approvedBy;
+	
+	/** The review body. */
 	private String reviewBody;
 
+	/**
+	 * Instantiates a new review.
+	 *
+	 * @param uId the u id
+	 * @param bId the b id
+	 * @param nIckname the n ickname
+	 * @param bOokName the b ook name
+	 * @param aPprovedBy the a pproved by
+	 * @param rEviewBody the r eview body
+	 */
 	public Review(int uId, int bId, String nIckname, String bOokName, int aPprovedBy, String rEviewBody) {
 		this.uid = uId;
 		this.bid = bId;
@@ -28,6 +55,12 @@ public class Review implements Serializable {
 		this.reviewBody = rEviewBody;
 	}
 
+	/**
+	 * Instantiates a new review.
+	 *
+	 * @param rs the rs
+	 * @throws SQLException the SQL exception
+	 */
 	public Review(ResultSet rs) throws SQLException {
 		this.uid = rs.getInt("uid");
 		this.bid = rs.getInt("bid");
@@ -37,6 +70,12 @@ public class Review implements Serializable {
 		this.reviewBody = rs.getString("text");
 	}
 
+	/**
+	 * Adds the to DB.
+	 *
+	 * @return the int
+	 * @throws SQLException the SQL exception
+	 */
 	public int addToDB() throws SQLException {
 		PreparedStatement stmt = null;
 		Connection con = null;
@@ -66,6 +105,12 @@ public class Review implements Serializable {
 
 	}
 
+	/**
+	 * Approve.
+	 *
+	 * @return the int
+	 * @throws SQLException the SQL exception
+	 */
 	public int approve() throws SQLException {
 		PreparedStatement stmt = null;
 		Connection con = null;
@@ -91,6 +136,12 @@ public class Review implements Serializable {
 
 	}
 
+	/**
+	 * Disprove.
+	 *
+	 * @return the int
+	 * @throws SQLException the SQL exception
+	 */
 	public int disprove() throws SQLException {
 		PreparedStatement stmt = null;
 		Connection con = null;
@@ -125,50 +176,110 @@ public class Review implements Serializable {
 
 	}
 
+	/**
+	 * Gets the uid.
+	 *
+	 * @return the uid
+	 */
 	public int getUid() {
 		return uid;
 	}
 
+	/**
+	 * Sets the uid.
+	 *
+	 * @param uid the new uid
+	 */
 	public void setUid(int uid) {
 		this.uid = uid;
 	}
 
+	/**
+	 * Gets the bid.
+	 *
+	 * @return the bid
+	 */
 	public int getBid() {
 		return bid;
 	}
 
+	/**
+	 * Sets the bid.
+	 *
+	 * @param bid the new bid
+	 */
 	public void setBid(int bid) {
 		this.bid = bid;
 	}
 
+	/**
+	 * Gets the nickname.
+	 *
+	 * @return the nickname
+	 */
 	public String getNickname() {
 		return nickname;
 	}
 
+	/**
+	 * Sets the nickname.
+	 *
+	 * @param nickname the new nickname
+	 */
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
 
+	/**
+	 * Gets the book name.
+	 *
+	 * @return the book name
+	 */
 	public String getBookName() {
 		return bookName;
 	}
 
+	/**
+	 * Sets the book name.
+	 *
+	 * @param bookName the new book name
+	 */
 	public void setBookName(String bookName) {
 		this.bookName = bookName;
 	}
 
+	/**
+	 * Gets the approved by.
+	 *
+	 * @return the approved by
+	 */
 	public int getApprovedBy() {
 		return approvedBy;
 	}
 
+	/**
+	 * Sets the approved by.
+	 *
+	 * @param approvedBy the new approved by
+	 */
 	public void setApprovedBy(int approvedBy) {
 		this.approvedBy = approvedBy;
 	}
 
+	/**
+	 * Gets the review body.
+	 *
+	 * @return the review body
+	 */
 	public String getReviewBody() {
 		return reviewBody;
 	}
 
+	/**
+	 * Sets the review body.
+	 *
+	 * @param reviewBody the new review body
+	 */
 	public void setReviewBody(String reviewBody) {
 		this.reviewBody = reviewBody;
 	}

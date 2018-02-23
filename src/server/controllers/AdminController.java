@@ -9,8 +9,19 @@ import server.model.Admin;
 import server.utils.ApplicationConstants;
 import server.utils.DataStructure;
 
+/**
+ * The Class AdminController.
+ */
 public class AdminController {
 
+	/**
+	 * Gets the admin.
+	 *
+	 * @param login the login
+	 * @param password the password
+	 * @return the admin
+	 * @throws SQLException the SQL exception
+	 */
 	public static Admin getAdmin(String login, String password) throws SQLException {
 		Admin result = null;
 		Connection con = null;

@@ -21,13 +21,17 @@ import server.response.BasicResponse;
 import server.response.GetMyOldPositionResponse;
 
 /**
- * Servlet implementation class UserServlet
+ * Servlet implementation class UserServlet.
  */
 @WebServlet("/getMyOldPosition")
 public class GetMyOldPositionServlet extends HttpServlet {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/**
+	 * Instantiates a new gets the my old position servlet.
+	 *
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public GetMyOldPositionServlet() {
@@ -36,6 +40,12 @@ public class GetMyOldPositionServlet extends HttpServlet {
 	}
 
 	/**
+	 * Do post.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
@@ -44,6 +54,15 @@ public class GetMyOldPositionServlet extends HttpServlet {
 		signUpRequest(request, response);
 	}
 
+	/**
+	 * Sign up request.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws JsonSyntaxException the json syntax exception
+	 * @throws JsonIOException the json IO exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private void signUpRequest(HttpServletRequest request, HttpServletResponse response)
 			throws JsonSyntaxException, JsonIOException, IOException {
 		System.out.println("signUpRequest 1");

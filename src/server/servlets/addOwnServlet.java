@@ -19,16 +19,23 @@ import server.response.BasicResponse;
 import server.response.BuyBookResponse;
 
 /**
- * Servlet implementation class addLike
- * 
- * @author toshiba2015
+ * Servlet implementation class addLike.
  *
+ * @author toshiba2015
  */
 @WebServlet("/AddOwn")
 public class addOwnServlet extends HttpServlet {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/**
+	 * Do post.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
@@ -38,11 +45,12 @@ public class addOwnServlet extends HttpServlet {
 	}
 
 	/**
-	 * 
-	 * @param request
-	 * @param response
-	 * @throws ServletException
-	 * @throws IOException
+	 * Insert request.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	protected void insertRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

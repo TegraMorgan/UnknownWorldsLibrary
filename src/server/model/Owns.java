@@ -12,30 +12,60 @@ import java.time.format.DateTimeFormatter;
 import server.utils.ApplicationConstants;
 import server.utils.DataStructure;
 
+/**
+ * The Class Owns.
+ */
 public class Owns implements Serializable {
-	/**
-	 * 
-	 */
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
+	
+	/** The uid. */
 	private int uid;
+	
+	/** The bid. */
 	private int bid;
+	
+	/** The date of. */
 	private String dateOf;
 
+	/**
+	 * Instantiates a new owns.
+	 */
 	// Dummy constructor for json parsing
 	public Owns() {};
 	
+	/**
+	 * Instantiates a new owns.
+	 *
+	 * @param uId the u id
+	 * @param bId the b id
+	 * @param dAteOf the d ate of
+	 */
 	public Owns(int uId, int bId, String dAteOf) {
 		this.uid = uId;
 		this.bid = bId;
 		this.dateOf = dAteOf;
 	}
 
+	/**
+	 * Instantiates a new owns.
+	 *
+	 * @param rs the rs
+	 * @throws SQLException the SQL exception
+	 */
 	public Owns(ResultSet rs) throws SQLException {
 		this.uid = rs.getInt("uid");
 		this.bid = rs.getInt("bid");
 		this.dateOf = rs.getTimestamp("dateof").toString();
 	}
 
+	/**
+	 * Adds the to DB.
+	 *
+	 * @return the int
+	 * @throws SQLException the SQL exception
+	 */
 	public int addToDB()  throws SQLException {
 		PreparedStatement stmt = null;
 		Connection con = null;
@@ -64,26 +94,56 @@ public class Owns implements Serializable {
 		return this.bid;
 	}
 
+	/**
+	 * Gets the uid.
+	 *
+	 * @return the uid
+	 */
 	public int getUid() {
 		return uid;
 	}
 
+	/**
+	 * Sets the uid.
+	 *
+	 * @param uid the new uid
+	 */
 	public void setUid(int uid) {
 		this.uid = uid;
 	}
 
+	/**
+	 * Gets the bid.
+	 *
+	 * @return the bid
+	 */
 	public int getBid() {
 		return bid;
 	}
 
+	/**
+	 * Sets the bid.
+	 *
+	 * @param bid the new bid
+	 */
 	public void setBid(int bid) {
 		this.bid = bid;
 	}
 
+	/**
+	 * Gets the date of.
+	 *
+	 * @return the date of
+	 */
 	public String getDateOf() {
 		return dateOf;
 	}
 
+	/**
+	 * Sets the date of.
+	 *
+	 * @param dateOf the new date of
+	 */
 	public void setDateOf(String dateOf) {
 		this.dateOf = dateOf;
 	}

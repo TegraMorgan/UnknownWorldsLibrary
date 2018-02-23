@@ -9,8 +9,16 @@ import server.model.Review;
 import server.utils.ApplicationConstants;
 import server.utils.DataStructure;
 
+/**
+ * The Class ReviewController.
+ */
 public class ReviewController {
 
+	/**
+	 * Gets the unapproved reviews.
+	 *
+	 * @return the unapproved reviews
+	 */
 	public static ArrayList<Review> getUnapprovedReviews() {
 		ArrayList<Review> result = new ArrayList<Review>();
 		Connection con = null;

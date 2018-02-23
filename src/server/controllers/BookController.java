@@ -14,8 +14,17 @@ import server.model.Review;
 import server.utils.ApplicationConstants;
 import server.utils.DataStructure;
 
+/**
+ * The Class BookController.
+ */
 public class BookController {
 
+	/**
+	 * Gets the book by id.
+	 *
+	 * @param bid the bid
+	 * @return the book
+	 */
 	public static Book GetBookById(int bid) {
 		Book result = null;
 		Connection con = null;
@@ -50,6 +59,11 @@ public class BookController {
 		return result;
 	}
 
+	/**
+	 * Gets the all books.
+	 *
+	 * @return the all books
+	 */
 	public static ArrayList<Book> getAllBooks() {
 		ArrayList<Book> result = new ArrayList<Book>();
 		Connection conn = null;
@@ -134,6 +148,14 @@ public class BookController {
 		}
 	}
 
+	/**
+	 * Filter reviews.
+	 *
+	 * @param bId the b id
+	 * @param reviewsSet the reviews set
+	 * @return the linked list
+	 * @throws SQLException the SQL exception
+	 */
 	public static LinkedList<Review> filterReviews(int bId, ResultSet reviewsSet) throws SQLException {
 		LinkedList<Review> result = new LinkedList<Review>();
 		while (reviewsSet.next()) {
@@ -144,6 +166,14 @@ public class BookController {
 		return result;
 	}
 
+	/**
+	 * Filter likes.
+	 *
+	 * @param bId the b id
+	 * @param likesSet the likes set
+	 * @return the linked list
+	 * @throws SQLException the SQL exception
+	 */
 	public static LinkedList<String> filterLikes(int bId, ResultSet likesSet) throws SQLException {
 		LinkedList<String> result = new LinkedList<String>();
 		while (likesSet.next()) {

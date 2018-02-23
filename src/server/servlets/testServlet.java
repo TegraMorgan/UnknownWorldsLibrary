@@ -19,13 +19,17 @@ import com.google.gson.GsonBuilder;
 import server.model.Customer;
 
 /**
- * This servlet is for connection testing purposes
+ * This servlet is for connection testing purposes.
  */
 @WebServlet(urlPatterns = "/testServlet")
 public class testServlet extends HttpServlet {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/**
+	 * Instantiates a new test servlet.
+	 *
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public testServlet() {
@@ -34,6 +38,12 @@ public class testServlet extends HttpServlet {
 	}
 
 	/**
+	 * Do get.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
@@ -44,6 +54,12 @@ public class testServlet extends HttpServlet {
 	}
 
 	/**
+	 * Do post.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
@@ -53,6 +69,14 @@ public class testServlet extends HttpServlet {
 		handleRequest(request, response);
 	}
 
+	/**
+	 * Handle request.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private void handleRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setStatus(HttpServletResponse.SC_OK);

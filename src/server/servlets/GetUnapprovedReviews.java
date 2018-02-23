@@ -26,13 +26,17 @@ import server.response.GetAllUsersResponse;
 import server.response.GetUnapprovedReviewsResponse;
 
 /**
- * Servlet implementation class GetAllUsersServlet
+ * Servlet implementation class GetAllUsersServlet.
  */
 @WebServlet("/GetUnappRev")
 public class GetUnapprovedReviews extends HttpServlet {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/**
+	 * Instantiates a new gets the unapproved reviews.
+	 *
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public GetUnapprovedReviews() {
@@ -41,6 +45,12 @@ public class GetUnapprovedReviews extends HttpServlet {
 	}
 
 	/**
+	 * Do get.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
@@ -51,6 +61,12 @@ public class GetUnapprovedReviews extends HttpServlet {
 	}
 
 	/**
+	 * Do post.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
@@ -60,6 +76,14 @@ public class GetUnapprovedReviews extends HttpServlet {
 		handleRequest(request, response);
 	}
 
+	/**
+	 * Handle request.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private void handleRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		GetUnapprovedReviewsResponse resp = new GetUnapprovedReviewsResponse();

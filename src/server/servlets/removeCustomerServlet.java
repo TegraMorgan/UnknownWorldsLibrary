@@ -19,13 +19,17 @@ import server.model.Customer;
 import server.response.BasicResponse;
 
 /**
- * Servlet implementation class removeCustomerServlet
+ * Servlet implementation class removeCustomerServlet.
  */
 @WebServlet("/removeCustomer")
 public class removeCustomerServlet extends HttpServlet {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
        
     /**
+     * Instantiates a new removes the customer servlet.
+     *
      * @see HttpServlet#HttpServlet()
      */
     public removeCustomerServlet() {
@@ -34,6 +38,12 @@ public class removeCustomerServlet extends HttpServlet {
     }
 
 	/**
+	 * Do get.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -42,12 +52,27 @@ public class removeCustomerServlet extends HttpServlet {
 		}
 
 	/**
+	 * Do post.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		removeCustomer(request, response);
 	}
+	
+	/**
+	 * Removes the customer.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private void removeCustomer(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("application/json; charset=UTF-8");

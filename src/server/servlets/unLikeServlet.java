@@ -24,14 +24,21 @@ import server.model.*;
 import server.response.BasicResponse;
 
 /**
- * Servlet implementation class unLike
- *  
+ * Servlet implementation class unLike.
  */
 @WebServlet("/unLike")
 public class unLikeServlet extends HttpServlet {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 	
 	/**
+	 * Do post.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
@@ -40,6 +47,14 @@ public class unLikeServlet extends HttpServlet {
 		deleteRequest(request, response);
 	}
 
+	/**
+	 * Delete request.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private void deleteRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("application/json; charset=UTF-8");

@@ -29,13 +29,17 @@ import server.response.GetTransactionsResponse;
 import server.response.GetUnapprovedReviewsResponse;
 
 /**
- * Servlet implementation class GetAllUsersServlet
+ * Servlet implementation class GetAllUsersServlet.
  */
 @WebServlet("/GetTransactions")
 public class GetTransactions extends HttpServlet {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/**
+	 * Instantiates a new gets the transactions.
+	 *
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public GetTransactions() {
@@ -44,6 +48,12 @@ public class GetTransactions extends HttpServlet {
 	}
 
 	/**
+	 * Do get.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
@@ -54,6 +64,12 @@ public class GetTransactions extends HttpServlet {
 	}
 
 	/**
+	 * Do post.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
@@ -63,6 +79,14 @@ public class GetTransactions extends HttpServlet {
 		handleRequest(request, response);
 	}
 
+	/**
+	 * Handle request.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private void handleRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		GetTransactionsResponse resp = new GetTransactionsResponse();

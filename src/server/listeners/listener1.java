@@ -34,7 +34,7 @@ import server.utils.*;
 //import com.model.User;
 
 /**
- * This class creates the database tables and populates it with the data
+ * This class creates the database tables and populates it with the data.
  */
 @WebListener
 public class listener1 implements ServletContextListener {
@@ -45,6 +45,9 @@ public class listener1 implements ServletContextListener {
 	public listener1() {
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletContextListener#contextDestroyed(javax.servlet.ServletContextEvent)
+	 */
 	@Override
 	public void contextDestroyed(ServletContextEvent event) {
 		ServletContext cntx = event.getServletContext();
@@ -59,6 +62,9 @@ public class listener1 implements ServletContextListener {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.servlet.ServletContextListener#contextInitialized(javax.servlet.ServletContextEvent)
+	 */
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
 		ServletContext cntx = event.getServletContext();
@@ -265,6 +271,12 @@ public class listener1 implements ServletContextListener {
 
 	}
 
+	/**
+	 * Table already exists.
+	 *
+	 * @param e the e
+	 * @return true, if successful
+	 */
 	private boolean tableAlreadyExists(SQLException e) {
 		boolean exists;
 		if (e.getSQLState().equals("X0Y32")) {
@@ -275,6 +287,13 @@ public class listener1 implements ServletContextListener {
 		return exists;
 	}
 
+	/**
+	 * Load admins.
+	 *
+	 * @param is the is
+	 * @return the collection
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	/* this function should be made generic */
 	private Collection<Admin> loadAdmins(InputStream is) throws IOException {
 		try {
@@ -300,6 +319,13 @@ public class listener1 implements ServletContextListener {
 		}
 	}
 
+	/**
+	 * Load customers.
+	 *
+	 * @param is the is
+	 * @return the collection
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private Collection<Customer> loadCustomers(InputStream is) throws IOException {
 		try {
 			if (is != null) {
@@ -323,6 +349,13 @@ public class listener1 implements ServletContextListener {
 		}
 	}
 
+	/**
+	 * Load books.
+	 *
+	 * @param is the is
+	 * @return the collection
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private Collection<Book> loadBooks(InputStream is) throws IOException {
 		try {
 			if (is != null) {
@@ -347,6 +380,13 @@ public class listener1 implements ServletContextListener {
 
 	}
 
+	/**
+	 * Load likes.
+	 *
+	 * @param is the is
+	 * @return the collection
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private Collection<server.model.Like> loadLikes(InputStream is) throws IOException {
 		try {
 			if (is != null) {
@@ -369,6 +409,13 @@ public class listener1 implements ServletContextListener {
 
 	}
 	
+	/**
+	 * Load owns.
+	 *
+	 * @param is the is
+	 * @return the collection
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private Collection<Owns> loadOwns(InputStream is) throws IOException {
 		try {
 			if (is != null) {
@@ -391,6 +438,13 @@ public class listener1 implements ServletContextListener {
 
 	}
 
+	/**
+	 * Load reviews.
+	 *
+	 * @param is the is
+	 * @return the collection
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private Collection<Review> loadReviews(InputStream is) throws IOException {
 		try {
 			if (is != null) {

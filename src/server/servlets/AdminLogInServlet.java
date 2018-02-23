@@ -21,16 +21,24 @@ import server.controllers.*;
 
 
 /**
- * Servlet implementation class AdminLogInServlet
+ * Servlet implementation class AdminLogInServlet.
  */
 
 @WebServlet("/AdminLogIn")
 public class AdminLogInServlet extends HttpServlet {
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 	
 
 
 	/**
+	 * Do post.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
@@ -39,6 +47,15 @@ public class AdminLogInServlet extends HttpServlet {
 		adminlogInRequest(request, response);
 	}
 	
+	/**
+	 * Adminlog in request.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws JsonSyntaxException the json syntax exception
+	 * @throws JsonIOException the json IO exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private void adminlogInRequest(HttpServletRequest request, HttpServletResponse response)
 			throws JsonSyntaxException, JsonIOException, IOException {
 		Gson gson = new GsonBuilder().create();

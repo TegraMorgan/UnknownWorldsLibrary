@@ -10,8 +10,17 @@ import server.model.Position;
 import server.utils.ApplicationConstants;
 import server.utils.DataStructure;
 
+/**
+ * The Class PositionController.
+ */
 public class PositionController {
 
+	/**
+	 * Save position.
+	 *
+	 * @param pos the pos
+	 * @return true, if successful
+	 */
 	public static boolean savePosition(Position pos) {
 		boolean result = false;
 		boolean update = false;
@@ -93,6 +102,12 @@ public class PositionController {
 		return result;
 	}
 
+	/**
+	 * Gets the old position.
+	 *
+	 * @param pos the pos
+	 * @return the old position
+	 */
 	public static Position getOldPosition(Position pos) {
 		Position result = null;
 		Connection con = null;
