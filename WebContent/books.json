@@ -68,5 +68,41 @@
 		"description": "We must remember that children are much more alike than they are different. One may have blue eyes, another gray, another black, but they all have two. We are, therefore, in a position to make rules for creatures having two eyes and these rules apply to eyes of all colors. Children may be nervous, sanguine, bilious, or plethoric, but they all have the same kind of internal organs end the same general rules of health apply to them all.",
 		"imageUrl": "img/books/childLife.jpg",
 		"filepath": "pages/books/childLife.html"
+	},
+	{
+		"name": "The Nervous Child",
+		"author": "Morrison & Gibb Ltd., Edinburgh",
+		"genre": "Psychology",
+		"price": 0.99,
+		"description": "o-day on all sides we hear of the extreme importance of Preventive Medicine and the great future which lies before us in this aspect of our work. If so, it follows that the study of infancy and childhood must rise into corresponding prominence. ",
+		"imageUrl": "img/books/theNervousChild.jpg",
+		"filepath": "pages/books/theNervousChild.html"
+	},
+	{
+		"name": "NERVES AND COMMON SENSE",
+		"author": "ANNIE PAYSON CALL",
+		"genre": "Psychology",
+		"price": 0.99,
+		"description": "PEOPLE form habits which cause nervous strain. When these habits have fixed themselves for long enough upon their victims, the nerves give way and severe depression or some other form of nervous prostration is the result.",
+		"imageUrl": "img/books/nerveCense.jpg",
+		"filepath": "pages/books/nervesCommon.html"
+	},
+	{
+		"name": "THE THREE MUSKETEERS",
+		"author": "Alexandre Dumas, Pere",
+		"genre": "Fiction",
+		"price": 0.99,
+		"description": "In which it is proved that, notwithstanding their names’ ending in OS and IS, the heroes of the story which we are about to have the honor to relate to our readers have nothing mythological about them.",
+		"imageUrl": "img/books/musketeers.jpg",
+		"filepath": "pages/books/musketeers.html"
+	},
+	{
+		"name": "Moonfleet",
+		"author": "J. MEADE FALKNER",
+		"genre": "Fiction",
+		"price": 0.99,
+		"description": "The village of Moonfleet lies half a mile from the sea on the right or west bank of the Fleet stream. This rivulet, which is so narrow as it passes the houses that I have known a good jumper clear it without a pole, broadens out into salt marshes below the village, and loses itself at last in a lake of brackish water.",
+		"imageUrl": "img/books/moonfleet.jpg",
+		"filepath": "pages/books/moonfleet.html"
 	}
 ]
