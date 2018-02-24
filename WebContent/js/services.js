@@ -30,14 +30,14 @@
       var values = angular.toJson(input);
       $.ajax({
         type : method,
-        url : '/UnknownWorldsLibrary/'+url,
+        url : '/BooksForAll/'+url,
         data : values
       }).done(onsuccsess).always(always).fail(onfail);
     },
   sync : function(url, input, onsuccsess, onfail, always) {
     var values = angular.toJson(input);
     $.post({
-      url : '/UnknownWorldsLibrary/'+url,
+      url : '/BooksForAll/'+url,
       data : values
     }).done(onsuccsess).always(always).fail(onfail);
   },
@@ -46,7 +46,7 @@
         $.ajax({
           method : 'POST',
           async : false,
-          url : '/UnknownWorldsLibrary/'+url,
+          url : '/BooksForAll/'+url,
           data : values,
           context:document.body,
     }).done(onsuccsess).fail(onfail);
