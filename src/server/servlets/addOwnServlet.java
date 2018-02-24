@@ -19,9 +19,7 @@ import server.response.BasicResponse;
 import server.response.BuyBookResponse;
 
 /**
- * Servlet implementation class addLike.
- *
- * @author toshiba2015
+ * The Class addOwnServlet.
  */
 @WebServlet("/AddOwn")
 public class addOwnServlet extends HttpServlet {
@@ -29,15 +27,8 @@ public class addOwnServlet extends HttpServlet {
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Do post.
-	 *
-	 * @param request the request
-	 * @param response the response
-	 * @throws ServletException the servlet exception
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	/* (non-Javadoc)
+	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
