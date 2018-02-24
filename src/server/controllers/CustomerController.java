@@ -19,10 +19,13 @@ public class CustomerController {
 	/**
 	 * Gets the customer.
 	 *
-	 * @param userName the user name
-	 * @param password the password
+	 * @param userName
+	 *            the user name
+	 * @param password
+	 *            the password
 	 * @return the customer
-	 * @throws SQLException the SQL exception
+	 * @throws SQLException
+	 *             the SQL exception
 	 */
 	public static Customer getCustomer(String userName, String password) throws SQLException {
 		Customer result = null;
@@ -78,9 +81,11 @@ public class CustomerController {
 	/**
 	 * Gets the customer.
 	 *
-	 * @param uid the uid
+	 * @param uid
+	 *            the uid
 	 * @return the customer
-	 * @throws SQLException the SQL exception
+	 * @throws SQLException
+	 *             the SQL exception
 	 */
 	public static Customer getCustomer(int uid) throws SQLException {
 		Customer result = null;
@@ -108,9 +113,11 @@ public class CustomerController {
 	/**
 	 * Gets the customer by nick.
 	 *
-	 * @param nick the nick
+	 * @param nick
+	 *            the nick
 	 * @return the customer by nick
-	 * @throws SQLException the SQL exception
+	 * @throws SQLException
+	 *             the SQL exception
 	 */
 	public static Customer getCustomerByNick(String nick) throws SQLException {
 		Customer result = null;
@@ -134,13 +141,15 @@ public class CustomerController {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * Gets the customer by email.
 	 *
-	 * @param email the email
+	 * @param email
+	 *            the email
 	 * @return the customer by email
-	 * @throws SQLException the SQL exception
+	 * @throws SQLException
+	 *             the SQL exception
 	 */
 	public static Customer getCustomerByEmail(String email) throws SQLException {
 		Customer result = null;
@@ -164,43 +173,60 @@ public class CustomerController {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * Gets the customer by username.
 	 *
-	 * @param usn the usn
+	 * @param usn
+	 *            the usn
 	 * @return the customer by username
-	 * @throws SQLException the SQL exception
+	 * @throws SQLException
+	 *             the SQL exception
 	 */
-	public static Customer getCustomerByUsername(String usn) throws SQLException {
+	public static Customer getCustomerByUsername(String usn) {
 		Customer result = null;
 		Connection con = null;
 		PreparedStatement stmt = null;
 		try {
 			con = (Connection) DataStructure.ds.getConnection();
-			stmt = con.prepareStatement(ApplicationConstants.FIND_CUSTOMER_BY_USERNAME);
-			stmt.setString(1, usn);
-			ResultSet resltset = stmt.executeQuery();
-			if (resltset.next()) {
-				result = new Customer(resltset);
+			try {
+				stmt = con.prepareStatement(ApplicationConstants.FIND_CUSTOMER_BY_USERNAME);
+				try {
+					stmt.setString(1, usn);
+					ResultSet resltset = stmt.executeQuery();
+					try {
+						if (resltset.next()) {
+							result = new Customer(resltset);
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					} finally {
+						resltset.close();
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					stmt.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				con.close();
 			}
-			resltset.close();
 		} catch (Exception e) {
-
 			e.printStackTrace();
-		} finally {
-			stmt.close();
-			con.close();
 		}
 		return result;
 	}
-	
+
 	/**
 	 * Removes the customer.
 	 *
-	 * @param uid the uid
+	 * @param uid
+	 *            the uid
 	 * @return the int
-	 * @throws SQLException the SQL exception
+	 * @throws SQLException
+	 *             the SQL exception
 	 */
 	public static int removeCustomer(int uid) throws SQLException {
 		PreparedStatement stmt = null;

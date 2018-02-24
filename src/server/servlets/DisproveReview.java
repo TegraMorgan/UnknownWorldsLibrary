@@ -69,32 +69,6 @@ public class DisproveReview extends HttpServlet {
 		handleApprove(request, response);
 	}
 
-	/**
-	 * Testing.
-	 *
-	 * @param request the request
-	 * @param response the response
-	 * @throws JsonSyntaxException the json syntax exception
-	 * @throws JsonIOException the json IO exception
-	 * @throws IOException Signals that an I/O exception has occurred.
-	 */
-	private void testing(HttpServletRequest request, HttpServletResponse response)
-			throws JsonSyntaxException, JsonIOException, IOException {
-		response.setContentType("application/json; charset=UTF-8");
-		PrintWriter printWriter = response.getWriter();
-		BasicResponse resp = new BasicResponse();
-		try {
-			resp.setResultSuccess();
-			response.setStatus(HttpServletResponse.SC_OK);
-		} catch (Exception e) {
-			e.printStackTrace();
-			resp.setResultFail();
-			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-		} finally {
-			printWriter.println(resp.tojson());
-			printWriter.close();
-		}
-	}
 
 	/**
 	 * Handle approve.

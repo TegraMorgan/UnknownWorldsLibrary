@@ -10,7 +10,7 @@
             </div>
           </div>
           <!-- registerForm.$valid && -->
-          <form ng-submit="lCtrt.register()" name="registerForm" novalidate action="">
+          <form name="registerForm" novalidate>
             <div class="form-group">
               <div class="row">
                 <div class="col-xs-8 col-xs-offset-2">
@@ -154,10 +154,10 @@
         </div>
         <div class="row">
           <div class="col-xs-4 col-xs-offset-2 text-center">
-            <button type="submit" class="btn btn-primary" id="registerButton" ng-click="lCtrt.register()">Register</button>
+            <button ng-click="lCtrt.register()" class="btn btn-primary" id="registerButton">Register</button>
           </div>
           <div class="col-xs-4 text-center">
-            <button type="submit" class="btn btn-default" ng-click="lCtrt.navToLogin()">Back to Sing-in</button>
+            <button class="btn btn-default" ng-click="lCtrt.navToLogin()">Back to Sing-in</button>
           </div>
         </div>
       </div>

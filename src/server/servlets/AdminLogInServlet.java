@@ -75,11 +75,9 @@ public class AdminLogInServlet extends HttpServlet {
 				resp.setAdmin(newAdmin);
 				resp.setResultSuccess();
 				data = resp.tojson();
-				response.setStatus(HttpServletResponse.SC_OK);
 			} else {
 				resp.setResultFail();
 				data = resp.tojson();
-				response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 			}
 			printWriter.println(data);
 			printWriter.close();
