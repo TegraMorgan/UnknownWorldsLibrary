@@ -14,16 +14,16 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="myNavBar">
           <ul class="nav navbar-nav">
-            <li><button id="btnUsers" type="button" class="btn btn-xs navbar-btn btn-default active" ng-click="mCtrt.navToUsers()">Users</button></li>
-            <li><button id="btnMyBooks" type="button" class="btn btn-xs navbar-btn btn-default" ng-click="mCtrt.navToBooks()">Books</button></li>
-            <li><button id="btnReviews" type="button" class="btn btn-xs navbar-btn btn-default" ng-click="mCtrt.navToReviews()">Reviews  <span class="badge">{{revs}}</span></button></li>
-            <li><button id="btnTransactions" type="button" class="btn btn-xs navbar-btn btn-default" ng-click="mCtrt.navToTransactions()">Transaction</button></li>
+            <li><button id="btnUsers" type="button" class="btn btn-xs navbar-btn btn-default active" ng-click="lCtrt.navToUsers()">Users</button></li>
+            <li><button id="btnMyBooks" type="button" class="btn btn-xs navbar-btn btn-default" ng-click="lCtrt.navToBooks()">Books</button></li>
+            <li><button id="btnReviews" type="button" class="btn btn-xs navbar-btn btn-default" ng-click="lCtrt.navToReviews()">Reviews  <span class="badge">{{revs}}</span></button></li>
+            <li><button id="btnTransactions" type="button" class="btn btn-xs navbar-btn btn-default" ng-click="lCtrt.navToTransactions()">Transaction</button></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><button class="mypop btn btn-danger navbar-btn" 
             data-toggle="popover" 
             data-html="false" data-trigger="hover" data-placement="bottom" 
-            data-content="Log out" ng-click="mCtrt.logOut()">Greetings {{admin.login}} </button></li>
+            data-content="Log out" ng-click="lCtrt.logout()">Greetings {{admin.login}} </button></li>
           </ul>
         </div>
         <!-- /.navbar-collapse -->

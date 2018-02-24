@@ -275,6 +275,8 @@ public class Customer implements Serializable {
 			preparedStatement.setString(i++, this.password);
 			preparedStatement.setString(i++, this.nickname);
 			preparedStatement.setString(i++, this.description);
+			if (this.photo_url == null || this.photo_url.isEmpty())
+				this.photo_url = "img/Users/Default.gif";
 			preparedStatement.setString(i++, this.photo_url);
 			preparedStatement.setString(i++, this.stName);
 			preparedStatement.setInt(i++, this.blNum);

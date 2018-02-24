@@ -59,15 +59,15 @@ public class AdminLogInServlet extends HttpServlet {
 	private void adminlogInRequest(HttpServletRequest request, HttpServletResponse response)
 			throws JsonSyntaxException, JsonIOException, IOException {
 		Gson gson = new GsonBuilder().create();
-		Admin admin = gson.fromJson(request.getReader(), Admin.class);
+		Customer admin = gson.fromJson(request.getReader(), Customer.class);
 		response.setContentType("application/json; charset=UTF-8");
 		PrintWriter printWriter = response.getWriter();
 		String data;
 
 		try {
 			AdminLogInResponse resp = new AdminLogInResponse();
-			Admin newAdmin;
-			newAdmin = AdminController.getAdmin(admin.getLogin() , admin.getPassword());
+			Admin newAdmin = null;
+			newAdmin = AdminController.getAdmin(admin.getUsername() , admin.getPassword());
 			if (newAdmin != null) {
 				HttpSession session = request.getSession();
 				session.setAttribute("admin", newAdmin);
