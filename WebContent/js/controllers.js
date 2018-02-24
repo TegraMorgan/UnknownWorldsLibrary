@@ -33,7 +33,7 @@
     /*
      * $rootScope.secondView = 'pages/checkout.html';
      */
-
+    /*
     this.newCustomer.username = "admin";
     this.newCustomer.email = "chook@mail.com";
     this.newCustomer.street = "Galil";
@@ -44,8 +44,9 @@
     this.newCustomer.password = "123";
     this.newCustomer.password2 = "123";
     this.newCustomer.nickname = "Chooka";
-    // this.newCustomer.description = "";
-    // this.newCustomer.photo = "";
+    this.newCustomer.description = "";
+    this.newCustomer.photo = "";
+    */
 
     /* END OF SECTION TO BE REMOVED */
 

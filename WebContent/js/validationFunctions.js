@@ -31,12 +31,12 @@ function testNewUsername(str) {
   if (len > 10) return false;
   var regex1 = /^[a-zA-Z0-9]+$/;
   if (!regex1.test(str)) return false;
-  /* TODO test for duplicate user in database */
   return true;
 }
 
 function testNewEmail(str) {
   var parts = str.split('@');
+  if (parts[0] == null || parts[0].len<=0 ) return false;
   if (parts[1] == null || parts[1].len <= 0) {
     return false;
   }
@@ -123,7 +123,6 @@ function testNewPassword(str) {
 function testNewNick(str){
   var len=str.length;
   if (len > 20) return false;
-  /*TODO test for uniqueness !!! */
   return true;
 }
 
@@ -137,7 +136,8 @@ function testNewPhoto(str){
   
   return true;
 }
-
+/* validation functions of book purchase - not implemented 
+ * on server because purchase is not sent there anyway */
 function testFullName(str) {
   var len = str.length;
   if (len < 4) return false;
