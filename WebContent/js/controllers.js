@@ -1184,7 +1184,7 @@
   } ]).controller('usersController', [ '$rootScope', '$scope', '$http', 'comms', '$location', function($rootScope, $scope, $http, comms, $location) {
 
     var ctr = this;
-
+    $('.mypop').popover();
     this.navToUsers3 = function() {
       $rootScope.navToUsers2();
     };
