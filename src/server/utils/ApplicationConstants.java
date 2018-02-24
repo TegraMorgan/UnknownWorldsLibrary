@@ -173,6 +173,9 @@ public interface ApplicationConstants {
 		/** The find admin by login and pass. */
 		public final String FIND_ADMIN_BY_LOGIN_AND_PASS = "SELECT * FROM admins WHERE login=? AND password=?";
 		
+		/** The find admin by login. */
+		public final String FIND_ADMIN_BY_LOGIN = "SELECT * FROM admins WHERE login=?";
+		
 		/** The delete customer. */
 		public final String DELETE_CUSTOMER = "DELETE FROM customers WHERE uid=?";
 		

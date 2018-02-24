@@ -29,17 +29,21 @@ import server.response.DetailedUserResponse;
  */
 @WebServlet("/DetailedUserByNick")
 public class GetDetailerUserByNickServlet extends HttpServlet {
-	
+
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Do get.
 	 *
-	 * @param request the request
-	 * @param response the response
-	 * @throws ServletException the servlet exception
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @throws ServletException
+	 *             the servlet exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
@@ -51,10 +55,14 @@ public class GetDetailerUserByNickServlet extends HttpServlet {
 	/**
 	 * Do post.
 	 *
-	 * @param request the request
-	 * @param response the response
-	 * @throws ServletException the servlet exception
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @throws ServletException
+	 *             the servlet exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
@@ -66,10 +74,13 @@ public class GetDetailerUserByNickServlet extends HttpServlet {
 	/**
 	 * Gets the detailed user.
 	 *
-	 * @param request the request
-	 * @param response the response
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
 	 * @return the detailed user
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	private void getDetailedUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setContentType("application/json; charset=UTF-8");
@@ -79,13 +90,13 @@ public class GetDetailerUserByNickServlet extends HttpServlet {
 			String nick = gson.fromJson(request.getReader(), String.class);
 			DetailedUserResponse resp = new DetailedUserResponse();
 			resp.setUser(CustomerController.getCustomerByNick(nick));
-			if (resp.getUser() != null) {
+			if (resp.getUser() == null)
 				resp.setResultSuccess();
-				response.setStatus(HttpServletResponse.SC_OK);
-				printWriter.println(resp.tojson());
-			}
-			else response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			else
+				resp.setResultFail();
+			printWriter.println(resp.tojson());
 		} catch (Exception e) {
+			e.printStackTrace();
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		} finally {
 			printWriter.close();

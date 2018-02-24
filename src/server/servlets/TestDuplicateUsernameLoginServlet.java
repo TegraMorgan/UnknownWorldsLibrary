@@ -20,26 +20,32 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
+import server.controllers.AdminController;
 import server.controllers.CustomerController;
 import server.model.*;
+import server.response.BasicResponse;
 import server.response.DetailedUserResponse;
 
 /**
  * Servlet implementation class addLike.
  */
-@WebServlet("/DetailedUserUsername")
-public class GetDetailerUserByUsernameServlet extends HttpServlet {
-	
+@WebServlet("/TestForDuplicate")
+public class TestDuplicateUsernameLoginServlet extends HttpServlet {
+
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Do get.
 	 *
-	 * @param request the request
-	 * @param response the response
-	 * @throws ServletException the servlet exception
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @throws ServletException
+	 *             the servlet exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
@@ -51,10 +57,14 @@ public class GetDetailerUserByUsernameServlet extends HttpServlet {
 	/**
 	 * Do post.
 	 *
-	 * @param request the request
-	 * @param response the response
-	 * @throws ServletException the servlet exception
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @throws ServletException
+	 *             the servlet exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
@@ -66,29 +76,33 @@ public class GetDetailerUserByUsernameServlet extends HttpServlet {
 	/**
 	 * Gets the detailed user.
 	 *
-	 * @param request the request
-	 * @param response the response
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
 	 * @return the detailed user
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	private void getDetailedUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setContentType("application/json; charset=UTF-8");
 		PrintWriter printWriter = response.getWriter();
+		Gson gson = new GsonBuilder().create();
+		String usn = gson.fromJson(request.getReader(), String.class);
+		Customer cust = CustomerController.getCustomerByUsername(usn);
+		Admin adm = AdminController.getDupAdmin(usn);
+		BasicResponse resp = new BasicResponse();
 		try {
-			Gson gson = new GsonBuilder().create();
-			String usn = gson.fromJson(request.getReader(), String.class);
-			DetailedUserResponse resp = new DetailedUserResponse();
-			resp.setUser(CustomerController.getCustomerByUsername(usn));
-			if (resp.getUser() != null) {
+			if (cust == null && adm == null)
 				resp.setResultSuccess();
-				response.setStatus(HttpServletResponse.SC_OK);
-				printWriter.println(resp.tojson());
-			}
-			else response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			else
+				resp.setResultFail();
+			printWriter.println(resp.tojson());
 		} catch (Exception e) {
 			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 		} finally {
 			printWriter.close();
 		}
 	}
+
 }
