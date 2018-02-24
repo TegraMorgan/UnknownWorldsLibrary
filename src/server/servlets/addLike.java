@@ -19,7 +19,6 @@ import server.response.*;
 /**
  * Servlet implementation class addLike.
  *
- * @author toshiba2015
  */
 @WebServlet("/AddLike")
 public class addLike extends HttpServlet {
@@ -45,7 +44,7 @@ public class addLike extends HttpServlet {
 	}
 
 	/**
-	 * Insert request.
+	 * Insert new like to DB.
 	 *
 	 * @param request the request
 	 * @param response the response
