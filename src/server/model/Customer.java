@@ -48,7 +48,8 @@ public class Customer implements Serializable {
 	
 	/** The bl num. */
 	private int blNum;
-	
+
+
 	/** The city name. */
 	private String cityName;
 	
@@ -426,6 +427,14 @@ public class Customer implements Serializable {
 	 */
 	public String getPhoto_url() {
 		return photo_url;
+	}
+	/**
+	 * Gets the bl num.
+	 *
+	 * @return the bl num
+	 */
+	public int getBlNum() {
+		return blNum;
 	}
 
 	/**
