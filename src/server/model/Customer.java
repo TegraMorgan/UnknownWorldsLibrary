@@ -447,6 +447,33 @@ public class Customer implements Serializable {
 	}
 
 	/**
+	 * Gets the street name.
+	 *
+	 * @return the street name
+	 */
+	public String getStName() {
+		return stName;
+	}
+	/**
+	 * Gets the city name.
+	 *
+	 * @return the city name
+	 */
+
+	public String getCityName() {
+		return cityName;
+	}
+	/**
+	 * Gets the zip.
+	 *
+	 * @return the zip.
+	 */
+
+	public String getZip() {
+		return zip;
+	}
+
+	/**
 	 * Gets the owns.
 	 *
 	 * @return the owns
