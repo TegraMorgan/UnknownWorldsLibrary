@@ -87,7 +87,7 @@ public class SignUpServlet extends HttpServlet {
 			// addUser is a method at User class which add the user to the DB
 			System.out.println("signUpRequest 2");
 			boolean b = server.utils.validations.testCustomer(ncust);
-			if (b)
+			if (b) 
 				ncust.addCustomer();
 			System.out.println(" the cust test : " + b);
 			cust = CustomerController.getCustomer(ncust.getUsername(), ncust.getPassword());

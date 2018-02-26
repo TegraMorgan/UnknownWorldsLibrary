@@ -90,11 +90,11 @@ public class validations {
 			if (!str.matches(regex))
 				return false;
 			String[] nmbrs = str.split("");
-			if (nmbrs[0] != "0")
+			if (nmbrs[0].compareTo("0") != 0)
 				return false;
-			if (nmbrs[1] != "5" && str.length() != 9)
+			if (nmbrs[1].compareTo("5") != 0 && str.length() != 9)
 				return false;
-			if (nmbrs[1] == "5" && str.length() != 10)
+			if (nmbrs[1].compareTo("5") == 0 && str.length() != 10)
 				return false;
 			return true;
 		}
