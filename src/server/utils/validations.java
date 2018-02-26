@@ -1,7 +1,22 @@
 package server.utils;
 
+import server.model.Customer;
+
 public class validations {
 
+	public static boolean testCustomer(Customer cust) {
+		
+		if( testUserName(cust.getUsername()))
+			if( testPassword(cust.getPassword()))
+				if( testNickName(cust.getNickname()))
+					if( testEmail(cust.getEmail()))
+						if(testDescription(cust.getDescription()))
+							if( testNewBNum(Integer.toString(cust.getBlNum())))
+								if(testNewPhone(cust.getPhone()))
+									return true;
+		return false;
+		
+	}
 	public static boolean testUserName(String userName) {
 		int len = userName.length();
 		if (len > 10)
@@ -81,4 +96,5 @@ public class validations {
 			return false;
 		return true;
 	}
+
 }

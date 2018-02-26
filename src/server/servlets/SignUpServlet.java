@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.derby.impl.sql.catalog.SYSROUTINEPERMSRowFactory;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
@@ -75,7 +77,10 @@ public class SignUpServlet extends HttpServlet {
 		try {
 			// addUser is a method at User class which add the user to the DB
 			System.out.println("signUpRequest 2");
-			ncust.addCustomer();
+			boolean b=server.utils.validations.testCustomer(ncust);
+			if(b)
+				ncust.addCustomer();
+			System.out.println(" the cust test : "+b);
 			cust = CustomerController.getCustomer(ncust.getUsername(), ncust.getPassword());
 			if (cust != null) {
 				HttpSession session = request.getSession();
