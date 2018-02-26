@@ -538,17 +538,21 @@
         this.newPhotoOk = false;
       }
       
-      
-      console.log(passed);
       if (passed == true) {
         /* send this.newCustomer to server */
         /* alert('user passed all the tests - attempting to send the post request'); */
         comms.call('POST', 'UserServlet', this.newCustomer, function(data, textStatus, jqXHR) {
+          if(data.result = "success"){
           this.wrongLoginData = false;
           ctr.newCustomer = {};
           ctr.oldCustomer = {};
           ctr.registrationSuccessful = true;
           ctr.navToLogin();
+          }
+          else{
+            ctr.photoError = "Some of the information provided is invalid";
+            ctr.newPhotoOk = false;
+          }
           $rootScope.$apply();
         }, function(data, textStatus, errorThrown) {
           alert('Server error. Please try again');
