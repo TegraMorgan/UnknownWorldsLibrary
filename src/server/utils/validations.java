@@ -91,10 +91,14 @@ public class validations {
 		return true;
 	}
 	public static boolean testDescription(String str) {
-		int len = str.length();
-		if (len>50) 
-			return false;
-		return true;
+		if(str!=null)
+		{
+			int len = str.length();
+			if (len>50) 
+				return false;
+			return true;			
+		}
+		else return true;
 	}
 
 }
