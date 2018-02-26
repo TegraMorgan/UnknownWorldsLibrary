@@ -29,27 +29,6 @@
     this.oldCustomer.owns = [];
     this.admin = {};
 
-    /* TODO remove all this section this later */
-    /*
-     * $rootScope.secondView = 'pages/checkout.html';
-     */
-    /*
-    this.newCustomer.username = "admin";
-    this.newCustomer.email = "chook@mail.com";
-    this.newCustomer.street = "Galil";
-    this.newCustomer.blockNum = 12;
-    this.newCustomer.city = "Haifa";
-    this.newCustomer.zip = 1234567;
-    this.newCustomer.phone = '046-222-210';
-    this.newCustomer.password = "123";
-    this.newCustomer.password2 = "123";
-    this.newCustomer.nickname = "Chooka";
-    this.newCustomer.description = "";
-    this.newCustomer.photo = "";
-    */
-
-    /* END OF SECTION TO BE REMOVED */
-
     /* set controller variables */
 
     /* login variables */
