@@ -26,7 +26,7 @@ import server.response.RegisterResponse;
  */
 @WebServlet("/UserServlet")
 public class SignUpServlet extends HttpServlet {
-	
+
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
@@ -43,10 +43,14 @@ public class SignUpServlet extends HttpServlet {
 	/**
 	 * Do post.
 	 *
-	 * @param request the request
-	 * @param response the response
-	 * @throws ServletException the servlet exception
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @throws ServletException
+	 *             the servlet exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
@@ -58,11 +62,16 @@ public class SignUpServlet extends HttpServlet {
 	/**
 	 * Sign up request.
 	 *
-	 * @param request the request
-	 * @param response the response
-	 * @throws JsonSyntaxException the json syntax exception
-	 * @throws JsonIOException the json IO exception
-	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @param request
+	 *            the request
+	 * @param response
+	 *            the response
+	 * @throws JsonSyntaxException
+	 *             the json syntax exception
+	 * @throws JsonIOException
+	 *             the json IO exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	private void signUpRequest(HttpServletRequest request, HttpServletResponse response)
 			throws JsonSyntaxException, JsonIOException, IOException {
@@ -77,10 +86,10 @@ public class SignUpServlet extends HttpServlet {
 		try {
 			// addUser is a method at User class which add the user to the DB
 			System.out.println("signUpRequest 2");
-			boolean b=server.utils.validations.testCustomer(ncust);
-			if(b)
+			boolean b = server.utils.validations.testCustomer(ncust);
+			if (b)
 				ncust.addCustomer();
-			System.out.println(" the cust test : "+b);
+			System.out.println(" the cust test : " + b);
 			cust = CustomerController.getCustomer(ncust.getUsername(), ncust.getPassword());
 			if (cust != null) {
 				HttpSession session = request.getSession();
@@ -89,16 +98,14 @@ public class SignUpServlet extends HttpServlet {
 				request.setAttribute("httpSession", session);
 				resp.setResultSuccess();
 				resp.setCustomer(cust);
-				response.setStatus(HttpServletResponse.SC_OK);
 			} else {
 				resp.setResultFail();
-				response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 			}
 			printWriter.println(resp.tojson());
-			printWriter.close();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			printWriter.close();
 		}
 
 	}
